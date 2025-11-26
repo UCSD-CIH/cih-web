@@ -1973,7 +1973,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 
 /* Type tag icons (mask-based, color = currentColor) */
 .view-press-media .group--press-media-thumbnail .field--name-field-press-type .field__item a::before,
-.view-id-press_media .group--press-media-thumbnail .field--name-field-press-type .field__item a::before {
+.view-id-press_media .group--press-media-thumbnail .field--name-field-press-type .field__item a::before,
+.press-media-card .field--name-field-press-type .field__item a::before {
   content: "";
   display: inline-block;
   width: 0.9em;
@@ -1983,44 +1984,44 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   background-color: currentColor;
 }
 /* Video (term 49) */
-:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+:is(.view-press-media, .view-id-press_media, .press-media-card) .field--name-field-press-type .field__item a:is(
   [href$="/49"],
   [href*="field_press_type_target_id=49"],
   [href*="field_press_type_target_id%5B49%5D"],
   [data-term-id="49"]
 )::before {
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
-          mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+  -webkit-mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
 }
 /* Article (term 50) */
-:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+:is(.view-press-media, .view-id-press_media, .press-media-card) .field--name-field-press-type .field__item a:is(
   [href$="/50"],
   [href*="field_press_type_target_id=50"],
   [href*="field_press_type_target_id%5B50%5D"],
   [data-term-id="50"]
 )::before {
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
-          mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
+  -webkit-mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
 }
 /* Publication (term 51) */
-:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+:is(.view-press-media, .view-id-press_media, .press-media-card) .field--name-field-press-type .field__item a:is(
   [href$="/51"],
   [href*="field_press_type_target_id=51"],
   [href*="field_press_type_target_id%5B51%5D"],
   [data-term-id="51"]
 )::before {
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/book-fill-icon.svg") no-repeat center / contain;
-          mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/book-fill-icon.svg") no-repeat center / contain;
+  -webkit-mask: url("/sites/default/files/2025-08/book-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/book-fill-icon.svg") no-repeat center / contain;
 }
 /* External Link (term 52) */
-:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+:is(.view-press-media, .view-id-press_media, .press-media-card) .field--name-field-press-type .field__item a:is(
   [href$="/52"],
   [href*="field_press_type_target_id=52"],
   [href*="field_press_type_target_id%5B52%5D"],
   [data-term-id="52"]
 )::before {
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
-          mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
+  -webkit-mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
 }
 
 /* Hover tweak for Type pill */
@@ -2318,9 +2319,9 @@ footer.submitted {
   height: 1.35em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/plus-circle-fill-icon_1_0.svg") no-repeat center;
+  -webkit-mask: url("/sites/default/files/2025-07/plus-circle-fill-icon_1_0.svg") no-repeat center;
   -webkit-mask-size: contain;
-  mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/plus-circle-fill-icon_1_0.svg") no-repeat center;
+  mask: url("/sites/default/files/2025-07/plus-circle-fill-icon_1_0.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
 }
@@ -2337,9 +2338,9 @@ footer.submitted {
   height: 1.35em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/check-circle-fill-icon_0.svg") no-repeat center;
+  -webkit-mask: url("/sites/default/files/2025-07/check-circle-fill-icon_0.svg") no-repeat center;
   -webkit-mask-size: contain;
-  mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/check-circle-fill-icon_0.svg") no-repeat center;
+  mask: url("/sites/default/files/2025-07/check-circle-fill-icon_0.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
 }
@@ -2351,9 +2352,9 @@ content: "";
   height: 1em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/grid-fill-icon_0.svg") no-repeat center;
+  -webkit-mask: url("/sites/default/files/2025-07/grid-fill-icon_0.svg") no-repeat center;
   -webkit-mask-size: contain;
-  mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/grid-fill-icon_0.svg") no-repeat center;
+  mask: url("/sites/default/files/2025-07/grid-fill-icon_0.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
  }
@@ -2365,9 +2366,9 @@ content: "";
   height: 1em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  -webkit-mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
   -webkit-mask-size: contain;
-  mask: url("https://cih.sdsc.edu/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
 }
