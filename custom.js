@@ -10,6 +10,33 @@
   };
   var studyFocusCollapseTimers = new WeakMap();
 
+  function extractTermIdFromHref(href) {
+    if (!href) return null;
+
+    var decoded = href;
+    try {
+      decoded = decodeURIComponent(href);
+    } catch (e) {
+      decoded = href;
+    }
+
+    var taxonomyMatch = decoded.match(/\/taxonomy\/term\/(\d+)(?:[/?#]|$)/);
+    if (taxonomyMatch && taxonomyMatch[1]) {
+      return taxonomyMatch[1];
+    }
+
+    var filterMatch = decoded.match(/field_(?:press_type|study_status|study_focus|study_type)_target_id\[(\d+)\]/i);
+    if (filterMatch && filterMatch[1]) return filterMatch[1];
+
+    var encodedFilterMatch = href.match(/field_(?:press_type|study_status|study_focus|study_type)_target_id%5B(\d+)%5D/i);
+    if (encodedFilterMatch && encodedFilterMatch[1]) return encodedFilterMatch[1];
+
+    var plainFilterMatch = decoded.match(/field_(?:press_type|study_status|study_focus|study_type)_target_id=?(\d+)/i);
+    if (plainFilterMatch && plainFilterMatch[1]) return plainFilterMatch[1];
+
+    return null;
+  }
+
   function buildPressTypeFilterUrl(termId) {
     var encodedId = encodeURIComponent(termId);
     return pressMediaListingPath +
@@ -44,6 +71,7 @@
     var targetId = overrideId || termId;
 
     link.setAttribute('href', buildPressTypeFilterUrl(targetId));
+    link.setAttribute('data-term-id', targetId);
     link.removeAttribute('target');
     removeNoopener(link);
     return true;
@@ -163,6 +191,23 @@
         card.querySelectorAll('.field--name-field-press-type a[href*="/taxonomy/term/"]').forEach(function (link) {
           rewritePressMediaTypeLink(link);
         });
+      });
+    }
+  };
+
+  // Adds data-term-id attributes to tags so icon CSS keeps working after link rewrites.
+  Drupal.behaviors.termTagDataAttributes = {
+    attach: function (context) {
+      var selector = [
+        '.field--name-field-press-type a[href]',
+        '.field--name-field-study-status a[href]'
+      ].join(', ');
+
+      once('termTagDataAttributes', selector, context).forEach(function (link) {
+        var termId = extractTermIdFromHref(link.getAttribute('href'));
+        if (termId) {
+          link.setAttribute('data-term-id', termId);
+        }
       });
     }
   };

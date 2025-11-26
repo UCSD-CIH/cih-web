@@ -1983,26 +1983,42 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   background-color: currentColor;
 }
 /* Video (term 49) */
-.view-press-media  .field--name-field-press-type .field__item a[href$="/49"]::before,
-.view-id-press_media .field--name-field-press-type .field__item a[href$="/49"]::before {
+:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+  [href$="/49"],
+  [href*="field_press_type_target_id=49"],
+  [href*="field_press_type_target_id%5B49%5D"],
+  [data-term-id="49"]
+)::before {
   -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
           mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
 }
 /* Article (term 50) */
-.view-press-media  .field--name-field-press-type .field__item a[href$="/50"]::before,
-.view-id-press_media .field--name-field-press-type .field__item a[href$="/50"]::before {
+:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+  [href$="/50"],
+  [href*="field_press_type_target_id=50"],
+  [href*="field_press_type_target_id%5B50%5D"],
+  [data-term-id="50"]
+)::before {
   -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
           mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
 }
 /* Publication (term 51) */
-.view-press-media  .field--name-field-press-type .field__item a[href$="/51"]::before,
-.view-id-press_media .field--name-field-press-type .field__item a[href$="/51"]::before {
+:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+  [href$="/51"],
+  [href*="field_press_type_target_id=51"],
+  [href*="field_press_type_target_id%5B51%5D"],
+  [data-term-id="51"]
+)::before {
   -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/book-fill-icon.svg") no-repeat center / contain;
           mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/book-fill-icon.svg") no-repeat center / contain;
 }
 /* External Link (term 52) */
-.view-press-media  .field--name-field-press-type .field__item a[href$="/52"]::before,
-.view-id-press_media .field--name-field-press-type .field__item a[href$="/52"]::before {
+:is(.view-press-media, .view-id-press_media) .field--name-field-press-type .field__item a:is(
+  [href$="/52"],
+  [href*="field_press_type_target_id=52"],
+  [href*="field_press_type_target_id%5B52%5D"],
+  [data-term-id="52"]
+)::before {
   -webkit-mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
           mask: url("https://cih.sdsc.edu/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
 }
@@ -2290,7 +2306,12 @@ footer.submitted {
 /* .field--name-field-study-type a::before { content: "🏥"; } */
 /* .field--name-field-study-focus a::before { content: "🏷️"; } */
 
-.field--name-field-study-status a[href$="/20"]::before {
+.field--name-field-study-status a:is(
+  [href$="/20"],
+  [href*="field_study_status_target_id=20"],
+  [href*="field_study_status_target_id%5B20%5D"],
+  [data-term-id="20"]
+)::before {
   content: "";
   display: inline-block;
   width: 1.35em;
@@ -2304,7 +2325,12 @@ footer.submitted {
   vertical-align: middle;
 }
 
-.field--name-field-study-status a[href$="/22"]::before {
+.field--name-field-study-status a:is(
+  [href$="/22"],
+  [href*="field_study_status_target_id=22"],
+  [href*="field_study_status_target_id%5B22%5D"],
+  [data-term-id="22"]
+)::before {
   content: "";
   display: inline-block;
   width: 1.35em;
@@ -2361,9 +2387,9 @@ content: "";
 
 /* ======== Hide Sign Up Buttons on Study Cards ======== */
 /* Delete selector for term 20 (Recruiting) once Study CTA buttons are active */
-.study-card:has(.field--name-field-study-status a[href="/taxonomy/term/20"]) .field--name-field-study-apply,
-.study-card:has(.field--name-field-study-status a[href="/taxonomy/term/22"]) .field--name-field-study-apply,
-.study-card:has(.field--name-field-study-status a[href="/taxonomy/term/61"]) .field--name-field-study-apply {
+.study-card:has(.field--name-field-study-status a:is([href="/taxonomy/term/20"], [href*="field_study_status_target_id=20"], [href*="field_study_status_target_id%5B20%5D"], [data-term-id="20"])) .field--name-field-study-apply,
+.study-card:has(.field--name-field-study-status a:is([href="/taxonomy/term/22"], [href*="field_study_status_target_id=22"], [href*="field_study_status_target_id%5B22%5D"], [data-term-id="22"])) .field--name-field-study-apply,
+.study-card:has(.field--name-field-study-status a:is([href="/taxonomy/term/61"], [href*="field_study_status_target_id=61"], [href*="field_study_status_target_id%5B61%5D"], [data-term-id="61"])) .field--name-field-study-apply {
   display: none;
 }
 
