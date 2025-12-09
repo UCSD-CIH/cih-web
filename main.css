@@ -2783,6 +2783,10 @@ footer.submitted {
 .gradient-overlay-horizontal {
   position: relative;
   overflow: hidden;
+  /* Allow gradient colors to be overridden by background utility tokens */
+  --overlay-gradient-start: var(--gradient-bg-start, #E2EAD8);
+  --overlay-gradient-mid: var(--gradient-bg-mid, rgba(226, 234, 216, 0.6));
+  --overlay-gradient-end: var(--gradient-bg-end, rgba(226, 234, 216, 0));
 }
 
 .gradient-overlay-horizontal::after {
@@ -2793,8 +2797,9 @@ footer.submitted {
   z-index: 1;
   background: linear-gradient(
     to right,
-    #E2EAD8 50%,
-    rgba(226, 234, 216, 0) 100%
+    var(--overlay-gradient-start) 0%,
+    var(--overlay-gradient-mid) 40%,
+    var(--overlay-gradient-end) 100%
   );
 }
 
