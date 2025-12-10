@@ -2031,6 +2031,44 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   border-color: var(--color-border-subdued-strong);
 }
 
+/* ===================================
+   GENERIC PILL BADGE (UTILITY)
+   Usage: apply .pill + modifier on drag-and-drop pages
+=================================== */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  padding: var(--space-075) var(--space-150);
+  border-radius: var(--radius-999);
+  white-space: nowrap;
+}
+
+/* Neutral outline pill (matches study tags) */
+.pill--outline {
+  background-color: transparent;
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  color: var(--color-text-disabled-strong);
+}
+
+/* Soft background pills using token colors */
+.pill--outline-blue {
+  background-color: transparent;
+  border: var(--border-050) solid var(--color-border-blue);
+  color: var(--color-text-blue);
+}
+
+.pill--outline-grey {
+  background-color: transparent;
+  border: 1px solid var(--color-border-disabled-soft);
+  color: var(--color-text-disabled-strong);
+}
+
 /* ---- Utilities ---- */
 .press-media-card .field--name-field-press-link { display: none !important; } /* hide raw link field */
 
@@ -2783,10 +2821,99 @@ footer.submitted {
 .gradient-overlay-horizontal {
   position: relative;
   overflow: hidden;
-  /* Allow gradient colors to be overridden by background utility tokens */
-  --overlay-gradient-start: var(--gradient-bg-start, #E2EAD8);
-  --overlay-gradient-mid: var(--gradient-bg-mid, rgba(226, 234, 216, 0.6));
-  --overlay-gradient-end: var(--gradient-bg-end, rgba(226, 234, 216, 0));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--color-bg-lightest, #f7f9fc);
+  /* Dedicated horizontal overlay tokens (independent of .bg-* utilities) */
+  --overlay-horizontal-start: rgba(233, 240, 217, 1);   /* base hue @100% */
+  --overlay-horizontal-mid: rgba(233, 240, 217, 0.9);  /* denser mid for readability */
+  --overlay-horizontal-end: rgba(233, 240, 217, 0.15); /* leave a faint tint near the edge */
+}
+
+.gradient-overlay-horizontal.overlay-strong {
+  --overlay-horizontal-start: rgba(233, 240, 217, 0.98);
+  --overlay-horizontal-mid: rgba(233, 240, 217, 0.92);
+  --overlay-horizontal-end: rgba(233, 240, 217, 0.25);
+}
+
+.gradient-overlay-horizontal.overlay-light {
+  --overlay-horizontal-start: rgba(233, 240, 217, 0.85);
+  --overlay-horizontal-mid: rgba(233, 240, 217, 0.65);
+  --overlay-horizontal-end: rgba(233, 240, 217, 0.05);
+}
+
+/* Hue helpers to match existing bg-* palette (keeps consistent opacity ramp) */
+.overlay-navy {
+  --overlay-horizontal-start: rgba(220, 223, 228, 1);
+  --overlay-horizontal-mid: rgba(220, 223, 228, 0.8);
+  --overlay-horizontal-end: rgba(220, 223, 228, 0);
+}
+
+.overlay-blue {
+  --overlay-horizontal-start: rgba(217, 231, 240, 1);
+  --overlay-horizontal-mid: rgba(217, 231, 240, 0.8);
+  --overlay-horizontal-end: rgba(217, 231, 240, 0);
+}
+
+.overlay-yellow {
+  --overlay-horizontal-start: rgba(255, 245, 204, 1);
+  --overlay-horizontal-mid: rgba(255, 245, 204, 0.8);
+  --overlay-horizontal-end: rgba(255, 245, 204, 0);
+}
+
+.overlay-gold {
+  --overlay-horizontal-start: rgba(244, 233, 208, 1);
+  --overlay-horizontal-mid: rgba(244, 233, 208, 0.8);
+  --overlay-horizontal-end: rgba(244, 233, 208, 0);
+}
+
+.overlay-turquoise {
+  --overlay-horizontal-start: rgba(204, 244, 247, 1);
+  --overlay-horizontal-mid: rgba(204, 244, 247, 0.8);
+  --overlay-horizontal-end: rgba(204, 244, 247, 0);
+}
+
+.overlay-magenta {
+  --overlay-horizontal-start: rgba(251, 228, 243, 1);
+  --overlay-horizontal-mid: rgba(251, 228, 243, 0.8);
+  --overlay-horizontal-end: rgba(251, 228, 243, 0);
+}
+
+.overlay-sand {
+  --overlay-horizontal-start: rgba(253, 252, 250, 1);
+  --overlay-horizontal-mid: rgba(253, 252, 250, 0.8);
+  --overlay-horizontal-end: rgba(253, 252, 250, 0);
+}
+
+.overlay-citron {
+  --overlay-horizontal-start: rgba(253, 250, 204, 1);
+  --overlay-horizontal-mid: rgba(253, 250, 204, 0.8);
+  --overlay-horizontal-end: rgba(253, 250, 204, 0);
+}
+
+.overlay-orange {
+  --overlay-horizontal-start: rgba(255, 234, 209, 1);
+  --overlay-horizontal-mid: rgba(255, 234, 209, 0.8);
+  --overlay-horizontal-end: rgba(255, 234, 209, 0);
+}
+
+.overlay-green {
+  --overlay-horizontal-start: rgba(232, 240, 222, 1);
+  --overlay-horizontal-mid: rgba(232, 240, 222, 0.8);
+  --overlay-horizontal-end: rgba(232, 240, 222, 0);
+}
+
+.overlay-stone {
+  --overlay-horizontal-start: rgba(240, 239, 238, 1);
+  --overlay-horizontal-mid: rgba(240, 239, 238, 0.8);
+  --overlay-horizontal-end: rgba(240, 239, 238, 0);
+}
+
+.overlay-lightest {
+  --overlay-horizontal-start: rgba(247, 249, 252, 1);
+  --overlay-horizontal-mid: rgba(247, 249, 252, 0.8);
+  --overlay-horizontal-end: rgba(247, 249, 252, 0);
 }
 
 .gradient-overlay-horizontal::after {
@@ -2797,9 +2924,11 @@ footer.submitted {
   z-index: 1;
   background: linear-gradient(
     to right,
-    var(--overlay-gradient-start) 0%,
-    var(--overlay-gradient-mid) 40%,
-    var(--overlay-gradient-end) 100%
+    var(--overlay-horizontal-start) 0%,
+    var(--overlay-horizontal-start) 35%,
+    var(--overlay-horizontal-mid) 60%,
+    var(--overlay-horizontal-end) 90%,
+    var(--overlay-horizontal-end) 100%
   );
 }
 
