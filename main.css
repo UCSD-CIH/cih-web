@@ -1403,6 +1403,7 @@ code.bg-light {
 .img-rounded {
   border-radius: var(--radius-200);
   overflow: hidden;
+  border: none !important; /* override Bootstrap default image border */
 }
 
 /* ===================================
@@ -2930,6 +2931,20 @@ footer.submitted {
     var(--overlay-horizontal-end) 90%,
     var(--overlay-horizontal-end) 100%
   );
+}
+
+/* Remove inherited gutters/margins inside horizontal overlay cards */
+.feature-card.gradient-overlay-horizontal .card-body {
+  padding: var(--space-500);
+}
+.feature-card.gradient-overlay-horizontal .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.feature-card.gradient-overlay-horizontal .az-column {
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
 }
 
 /* ===================================
