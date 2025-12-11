@@ -3293,31 +3293,35 @@ footer.submitted {
 .accordion-stone { --accordion-bg: var(--color-bg-stone-20); }
 .accordion-subdued-soft { --accordion-bg: var(--color-bg-subdued-soft); }
 
+.accordion-header {
+  margin-bottom: var(--space-050) !important;
+}
+
 .accordion-item {
   border-radius: 16px !important;
   overflow: hidden; /* ensure children don’t spill outside the rounded edge */
-background: var(--accordion-bg);
-border: var(--border-050) solid var(--color-border-subdued-strong);
+  background: var(--accordion-bg, var(--color-bg-sand-20));
+  border: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
 .accordion-item .accordion-button {
-    background: var(--accordion-bg);
-    color: var(--dxt-color-headertext);
-font-family: 'Inter', sans-serif;
+  background: var(--accordion-bg, var(--color-bg-sand-20));
+  color: var(--dxt-color-headertext);
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 20px;
   line-height: 32px;
   letter-spacing: -0.005em; /*text body large bold*/
 }
 .accordion-item .accordion-button:not(.collapsed) {
-    background: var(--accordion-bg);
-    color: var(--dxt-color-base);
-border-bottom-right-radius: var(--radius-0) !important;
-border-bottom-left-radius: var(--radius-0) !important;
+  background: var(--accordion-bg, var(--color-bg-sand-20));
+  color: var(--dxt-color-base);
+  border-bottom-right-radius: var(--radius-0) !important;
+  border-bottom-left-radius: var(--radius-0) !important;
 } 
 .accordion-item .accordion-body {
-  background: var(--accordion-bg);
- font-family: 'Inter', sans-serif !important;
+  background: var(--accordion-bg, var(--color-bg-sand-20));
+  font-family: 'Inter', sans-serif !important;
   font-weight: 400 !important;
   font-size: 16px;
   line-height: 24px;
