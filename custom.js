@@ -302,14 +302,17 @@
         if (first && first.textContent) nameParts.push(first.textContent.trim());
         if (last && last.textContent) nameParts.push(last.textContent.trim());
         var fallbackLabel = nameParts.join(' ');
-        var emoji = ' 👤';
+        var emoji = '👤';
 
         function buildPlaceholder() {
           if (headshot.querySelector('.reach-profile-placeholder')) return;
           headshot.innerHTML = '';
           var placeholder = document.createElement('div');
           placeholder.className = 'reach-profile-placeholder';
-          placeholder.textContent = fallbackLabel ? fallbackLabel + emoji : 'Headshot' + emoji;
+          placeholder.textContent = emoji;
+          if (fallbackLabel) {
+            placeholder.setAttribute('aria-label', fallbackLabel + ' headshot placeholder');
+          }
           headshot.appendChild(placeholder);
         }
 
@@ -321,6 +324,34 @@
           }
         } else {
           buildPlaceholder();
+        }
+      });
+    }
+  };
+
+  // Keeps last name + credentials glued together so comma never wraps alone.
+  Drupal.behaviors.reachProfileNameGlue = {
+    attach: function (context) {
+      once(
+        'reachProfileNameGlue',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
+        context
+      ).forEach(function (card) {
+        var last = card.querySelector('.field--name-field-last-name');
+        var creds = card.querySelector('.field--name-field-credentials-display');
+        if (!last || !creds) return;
+
+        if (last.parentElement && last.parentElement.classList.contains('reach-name-combined')) return;
+        if (creds.parentElement && creds.parentElement.classList.contains('reach-name-combined')) return;
+
+        var wrap = document.createElement('span');
+        wrap.className = 'reach-name-combined';
+
+        var referenceNode = last;
+        if (last.parentNode) {
+          last.parentNode.insertBefore(wrap, referenceNode);
+          wrap.appendChild(last);
+          wrap.appendChild(creds);
         }
       });
     }

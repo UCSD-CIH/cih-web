@@ -2081,10 +2081,10 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   place-items: center;
   text-align: center;
   padding: var(--space-100);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 128px;
+  opacity: 0.3;
 }
 
 :is(
@@ -2149,6 +2149,34 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   margin-left: 0;
   margin-right: var(--space-050);
   white-space: nowrap;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-050);
+  white-space: nowrap;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-last-name,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-credentials-display {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 :is(
