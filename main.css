@@ -3900,3 +3900,24 @@ textarea.form-textarea:focus {
 ) .reach-name-combined .field--name-field-credentials-display {
   display: none !important;
 }
+
+/* Force-hide original name fragments when JS marks them as hidden */
+.reach-name-hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Hide individual name fields when combined wrapper exists (belt-and-suspenders to prevent duplicates) */
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .profile-card:has(.reach-name-combined)
+  :is(
+    .field--name-field-first-name,
+    .field--name-field-last-name,
+    .field--name-field-credentials-display
+  ) {
+  display: none !important;
+}

@@ -372,6 +372,7 @@
         [first, last, creds].forEach(function (node) {
           if (!node) return;
           node.setAttribute('aria-hidden', 'true');
+          node.classList.add('reach-name-hidden');
           node.style.display = 'none';
         });
 
