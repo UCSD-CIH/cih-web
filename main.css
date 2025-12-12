@@ -437,6 +437,14 @@ p,
   letter-spacing: 0;
 }
 
+.text--body-large-tight * {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+}
+
 .text--body-small-tight * {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -2099,7 +2107,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .field--name-field-first-name {
-  display: inline-block;
+  display: inline !important;
   margin-top: var(--space-150);
   font-family: 'Inter', sans-serif;
   font-weight: 700;
@@ -2121,7 +2129,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .field--name-field-credentials-display {
-  display: inline;
+  display: inline !important;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 24px;
@@ -2141,7 +2149,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 20px;
-  line-height: 32px;
+  line-height: 24px;
   letter-spacing: -0.005em;
   color: var(--color-text-paragraph);
 }
@@ -2205,9 +2213,9 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 ) .field--name-field-research-areas * {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: 0;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
 }
 
 :is(

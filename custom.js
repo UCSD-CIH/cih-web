@@ -302,7 +302,7 @@
         if (first && first.textContent) nameParts.push(first.textContent.trim());
         if (last && last.textContent) nameParts.push(last.textContent.trim());
         var fallbackLabel = nameParts.join(' ');
-        var emoji = ' 🕴️';
+        var emoji = ' 👤';
 
         function buildPlaceholder() {
           if (headshot.querySelector('.reach-profile-placeholder')) return;
@@ -321,6 +321,23 @@
           }
         } else {
           buildPlaceholder();
+        }
+      });
+    }
+  };
+
+  // Moves institution pill into headshot container so it overlays with inset spacing.
+  Drupal.behaviors.reachProfileInstitutionOverlay = {
+    attach: function (context) {
+      once(
+        'reachProfileInstitutionOverlay',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
+        context
+      ).forEach(function (card) {
+        var headshot = card.querySelector('.field--name-field-profile-headshot');
+        var institution = card.querySelector('.field--name-field-institution');
+        if (headshot && institution && institution.parentNode !== headshot) {
+          headshot.appendChild(institution);
         }
       });
     }
