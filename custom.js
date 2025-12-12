@@ -340,6 +340,7 @@
         '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
         context
       ).forEach(function (card) {
+        var first = card.querySelector('.field--name-field-first-name');
         var last = card.querySelector('.field--name-field-last-name');
         var creds = card.querySelector('.field--name-field-credentials-display');
         if (!last || !creds) return;
@@ -347,31 +348,36 @@
         if (last.parentElement && last.parentElement.classList.contains('reach-name-combined')) return;
         if (creds.parentElement && creds.parentElement.classList.contains('reach-name-combined')) return;
 
-        var lastText = (last.textContent || '').trim();
-        var credsText = (creds.textContent || '').trim();
-        var lastHasComma = lastText.endsWith(',');
-        var credsStartsWithComma = credsText.charAt(0) === ',';
+        var firstText = first ? (first.textContent || '').trim() : '';
+        var lastText = (last.textContent || '').trim().replace(/,+\s*$/, '');
+        var credsText = (creds.textContent || '').trim().replace(/^,\s*/, '');
 
-        if (!lastHasComma && !credsStartsWithComma) {
-          last.textContent = lastText ? lastText + ',' : '';
-        } else {
-          last.textContent = lastText;
+        if (!firstText && !lastText) return;
+
+        var parts = [];
+        if (firstText) parts.push(firstText);
+        if (lastText) {
+          var lastPart = lastText;
+          if (credsText) lastPart += ',';
+          parts.push(lastPart);
         }
+        if (credsText) parts.push(credsText);
 
-        if (credsStartsWithComma) {
-          creds.textContent = credsText.replace(/^,\s*/, '');
-        } else {
-          creds.textContent = credsText;
-        }
-
+        var combined = parts.join(' ');
         var wrap = document.createElement('span');
         wrap.className = 'reach-name-combined';
+        wrap.textContent = combined;
 
-        var referenceNode = last;
-        if (last.parentNode) {
-          last.parentNode.insertBefore(wrap, referenceNode);
-          wrap.appendChild(last);
-          wrap.appendChild(creds);
+        // Hide originals to avoid duplicate render while preserving text for lookups.
+        [first, last, creds].forEach(function (node) {
+          if (!node) return;
+          node.setAttribute('aria-hidden', 'true');
+          node.style.display = 'none';
+        });
+
+        var insertBeforeTarget = first || last || creds;
+        if (insertBeforeTarget && insertBeforeTarget.parentNode) {
+          insertBeforeTarget.parentNode.insertBefore(wrap, insertBeforeTarget);
         }
       });
     }

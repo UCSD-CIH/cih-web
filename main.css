@@ -3859,3 +3859,44 @@ textarea.form-textarea:focus {
 .center-nav > li > ul > li > a.nav-link {
   padding: var(--space-150) var(--space-200);
 }
+
+/* Override: render combined profile name as a single text block with natural wrapping */
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--color-text-heading);
+  margin-top: var(--space-150);
+  margin-right: 0;
+  white-space: normal;
+  word-break: normal;
+}
+
+/* Hide individual name fields inside the combined wrapper (JS already hides inline) */
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-first-name,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-last-name,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-credentials-display {
+  display: none !important;
+}
