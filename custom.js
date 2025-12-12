@@ -326,6 +326,23 @@
     }
   };
 
+  // Normalizes profile link labels to "View Profile" to avoid long URL overflow.
+  Drupal.behaviors.reachProfileLinkLabel = {
+    attach: function (context) {
+      once(
+        'reachProfileLinkLabel',
+        '.view-reach-profiles-leadership .profile-card .field--name-field-profile-link a, .view-reach-profiles-members .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_leadership .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_members .profile-card .field--name-field-profile-link a',
+        context
+      ).forEach(function (link) {
+        var original = (link.textContent || '').trim();
+        if (original && original.toLowerCase() !== 'view profile') {
+          link.setAttribute('data-original-url', original);
+          link.textContent = 'View Profile';
+        }
+      });
+    }
+  };
+
   // Forces main-nav external links to open in the current tab and strips noopener.
   Drupal.behaviors.extLinkOverride = {
     attach: function (context) {

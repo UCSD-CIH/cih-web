@@ -1938,6 +1938,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   display: flex;
   flex: 0 0 264px;
   width: 264px;
+  max-width: 264px;
   margin: 0;
   float: none !important;
   min-width: 0;
@@ -1985,7 +1986,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .profile-card {
-  background-color: var(--color-bg-lightest);
+  background-color: var(--color-bg-plain);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
   padding: var(--space-200);
@@ -1995,6 +1996,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   height: 100%;
   position: relative;
   box-shadow: none;
+  min-width: 0;
 }
 
 :is(
@@ -2082,7 +2084,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   padding: var(--space-075) var(--space-150);
   border-radius: var(--radius-999);
   border: var(--border-050) solid var(--color-border-subdued-strong);
-  background-color: var(--color-bg-lightest);
+  background-color: rgba(255, 255, 255, 0.88);
   color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -2104,6 +2106,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   font-size: 24px;
   line-height: 28px;
   color: var(--color-text-heading);
+  white-space: nowrap;
 }
 
 :is(
@@ -2125,6 +2128,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   line-height: 28px;
   color: var(--color-text-heading);
   margin-left: var(--space-050);
+  white-space: nowrap;
 }
 
 :is(
@@ -2136,9 +2140,10 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   margin-top: var(--space-100);
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--color-text-heading);
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -0.005em;
+  color: var(--color-text-paragraph);
 }
 
 :is(
@@ -2168,9 +2173,10 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   margin-top: var(--space-200);
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--color-text-heading);
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0;
+  color: var(--color-text-subdued-strong);
 }
 
 :is(
@@ -2223,6 +2229,9 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 /* ---- Type pill pinned top-right of thumbnail ---- */
