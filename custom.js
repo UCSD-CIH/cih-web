@@ -309,7 +309,10 @@
           headshot.innerHTML = '';
           var placeholder = document.createElement('div');
           placeholder.className = 'reach-profile-placeholder';
-          placeholder.textContent = emoji;
+          var emojiEl = document.createElement('span');
+          emojiEl.className = 'reach-profile-placeholder-emoji';
+          emojiEl.textContent = emoji;
+          placeholder.appendChild(emojiEl);
           if (fallbackLabel) {
             placeholder.setAttribute('aria-label', fallbackLabel + ' headshot placeholder');
           }
@@ -343,6 +346,23 @@
 
         if (last.parentElement && last.parentElement.classList.contains('reach-name-combined')) return;
         if (creds.parentElement && creds.parentElement.classList.contains('reach-name-combined')) return;
+
+        var lastText = (last.textContent || '').trim();
+        var credsText = (creds.textContent || '').trim();
+        var lastHasComma = lastText.endsWith(',');
+        var credsStartsWithComma = credsText.charAt(0) === ',';
+
+        if (!lastHasComma && !credsStartsWithComma) {
+          last.textContent = lastText ? lastText + ',' : '';
+        } else {
+          last.textContent = lastText;
+        }
+
+        if (credsStartsWithComma) {
+          creds.textContent = credsText.replace(/^,\s*/, '');
+        } else {
+          creds.textContent = credsText;
+        }
 
         var wrap = document.createElement('span');
         wrap.className = 'reach-name-combined';

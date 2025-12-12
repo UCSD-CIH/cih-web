@@ -2083,7 +2083,16 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   padding: var(--space-100);
   font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Inter', sans-serif;
   font-weight: 400;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-profile-placeholder-emoji {
   font-size: 128px;
+  line-height: 1;
   opacity: 0.3;
 }
 
@@ -2148,7 +2157,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   color: var(--color-text-heading);
   margin-left: 0;
   margin-right: var(--space-050);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 :is(
@@ -2159,8 +2168,13 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 ) .reach-name-combined {
   display: inline-flex;
   align-items: baseline;
-  gap: var(--space-050);
-  white-space: nowrap;
+  gap: 0;
+  white-space: normal;
+  flex-wrap: wrap;
+  column-gap: var(--space-025);
+  row-gap: 0;
+  min-width: 0;
+  max-width: 100%;
 }
 
 :is(
@@ -2177,6 +2191,26 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 ) .reach-name-combined .field--name-field-credentials-display {
   margin-left: 0;
   margin-right: 0;
+  white-space: normal;
+  max-width: 100%;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-last-name {
+  white-space: nowrap;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-name-combined .field--name-field-credentials-display {
+  margin-left: var(--space-025);
 }
 
 :is(
