@@ -2115,7 +2115,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .field--name-field-first-name {
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: baseline;
   margin-top: var(--space-150);
   margin-right: var(--space-050);
   font-family: 'Inter', sans-serif;
@@ -2138,7 +2139,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .field--name-field-credentials-display {
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: baseline;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 24px;
@@ -2147,6 +2149,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   margin-left: 0;
   margin-right: var(--space-050);
   white-space: nowrap;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-credentials-display {
+  margin-right: 0;
 }
 
 :is(
