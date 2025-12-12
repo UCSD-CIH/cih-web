@@ -437,6 +437,14 @@ p,
   letter-spacing: 0;
 }
 
+.text--body-small-tight * {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0;
+}
+
 .emoji--body-large {
   display: inline-block;
   vertical-align: middle;
@@ -1905,6 +1913,316 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   height: auto;
   border: var(--border-050) solid var(--color-border-subdued-strong); /* subtle frame */
   border-radius: var(--radius-200);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .view-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-400); /* 32px */
+  max-width: 1200px;
+  margin-inline: auto;
+  align-items: stretch;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .views-row {
+  display: flex;
+  flex: 0 0 264px;
+  width: 264px;
+  margin: 0;
+  float: none !important;
+  min-width: 0;
+}
+
+@media (max-width: 1200px) {
+  :is(
+    .view-reach-profiles-leadership,
+    .view-reach-profiles-members,
+    .view-id-reach_profiles_leadership,
+    .view-id-reach_profiles_members
+  ) .views-row {
+    flex-basis: calc((100% - (var(--space-400) * 2)) / 3);
+    width: calc((100% - (var(--space-400) * 2)) / 3);
+  }
+}
+
+@media (max-width: 960px) {
+  :is(
+    .view-reach-profiles-leadership,
+    .view-reach-profiles-members,
+    .view-id-reach_profiles_leadership,
+    .view-id-reach_profiles_members
+  ) .views-row {
+    flex-basis: calc((100% - var(--space-400)) / 2);
+    width: calc((100% - var(--space-400)) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  :is(
+    .view-reach-profiles-leadership,
+    .view-reach-profiles-members,
+    .view-id-reach_profiles_leadership,
+    .view-id-reach_profiles_members
+  ) .views-row {
+    flex-basis: 100%;
+    width: 100%;
+  }
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .profile-card {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  padding: var(--space-200);
+  color: var(--color-text-paragraph);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  box-shadow: none;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .profile-card h2,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .profile-card .field--name-title {
+  display: none !important;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .profile-card .content {
+  display: contents;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-profile-headshot {
+  position: relative;
+  margin: 0;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-profile-headshot img,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-profile-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-100);
+  object-fit: cover;
+  display: block;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .reach-profile-placeholder {
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  background-color: var(--color-bg-lightest);
+  color: var(--color-text-subdued-strong);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-100);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-institution {
+  position: absolute;
+  top: var(--space-150);
+  left: var(--space-150);
+  z-index: 1;
+  padding: var(--space-075) var(--space-150);
+  border-radius: var(--radius-999);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  background-color: var(--color-bg-lightest);
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-first-name {
+  display: inline-block;
+  margin-top: var(--space-150);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--color-text-heading);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-last-name,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-credentials-display {
+  display: inline;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--color-text-heading);
+  margin-left: var(--space-050);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-reach-roles {
+  margin-top: var(--space-100);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-heading);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-reach-roles .field__item {
+  display: inline;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-reach-roles .field__item:not(:last-child)::after {
+  content: ", ";
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-titles {
+  margin-top: var(--space-200);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-heading);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-research-areas {
+  margin-top: var(--space-200);
+  padding-top: var(--space-200);
+  border-top: var(--border-025) solid var(--color-border-subdued-strong);
+  color: var(--color-text-subdued-strong);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-research-areas,
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-research-areas * {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-profile-link {
+  margin-top: var(--space-100);
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-profile-link a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 /* ---- Type pill pinned top-right of thumbnail ---- */

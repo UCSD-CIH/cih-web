@@ -277,6 +277,55 @@
     removeNoopener(link);
   }
 
+  // Adds a text-based placeholder when headshot images are missing/broken.
+  Drupal.behaviors.reachProfileHeadshotPlaceholder = {
+    attach: function (context) {
+      once(
+        'reachProfileCard',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
+        context
+      ).forEach(function (card) {
+        var content = card.querySelector('.content') || card;
+        var headshot = card.querySelector('.field--name-field-profile-headshot');
+
+        if (!headshot) {
+          headshot = document.createElement('div');
+          headshot.className = 'field field--name-field-profile-headshot field__item';
+          content.insertBefore(headshot, content.firstChild);
+        }
+
+        headshot.classList.add('reach-profile-headshot');
+
+        var first = card.querySelector('.field--name-field-first-name');
+        var last = card.querySelector('.field--name-field-last-name');
+        var nameParts = [];
+        if (first && first.textContent) nameParts.push(first.textContent.trim());
+        if (last && last.textContent) nameParts.push(last.textContent.trim());
+        var fallbackLabel = nameParts.join(' ');
+        var emoji = ' 🕴️';
+
+        function buildPlaceholder() {
+          if (headshot.querySelector('.reach-profile-placeholder')) return;
+          headshot.innerHTML = '';
+          var placeholder = document.createElement('div');
+          placeholder.className = 'reach-profile-placeholder';
+          placeholder.textContent = fallbackLabel ? fallbackLabel + emoji : 'Headshot' + emoji;
+          headshot.appendChild(placeholder);
+        }
+
+        var img = headshot.querySelector('img');
+        if (img) {
+          img.addEventListener('error', buildPlaceholder, { once: true });
+          if (img.complete && img.naturalWidth === 0) {
+            buildPlaceholder();
+          }
+        } else {
+          buildPlaceholder();
+        }
+      });
+    }
+  };
+
   // Forces main-nav external links to open in the current tab and strips noopener.
   Drupal.behaviors.extLinkOverride = {
     attach: function (context) {
