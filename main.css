@@ -1946,7 +1946,6 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   display: flex;
   flex: 0 0 264px;
   width: 264px;
-  max-width: 264px;
   margin: 0;
   float: none !important;
   min-width: 0;
@@ -1984,6 +1983,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
     .view-id-reach_profiles_members
   ) .views-row {
     flex-basis: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  :is(
+    .view-reach-profiles-leadership,
+    .view-reach-profiles-members,
+    .view-id-reach_profiles_leadership,
+    .view-id-reach_profiles_members
+  ) .profile-card {
     width: 100%;
   }
 }
@@ -2107,8 +2115,9 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .field--name-field-first-name {
-  display: inline !important;
+  display: inline-block !important;
   margin-top: var(--space-150);
+  margin-right: var(--space-050);
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 24px;
@@ -2129,13 +2138,14 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
 ) .field--name-field-credentials-display {
-  display: inline !important;
+  display: inline-block !important;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 24px;
   line-height: 28px;
   color: var(--color-text-heading);
-  margin-left: var(--space-050);
+  margin-left: 0;
+  margin-right: var(--space-050);
   white-space: nowrap;
 }
 
