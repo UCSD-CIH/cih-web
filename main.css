@@ -2094,6 +2094,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   font-size: 128px;
   line-height: 1;
   opacity: 0.3;
+  transform: translateY(12px);
 }
 
 :is(
