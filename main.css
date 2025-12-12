@@ -2064,6 +2064,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-100);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
   object-fit: cover;
   display: block;
 }
