@@ -398,7 +398,14 @@
     if (!field) return '';
     var target = field.querySelector('a') || field;
     var candidates = [field, target];
-    var attrs = ['data-abbreviation', 'data-abbrev', 'data-abbr'];
+    var attrs = [
+      'data-abbreviation',
+      'data-abbrev',
+      'data-abbr',
+      'data-term-abbreviation',
+      'data-term-abbrev',
+      'data-term-abbr'
+    ];
 
     for (var i = 0; i < candidates.length; i++) {
       var node = candidates[i];
@@ -421,9 +428,17 @@
     var finalLabel = abbreviation || existing;
     if (!finalLabel) return;
 
-    labelTarget.textContent = finalLabel;
-    if (link && existing && !link.getAttribute('title')) {
-      link.setAttribute('title', existing);
+    // Replace link with plain text to avoid hyperlink in the pill.
+    if (link) {
+      var span = document.createElement('span');
+      span.className = link.className || '';
+      span.textContent = finalLabel;
+      if (existing && !span.getAttribute('title')) {
+        span.setAttribute('title', existing);
+      }
+      link.parentNode.replaceChild(span, link);
+    } else {
+      labelTarget.textContent = finalLabel;
     }
   }
 
