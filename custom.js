@@ -491,6 +491,20 @@
     }
   };
 
+  // Fallback: ensure the overlay behavior runs even if Drupal never attaches.
+  function ensureInstitutionOverlayRuns() {
+    try {
+      Drupal.behaviors.reachProfileInstitutionOverlay.attach(document);
+    } catch (e) {
+      // Swallow to avoid blocking other scripts; this is a defensive helper.
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureInstitutionOverlayRuns, { once: true });
+  } else {
+    ensureInstitutionOverlayRuns();
+  }
+
   // Normalizes profile link labels to "View Profile" to avoid long URL overflow.
   Drupal.behaviors.reachProfileLinkLabel = {
     attach: function (context) {
