@@ -424,6 +424,12 @@
       }
     }
 
+    var abbrField = field.querySelector('.field--name-field-abbreviation .field__item');
+    if (abbrField) {
+      var abbrText = (abbrField.textContent || '').trim();
+      if (abbrText) return abbrText;
+    }
+
     return '';
   }
 
@@ -441,8 +447,10 @@
     var link = field.querySelector('a');
     var labelTarget = link || field;
     var abbreviation = readInstitutionAbbreviation(field);
+    var heading = field.querySelector('h2');
+    var headingText = heading && heading.textContent ? heading.textContent.trim() : '';
     var existing = (labelTarget.textContent || '').trim();
-    var finalLabel = abbreviation || existing;
+    var finalLabel = abbreviation || headingText || existing;
     if (!finalLabel) return;
 
     // Replace link with plain text to avoid hyperlink in the pill.

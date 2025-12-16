@@ -3923,3 +3923,13 @@ textarea.form-textarea:focus {
   ) {
   display: none !important;
 }
+
+/* Hide abbreviation field labels in institution pills (JS still reads the value) */
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members
+) .field--name-field-institution-affiliation .field--name-field-abbreviation {
+  display: none !important;
+}
