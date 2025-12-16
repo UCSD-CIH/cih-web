@@ -433,6 +433,37 @@
     return '';
   }
 
+  function readInstitutionName(field) {
+    if (!field) return '';
+
+    var heading = field.querySelector('h2, h3');
+    if (heading) {
+      var headingText = (heading.textContent || '').trim();
+      if (headingText) return headingText;
+
+      var headingTitle = heading.getAttribute('title');
+      if (headingTitle && headingTitle.trim()) return headingTitle.trim();
+
+      var titledChild = heading.querySelector('[title]');
+      if (titledChild) {
+        var innerTitle = titledChild.getAttribute('title');
+        if (innerTitle && innerTitle.trim()) return innerTitle.trim();
+      }
+    }
+
+    var titled = field.querySelector('[data-name], [data-term-name], [title]');
+    if (titled) {
+      var value =
+        titled.getAttribute('data-name') ||
+        titled.getAttribute('data-term-name') ||
+        titled.getAttribute('title') ||
+        '';
+      if (value && value.trim()) return value.trim();
+    }
+
+    return (field.textContent || '').trim();
+  }
+
   function copyDataAttributes(source, target) {
     if (!source || !target || !source.attributes) return;
     Array.prototype.forEach.call(source.attributes, function (attr) {
@@ -445,12 +476,15 @@
   function applyInstitutionLabel(field) {
     if (!field) return;
     var link = field.querySelector('a');
-    var labelTarget = link || field;
+    var labelTarget =
+      link ||
+      field.querySelector('h2 span') ||
+      field.querySelector('h2') ||
+      field;
     var abbreviation = readInstitutionAbbreviation(field);
-    var heading = field.querySelector('h2');
-    var headingText = heading && heading.textContent ? heading.textContent.trim() : '';
+    var name = readInstitutionName(field);
     var existing = (labelTarget.textContent || '').trim();
-    var finalLabel = abbreviation || headingText || existing;
+    var finalLabel = abbreviation || name || existing;
     if (!finalLabel) return;
 
     // Replace link with plain text to avoid hyperlink in the pill.
@@ -460,12 +494,18 @@
       // Preserve any data attributes (e.g., abbreviations) from the link.
       copyDataAttributes(link, span);
       span.textContent = finalLabel;
-      if (existing && !span.getAttribute('title')) {
-        span.setAttribute('title', existing);
+      var linkTitle = link.getAttribute('title') || existing;
+      var tooltip = abbreviation && name && name !== abbreviation ? name : linkTitle;
+      if (tooltip && !span.getAttribute('title')) {
+        span.setAttribute('title', tooltip);
       }
       link.parentNode.replaceChild(span, link);
     } else {
       labelTarget.textContent = finalLabel;
+      var title = abbreviation && name && name !== abbreviation ? name : '';
+      if (title && !labelTarget.getAttribute('title')) {
+        labelTarget.setAttribute('title', title);
+      }
     }
   }
 
