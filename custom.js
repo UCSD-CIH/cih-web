@@ -435,6 +435,7 @@
 
   function readInstitutionName(field) {
     if (!field) return '';
+    var link = field.querySelector('a');
 
     var heading = field.querySelector('h2, h3');
     if (heading) {
@@ -461,6 +462,28 @@
       if (value && value.trim()) return value.trim();
     }
 
+    var labelAttrs = ['aria-label', 'data-label', 'data-entity-label', 'data-drupal-entity-label'];
+    var labelTargets = [field];
+    if (link) labelTargets.push(link);
+    field.querySelectorAll(
+      labelAttrs
+        .map(function (attr) {
+          return '[' + attr + ']';
+        })
+        .join(',')
+    ).forEach(function (node) {
+      labelTargets.push(node);
+    });
+
+    for (var i = 0; i < labelTargets.length; i++) {
+      var node = labelTargets[i];
+      if (!node) continue;
+      for (var j = 0; j < labelAttrs.length; j++) {
+        var attrVal = node.getAttribute(labelAttrs[j]);
+        if (attrVal && attrVal.trim()) return attrVal.trim();
+      }
+    }
+
     return (field.textContent || '').trim();
   }
 
@@ -475,38 +498,47 @@
 
   function applyInstitutionLabel(field) {
     if (!field) return '';
-    var link = field.querySelector('a');
-    var labelTarget =
-      link ||
-      field.querySelector('h2 span') ||
-      field.querySelector('h2') ||
-      field;
     var abbreviation = readInstitutionAbbreviation(field);
     var name = readInstitutionName(field);
-    var existing = (labelTarget.textContent || '').trim();
+    var labelSpan =
+      field.querySelector('.reach-institution-pill-label') ||
+      field.querySelector('h2 span') ||
+      field.querySelector('h2');
+    var link = field.querySelector('a');
+    var existing = (labelSpan && labelSpan.textContent ? labelSpan.textContent : field.textContent || '').trim();
     var finalLabel = abbreviation || name || existing;
     if (!finalLabel) return '';
 
-    // Replace link with plain text to avoid hyperlink in the pill.
-    if (link) {
-      var span = document.createElement('span');
-      span.className = link.className || '';
-      // Preserve any data attributes (e.g., abbreviations) from the link.
-      copyDataAttributes(link, span);
-      span.textContent = finalLabel;
+    if (!labelSpan) {
+      labelSpan = document.createElement('span');
+      labelSpan.className = 'reach-institution-pill-label';
+    }
+
+    // Replace link with plain text to avoid hyperlink in the pill, preserving attributes.
+    if (link && link.parentNode) {
+      var classes = [link.className, labelSpan.className].filter(Boolean).join(' ').trim();
+      labelSpan.className = classes || 'reach-institution-pill-label';
+      copyDataAttributes(link, labelSpan);
       var linkTitle = link.getAttribute('title') || existing;
       var tooltip = abbreviation && name && name !== abbreviation ? name : linkTitle;
-      if (tooltip && !span.getAttribute('title')) {
-        span.setAttribute('title', tooltip);
+      if (tooltip && !labelSpan.getAttribute('title')) {
+        labelSpan.setAttribute('title', tooltip);
       }
-      link.parentNode.replaceChild(span, link);
-    } else {
-      labelTarget.textContent = finalLabel;
+      link.parentNode.replaceChild(labelSpan, link);
+    } else if (!labelSpan.parentNode) {
       var title = abbreviation && name && name !== abbreviation ? name : '';
-      if (title && !labelTarget.getAttribute('title')) {
-        labelTarget.setAttribute('title', title);
+      if (title && !labelSpan.getAttribute('title')) {
+        labelSpan.setAttribute('title', title);
       }
+      field.appendChild(labelSpan);
     }
+
+    labelSpan.textContent = finalLabel;
+    labelSpan.style.textIndent = '0';
+    labelSpan.style.display = 'inline';
+    labelSpan.style.visibility = 'visible';
+    labelSpan.style.opacity = '1';
+    labelSpan.removeAttribute('aria-hidden');
 
     return finalLabel;
   }
