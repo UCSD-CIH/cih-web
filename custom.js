@@ -474,7 +474,7 @@
   }
 
   function applyInstitutionLabel(field) {
-    if (!field) return;
+    if (!field) return '';
     var link = field.querySelector('a');
     var labelTarget =
       link ||
@@ -485,7 +485,7 @@
     var name = readInstitutionName(field);
     var existing = (labelTarget.textContent || '').trim();
     var finalLabel = abbreviation || name || existing;
-    if (!finalLabel) return;
+    if (!finalLabel) return '';
 
     // Replace link with plain text to avoid hyperlink in the pill.
     if (link) {
@@ -507,6 +507,8 @@
         labelTarget.setAttribute('title', title);
       }
     }
+
+    return finalLabel;
   }
 
   Drupal.behaviors.reachProfileInstitutionOverlay = {
@@ -521,19 +523,30 @@
         if (!headshot || !selection) return;
 
         var institution = selection.node;
-        var legacy = selection.isAffiliation
-          ? card.querySelector('.field--name-field-institution')
-          : null;
+        var legacy = card.querySelector('.field--name-field-institution');
+        var chosen = institution;
 
-        applyInstitutionLabel(institution);
+        var label = applyInstitutionLabel(chosen);
+        if (!label && legacy && legacy !== institution) {
+          label = applyInstitutionLabel(legacy);
+          if (label) {
+            chosen = legacy;
+          }
+        }
+        if (!label) return;
 
-        if (legacy && legacy !== institution) {
+        if (legacy && legacy !== chosen) {
           legacy.setAttribute('aria-hidden', 'true');
           legacy.style.display = 'none';
         }
 
-        if (institution.parentNode !== headshot) {
-          headshot.appendChild(institution);
+        if (institution && institution !== chosen) {
+          institution.setAttribute('aria-hidden', 'true');
+          institution.style.display = 'none';
+        }
+
+        if (chosen.parentNode !== headshot) {
+          headshot.appendChild(chosen);
         }
       });
     }
