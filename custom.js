@@ -548,6 +548,9 @@
     var hoverTitle = name || finalLabel;
     if (hoverTitle) {
       labelSpan.setAttribute('title', hoverTitle);
+      if (!field.getAttribute('title') || field.getAttribute('title') !== hoverTitle) {
+        field.setAttribute('title', hoverTitle);
+      }
     }
 
     labelSpan.textContent = finalLabel;
