@@ -546,7 +546,7 @@
 
     // Always provide full institution name as hover helper when available.
     var hoverTitle = name || finalLabel;
-    if (hoverTitle && !labelSpan.getAttribute('title')) {
+    if (hoverTitle) {
       labelSpan.setAttribute('title', hoverTitle);
     }
 
