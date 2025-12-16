@@ -407,6 +407,14 @@
       'data-term-abbr'
     ];
 
+    var selector = attrs.map(function (attr) {
+      return '[' + attr + ']';
+    }).join(',');
+    var dataNodes = selector ? field.querySelectorAll(selector) : [];
+    dataNodes.forEach(function (node) {
+      candidates.push(node);
+    });
+
     for (var i = 0; i < candidates.length; i++) {
       var node = candidates[i];
       if (!node) continue;
@@ -417,6 +425,15 @@
     }
 
     return '';
+  }
+
+  function copyDataAttributes(source, target) {
+    if (!source || !target || !source.attributes) return;
+    Array.prototype.forEach.call(source.attributes, function (attr) {
+      if (attr.name && attr.name.indexOf('data-') === 0) {
+        target.setAttribute(attr.name, attr.value);
+      }
+    });
   }
 
   function applyInstitutionLabel(field) {
@@ -432,6 +449,8 @@
     if (link) {
       var span = document.createElement('span');
       span.className = link.className || '';
+      // Preserve any data attributes (e.g., abbreviations) from the link.
+      copyDataAttributes(link, span);
       span.textContent = finalLabel;
       if (existing && !span.getAttribute('title')) {
         span.setAttribute('title', existing);
