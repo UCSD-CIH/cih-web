@@ -500,31 +500,33 @@
     if (!field) return '';
     var abbreviation = readInstitutionAbbreviation(field);
     var name = readInstitutionName(field);
-    var labelSpan =
-      field.querySelector('.reach-institution-pill-label') ||
-      field.querySelector('h2 span') ||
-      field.querySelector('h2');
+    var existingLabelNode = field.querySelector('.reach-institution-pill-label');
+    var heading = field.querySelector('h2, h3, h4, h5, h6');
+    var labelClass = (existingLabelNode && existingLabelNode.className) || 'reach-institution-pill-label';
+    var labelSpan = existingLabelNode && existingLabelNode.tagName.toLowerCase() === 'span' ? existingLabelNode : null;
     var link = field.querySelector('a');
-    var existing = (labelSpan && labelSpan.textContent ? labelSpan.textContent : field.textContent || '').trim();
+    var existing = (existingLabelNode && existingLabelNode.textContent ? existingLabelNode.textContent : field.textContent || '').trim();
     var finalLabel = abbreviation || name || existing;
     if (!finalLabel) return '';
 
     if (!labelSpan) {
       labelSpan = document.createElement('span');
-      labelSpan.className = 'reach-institution-pill-label';
+      labelSpan.className = labelClass || 'reach-institution-pill-label';
+      var container = heading || field;
+      if (container) {
+        container.appendChild(labelSpan);
+      }
     }
 
     // Replace link with plain text to avoid hyperlink in the pill, preserving attributes.
     if (link && link.parentNode) {
-      var classes = [link.className, labelSpan.className].filter(Boolean).join(' ').trim();
-      labelSpan.className = classes || 'reach-institution-pill-label';
       copyDataAttributes(link, labelSpan);
       var linkTitle = link.getAttribute('title') || existing;
       var tooltip = abbreviation && name && name !== abbreviation ? name : linkTitle;
       if (tooltip && !labelSpan.getAttribute('title')) {
         labelSpan.setAttribute('title', tooltip);
       }
-      link.parentNode.replaceChild(labelSpan, link);
+      link.parentNode.removeChild(link);
     } else if (!labelSpan.parentNode) {
       var title = abbreviation && name && name !== abbreviation ? name : '';
       if (title && !labelSpan.getAttribute('title')) {
