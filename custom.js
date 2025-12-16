@@ -511,11 +511,20 @@
 
     if (!labelSpan) {
       labelSpan = document.createElement('span');
-      labelSpan.className = labelClass || 'reach-institution-pill-label';
-      var container = heading || field;
-      if (container) {
-        container.appendChild(labelSpan);
+    }
+    labelSpan.className = labelClass || 'reach-institution-pill-label';
+
+    // Move label into the field root so it is not hidden by profile card heading styles.
+    if (labelSpan.parentNode !== field) {
+      if (field.firstChild) {
+        field.insertBefore(labelSpan, field.firstChild);
+      } else {
+        field.appendChild(labelSpan);
       }
+    }
+    if (heading) {
+      heading.setAttribute('aria-hidden', 'true');
+      heading.style.display = 'none';
     }
 
     // Replace link with plain text to avoid hyperlink in the pill, preserving attributes.
