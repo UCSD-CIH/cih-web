@@ -2103,7 +2103,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members
-) .field--name-field-institution {
+) :is(.field--name-field-institution, .field--name-field-institution-affiliation) {
   position: absolute;
   top: var(--space-150);
   left: var(--space-150);

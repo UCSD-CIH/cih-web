@@ -385,6 +385,48 @@
   };
 
   // Moves institution pill into headshot container so it overlays with inset spacing.
+  function findProfileInstitutionField(card) {
+    if (!card) return null;
+    var affiliation = card.querySelector('.field--name-field-institution-affiliation');
+    if (affiliation) return { node: affiliation, isAffiliation: true };
+    var legacy = card.querySelector('.field--name-field-institution');
+    if (legacy) return { node: legacy, isAffiliation: false };
+    return null;
+  }
+
+  function readInstitutionAbbreviation(field) {
+    if (!field) return '';
+    var target = field.querySelector('a') || field;
+    var candidates = [field, target];
+    var attrs = ['data-abbreviation', 'data-abbrev', 'data-abbr'];
+
+    for (var i = 0; i < candidates.length; i++) {
+      var node = candidates[i];
+      if (!node) continue;
+      for (var j = 0; j < attrs.length; j++) {
+        var val = node.getAttribute(attrs[j]);
+        if (val && val.trim()) return val.trim();
+      }
+    }
+
+    return '';
+  }
+
+  function applyInstitutionLabel(field) {
+    if (!field) return;
+    var link = field.querySelector('a');
+    var labelTarget = link || field;
+    var abbreviation = readInstitutionAbbreviation(field);
+    var existing = (labelTarget.textContent || '').trim();
+    var finalLabel = abbreviation || existing;
+    if (!finalLabel) return;
+
+    labelTarget.textContent = finalLabel;
+    if (link && existing && !link.getAttribute('title')) {
+      link.setAttribute('title', existing);
+    }
+  }
+
   Drupal.behaviors.reachProfileInstitutionOverlay = {
     attach: function (context) {
       once(
@@ -393,8 +435,22 @@
         context
       ).forEach(function (card) {
         var headshot = card.querySelector('.field--name-field-profile-headshot');
-        var institution = card.querySelector('.field--name-field-institution');
-        if (headshot && institution && institution.parentNode !== headshot) {
+        var selection = findProfileInstitutionField(card);
+        if (!headshot || !selection) return;
+
+        var institution = selection.node;
+        var legacy = selection.isAffiliation
+          ? card.querySelector('.field--name-field-institution')
+          : null;
+
+        applyInstitutionLabel(institution);
+
+        if (legacy && legacy !== institution) {
+          legacy.setAttribute('aria-hidden', 'true');
+          legacy.style.display = 'none';
+        }
+
+        if (institution.parentNode !== headshot) {
           headshot.appendChild(institution);
         }
       });
