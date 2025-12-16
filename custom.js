@@ -544,6 +544,12 @@
       field.appendChild(labelSpan);
     }
 
+    // Always provide full institution name as hover helper when available.
+    var hoverTitle = name || finalLabel;
+    if (hoverTitle && !labelSpan.getAttribute('title')) {
+      labelSpan.setAttribute('title', hoverTitle);
+    }
+
     labelSpan.textContent = finalLabel;
     labelSpan.style.textIndent = '0';
     labelSpan.style.display = 'inline';

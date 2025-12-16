@@ -2105,8 +2105,9 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members
 ) :is(.field--name-field-institution, .field--name-field-institution-affiliation) {
   position: absolute;
-  top: var(--space-150);
-  left: var(--space-150);
+  top: auto;
+  bottom: var(--space-100);
+  left: var(--space-100);
   z-index: 1;
   padding: var(--space-075) var(--space-150);
   border-radius: var(--radius-999);
