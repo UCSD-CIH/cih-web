@@ -282,7 +282,7 @@
     attach: function (context) {
       once(
         'reachProfileCard',
-        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card, .profile-cards .profile-card',
         context
       ).forEach(function (card) {
         var content = card.querySelector('.content') || card;
@@ -337,7 +337,7 @@
     attach: function (context) {
       once(
         'reachProfileNameGlue',
-        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card, .profile-cards .profile-card',
         context
       ).forEach(function (card) {
         var first = card.querySelector('.field--name-field-first-name');
@@ -567,7 +567,7 @@
     attach: function (context) {
       once(
         'reachProfileInstitutionOverlay',
-        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card, .profile-cards .profile-card',
         context
       ).forEach(function (card) {
         var headshot = card.querySelector('.field--name-field-profile-headshot');
@@ -623,7 +623,7 @@
     attach: function (context) {
       once(
         'reachProfileLinkLabel',
-        '.view-reach-profiles-leadership .profile-card .field--name-field-profile-link a, .view-reach-profiles-members .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_leadership .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_members .profile-card .field--name-field-profile-link a',
+        '.view-reach-profiles-leadership .profile-card .field--name-field-profile-link a, .view-reach-profiles-members .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_leadership .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_members .profile-card, .view-id-reach_profiles_scholars .profile-card .field--name-field-profile-link a',
         context
       ).forEach(function (link) {
         var original = (link.textContent || '').trim();
@@ -638,29 +638,33 @@
   // Hides "Leadership" role tag from profile cards while keeping other roles.
   Drupal.behaviors.reachProfileRoleFilter = {
     attach: function (context) {
-      once(
-        'reachProfileRoleFilter',
-        '.profile-card .field--name-field-reach-roles',
-        context
-      ).forEach(function (field) {
-        var items = Array.prototype.slice.call(field.querySelectorAll('.field__item'));
-        var visibleCount = 0;
+      try {
+        once('reachProfileRoleFilter', '.profile-card .field--name-field-reach-roles', context).forEach(function (field) {
+          if (!field || !field.querySelectorAll) return;
 
-        items.forEach(function (item) {
-          var text = (item.textContent || '').trim().toLowerCase();
-          if (text === 'leadership') {
-            item.setAttribute('aria-hidden', 'true');
-            item.style.display = 'none';
-          } else {
-            visibleCount++;
+          var items = Array.prototype.slice.call(field.querySelectorAll('.field__item'));
+          if (!items.length) return;
+
+          var visibleCount = 0;
+
+          items.forEach(function (item) {
+            var text = (item.textContent || '').trim().toLowerCase();
+            if (text === 'leadership') {
+              item.setAttribute('aria-hidden', 'true');
+              item.style.display = 'none';
+            } else {
+              visibleCount++;
+            }
+          });
+
+          if (visibleCount === 0) {
+            field.setAttribute('aria-hidden', 'true');
+            field.style.display = 'none';
           }
         });
-
-        if (visibleCount === 0) {
-          field.setAttribute('aria-hidden', 'true');
-          field.style.display = 'none';
-        }
-      });
+      } catch (e) {
+        // Fail silently to avoid blocking Drupal behaviors or view rendering.
+      }
     }
   };
 

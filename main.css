@@ -1927,7 +1927,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .view-content {
   display: flex;
   flex-wrap: wrap;
@@ -1941,7 +1942,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .views-row {
   display: flex;
   flex: 0 0 264px;
@@ -2000,7 +2002,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card {
   background-color: var(--color-bg-plain);
   border: var(--border-050) solid var(--color-border-subdued-strong);
@@ -2019,13 +2022,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card h2,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card .field--name-title {
   display: none !important;
 }
@@ -2034,7 +2039,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card .content {
   display: contents;
 }
@@ -2043,7 +2049,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-profile-headshot {
   position: relative;
   margin: 0;
@@ -2053,13 +2060,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-profile-headshot img,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-profile-placeholder {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -2073,7 +2082,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-profile-placeholder {
   border: var(--border-050) solid var(--color-border-subdued-strong);
   background-color: var(--color-bg-lightest);
@@ -2090,7 +2100,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-profile-placeholder-emoji {
   font-size: 128px;
   line-height: 1;
@@ -2101,7 +2112,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) :is(.field--name-field-institution, .field--name-field-institution-affiliation) {
   position: absolute;
   top: auto;
@@ -2125,7 +2137,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-first-name {
   display: inline-flex !important;
   align-items: baseline;
@@ -2143,13 +2156,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-last-name,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-credentials-display {
   display: inline-flex !important;
   align-items: baseline;
@@ -2167,7 +2182,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined {
   display: inline-flex;
   align-items: baseline;
@@ -2184,13 +2200,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-last-name,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-credentials-display {
   margin-left: 0;
   margin-right: 0;
@@ -2202,7 +2220,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-last-name {
   white-space: nowrap;
 }
@@ -2211,7 +2230,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-credentials-display {
   margin-left: var(--space-025);
 }
@@ -2220,7 +2240,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-credentials-display {
   margin-right: 0;
 }
@@ -2229,7 +2250,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-reach-roles {
   margin-top: var(--space-100);
   font-family: 'Inter', sans-serif;
@@ -2244,7 +2266,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-reach-roles .field__item {
   display: inline;
 }
@@ -2253,7 +2276,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-reach-roles .field__item:not(:last-child)::after {
   content: ", ";
 }
@@ -2262,7 +2286,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-titles {
   margin-top: var(--space-200);
   font-family: 'Inter', sans-serif;
@@ -2277,7 +2302,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-research-areas {
   margin-top: var(--space-200);
   padding-top: var(--space-200);
@@ -2289,13 +2315,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-research-areas,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-research-areas * {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -2308,7 +2336,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-profile-link {
   margin-top: var(--space-100);
 }
@@ -2317,7 +2346,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-profile-link a {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -3868,7 +3898,8 @@ textarea.form-textarea:focus {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined {
   display: block;
   font-family: 'Inter', sans-serif;
@@ -3887,19 +3918,22 @@ textarea.form-textarea:focus {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-first-name,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-last-name,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .reach-name-combined .field--name-field-credentials-display {
   display: none !important;
 }
@@ -3915,7 +3949,8 @@ textarea.form-textarea:focus {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card:has(.reach-name-combined)
   :is(
     .field--name-field-first-name,
@@ -3930,7 +3965,8 @@ textarea.form-textarea:focus {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-institution-affiliation .field--name-field-abbreviation {
   display: none !important;
 }
