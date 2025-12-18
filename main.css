@@ -2022,13 +2022,15 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card h2,
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,
   .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .profile-card .field--name-title {
   display: none !important;
 }
