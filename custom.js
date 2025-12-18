@@ -635,6 +635,34 @@
     }
   };
 
+  // Removes "Leadership" role tag from profile cards while keeping other roles.
+  Drupal.behaviors.reachProfileRoleFilter = {
+    attach: function (context) {
+      once(
+        'reachProfileRoleFilter',
+        '.profile-card .field--name-field-reach-roles',
+        context
+      ).forEach(function (field) {
+        var removed = false;
+        field.querySelectorAll('.field__item').forEach(function (item) {
+          var text = (item.textContent || '').trim().toLowerCase();
+          if (text === 'leadership') {
+            item.parentNode.removeChild(item);
+            removed = true;
+          }
+        });
+
+        if (removed) {
+          var remaining = field.querySelectorAll('.field__item');
+          if (!remaining.length) {
+            field.setAttribute('aria-hidden', 'true');
+            field.style.display = 'none';
+          }
+        }
+      });
+    }
+  };
+
   // Forces main-nav external links to open in the current tab and strips noopener.
   Drupal.behaviors.extLinkOverride = {
     attach: function (context) {
