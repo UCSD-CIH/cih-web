@@ -623,7 +623,7 @@
     attach: function (context) {
       once(
         'reachProfileLinkLabel',
-        '.view-reach-profiles-leadership .profile-card .field--name-field-profile-link a, .view-reach-profiles-members .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_leadership .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_members .profile-card, .view-id-reach_profiles_scholars .profile-card .field--name-field-profile-link a',
+        '.view-reach-profiles-leadership .profile-card .field--name-field-profile-link a, .view-reach-profiles-members .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_leadership .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_members .profile-card .field--name-field-profile-link a, .profile-cards .profile-card .field--name-field-profile-link a',
         context
       ).forEach(function (link) {
         var original = (link.textContent || '').trim();
