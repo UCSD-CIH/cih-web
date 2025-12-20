@@ -10,6 +10,16 @@
   };
   var studyFocusCollapseTimers = new WeakMap();
 
+  Drupal.behaviors.adminBodyClass = {
+    attach: function (context) {
+      if (typeof drupalSettings === 'undefined' || !drupalSettings.path || !drupalSettings.path.isAdmin) return;
+
+      once('adminBodyClass', 'body', context).forEach(function (bodyEl) {
+        bodyEl.classList.add('is-admin-page');
+      });
+    }
+  };
+
   function extractTermIdFromHref(href) {
     if (!href) return null;
 

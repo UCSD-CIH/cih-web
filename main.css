@@ -340,9 +340,23 @@ h1.page-title {
   text-transform: none !important;
 }
 
+/* Force Inter on all admin headings (keep public/preview headers unchanged) */
+body.is-admin-page h1,
+body.is-admin-page h1.page-title,
+body.is-admin-page h2,
+body.is-admin-page h3,
+body.is-admin-page h4,
+body.is-admin-page h5,
+body.is-admin-page h6,
+body.is-admin-page .text--display-large *,
+body.is-admin-page .text--display-medium *,
+body.is-admin-page .text--display-small * {
+  font-family: 'Inter', sans-serif !important;
+}
+
 /* Apply alt H2 styling across Drupal admin (Gin) screens */
-body[class*="gin"] .main-container h2,
-body[class*="gin"] .main-container h2 * {
+body.is-admin-page .main-container h2,
+body.is-admin-page .main-container h2 * {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   font-size: 24px !important;
@@ -374,9 +388,9 @@ body[class*="gin"] .main-container h2 * {
   margin-bottom: var(--space-150);
 }
 
-body[class*="gin"] .main-container h5,
-body[class*="gin"] .main-container .heading--h5,
-body[class*="gin"] .main-container .heading--h5 h5 {
+body.is-admin-page .main-container h5,
+body.is-admin-page .main-container .heading--h5,
+body.is-admin-page .main-container .heading--h5 h5 {
   font-weight: 600 !important;
   font-size: 18px !important;
   line-height: 22px !important;
