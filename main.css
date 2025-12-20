@@ -1930,11 +1930,9 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members,
   .profile-cards
 ) .view-content {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
   gap: var(--space-400); /* 32px */
-  max-width: 1200px;
-  margin-inline: auto;
   align-items: stretch;
 }
 
@@ -1946,56 +1944,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .profile-cards
 ) .views-row {
   display: flex;
-  flex: 0 0 264px;
-  width: 264px;
-  margin: 0;
-  float: none !important;
   min-width: 0;
-}
-
-@media (max-width: 1200px) {
-  :is(
-    .view-reach-profiles-leadership,
-    .view-reach-profiles-members,
-    .view-id-reach_profiles_leadership,
-    .view-id-reach_profiles_members
-  ) .views-row {
-    flex-basis: calc((100% - (var(--space-400) * 2)) / 3);
-    width: calc((100% - (var(--space-400) * 2)) / 3);
-  }
-}
-
-@media (max-width: 960px) {
-  :is(
-    .view-reach-profiles-leadership,
-    .view-reach-profiles-members,
-    .view-id-reach_profiles_leadership,
-    .view-id-reach_profiles_members
-  ) .views-row {
-    flex-basis: calc((100% - var(--space-400)) / 2);
-    width: calc((100% - var(--space-400)) / 2);
-  }
-}
-
-@media (max-width: 640px) {
-  :is(
-    .view-reach-profiles-leadership,
-    .view-reach-profiles-members,
-    .view-id-reach_profiles_leadership,
-    .view-id-reach_profiles_members
-  ) .views-row {
-    flex-basis: 100%;
-    width: 100%;
-    max-width: 100%;
-  }
-  :is(
-    .view-reach-profiles-leadership,
-    .view-reach-profiles-members,
-    .view-id-reach_profiles_leadership,
-    .view-id-reach_profiles_members
-  ) .profile-card {
-    width: 100%;
-  }
 }
 
 :is(
