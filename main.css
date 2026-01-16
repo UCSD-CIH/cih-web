@@ -3933,3 +3933,28 @@ textarea.form-textarea:focus {
 ) .field--name-field-institution-affiliation .field--name-field-abbreviation {
   display: none !important;
 }
+
+/* ===================================
+   IMAGE HEIGHT UTILITIES
+   Standardized image sizing
+=================================== */
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Fixed-height image containers */
+.img-h-160 { height: 160px; }
+.img-h-200 { height: 200px; }
+.img-h-240 { height: 240px; }
+.img-h-300 { height: 300px; }
+.img-h-400 { height: 400px; }
+
+/* Optional: rounded image containers */
+.img-frame {
+  overflow: hidden;
+  border-radius: var(--radius-200);
+}
