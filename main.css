@@ -1168,13 +1168,23 @@ code.bg-light {
 #navbar.dxpr-theme-header--top .menu > li > a {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 16px !important;
-  line-height: 16px;
-  letter-spacing: 0.05em;
+  font-size: 15px !important;
+  line-height: 15px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-text-on-dark) !important;
   background-color: transparent;
   text-decoration: none;
+}
+
+.body--dxpr-theme-nav-desktop .dxpr-theme-header--top .nav > li > a,
+.body--dxpr-theme-nav-desktop .dxpr-theme-header--top .nav > li > span {
+  display: inline-block;
+  font-size: 15px;
+  height: auto;
+  line-height: 15px;
+  padding: 0;
+  vertical-align: baseline;
 }
 
 #navbar.dxpr-theme-header--top .menu > li > a:hover,
