@@ -1183,7 +1183,7 @@ code.bg-light {
   font-size: 15px;
   height: auto;
   line-height: 15px;
-  padding: 0;
+  padding: var(--space-050) var(--space-150);
   vertical-align: baseline;
 }
 
