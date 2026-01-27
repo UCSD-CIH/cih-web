@@ -1013,6 +1013,10 @@ code.bg-light {
   margin-top: var(--space-600);
 }
 
+.is-unpublished {
+  background-color: var(--shade-white);
+}
+
 .main-container .text-formatted a:not(.btn):not(.btn-link):not(.nav-link),
 .main-container .text-formatted a:not(.btn):not(.btn-link):not(.nav-link):visited,
 .main-container .field--type-text-long a:not(.btn):not(.btn-link):not(.nav-link),
