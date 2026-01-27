@@ -1170,7 +1170,7 @@ code.bg-light {
   font-weight: 600;
   font-size: 15px !important;
   line-height: 15px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--color-text-on-dark) !important;
   background-color: transparent;
