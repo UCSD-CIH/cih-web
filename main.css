@@ -2,105 +2,6 @@
    TEST CODE SECTION
    Copy this section, replace this line with [Name] [Feature Description]
 =================================== */
-/* Scott Parish - Breadcrumbs + UAM alignment in hero region */
-.region-highlighted {
-  width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: var(--space-300);
-  padding-top: var(--space-300);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  column-gap: var(--space-300);
-  row-gap: var(--space-150);
-}
-
-.region-highlighted > section {
-  grid-column: 1 / -1;
-}
-
-#block-dxpr-theme-breadcrumbs-2 {
-  grid-column: 1;
-}
-
-#block-dxpr-theme-useraccountmenu-2 {
-  grid-column: 2;
-  justify-self: end;
-}
-
-.region-highlighted .block-title,
-.region-highlighted .block-hr {
-  display: none;
-}
-
-#block-dxpr-theme-breadcrumbs-2,
-.user-account-menu--alt {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-#block-dxpr-theme-breadcrumbs-2 .breadcrumb {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-050);
-}
-
-#block-dxpr-theme-breadcrumbs-2 .breadcrumb a {
-  color: var(--color-text-blue);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-#block-dxpr-theme-breadcrumbs-2 .breadcrumb a:hover,
-#block-dxpr-theme-breadcrumbs-2 .breadcrumb a:focus {
-  color: var(--color-text-navy);
-  text-decoration: none;
-}
-
-#block-dxpr-theme-breadcrumbs-2 .breadcrumb li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-050);
-}
-
-#block-dxpr-theme-breadcrumbs-2 .breadcrumb li.active {
-  color: var(--color-text-subdued-strong);
-}
-
-.user-account-menu--alt .nav {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.user-account-menu--alt .nav-link {
-  padding: 0;
-  color: var(--color-text-link);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.user-account-menu--alt .nav-link:hover,
-.user-account-menu--alt .nav-link:focus {
-  text-decoration: none;
-}
-
-@media (max-width: 767.98px) {
-  .region-highlighted {
-    grid-template-columns: 1fr;
-  }
-
-  #block-dxpr-theme-useraccountmenu-2 {
-    justify-self: start;
-  }
-}
-
 /* ===================================
   MASTER CSS FILE BEGINS - DO NOT MODIFY CODE BELOW HERE - COMMIT TO GIT FIRST
 =================================== */
@@ -1109,6 +1010,109 @@ code.bg-light {
 
 .page-title-container {
   margin-top: var(--space-600);
+}
+
+/* Scott Parish - Breadcrumbs + UAM alignment in hero region */
+.region-highlighted {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-300);
+  padding-top: var(--space-300);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: var(--space-300);
+  row-gap: var(--space-150);
+}
+
+.region-highlighted > section {
+  grid-column: 1 / -1;
+}
+
+#block-dxpr-theme-breadcrumbs-2 {
+  grid-column: 1;
+}
+
+#block-dxpr-theme-useraccountmenu-2 {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.region-highlighted .block-title,
+.region-highlighted .block-hr {
+  display: none;
+}
+
+.page-title-container .breadcrumb {
+  display: none;
+}
+
+#block-dxpr-theme-breadcrumbs-2,
+.user-account-menu--alt {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#block-dxpr-theme-breadcrumbs-2 .breadcrumb {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-050);
+}
+
+#block-dxpr-theme-breadcrumbs-2 .breadcrumb a {
+  color: var(--color-text-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#block-dxpr-theme-breadcrumbs-2 .breadcrumb a:hover,
+#block-dxpr-theme-breadcrumbs-2 .breadcrumb a:focus {
+  color: var(--color-text-navy);
+  text-decoration: none;
+}
+
+#block-dxpr-theme-breadcrumbs-2 .breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+}
+
+#block-dxpr-theme-breadcrumbs-2 .breadcrumb li.active {
+  color: var(--color-text-subdued-strong);
+}
+
+.user-account-menu--alt .nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.user-account-menu--alt .nav-link {
+  padding: 0;
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.user-account-menu--alt .nav-link:hover,
+.user-account-menu--alt .nav-link:focus {
+  text-decoration: none;
+}
+
+@media (max-width: 767.98px) {
+  .region-highlighted {
+    grid-template-columns: 1fr;
+  }
+
+  #block-dxpr-theme-useraccountmenu-2 {
+    justify-self: start;
+  }
 }
 
 .is-unpublished {
