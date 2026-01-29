@@ -2074,10 +2074,10 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members,
   .profile-cards
 ) .profile-card {
-  background-color: var(--color-bg-plain);
+  background-color: var(--color-bg-lightest);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
-  padding: var(--space-200);
+  padding: var(--space-300);
   color: var(--color-text-paragraph);
   display: flex;
   flex-direction: column;
@@ -2215,8 +2215,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   margin-right: var(--space-050);
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 24px;
   color: var(--color-text-heading);
   white-space: nowrap;
 }
@@ -2239,8 +2239,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   align-items: baseline;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 24px;
   color: var(--color-text-heading);
   margin-left: 0;
   margin-right: var(--space-050);
@@ -2325,9 +2325,9 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   margin-top: var(--space-100);
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.005em;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
   color: var(--color-text-paragraph);
 }
 
@@ -3973,8 +3973,8 @@ textarea.form-textarea:focus {
   display: block;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 24px;
   color: var(--color-text-heading);
   margin-top: var(--space-150);
   margin-right: 0;
