@@ -2077,7 +2077,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   background-color: var(--color-bg-lightest);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
-  padding: var(--space-300);
+  padding: var(--space-250);
   color: var(--color-text-paragraph);
   display: flex;
   flex-direction: column;
