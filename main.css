@@ -3523,6 +3523,10 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   display: none;
 }
 
+.region-highlighted:has(> section.announcement-banner.view-hide-if-empty):not(:has(> section:not(.announcement-banner))):not(:has(.view-content *)) {
+  display: none;
+}
+
 .view-announcement-banner .views-row,
 .view-announcement-banner-reach-home .views-row,
 .view-announcement-banner-kcir-home .views-row {
