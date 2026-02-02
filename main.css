@@ -3515,6 +3515,10 @@ footer.submitted {
   margin-block: var(--space-400) 0;
 }
 
+section.announcement-banner.view-hide-if-empty:has(.view-empty):not(:has(.view-content *)) {
+  display: none;
+}
+
 .view-announcement-banner .views-row,
 .view-announcement-banner-reach-home .views-row,
 .view-announcement-banner-kcir-home .views-row {
