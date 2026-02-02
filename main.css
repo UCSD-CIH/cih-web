@@ -3515,7 +3515,11 @@ footer.submitted {
   margin-block: var(--space-400) 0;
 }
 
-section.announcement-banner.view-hide-if-empty:has(.view-empty):not(:has(.view-content *)) {
+section.announcement-banner.view-hide-if-empty:not(:has(.view-content *)) {
+  display: none;
+}
+
+section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   display: none;
 }
 
