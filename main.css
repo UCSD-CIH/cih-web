@@ -2946,10 +2946,7 @@ content: "";
 }
 
 /* ======== Hide Sign Up Buttons on Study Cards ======== */
-/* Delete selector for term 20 (Recruiting) once Study CTA buttons are active */
-.study-card:has(.field--name-field-study-status a:is([href="/taxonomy/term/20"], [href*="field_study_status_target_id=20"], [href*="field_study_status_target_id%5B20%5D"], [data-term-id="20"])) .field--name-field-study-apply,
-.study-card:has(.field--name-field-study-status a:is([href="/taxonomy/term/22"], [href*="field_study_status_target_id=22"], [href*="field_study_status_target_id%5B22%5D"], [data-term-id="22"])) .field--name-field-study-apply,
-.study-card:has(.field--name-field-study-status a:is([href="/taxonomy/term/61"], [href*="field_study_status_target_id=61"], [href*="field_study_status_target_id%5B61%5D"], [data-term-id="61"])) .field--name-field-study-apply {
+.study-card .field--name-field-study-apply {
   display: none;
 }
 
@@ -3078,10 +3075,7 @@ content: "";
 }
 
 /* ======== Hide Sign Up Buttons on Study Pages ======== */
-/* Delete selector for term 20 (Recruiting) once Study CTA buttons are active */
-.page-node-type-study:has(.field--name-field-study-status a[href="/taxonomy/term/20"]) .group--study-sidebar .field--name-field-study-apply,
-.page-node-type-study:has(.field--name-field-study-status a[href="/taxonomy/term/22"]) .group--study-sidebar .field--name-field-study-apply,
-.page-node-type-study:has(.field--name-field-study-status a[href="/taxonomy/term/61"]) .group--study-sidebar .field--name-field-study-apply {
+.page-node-type-study .group--study-sidebar .field--name-field-study-apply {
   display: none;
 }
 
