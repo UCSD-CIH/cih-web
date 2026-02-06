@@ -3243,6 +3243,10 @@ footer.submitted {
   margin-top: var(--space-400);
 }
 
+.page-node-type-program footer.submitted {
+  display: none !important;
+}
+
 /* ===================================
    COMPONENT: PROGRAM PAGE
    Mirrors Study page layout + spacing
@@ -3367,11 +3371,18 @@ footer.submitted {
   gap: var(--space-200);
 }
 
+.page-node-type-program .field--name-field-instructors .inline-instructor__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  min-width: 0;
+}
+
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot img {
   width: 72px;
   height: 72px;
   border-radius: var(--radius-100);
-  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border: var(--border-050) solid var(--color-border-plain);
   object-fit: cover;
   display: block;
 }
@@ -3394,7 +3405,7 @@ footer.submitted {
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio {
-  margin-top: var(--space-100);
+  margin-top: 0;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 20px;
@@ -3402,11 +3413,19 @@ footer.submitted {
 }
 
 /* View profile link styling */
-.page-node-type-program .field--name-field-instructors .inline-instructor a {
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link {
+  margin-top: var(--space-050);
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: none;
   color: var(--color-text-link);
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-weight: 600;
 }
 
 /* Hide extra instructor fields for inline view */

@@ -678,6 +678,76 @@
     }
   };
 
+  // Ensures program instructor layout matches the mock and normalizes profile link text.
+  Drupal.behaviors.programInstructorLayout = {
+    attach: function (context) {
+      once('programInstructorLayout', '.page-node-type-program .field--name-field-instructors .inline-instructor', context)
+        .forEach(function (instructor) {
+          var headshot = instructor.querySelector('.field--name-field-profile-headshot');
+          if (!headshot) return;
+
+          var body = instructor.querySelector('.inline-instructor__body');
+          if (!body) {
+            body = document.createElement('div');
+            body.className = 'inline-instructor__body';
+          }
+
+          Array.prototype.slice.call(instructor.children).forEach(function (child) {
+            if (child === headshot || child === body) return;
+            body.appendChild(child);
+          });
+
+          if (body.parentNode !== instructor) {
+            instructor.appendChild(body);
+          }
+
+          var shortBio = body.querySelector('.field--name-field-short-bio');
+          var profileField = body.querySelector('.field--name-field-profile-link');
+
+          if (profileField) {
+            var profileLink = profileField.querySelector('a');
+            if (profileLink) {
+              var original = (profileLink.textContent || '').trim();
+              if (original && original.toLowerCase() !== 'view profile') {
+                profileLink.setAttribute('data-original-url', original);
+              }
+              profileLink.textContent = 'View Profile';
+            }
+
+            if (shortBio) {
+              body.appendChild(profileField);
+            }
+          }
+        });
+    }
+  };
+
+  // Normalizes program sidebar CTA labels so URLs never render as button text.
+  Drupal.behaviors.programSidebarCtaLabels = {
+    attach: function (context) {
+      once('programSidebarCtaLabels', '.page-node-type-program .group-program-sidebar', context)
+        .forEach(function (sidebar) {
+          var registration = sidebar.querySelector('.field--name-field-registration-link a');
+          if (registration) {
+            var regOriginal = (registration.textContent || '').trim();
+            if (regOriginal && regOriginal.toLowerCase() !== 'register now') {
+              registration.setAttribute('data-original-url', regOriginal);
+            }
+            registration.textContent = 'Register Now';
+          }
+
+          var subscribe = sidebar.querySelector('.field--name-field-subscribe-link a');
+          if (subscribe) {
+            var subOriginal = (subscribe.textContent || '').trim();
+            if (subOriginal && subOriginal.toLowerCase() !== 'subscribe for updates') {
+              subscribe.setAttribute('data-original-url', subOriginal);
+            }
+            subscribe.textContent = 'Subscribe for Updates';
+          }
+        });
+    }
+  };
+
   // Toggles program registration state based on registration date window.
   Drupal.behaviors.programRegistrationToggle = {
     attach: function (context) {
