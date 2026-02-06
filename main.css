@@ -102,6 +102,8 @@
   --color-text-danger: #B01030;
   --color-text-disabled-soft: #C5CCD3;
   --color-text-disabled-strong: #7A8999;
+  --color-text-magenta: #A1357C;
+  --color-text-citron: #777100;
   --color-text-on-light: #182B49;
   --color-text-on-dark: #FFFFFF;
 }
@@ -2544,6 +2546,16 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   -webkit-mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
           mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
 }
+/* Broadcast (term 53) */
+:is(.view-press-media, .view-id-press_media, .press-media-card) .field--name-field-press-type .field__item a:is(
+  [href$="/53"],
+  [href*="field_press_type_target_id=53"],
+  [href*="field_press_type_target_id%5B53%5D"],
+  [data-term-id="53"]
+)::before {
+  -webkit-mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+}
 
 /* Hover tweak for Type pill */
 .view-press-media .group--press-media-thumbnail .field--name-field-press-type .field__item a:hover,
@@ -2664,7 +2676,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
   color: var(--color-text-paragraph);
-  padding: var(--space-500) var(--space-600) var(--space-500) var(--space-500);
+  padding: var(--space-400);
   display: flex;
   flex-direction: column;
 }
@@ -2811,7 +2823,7 @@ footer.submitted {
 /* Disable tag link interaction (used for visual tags only) */
 .field--name-field-study-status a,
 .field--name-field-study-focus a,
-.field--name-field-study-type a {
+:is(.field--name-field-study-type, .field--name-field-program-format) a {
   pointer-events: none;
   text-decoration: none;
   color: inherit;
@@ -2821,7 +2833,7 @@ footer.submitted {
 /* ======== Base Pill Styles ======== */
 
 .field--name-field-study-status a,
-.field--name-field-study-type a,
+:is(.field--name-field-study-type, .field--name-field-program-format) a,
 .field--name-field-study-focus .field__item a {
   display: inline-block;
   font-family: 'Inter', sans-serif;
@@ -2841,6 +2853,52 @@ footer.submitted {
   white-space: nowrap;
 }
 
+/* Type pills use a light fill */
+:is(.field--name-field-study-type, .field--name-field-program-format) a {
+  background-color: var(--color-bg-lightest);
+}
+
+/* Study Type: Program format text colors */
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/113"],
+  [href*="field_study_type_target_id=113"],
+  [href*="field_study_type_target_id%5B113%5D"],
+  [data-term-id="113"]
+) {
+  color: var(--color-text-blue);
+  border-color: var(--color-border-blue);
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/114"],
+  [href*="field_study_type_target_id=114"],
+  [href*="field_study_type_target_id%5B114%5D"],
+  [data-term-id="114"]
+) {
+  color: var(--color-text-green);
+  border-color: var(--color-border-green-soft);
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/115"],
+  [href*="field_study_type_target_id=115"],
+  [href*="field_study_type_target_id%5B115%5D"],
+  [data-term-id="115"]
+) {
+  color: var(--color-text-magenta);
+  border-color: var(--color-border-magenta-soft);
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/116"],
+  [href*="field_study_type_target_id=116"],
+  [href*="field_study_type_target_id%5B116%5D"],
+  [data-term-id="116"]
+) {
+  color: var(--color-text-citron);
+  border-color: var(--color-border-citron);
+}
+
 /* ======== SVG Icons ======== */
 
 .field--name-field-study-status a::before {
@@ -2852,7 +2910,7 @@ footer.submitted {
   top: -1.25px;
 }
 
-.field--name-field-study-type a::before,
+:is(.field--name-field-study-type, .field--name-field-program-format) a::before,
 .field--name-field-study-focus a::before {
   content: "";
   font-size: 12px;
@@ -2904,19 +2962,62 @@ footer.submitted {
   vertical-align: middle;
 }
 
-.field--name-field-study-type a::before {
-content: "";
+/* Program format icons (mask-based, color = currentColor) */
+:is(.field--name-field-study-type, .field--name-field-program-format) a::before {
+  content: "";
   display: inline-block;
   width: 1em;
   height: 1em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2025-07/grid-fill-icon_0.svg") no-repeat center;
-  -webkit-mask-size: contain;
-  mask: url("/sites/default/files/2025-07/grid-fill-icon_0.svg") no-repeat center;
-  mask-size: contain;
   vertical-align: middle;
- }
+}
+
+/* Study type pills should not render an icon */
+.field--name-field-study-type a::before {
+  content: none;
+  display: none;
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/113"],
+  [href*="field_study_type_target_id=113"],
+  [href*="field_study_type_target_id%5B113%5D"],
+  [data-term-id="113"]
+)::before {
+  -webkit-mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/114"],
+  [href*="field_study_type_target_id=114"],
+  [href*="field_study_type_target_id%5B114%5D"],
+  [data-term-id="114"]
+)::before {
+  -webkit-mask: url("/sites/default/files/2026-02/person-2-fill.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2026-02/person-2-fill.svg") no-repeat center / contain;
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/115"],
+  [href*="field_study_type_target_id=115"],
+  [href*="field_study_type_target_id%5B115%5D"],
+  [data-term-id="115"]
+)::before {
+  -webkit-mask: url("/sites/default/files/2026-02/rectangle-fill-on-rectangle-fill.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2026-02/rectangle-fill-on-rectangle-fill.svg") no-repeat center / contain;
+}
+
+:is(.field--name-field-study-type, .field--name-field-program-format) a:is(
+  [href$="/116"],
+  [href*="field_study_type_target_id=116"],
+  [href*="field_study_type_target_id%5B116%5D"],
+  [data-term-id="116"]
+)::before {
+  -webkit-mask: url("/sites/default/files/2026-02/triangle-side-fill.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2026-02/triangle-side-fill.svg") no-repeat center / contain;
+}
 
 .field--name-field-study-focus a::before {
   content: "";
@@ -2934,15 +3035,37 @@ content: "";
 
 /* ======== Status Pill Variants ======== */
 
-.field--name-field-study-status a[href$="/20"] {
+.field--name-field-study-status a:is(
+  [href$="/20"],
+  [href*="field_study_status_target_id=20"],
+  [href*="field_study_status_target_id%5B20%5D"],
+  [data-term-id="20"]
+) {
   background-color: var(--color-bg-green-20);
   border-color: var(--color-border-green-soft);
   color: var(--color-text-green);
 }
 
-.field--name-field-study-status a[href$="/22"] {
-  color: var(--color-text-disabled-strong);
-  border-color: var(--color-border-disabled-soft);
+.field--name-field-study-status a:is(
+  [href$="/61"],
+  [href*="field_study_status_target_id=61"],
+  [href*="field_study_status_target_id%5B61%5D"],
+  [data-term-id="61"]
+) {
+  background-color: var(--color-bg-citron-20);
+  border-color: var(--color-border-citron);
+  color: var(--color-text-citron);
+}
+
+.field--name-field-study-status a:is(
+  [href$="/117"],
+  [href*="field_study_status_target_id=117"],
+  [href*="field_study_status_target_id%5B117%5D"],
+  [data-term-id="117"]
+) {
+  background-color: var(--color-bg-magenta-20);
+  border-color: var(--color-border-magenta-soft);
+  color: var(--color-text-magenta);
 }
 
 /* ======== Hide Sign Up Buttons on Study Cards ======== */
@@ -2961,7 +3084,8 @@ content: "";
 }
 
 .group--study-card-tags {
-  margin: var(--space-400) 0 0 0;
+  margin: 0;
+  padding-top: var(--space-200);
 }
 
 .field--name-field-study-focus .field__item {
