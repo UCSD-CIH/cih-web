@@ -3244,6 +3244,289 @@ footer.submitted {
 }
 
 /* ===================================
+   COMPONENT: PROGRAM PAGE
+   Mirrors Study page layout + spacing
+=================================== */
+
+.page-node-type-program .field--name-field-primary-center {
+  display: none !important;
+}
+
+.page-node-type-program .group-program-layout {
+  align-items: flex-start;
+  display: flex;
+  flex: 1 0 100%;
+  flex-wrap: wrap;
+  gap: var(--space-400);
+  justify-content: space-between;
+  margin-top: 0;
+}
+
+.page-node-type-program h1.page-title {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+  line-height: 44px;
+  text-transform: none !important;
+}
+
+/* Program badges (format + focus areas) */
+.page-node-type-program :is(
+  .field--name-field-program-format,
+  .field--name-field-program-focus-areas
+) {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+}
+
+/* Hide labels for program badge fields */
+.page-node-type-program :is(
+  .field--name-field-program-format .field__label,
+  .field--name-field-program-focus-areas .field__label
+) {
+  display: none !important;
+}
+
+/* Focus areas use the same pill style as study focus badges */
+.page-node-type-program .field--name-field-program-focus-areas .field__item a {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--color-text-disabled-strong);
+  text-decoration: none;
+  padding: var(--space-100) var(--space-150);
+  margin: 0 var(--space-050) var(--space-150) 0;
+  background-color: transparent;
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  border-radius: var(--radius-999);
+  cursor: default;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-node-type-program .group-program-body {
+  flex: 1 1 60%;
+  min-width: 320px;
+}
+
+.page-node-type-program .group-program-body p {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 24px;
+}
+
+/* Program subheadings use h5 scale */
+.page-node-type-program .group-program-body h5 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  margin-bottom: var(--space-150);
+}
+
+/* Hardcoded section headings */
+.page-node-type-program .field--name-field-instructors::before {
+  content: "About the Instructor";
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin: var(--space-400) 0 var(--space-200) 0;
+  color: var(--color-text-heading);
+}
+
+.page-node-type-program .field--name-field-contact-email::before {
+  content: "Questions?";
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin: var(--space-400) 0 var(--space-100) 0;
+  color: var(--color-text-heading);
+}
+
+.page-node-type-program .field--name-field-contact-email .field__label {
+  display: none !important;
+}
+
+/* Inline instructor layout */
+.page-node-type-program .field--name-field-instructors .inline-instructor {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-200);
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot img {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-100);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  object-fit: cover;
+  display: block;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor :is(
+  .field--name-field-first-name,
+  .field--name-field-last-name,
+  .field--name-field-credentials-display
+) {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--color-text-heading);
+  display: inline;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-first-name {
+  margin-right: var(--space-050);
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio {
+  margin-top: var(--space-100);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-paragraph);
+}
+
+/* View profile link styling */
+.page-node-type-program .field--name-field-instructors .inline-instructor a {
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+/* Hide extra instructor fields for inline view */
+.page-node-type-program .field--name-field-instructors .inline-instructor :is(
+  .field--name-field-profile-roles,
+  .field--name-field-bio,
+  .field--name-field-focus-areas,
+  .field--name-field-institution-affiliation,
+  .field--name-field-titles
+) {
+  display: none !important;
+}
+
+/* Stack instructor block on small screens */
+@media (max-width: 640px) {
+  .page-node-type-program .field--name-field-instructors .inline-instructor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Sidebar (Program Details) */
+.page-node-type-program .group-program-sidebar {
+  flex: 1 1 32%;
+  min-width: 280px;
+  max-width: 360px;
+  padding: var(--space-500);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  background-color: var(--color-bg-lightest);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-300);
+}
+
+.page-node-type-program .group-program-sidebar::before {
+  content: "Program Details";
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-bottom: var(--space-100);
+  color: var(--color-text-heading);
+}
+
+.page-node-type-program .group-program-sidebar .field__label {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: var(--space-025);
+  color: var(--color-text-heading);
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-pricing-details {
+  color: var(--color-text-subdued-strong);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Registration buttons */
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link a {
+  background-color: var(--color-bg-yellow-100);
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  color: var(--color-text-on-light) !important;
+  cursor: pointer;
+  display: inline-block;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  padding: var(--space-200) var(--space-300);
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-subscribe-link a {
+  background-color: var(--color-bg-blue-100);
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  color: var(--color-text-on-dark) !important;
+  cursor: pointer;
+  display: inline-block;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  padding: var(--space-200) var(--space-300);
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Closed-state message (show only when a class is added) */
+.page-node-type-program .group-program-sidebar.is-registration-closed .field--name-field-subscribe-link::before {
+  content: "Registration is currently closed. New sessions will be posted as they become available.";
+  display: block;
+  margin-bottom: var(--space-200);
+  color: var(--color-text-paragraph);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Open/closed state toggles (add class via Drupal or JS) */
+.page-node-type-program .group-program-sidebar.is-registration-closed .field--name-field-registration-link {
+  display: none !important;
+}
+
+.page-node-type-program .group-program-sidebar.is-registration-open .field--name-field-subscribe-link {
+  display: none !important;
+}
+
+/* Hide registration dates field (used for logic) */
+.page-node-type-program .field--name-field-registration-dates {
+  display: none !important;
+}
+
+
+/* ===================================
    FEATURE CARD LAYOUT: VERTICAL BANNER POSITIONING
    DXPR-friendly setup:
    - Use .banner for top or bottom images (inline, not background)

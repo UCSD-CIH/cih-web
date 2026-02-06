@@ -678,6 +678,43 @@
     }
   };
 
+  // Toggles program registration state based on registration date window.
+  Drupal.behaviors.programRegistrationToggle = {
+    attach: function (context) {
+      once('programRegistrationToggle', '.page-node-type-program .group-program-sidebar', context)
+        .forEach(function (sidebar) {
+          var root = sidebar.closest('.page-node-type-program') || document;
+          var datesField = root.querySelector('.field--name-field-registration-dates');
+          if (!datesField) return;
+
+          var timeNodes = datesField.querySelectorAll('time[datetime]');
+          if (timeNodes.length < 2) return;
+
+          var startValue = timeNodes[0].getAttribute('datetime') || '';
+          var endValue = timeNodes[1].getAttribute('datetime') || '';
+          if (!startValue || !endValue) return;
+
+          var startDate = new Date(startValue);
+          var endDate = new Date(endValue);
+          if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) return;
+
+          if (startDate.getTime() > endDate.getTime()) {
+            var temp = startDate;
+            startDate = endDate;
+            endDate = temp;
+          }
+
+          var now = new Date();
+          var nowTime = now.getTime();
+          var isOpen = nowTime >= startDate.getTime() && nowTime <= endDate.getTime();
+
+          sidebar.classList.remove('is-registration-open', 'is-registration-closed');
+          sidebar.classList.add(isOpen ? 'is-registration-open' : 'is-registration-closed');
+          sidebar.setAttribute('data-registration-state', isOpen ? 'open' : 'closed');
+        });
+    }
+  };
+
   // Forces main-nav external links to open in the current tab and strips noopener.
   Drupal.behaviors.extLinkOverride = {
     attach: function (context) {
