@@ -681,8 +681,12 @@
   // Ensures program instructor layout matches the mock and normalizes profile link text.
   Drupal.behaviors.programInstructorLayout = {
     attach: function (context) {
-      once('programInstructorLayout', '.page-node-type-program .field--name-field-instructors .inline-instructor', context)
+      once('programInstructorLayout', '.page-node-type-program .field--name-field-instructors .field__item', context)
         .forEach(function (instructor) {
+          if (!instructor.classList.contains('inline-instructor')) {
+            instructor.classList.add('inline-instructor');
+          }
+
           var headshot = instructor.querySelector('.field--name-field-profile-headshot');
           if (!headshot) return;
 
@@ -748,6 +752,20 @@
     }
   };
 
+  // Forces program profile links to show "View Profile" text.
+  Drupal.behaviors.programProfileLinkLabel = {
+    attach: function (context) {
+      once('programProfileLinkLabel', '.page-node-type-program .field--name-field-profile-link a', context)
+        .forEach(function (link) {
+          var original = (link.textContent || '').trim();
+          if (original && original.toLowerCase() !== 'view profile') {
+            link.setAttribute('data-original-url', original);
+          }
+          link.textContent = 'View Profile';
+        });
+    }
+  };
+
   // Toggles program registration state based on registration date window.
   Drupal.behaviors.programRegistrationToggle = {
     attach: function (context) {
@@ -781,6 +799,23 @@
           sidebar.classList.remove('is-registration-open', 'is-registration-closed');
           sidebar.classList.add(isOpen ? 'is-registration-open' : 'is-registration-closed');
           sidebar.setAttribute('data-registration-state', isOpen ? 'open' : 'closed');
+
+          var message = sidebar.querySelector('.program-registration-message');
+          if (!isOpen) {
+            if (!message) {
+              message = document.createElement('p');
+              message.className = 'program-registration-message';
+              message.innerHTML = '<strong>Registration is currently closed.</strong> New sessions will be posted as they become available.';
+              var subscribeField = sidebar.querySelector('.field--name-field-subscribe-link');
+              if (subscribeField) {
+                sidebar.insertBefore(message, subscribeField);
+              } else {
+                sidebar.appendChild(message);
+              }
+            }
+          } else if (message) {
+            message.parentNode.removeChild(message);
+          }
         });
     }
   };

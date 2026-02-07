@@ -3266,6 +3266,15 @@ footer.submitted {
   margin-top: 0;
 }
 
+.page-node-type-program .group--program-badges {
+  display: flex;
+  flex: 1 0 100%;
+  flex-wrap: wrap;
+  gap: var(--space-100);
+  align-items: center;
+  order: 10;
+}
+
 .page-node-type-program h1.page-title {
   font-family: 'Inter', sans-serif !important;
   font-size: 36px !important;
@@ -3287,6 +3296,11 @@ footer.submitted {
   gap: var(--space-100);
 }
 
+.page-node-type-program .field--name-field-program-format a,
+.page-node-type-program .field--name-field-program-focus-areas .field__item a {
+  margin: 0;
+}
+
 /* Hide labels for program badge fields */
 .page-node-type-program :is(
   .field--name-field-program-format .field__label,
@@ -3306,7 +3320,7 @@ footer.submitted {
   color: var(--color-text-disabled-strong);
   text-decoration: none;
   padding: var(--space-100) var(--space-150);
-  margin: 0 var(--space-050) var(--space-150) 0;
+  margin: 0;
   background-color: transparent;
   border: var(--border-050) solid var(--color-border-disabled-soft);
   border-radius: var(--radius-999);
@@ -3318,6 +3332,7 @@ footer.submitted {
 .page-node-type-program .group-program-body {
   flex: 1 1 60%;
   min-width: 320px;
+  order: 20;
 }
 
 .page-node-type-program .group-program-body p {
@@ -3364,6 +3379,18 @@ footer.submitted {
   display: none !important;
 }
 
+.page-node-type-program .field--name-field-contact-email .field__item {
+  display: inline;
+}
+
+.page-node-type-program .field--name-field-contact-email .field__item::before {
+  content: "Email ";
+}
+
+.page-node-type-program .field--name-field-contact-email .field__item::after {
+  content: " for more information.";
+}
+
 /* Inline instructor layout */
 .page-node-type-program .field--name-field-instructors .inline-instructor {
   display: flex;
@@ -3379,8 +3406,8 @@ footer.submitted {
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot img {
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
   border-radius: var(--radius-100);
   border: var(--border-050) solid var(--color-border-plain);
   object-fit: cover;
@@ -3410,6 +3437,10 @@ footer.submitted {
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-paragraph);
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio .field__label {
+  display: none !important;
 }
 
 /* View profile link styling */
@@ -3459,6 +3490,7 @@ footer.submitted {
   display: flex;
   flex-direction: column;
   gap: var(--space-300);
+  order: 30;
 }
 
 .page-node-type-program .group-program-sidebar::before {
@@ -3481,10 +3513,15 @@ footer.submitted {
   color: var(--color-text-heading);
 }
 
+.page-node-type-program .group-program-sidebar .field--name-field-pricing-details .field__label,
+.page-node-type-program .group-program-sidebar .field--name-field-subscribe-link .field__label {
+  display: none !important;
+}
+
 .page-node-type-program .group-program-sidebar .field--name-field-pricing-details {
-  color: var(--color-text-subdued-strong);
-  font-size: 14px;
-  line-height: 20px;
+  color: var(--color-text-paragraph);
+  font-size: 16px;
+  line-height: 24px;
 }
 
 /* Registration buttons */
@@ -3522,12 +3559,14 @@ footer.submitted {
 
 /* Closed-state message (show only when a class is added) */
 .page-node-type-program .group-program-sidebar.is-registration-closed .field--name-field-subscribe-link::before {
-  content: "Registration is currently closed. New sessions will be posted as they become available.";
-  display: block;
-  margin-bottom: var(--space-200);
+  content: none;
+}
+
+.page-node-type-program .group-program-sidebar .program-registration-message {
+  margin: 0 0 var(--space-200) 0;
   color: var(--color-text-paragraph);
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 /* Open/closed state toggles (add class via Drupal or JS) */
