@@ -687,41 +687,81 @@
             instructor.classList.add('inline-instructor');
           }
 
-          var headshot = instructor.querySelector('.field--name-field-profile-headshot');
-          if (!headshot) return;
+          var body = instructor.querySelector('.inline-instructor__body') || instructor;
+          var article = body.querySelector('article.profile') || body;
+          var content = article.querySelector('.content') || article;
+          var headshot = content.querySelector('.field--name-field-profile-headshot');
 
-          var body = instructor.querySelector('.inline-instructor__body');
-          if (!body) {
-            body = document.createElement('div');
-            body.className = 'inline-instructor__body';
+          var media = body.querySelector('.inline-instructor__media');
+          if (!media) {
+            media = document.createElement('div');
+            media.className = 'inline-instructor__media';
           }
 
-          Array.prototype.slice.call(instructor.children).forEach(function (child) {
-            if (child === headshot || child === body) return;
-            body.appendChild(child);
+          var text = body.querySelector('.inline-instructor__text');
+          if (!text) {
+            text = document.createElement('div');
+            text.className = 'inline-instructor__text';
+          }
+
+          if (headshot && headshot.parentNode !== media) {
+            media.appendChild(headshot);
+          }
+
+          var firstName = content.querySelector('.field--name-field-first-name');
+          var lastName = content.querySelector('.field--name-field-last-name');
+          var credentials = content.querySelector('.field--name-field-credentials-display');
+          var shortBio = content.querySelector('.field--name-field-short-bio');
+
+          var nameWrap = document.createElement('div');
+          nameWrap.className = 'inline-instructor__name';
+
+          [firstName, lastName, credentials].forEach(function (node) {
+            if (node) {
+              nameWrap.appendChild(node);
+            }
           });
 
-          if (body.parentNode !== instructor) {
-            instructor.appendChild(body);
+          if (nameWrap.childNodes.length) {
+            text.appendChild(nameWrap);
           }
 
-          var shortBio = body.querySelector('.field--name-field-short-bio');
-          var profileField = body.querySelector('.field--name-field-profile-link');
-
-          if (profileField) {
-            var profileLink = profileField.querySelector('a');
-            if (profileLink) {
-              var original = (profileLink.textContent || '').trim();
-              if (original && original.toLowerCase() !== 'view profile') {
-                profileLink.setAttribute('data-original-url', original);
-              }
-              profileLink.textContent = 'View Profile';
-            }
-
-            if (shortBio) {
-              body.appendChild(profileField);
-            }
+          if (shortBio && shortBio.parentNode !== text) {
+            text.appendChild(shortBio);
           }
+
+          var profileField = content.querySelector('.field--name-field-profile-link');
+          var profileLink = profileField ? profileField.querySelector('a') : null;
+          var titleLink = article.querySelector('h2 a');
+
+          if (!profileField) {
+            profileField = document.createElement('div');
+            profileField.className = 'field field--name-field-profile-link field--type-link field--label-hidden';
+          }
+
+          if (!profileLink) {
+            profileLink = document.createElement('a');
+            profileField.appendChild(profileLink);
+          }
+
+          var href = (profileLink.getAttribute('href') || (titleLink && titleLink.getAttribute('href')) || '').trim();
+          if (href) {
+            profileLink.setAttribute('href', href);
+          }
+
+          profileLink.textContent = 'View Profile';
+
+          if (profileField.parentNode !== text) {
+            text.appendChild(profileField);
+          }
+
+          if (titleLink && titleLink.parentNode) {
+            titleLink.parentNode.style.display = 'none';
+          }
+
+          body.innerHTML = '';
+          body.appendChild(media);
+          body.appendChild(text);
         });
     }
   };
@@ -785,6 +825,18 @@
           });
 
           observer.observe(container, { childList: true, subtree: true });
+        });
+    }
+  };
+
+  // Ensures program contact email is clickable and prefixed/suffixed copy matches.
+  Drupal.behaviors.programContactEmailLink = {
+    attach: function (context) {
+      once('programContactEmailLink', '.page-node-type-program .field--name-field-contact-email .field__item', context)
+        .forEach(function (item) {
+          var email = (item.textContent || '').trim();
+          if (!email) return;
+          item.innerHTML = 'Email <a href="mailto:' + email + '">' + email + '</a> for more information.';
         });
     }
   };

@@ -3160,7 +3160,7 @@ footer.submitted {
   flex-direction: column;
   gap: var(--space-300);
   max-width: 360px;
-  padding: var(--space-500);
+  padding: var(--space-400);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
   background-color: var(--color-bg-lightest);
@@ -3274,6 +3274,15 @@ footer.submitted {
   align-items: center;
   order: 10;
   justify-content: flex-start;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.page-node-type-program .group--program-badges > .field {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
 }
 
 .page-node-type-program h1.page-title {
@@ -3295,11 +3304,26 @@ footer.submitted {
   flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
+  white-space: nowrap;
 }
 
 .page-node-type-program .field--name-field-program-format a,
 .page-node-type-program .field--name-field-program-focus-areas .field__item a {
   margin: 0;
+}
+
+.page-node-type-program .field--name-field-program-focus-areas .field__items {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--space-100);
+  white-space: nowrap;
+}
+
+.page-node-type-program .field--name-field-program-focus-areas .field__item {
+  display: flex;
+  flex: 0 0 auto;
+  width: auto;
 }
 
 .page-node-type-program .field--name-field-program-focus-areas a::before {
@@ -3394,20 +3418,9 @@ footer.submitted {
   display: none !important;
 }
 
-.page-node-type-program .field--name-field-contact-email .field__item {
-  display: inline;
-}
-
-.page-node-type-program .field--name-field-contact-email .field__item::before {
-  content: "Email ";
-}
-
-.page-node-type-program .field--name-field-contact-email .field__item::after {
-  content: " for more information.";
-}
-
 /* Inline instructor layout */
-.page-node-type-program .field--name-field-instructors .inline-instructor {
+.page-node-type-program .field--name-field-instructors .inline-instructor,
+.page-node-type-program .field--name-field-instructors .field__item {
   display: flex;
   align-items: flex-start;
   gap: var(--space-200);
@@ -3419,10 +3432,38 @@ footer.submitted {
 
 .page-node-type-program .field--name-field-instructors .inline-instructor__body {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-100);
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-200);
   min-width: 0;
   flex: 1;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor__media {
+  flex: 0 0 auto;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor__text {
+  display: block;
+  min-width: 0;
+  flex: 1;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor__name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-050);
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor__name > * {
+  display: inline;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor__name .field--name-field-first-name {
+  margin-right: var(--space-050);
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot img {
@@ -3489,11 +3530,32 @@ footer.submitted {
   text-underline-offset: 2px;
 }
 
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link .field__item {
+  display: inline;
+}
+
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link :is(h1, h2, h3, h4, h5, h6) {
   font: inherit !important;
   margin: 0;
   display: inline;
   text-transform: none !important;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link h2 {
+  display: inline;
+  font: inherit !important;
+  margin: 0;
+  text-transform: none !important;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor :is(
+  .field--name-field-institution-affiliation,
+  .field--name-field-titles,
+  .field--name-field-profile-roles,
+  .field--name-field-bio,
+  h2
+) {
+  display: none !important;
 }
 
 /* Hide extra instructor fields for inline view */
@@ -3520,7 +3582,7 @@ footer.submitted {
   flex: 1 1 32%;
   min-width: 280px;
   max-width: 360px;
-  padding: var(--space-500);
+  padding: var(--space-400);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
   background-color: var(--color-bg-lightest);
@@ -3559,6 +3621,8 @@ footer.submitted {
   color: var(--color-text-paragraph);
   font-size: 14px;
   line-height: 20px;
+  padding-bottom: var(--space-300);
+  border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
 /* Registration buttons */
