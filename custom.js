@@ -681,8 +681,13 @@
   // Ensures program instructor layout matches the mock and normalizes profile link text.
   Drupal.behaviors.programInstructorLayout = {
     attach: function (context) {
-      once('programInstructorLayout', '.page-node-type-program .field--name-field-instructors .field__item', context)
+      once('programInstructorLayout', '.page-node-type-program .field--name-field-instructors > .field__items > .field__item', context)
         .forEach(function (instructor) {
+          if (instructor.getAttribute('data-program-instructor') === '1') {
+            return;
+          }
+          instructor.setAttribute('data-program-instructor', '1');
+
           if (!instructor.classList.contains('inline-instructor')) {
             instructor.classList.add('inline-instructor');
           }
@@ -759,7 +764,9 @@
             titleLink.parentNode.style.display = 'none';
           }
 
-          body.innerHTML = '';
+          while (body.firstChild) {
+            body.removeChild(body.firstChild);
+          }
           body.appendChild(media);
           body.appendChild(text);
         });
@@ -806,26 +813,6 @@
 
       once('programProfileLinkLabel', '.page-node-type-program .field--name-field-profile-link a', context)
         .forEach(normalizeLink);
-
-      once('programProfileLinkObserver', '.page-node-type-program .field--name-field-instructors', context)
-        .forEach(function (container) {
-          var observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-              mutation.addedNodes.forEach(function (node) {
-                if (!node || node.nodeType !== 1) return;
-                if (node.matches && node.matches('.field--name-field-profile-link a')) {
-                  normalizeLink(node);
-                } else {
-                  node.querySelectorAll &&
-                    node.querySelectorAll('.field--name-field-profile-link a')
-                      .forEach(normalizeLink);
-                }
-              });
-            });
-          });
-
-          observer.observe(container, { childList: true, subtree: true });
-        });
     }
   };
 
@@ -837,6 +824,28 @@
           var email = (item.textContent || '').trim();
           if (!email) return;
           item.innerHTML = 'Email <a href="mailto:' + email + '">' + email + '</a> for more information.';
+        });
+    }
+  };
+
+  // Formats program event dates as a single range line.
+  Drupal.behaviors.programEventDateRange = {
+    attach: function (context) {
+      once('programEventDateRange', '.page-node-type-program .field--name-field-event-dates', context)
+        .forEach(function (field) {
+          var items = field.querySelectorAll('.field__item');
+          if (!items || items.length < 2) return;
+
+          var startText = (items[0].textContent || '').trim();
+          var endText = (items[1].textContent || '').trim();
+          if (!startText || !endText) return;
+
+          var target = items[0];
+          target.textContent = startText + ' – ' + endText;
+
+          for (var i = 1; i < items.length; i += 1) {
+            items[i].style.display = 'none';
+          }
         });
     }
   };

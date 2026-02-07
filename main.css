@@ -3418,6 +3418,11 @@ footer.submitted {
   display: none !important;
 }
 
+.page-node-type-program .field--name-field-contact-email a {
+  color: var(--color-text-link);
+  text-decoration: underline;
+}
+
 /* Inline instructor layout */
 .page-node-type-program .field--name-field-instructors .inline-instructor,
 .page-node-type-program .field--name-field-instructors .field__item {
@@ -3604,6 +3609,21 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .field__label {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 20px;
+  margin-bottom: var(--space-025);
+  color: var(--color-text-heading);
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-event-dates .field__label {
+  display: none !important;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-event-dates::before {
+  content: "Dates";
+  display: block;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0;
