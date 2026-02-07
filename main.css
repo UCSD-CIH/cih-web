@@ -3426,6 +3426,10 @@ footer.submitted {
 /* Inline instructor layout */
 .page-node-type-program .field--name-field-instructors .inline-instructor,
 .page-node-type-program .field--name-field-instructors .field__item {
+  display: block;
+}
+
+.page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content {
   display: grid;
   grid-template-columns: 96px 1fr;
   column-gap: var(--space-200);
@@ -3433,21 +3437,12 @@ footer.submitted {
   align-items: start;
 }
 
-.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot,
-.page-node-type-program .field--name-field-instructors .field__item .field--name-field-profile-headshot {
+.page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content > .field--name-field-profile-headshot {
   grid-column: 1;
 }
 
-.page-node-type-program .field--name-field-instructors .inline-instructor__body {
-  display: contents;
-}
-
-.page-node-type-program .field--name-field-instructors .inline-instructor__media {
-  display: contents;
-}
-
-.page-node-type-program .field--name-field-instructors .inline-instructor__text {
-  display: contents;
+.page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content > :not(.field--name-field-profile-headshot) {
+  grid-column: 2;
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor__name {
@@ -3481,7 +3476,6 @@ footer.submitted {
   .field--name-field-last-name,
   .field--name-field-credentials-display
 ) {
-  grid-column: 2;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 18px;
@@ -3495,7 +3489,6 @@ footer.submitted {
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio {
-  grid-column: 2;
   margin-top: 0;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -3518,7 +3511,6 @@ footer.submitted {
 
 /* View profile link styling */
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link {
-  grid-column: 2;
   margin: 0 0 0 0.35em;
   display: inline;
 }
@@ -3532,6 +3524,13 @@ footer.submitted {
   color: var(--color-text-link);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.page-node-type-program .field--name-field-instructors .program-view-profile {
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 400;
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link .field__item {
@@ -3575,11 +3574,10 @@ footer.submitted {
 
 /* Stack instructor block on small screens */
 @media (max-width: 640px) {
-  .page-node-type-program .field--name-field-instructors .inline-instructor {
+  .page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content {
     grid-template-columns: 1fr;
   }
-  .page-node-type-program .field--name-field-instructors .inline-instructor > *,
-  .page-node-type-program .field--name-field-instructors .field__item > * {
+  .page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content > * {
     grid-column: 1;
   }
 }

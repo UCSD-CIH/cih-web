@@ -680,6 +680,40 @@
 
   // Program instructor layout handled by dedicated view mode; no DOM surgery here.
 
+  // Injects "View Profile" link after short bio using the profile title link.
+  Drupal.behaviors.programInstructorProfileLink = {
+    attach: function (context) {
+      once(
+        'programInstructorProfileLink',
+        '.page-node-type-program .field--name-field-instructors article.profile.inline-instructor',
+        context
+      ).forEach(function (article) {
+        if (article.getAttribute('data-program-profile-link') === '1') return;
+        article.setAttribute('data-program-profile-link', '1');
+
+        var titleLink = article.querySelector('h2 a');
+        if (!titleLink) return;
+
+        var bioParagraph = article.querySelector('.field--name-field-short-bio .field__item p');
+        if (!bioParagraph) return;
+
+        var existing = bioParagraph.querySelector('.program-view-profile');
+        if (!existing) {
+          var link = document.createElement('a');
+          link.className = 'program-view-profile';
+          link.href = titleLink.getAttribute('href') || '#';
+          link.textContent = 'View Profile';
+          bioParagraph.appendChild(document.createTextNode(' '));
+          bioParagraph.appendChild(link);
+        }
+
+        if (titleLink.parentNode) {
+          titleLink.parentNode.style.display = 'none';
+        }
+      });
+    }
+  };
+
   // Normalizes program sidebar CTA labels so URLs never render as button text.
   Drupal.behaviors.programSidebarCtaLabels = {
     attach: function (context) {
