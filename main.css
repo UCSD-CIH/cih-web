@@ -3269,10 +3269,11 @@ footer.submitted {
 .page-node-type-program .group--program-badges {
   display: flex;
   flex: 1 0 100%;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--space-100);
   align-items: center;
   order: 10;
+  justify-content: flex-start;
 }
 
 .page-node-type-program h1.page-title {
@@ -3291,7 +3292,7 @@ footer.submitted {
 ) {
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
 }
@@ -3299,6 +3300,20 @@ footer.submitted {
 .page-node-type-program .field--name-field-program-format a,
 .page-node-type-program .field--name-field-program-focus-areas .field__item a {
   margin: 0;
+}
+
+.page-node-type-program .field--name-field-program-focus-areas a::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  mask-size: contain;
+  vertical-align: middle;
 }
 
 /* Hide labels for program badge fields */
@@ -3398,11 +3413,16 @@ footer.submitted {
   gap: var(--space-200);
 }
 
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot {
+  flex: 0 0 auto;
+}
+
 .page-node-type-program .field--name-field-instructors .inline-instructor__body {
   display: flex;
   flex-direction: column;
   gap: var(--space-100);
   min-width: 0;
+  flex: 1;
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-headshot img {
@@ -3437,6 +3457,15 @@ footer.submitted {
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-paragraph);
+  display: inline;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio :is(p, .field__item) {
+  display: inline;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio .field__item::after {
+  content: " ";
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio .field__label {
@@ -3445,18 +3474,26 @@ footer.submitted {
 
 /* View profile link styling */
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link {
-  margin-top: var(--space-050);
+  margin: 0 0 0 0.35em;
+  display: inline;
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link a {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
   text-transform: none;
   color: var(--color-text-link);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link :is(h1, h2, h3, h4, h5, h6) {
+  font: inherit !important;
+  margin: 0;
+  display: inline;
+  text-transform: none !important;
 }
 
 /* Hide extra instructor fields for inline view */
@@ -3520,8 +3557,8 @@ footer.submitted {
 
 .page-node-type-program .group-program-sidebar .field--name-field-pricing-details {
   color: var(--color-text-paragraph);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 /* Registration buttons */

@@ -755,13 +755,36 @@
   // Forces program profile links to show "View Profile" text.
   Drupal.behaviors.programProfileLinkLabel = {
     attach: function (context) {
+      function normalizeLink(link) {
+        if (!link) return;
+        var original = (link.textContent || '').trim();
+        if (original && original.toLowerCase() !== 'view profile') {
+          link.setAttribute('data-original-url', original);
+        }
+        link.textContent = 'View Profile';
+      }
+
       once('programProfileLinkLabel', '.page-node-type-program .field--name-field-profile-link a', context)
-        .forEach(function (link) {
-          var original = (link.textContent || '').trim();
-          if (original && original.toLowerCase() !== 'view profile') {
-            link.setAttribute('data-original-url', original);
-          }
-          link.textContent = 'View Profile';
+        .forEach(normalizeLink);
+
+      once('programProfileLinkObserver', '.page-node-type-program .field--name-field-instructors', context)
+        .forEach(function (container) {
+          var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+              mutation.addedNodes.forEach(function (node) {
+                if (!node || node.nodeType !== 1) return;
+                if (node.matches && node.matches('.field--name-field-profile-link a')) {
+                  normalizeLink(node);
+                } else {
+                  node.querySelectorAll &&
+                    node.querySelectorAll('.field--name-field-profile-link a')
+                      .forEach(normalizeLink);
+                }
+              });
+            });
+          });
+
+          observer.observe(container, { childList: true, subtree: true });
         });
     }
   };
