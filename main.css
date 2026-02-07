@@ -3269,7 +3269,7 @@ footer.submitted {
 .page-node-type-program .group--program-badges {
   display: flex;
   flex: 1 0 100%;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   gap: var(--space-100);
   align-items: center;
   order: 10;
@@ -3301,7 +3301,7 @@ footer.submitted {
 ) {
   margin: 0;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   align-items: center;
   gap: var(--space-100);
   white-space: nowrap;
@@ -3314,7 +3314,7 @@ footer.submitted {
 
 .page-node-type-program .field--name-field-program-focus-areas .field__items {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   align-items: center;
   gap: var(--space-100);
   white-space: nowrap;
@@ -3503,7 +3503,7 @@ footer.submitted {
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-paragraph);
-  display: inline;
+  display: block;
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-short-bio :is(p, .field__item) {
@@ -3593,17 +3593,17 @@ footer.submitted {
   background-color: var(--color-bg-lightest);
   display: flex;
   flex-direction: column;
-  gap: var(--space-300);
+  gap: var(--space-200);
   order: 30;
 }
 
 .page-node-type-program .group-program-sidebar::before {
   content: "Program Details";
   display: block;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 24px;
+  line-height: 28px;
   margin-bottom: var(--space-100);
   color: var(--color-text-heading);
 }
@@ -3624,10 +3624,10 @@ footer.submitted {
 .page-node-type-program .group-program-sidebar .field--name-field-event-dates::before {
   content: "Dates";
   display: block;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
   letter-spacing: 0;
-  line-height: 20px;
+  line-height: 28px;
   margin-bottom: var(--space-025);
   color: var(--color-text-heading);
 }

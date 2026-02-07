@@ -756,8 +756,18 @@
 
           profileLink.textContent = 'View Profile';
 
-          if (profileField.parentNode !== text) {
+          var shortBioItem = shortBio ? (shortBio.querySelector('.field__item') || shortBio) : null;
+          var bioTarget = shortBioItem ? (shortBioItem.querySelector('p') || shortBioItem) : null;
+
+          if (bioTarget && profileLink.parentNode !== bioTarget) {
+            bioTarget.appendChild(document.createTextNode(' '));
+            bioTarget.appendChild(profileLink);
+          } else if (profileField.parentNode !== text) {
             text.appendChild(profileField);
+          }
+
+          if (profileField.parentNode && profileField.parentNode !== text && profileField.parentNode !== bioTarget) {
+            profileField.parentNode.removeChild(profileField);
           }
 
           if (titleLink && titleLink.parentNode) {
