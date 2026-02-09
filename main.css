@@ -1803,6 +1803,10 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   text-transform: none !important;
 }
 
+.dxpr-theme-footer {
+  margin-top: var(--space-800);
+}
+
 
 /* ===================================
    SEARCH AND FILTER CONTROLS
