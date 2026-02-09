@@ -2838,7 +2838,7 @@ footer.submitted {
   display: inline-block;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: 0.01em;
   color: var(--color-text-disabled-strong);
@@ -3353,7 +3353,7 @@ footer.submitted {
   display: inline-block;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1;
   letter-spacing: 0.01em;
   color: var(--color-text-disabled-strong);
@@ -3420,7 +3420,20 @@ footer.submitted {
 
 .page-node-type-program .field--name-field-contact-email a {
   color: var(--color-text-link);
+  font-weight: 600;
   text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-node-type-program .field--name-field-contact-email a:hover {
+  color: var(--color-text-blue);
+  text-decoration: none;
+}
+
+.page-node-type-program .field--name-field-contact-email a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+  text-decoration: none;
 }
 
 /* Inline instructor layout */
@@ -3518,7 +3531,7 @@ footer.submitted {
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link a {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 24px;
   text-transform: none;
   color: var(--color-text-link);
@@ -3530,7 +3543,20 @@ footer.submitted {
   color: var(--color-text-link);
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-weight: 400;
+  font-weight: 600;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link a:hover,
+.page-node-type-program .field--name-field-instructors .program-view-profile:hover {
+  color: var(--color-text-blue);
+  text-decoration: none;
+}
+
+.page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link a:focus-visible,
+.page-node-type-program .field--name-field-instructors .program-view-profile:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+  text-decoration: none;
 }
 
 .page-node-type-program .field--name-field-instructors .inline-instructor .field--name-field-profile-link .field__item {
@@ -3662,6 +3688,25 @@ footer.submitted {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link a:hover,
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link a:visited:hover {
+  background-color: var(--color-bg-turquoise-100);
+  border: var(--border-100) solid transparent;
+  color: var(--color-text-on-light) !important;
+  text-decoration: none;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link a:active {
+  background-color: var(--color-bg-turquoise-120) !important;
+  border: var(--border-100) solid transparent !important;
+  color: var(--color-text-navy) !important;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link a:focus-visible {
+  outline: 2px solid var(--color-bg-navy-100);
+  outline-offset: 2px;
+}
+
 .page-node-type-program .group-program-sidebar .field--name-field-subscribe-link a {
   background-color: var(--color-bg-blue-100);
   border: var(--border-100) solid transparent;
@@ -3676,6 +3721,25 @@ footer.submitted {
   text-decoration: none;
   text-transform: uppercase;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-subscribe-link a:hover,
+.page-node-type-program .group-program-sidebar .field--name-field-subscribe-link a:visited:hover {
+  background-color: var(--color-bg-navy-100);
+  border: var(--border-100) solid transparent;
+  color: var(--color-text-on-dark) !important;
+  text-decoration: none;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-subscribe-link a:active {
+  background-color: var(--color-bg-blue-120) !important;
+  border: var(--border-100) solid transparent !important;
+  color: var(--color-text-on-dark) !important;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-subscribe-link a:focus-visible {
+  outline: 2px solid var(--color-bg-navy-100);
+  outline-offset: 2px;
 }
 
 /* Closed-state message (show only when a class is added) */
