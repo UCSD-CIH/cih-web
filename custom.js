@@ -777,9 +777,30 @@
           var items = field.querySelectorAll('.field__item');
           if (!items || items.length < 2) return;
 
+          var startTime = items[0].querySelector('time[datetime]');
+          var endTime = items[1].querySelector('time[datetime]');
           var startText = (items[0].textContent || '').trim();
           var endText = (items[1].textContent || '').trim();
-          if (!startText || !endText) return;
+          if ((!startTime || !endTime) && (!startText || !endText)) return;
+
+          if (startTime && endTime) {
+            var startValue = startTime.getAttribute('datetime') || '';
+            var endValue = endTime.getAttribute('datetime') || '';
+            if (startValue && endValue) {
+              var startDate = new Date(startValue);
+              var endDate = new Date(endValue);
+              if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                var sameYear = startDate.getFullYear() === endDate.getFullYear();
+                var startOptions = { month: 'long', day: 'numeric' };
+                var endOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+                if (!sameYear) {
+                  startOptions.year = 'numeric';
+                }
+                startText = startDate.toLocaleDateString('en-US', startOptions);
+                endText = endDate.toLocaleDateString('en-US', endOptions);
+              }
+            }
+          }
 
           var target = items[0];
           target.textContent = startText + ' – ' + endText;
@@ -824,6 +845,28 @@
           sidebar.classList.remove('is-registration-open', 'is-registration-closed');
           sidebar.classList.add(isOpen ? 'is-registration-open' : 'is-registration-closed');
           sidebar.setAttribute('data-registration-state', isOpen ? 'open' : 'closed');
+
+          var closeNotice = sidebar.querySelector('.program-registration-closes');
+          if (isOpen) {
+            var closeText = endDate.toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric'
+            });
+            if (!closeNotice) {
+              closeNotice = document.createElement('p');
+              closeNotice.className = 'program-registration-closes';
+            }
+            closeNotice.textContent = 'Registration closes ' + closeText + '.';
+            var registrationField = sidebar.querySelector('.field--name-field-registration-link');
+            if (registrationField) {
+              sidebar.insertBefore(closeNotice, registrationField);
+            } else {
+              sidebar.appendChild(closeNotice);
+            }
+          } else if (closeNotice) {
+            closeNotice.parentNode.removeChild(closeNotice);
+          }
 
           var message = sidebar.querySelector('.program-registration-message');
           if (!isOpen) {
