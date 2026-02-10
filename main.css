@@ -3685,7 +3685,7 @@ footer.submitted {
   color: var(--color-text-paragraph);
   font-size: 14px;
   line-height: 20px;
-  padding-bottom: var(--space-300);
+  padding-bottom: var(--space-200);
   border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
@@ -3773,7 +3773,7 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .program-registration-closes {
-  margin: var(--space-300) 0 var(--space-200) 0;
+  margin: var(--space-200) 0 var(--space-200) 0;
   color: var(--color-text-paragraph);
   font-size: 16px;
   line-height: 24px;
