@@ -3758,6 +3758,23 @@ footer.submitted {
   line-height: 24px;
 }
 
+/* Prevent flash: hide both buttons until state class exists */
+.page-node-type-program .group-program-sidebar
+  :is(.field--name-field-registration-link, .field--name-field-subscribe-link) {
+  display: none !important;
+}
+
+/* Reveal the correct button once state class is applied */
+.page-node-type-program .group-program-sidebar.is-registration-open
+  .field--name-field-registration-link {
+  display: block !important;
+}
+
+.page-node-type-program .group-program-sidebar.is-registration-closed
+  .field--name-field-subscribe-link {
+  display: block !important;
+}
+
 /* Open/closed state toggles (add class via Drupal or JS) */
 .page-node-type-program .group-program-sidebar.is-registration-closed .field--name-field-registration-link {
   display: none !important;
