@@ -3395,6 +3395,20 @@ footer.submitted {
   margin-bottom: var(--space-150);
 }
 
+/* Program body field labels that should read like subheadings */
+.page-node-type-program .group-program-body
+  :is(.field--name-field-cancellation-policy, .field--name-field-continuing-education)
+  .field__label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  margin: var(--space-400) 0 var(--space-200) 0;
+  color: var(--color-text-heading);
+}
+
 /* Hardcoded section headings */
 .page-node-type-program .field--name-field-instructors::before {
   content: "About the Instructor";
