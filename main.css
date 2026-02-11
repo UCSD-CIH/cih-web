@@ -2426,7 +2426,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .profile-cards
 ) .field--name-field-profile-link a {
   font-family: 'Inter', sans-serif;
-  font-weight: 400;
+  font-weight: 400 !important;
   font-size: 14px;
   line-height: 20px;
   display: inline-block;
@@ -2441,7 +2441,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members,
   .profile-cards
 ) .field--name-field-profile-link a:hover {
-  color: var(--color-text-navy);
+  color: var(--color-text-navy) !important;
 }
 
 /* ---- Type pill pinned top-right of thumbnail ---- */
