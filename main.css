@@ -4568,6 +4568,68 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   text-transform: none !important;
 }
 
+/* Form section headers (Webform "Section" elements) */
+.webform-submission-form .js-form-wrapper.form-wrapper.bg-blue,
+.webform-submission-form .js-form-wrapper.form-wrapper.bg-navy {
+  background-color: var(--color-bg-lightest) !important;
+  border: var(--border-050) solid var(--color-border-subdued-strong) !important;
+  border-radius: var(--radius-200) !important;
+  padding: var(--space-200) var(--space-300) !important;
+  margin: var(--space-400) 0 var(--space-200) !important;
+}
+
+.webform-submission-form .js-form-wrapper.form-wrapper.bg-blue .h3,
+.webform-submission-form .js-form-wrapper.form-wrapper.bg-navy .h3 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 24px !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+  margin: 0;
+  color: var(--color-text-heading);
+}
+
+/* Form card containers (bold update) */
+.webform-submission-form > .js-form-wrapper.form-wrapper:not(.form-actions):not(.bg-blue):not(.bg-navy) {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  padding: var(--space-300);
+  margin: 0 0 var(--space-400) 0;
+}
+
+@media (max-width: 640px) {
+  .webform-submission-form > .js-form-wrapper.form-wrapper:not(.form-actions):not(.bg-blue):not(.bg-navy) {
+    padding: var(--space-250);
+  }
+}
+
+/* Labels + required markers */
+.webform-submission-form .form-item label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-050);
+}
+
+.webform-submission-form .form-required::after {
+  color: var(--color-text-danger);
+}
+
+/* Helper text + counters */
+.webform-submission-form .description,
+.webform-submission-form .webform-element-description,
+.webform-submission-form .text-count-message {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-subdued-strong);
+  margin-top: var(--space-050);
+}
+
 /* General styling for all Webform field types */
 .webform-submission-form input[type="text"],
 .webform-submission-form input[type="email"],
@@ -4575,12 +4637,14 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
 .webform-submission-form input[type="date"],
 .webform-submission-form select,
 textarea.form-textarea {
-  border: 1.5px solid #ccc !important;       /* Light grey default */
-  border-radius: 4px !important;
-  background-color: #fff !important;
-  color: #000 !important;
-  padding: 0.5rem !important;
-  font-size: 1rem !important;
+  border: var(--border-050) solid var(--color-border-plain) !important;
+  border-radius: var(--radius-100) !important;
+  background-color: var(--shade-white) !important;
+  color: var(--color-text-paragraph) !important;
+  padding: var(--space-150) var(--space-200) !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  min-height: 44px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -4589,8 +4653,27 @@ textarea.form-textarea {
 .webform-submission-form select:focus,
 textarea.form-textarea:focus {
   outline: none !important;
-  border-color: #182B49 !important;  /* UCSD navy */
+  border-color: var(--color-border-navy) !important;
   box-shadow: 0 0 0 2px rgba(24, 43, 73, 0.2) !important;
+}
+
+/* Radios/checkbox groups */
+.webform-submission-form .form-radios,
+.webform-submission-form .form-checkboxes {
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  background-color: var(--shade-white);
+  border-radius: var(--radius-100);
+  padding: var(--space-200);
+}
+
+.webform-submission-form .form-radios .form-item,
+.webform-submission-form .form-checkboxes .form-item {
+  margin: 0 0 var(--space-100) 0;
+}
+
+.webform-submission-form .form-radios .form-item:last-child,
+.webform-submission-form .form-checkboxes .form-item:last-child {
+  margin-bottom: 0;
 }
 
 /* Webform error message container */
@@ -4598,9 +4681,9 @@ textarea.form-textarea:focus {
   display: flex;
   align-items: flex-start; /* Align icon to top of text */
   gap: 0.5rem;
-  margin-top: 0.25rem;
-  font-size: 0.95rem;
-  color: #b03; /* Accessible red */
+  margin-top: var(--space-050);
+  font-size: 12px;
+  color: var(--color-text-danger);
   font-weight: normal; /* Remove bold */
 }
 
@@ -4614,8 +4697,13 @@ textarea.form-textarea:focus {
 .webform-submission-form .form-item--error input,
 .webform-submission-form .form-item--error textarea,
 .webform-submission-form .form-item--error select {
-  border-color: #c00 !important;
+  border-color: var(--color-text-danger) !important;
   box-shadow: 0 0 0 1px rgba(204, 0, 0, 0.25) !important;
+}
+
+/* Actions */
+.webform-submission-form .form-actions {
+  margin-top: var(--space-400);
 }
 
 /* ===================================
