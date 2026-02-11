@@ -3677,6 +3677,7 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .field--name-field-pricing-details .field__label,
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link .field__label,
 .page-node-type-program .group-program-sidebar .field--name-field-subscribe-link .field__label {
   display: none !important;
 }

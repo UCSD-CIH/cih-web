@@ -800,6 +800,13 @@
                 endText = endDate.toLocaleDateString('en-US', endOptions);
               }
             }
+          } else {
+            // Fallback: collapse repeated year in text like "March 6, 2026 – April 10, 2026"
+            var rangeMatch = startText.match(/^(.+?),\s*(\d{4})\s*[–-]\s*(.+?),\s*(\d{4})$/);
+            if (rangeMatch && rangeMatch[2] === rangeMatch[4]) {
+              startText = rangeMatch[1];
+              endText = rangeMatch[3] + ', ' + rangeMatch[4];
+            }
           }
 
           var target = items[0];
