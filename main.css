@@ -3775,7 +3775,7 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .program-registration-closes {
-  margin: var(--space-200) 0 var(--space-200) 0 !important;
+  margin: 0 !important;
   color: var(--color-text-paragraph);
   font-size: 16px;
   line-height: 24px;
