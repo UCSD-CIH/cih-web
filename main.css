@@ -4565,6 +4565,7 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   line-height: 40px !important;
   letter-spacing: 0;
   margin-bottom: var(--space-150);
+  text-align: center;
   text-transform: none !important;
 }
 
