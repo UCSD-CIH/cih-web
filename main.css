@@ -4564,7 +4564,7 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   font-size: 36px !important;
   line-height: 40px !important;
   letter-spacing: 0;
-  margin-bottom: var(--space-250);
+  margin-bottom: var(--space-150);
   text-transform: none !important;
 }
 
@@ -4582,12 +4582,17 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
 .webform-submission-form .js-form-wrapper.form-wrapper.bg-navy .h3 {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
-  font-size: 20px !important;
-  line-height: 24px !important;
+  font-size: 24px !important;
+  line-height: 28px !important;
   letter-spacing: 0;
   text-transform: none !important;
   margin: 0;
   color: var(--color-text-heading);
+}
+
+/* Tighten the gap after the page title */
+.webform-submission-form > .js-form-wrapper.form-wrapper:first-of-type {
+  margin-top: 0 !important;
 }
 
 /* Form card containers (bold update) */
@@ -4609,10 +4614,19 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
 .webform-submission-form .form-item label {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   color: var(--color-text-heading);
   margin-bottom: var(--space-050);
+}
+
+/* Fieldset legends (e.g., Award Type) align with other field headings */
+.webform-submission-form fieldset legend .fieldset-legend {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-heading);
 }
 
 .webform-submission-form .form-required::after {
@@ -4646,6 +4660,37 @@ textarea.form-textarea {
   line-height: 24px !important;
   min-height: 44px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* File input alignment + tertiary button styling */
+.webform-submission-form input[type="file"].form-file {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--color-text-paragraph);
+}
+
+.webform-submission-form input[type="file"].form-file::file-selector-button,
+.webform-submission-form input[type="file"].form-file::-webkit-file-upload-button {
+  border: var(--border-100) solid var(--color-bg-blue-100);
+  background-color: transparent;
+  color: var(--color-bg-blue-100);
+  border-radius: var(--radius-100);
+  padding: var(--space-150) var(--space-300);
+  font: var(--font-label-medium);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: none;
+  cursor: pointer;
+  margin-right: var(--space-150);
+}
+
+.webform-submission-form input[type="file"].form-file::file-selector-button:hover,
+.webform-submission-form input[type="file"].form-file::-webkit-file-upload-button:hover {
+  background-color: var(--color-bg-blue-100);
+  color: var(--color-text-on-dark);
 }
 
 /* Focus state: UCSD navy + soft blue glow */
