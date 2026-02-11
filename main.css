@@ -2380,20 +2380,10 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members,
   .profile-cards
 ) .field--name-field-research-areas {
-  margin-top: var(--space-200);
-  padding-top: var(--space-200);
+  margin-top: var(--space-250);
+  padding-top: var(--space-250);
   border-top: var(--border-025) solid var(--color-border-subdued-strong);
   color: var(--color-text-subdued-strong);
-}
-
-:is(
-  .view-reach-profiles-leadership,
-  .view-reach-profiles-members,
-  .view-id-reach_profiles_leadership,
-  .view-id-reach_profiles_members,
-  .profile-cards
-) .profile-card .field--name-field-research-areas {
-  margin-top: auto;
 }
 
 :is(
@@ -2424,7 +2414,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members,
   .profile-cards
 ) .field--name-field-profile-link {
-  margin-top: var(--space-100);
+  margin-top: auto;
+  padding-top: var(--space-250);
 }
 
 :is(
