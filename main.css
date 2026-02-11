@@ -2380,8 +2380,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_members,
   .profile-cards
 ) .field--name-field-research-areas {
-  margin-top: var(--space-250);
-  padding-top: var(--space-250);
+  margin-top: var(--space-200);
+  padding-top: var(--space-200);
   border-top: var(--border-025) solid var(--color-border-subdued-strong);
   color: var(--color-text-subdued-strong);
 }
@@ -2415,7 +2415,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .profile-cards
 ) .field--name-field-profile-link {
   margin-top: auto;
-  padding-top: var(--space-250);
+  padding-top: var(--space-150);
 }
 
 :is(
