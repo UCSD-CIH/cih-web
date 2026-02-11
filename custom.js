@@ -772,7 +772,7 @@
   // Formats program event dates as a single range line.
   Drupal.behaviors.programEventDateRange = {
     attach: function (context) {
-      once('programEventDateRangeV3', '.page-node-type-program .field--name-field-event-dates', context)
+      once('programEventDateRangeV4', '.page-node-type-program .field--name-field-event-dates', context)
         .forEach(function (field) {
           var items = field.querySelectorAll('.field__item');
           if (!items || items.length < 2) return;
@@ -805,11 +805,9 @@
             var normalizedStart = startText.replace(/\\u00a0/g, ' ').trim();
             var normalizedEnd = endText.replace(/\\u00a0/g, ' ').trim();
 
-            if (normalizedStart.indexOf('–') !== -1 || normalizedStart.indexOf('-') !== -1) {
-              var startParts = normalizedStart.split(/\\s*[–-]\\s*/);
-              if (startParts.length >= 1) {
-                normalizedStart = startParts[0].trim();
-              }
+            var startParts = normalizedStart.split(/\\s*[–-]\\s*/);
+            if (startParts.length >= 1) {
+              normalizedStart = startParts[0].trim();
             }
 
             var startYearMatch = normalizedStart.match(/(\\d{4})/);
