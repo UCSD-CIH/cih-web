@@ -4580,8 +4580,8 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
 
 .webform-submission-form .js-form-wrapper.form-wrapper.bg-blue .h3,
 .webform-submission-form .js-form-wrapper.form-wrapper.bg-navy .h3 {
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
+  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif !important;
+  font-weight: 800 !important;
   font-size: 24px !important;
   line-height: 28px !important;
   letter-spacing: 0;
@@ -4593,8 +4593,8 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
 /* Force section header labels to Inter (overrides inline styles when possible) */
 .webform-submission-form .js-form-wrapper.form-wrapper.bg-blue label.h3,
 .webform-submission-form .js-form-wrapper.form-wrapper.bg-navy label.h3 {
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
+  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif !important;
+  font-weight: 800 !important;
   font-style: normal !important;
   text-transform: none !important;
 }

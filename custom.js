@@ -20,6 +20,15 @@
     }
   };
 
+  Drupal.behaviors.webformLabelFontFix = {
+    attach: function (context) {
+      once('webformLabelFontFix', '.webform-submission-form .js-form-wrapper.form-wrapper, .webform-submission-form label.h3', context).forEach(function (node) {
+        if (!node || !node.hasAttribute || !node.hasAttribute('style')) return;
+        node.removeAttribute('style');
+      });
+    }
+  };
+
   function extractTermIdFromHref(href) {
     if (!href) return null;
 
