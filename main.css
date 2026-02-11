@@ -4753,6 +4753,13 @@ textarea.form-textarea:focus {
   margin-top: 0.15rem; /* Adjust for better vertical alignment */
 }
 
+/* Constrain webform width on desktop */
+.webform-submission-form {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 /* Hide honeypot field */
 .webform-submission-form .url-textfield {
   display: none !important;
