@@ -4610,7 +4610,7 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   background-color: var(--color-bg-lightest);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
-  padding: var(--space-300);
+  padding: var(--space-250);
   margin: 0 0 var(--space-400) 0;
 }
 
@@ -4637,6 +4637,14 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
   font-size: 16px;
   line-height: 20px;
   color: var(--color-text-heading);
+}
+
+.webform-submission-form fieldset.form-wrapper {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  padding: var(--space-250) !important;
+  margin: 0 0 var(--space-400) 0;
 }
 
 .webform-submission-form .form-required::after {
@@ -4735,6 +4743,15 @@ textarea.form-textarea:focus {
 .webform-submission-form .form-radios .form-item:last-child,
 .webform-submission-form .form-checkboxes .form-item:last-child {
   margin-bottom: 0;
+}
+
+/* Textarea items get card wrapper styling */
+.webform-submission-form .js-form-type-textarea {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  padding: var(--space-250);
+  margin: 0 0 var(--space-400) 0;
 }
 
 /* Option labels use body small style */
