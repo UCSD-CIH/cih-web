@@ -801,18 +801,25 @@
               }
             }
           } else {
-            // Fallback: collapse repeated year in text like "March 6, 2026 – April 10, 2026"
-            var parts = startText.split(/\s*[–-]\s*/);
-            if (parts.length === 2) {
-              var startPart = parts[0].trim();
-              var endPart = parts[1].trim();
-              var startYearMatch = startPart.match(/(\d{4})$/);
-              var endYearMatch = endPart.match(/(\d{4})$/);
-              if (startYearMatch && endYearMatch && startYearMatch[1] === endYearMatch[1]) {
-                startText = startPart.replace(/,\\s*\\d{4}$/, '');
-                endText = endPart;
+            // Fallback: use second item as end date and strip duplicate year from start.
+            var normalizedStart = startText.replace(/\\u00a0/g, ' ').trim();
+            var normalizedEnd = endText.replace(/\\u00a0/g, ' ').trim();
+
+            if (normalizedStart.indexOf('–') !== -1 || normalizedStart.indexOf('-') !== -1) {
+              var startParts = normalizedStart.split(/\\s*[–-]\\s*/);
+              if (startParts.length >= 1) {
+                normalizedStart = startParts[0].trim();
               }
             }
+
+            var startYearMatch = normalizedStart.match(/(\\d{4})/);
+            var endYearMatch = normalizedEnd.match(/(\\d{4})/);
+            if (startYearMatch && endYearMatch && startYearMatch[1] === endYearMatch[1]) {
+              normalizedStart = normalizedStart.replace(/,\\s*\\d{4}\\s*$/, '');
+            }
+
+            startText = normalizedStart;
+            endText = normalizedEnd;
           }
 
           var target = items[0];
