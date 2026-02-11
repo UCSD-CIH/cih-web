@@ -772,7 +772,7 @@
   // Formats program event dates as a single range line.
   Drupal.behaviors.programEventDateRange = {
     attach: function (context) {
-      once('programEventDateRange', '.page-node-type-program .field--name-field-event-dates', context)
+      once('programEventDateRangeV2', '.page-node-type-program .field--name-field-event-dates', context)
         .forEach(function (field) {
           var items = field.querySelectorAll('.field__item');
           if (!items || items.length < 2) return;
@@ -802,10 +802,14 @@
             }
           } else {
             // Fallback: collapse repeated year in text like "March 6, 2026 – April 10, 2026"
-            var rangeMatch = startText.match(/^(.+?),\s*(\d{4})\s*[–-]\s*(.+?),\s*(\d{4})$/);
-            if (rangeMatch && rangeMatch[2] === rangeMatch[4]) {
-              startText = rangeMatch[1];
-              endText = rangeMatch[3] + ', ' + rangeMatch[4];
+            var dashPattern = '[\\u2013\\u2014-]';
+            var rangeMatch = startText.match(new RegExp('^(.+?),\\s*(\\d{4})\\s*' + dashPattern + '\\s*(.+)$'));
+            if (rangeMatch) {
+              var endYearMatch = rangeMatch[3].match(/,\\s*(\\d{4})$/);
+              if (endYearMatch && endYearMatch[1] === rangeMatch[2]) {
+                startText = rangeMatch[1];
+                endText = rangeMatch[3];
+              }
             }
           }
 

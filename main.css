@@ -3687,6 +3687,7 @@ footer.submitted {
   font-size: 14px;
   line-height: 20px;
   padding-bottom: var(--space-200);
+  margin-bottom: 0;
   border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
@@ -3774,10 +3775,15 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .program-registration-closes {
-  margin: var(--space-200) 0 var(--space-200) 0;
+  margin: var(--space-200) 0 var(--space-200) 0 !important;
   color: var(--color-text-paragraph);
   font-size: 16px;
   line-height: 24px;
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-registration-link {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Prevent flash: hide both buttons until state class exists */
