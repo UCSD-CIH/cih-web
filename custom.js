@@ -802,18 +802,18 @@
             }
           } else {
             // Fallback: use second item as end date and strip duplicate year from start.
-            var normalizedStart = startText.replace(/\\u00a0/g, ' ').trim();
-            var normalizedEnd = endText.replace(/\\u00a0/g, ' ').trim();
+            var normalizedStart = startText.replace(/\u00a0/g, ' ').trim();
+            var normalizedEnd = endText.replace(/\u00a0/g, ' ').trim();
 
-            var startParts = normalizedStart.split(/\\s*[–-]\\s*/);
+            var startParts = normalizedStart.split(/\s*[–-]\s*/);
             if (startParts.length >= 1) {
               normalizedStart = startParts[0].trim();
             }
 
-            var startYearMatch = normalizedStart.match(/(\\d{4})/);
-            var endYearMatch = normalizedEnd.match(/(\\d{4})/);
+            var startYearMatch = normalizedStart.match(/(\d{4})/);
+            var endYearMatch = normalizedEnd.match(/(\d{4})/);
             if (startYearMatch && endYearMatch && startYearMatch[1] === endYearMatch[1]) {
-              normalizedStart = normalizedStart.replace(/,\\s*\\d{4}\\s*$/, '');
+              normalizedStart = normalizedStart.replace(/,\s*\d{4}\s*$/, '');
             }
 
             startText = normalizedStart;
