@@ -4737,6 +4737,15 @@ textarea.form-textarea:focus {
   margin-bottom: 0;
 }
 
+/* Option labels use body small style */
+.webform-submission-form label.option {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
 /* Webform error message container */
 .webform-submission-form .form-item--error-message {
   display: flex;
