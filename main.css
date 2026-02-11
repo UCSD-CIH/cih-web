@@ -2392,6 +2392,16 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   .view-id-reach_profiles_leadership,
   .view-id-reach_profiles_members,
   .profile-cards
+) .profile-card .field--name-field-research-areas {
+  margin-top: auto;
+}
+
+:is(
+  .view-reach-profiles-leadership,
+  .view-reach-profiles-members,
+  .view-id-reach_profiles_leadership,
+  .view-id-reach_profiles_members,
+  .profile-cards
 ) .field--name-field-research-areas,
 :is(
   .view-reach-profiles-leadership,
