@@ -3841,6 +3841,10 @@ footer.submitted {
 }
 
 @media (min-width: 992px) {
+  .page-node-type-post .page-title-container {
+    max-width: 800px;
+  }
+
   /* Match desktop content width used in webforms. */
   .page-node-type-post .block-system-main-block > .post.full {
     max-width: 800px;
@@ -3862,6 +3866,10 @@ footer.submitted {
 
 .page-node-type-post .field--name-field-post-featured-image {
   margin-bottom: var(--space-400);
+}
+
+.page-node-type-post .field--name-field-post-body h5 {
+  margin-top: var(--space-400);
 }
 
 
