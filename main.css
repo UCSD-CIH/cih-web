@@ -3828,6 +3828,42 @@ footer.submitted {
   display: none !important;
 }
 
+/* ===================================
+   POST: FULL CONTENT VIEW
+=================================== */
+.page-node-type-post h1.page-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 36px !important;
+  line-height: 40px !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
+@media (min-width: 992px) {
+  /* Match desktop content width used in webforms. */
+  .page-node-type-post .block-system-main-block > .post.full {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+.page-node-type-post .post.full > .content > .field > .field__label {
+  display: none;
+}
+
+.page-node-type-post .field--name-field-post-featured-image .field__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.page-node-type-post .field--name-field-post-featured-image {
+  margin-bottom: var(--space-400);
+}
+
 
 /* ===================================
    FEATURE CARD LAYOUT: VERTICAL BANNER POSITIONING
