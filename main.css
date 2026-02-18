@@ -4044,6 +4044,13 @@ footer.submitted {
 /* ===================================
    POST: FULL CONTENT VIEW
 =================================== */
+.page-node-type-post #page-title.container.page-title-container,
+.page-node-type-post .page-title-container {
+  padding-inline: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .page-node-type-post h1.page-title {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
