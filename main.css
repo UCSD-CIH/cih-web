@@ -3987,18 +3987,26 @@ footer.submitted {
   display: none !important;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .page-node-type-profile article.profile.full > .content {
-    grid-template-columns: 1fr;
-    row-gap: var(--space-150);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-150);
   }
 
-  .page-node-type-profile article.profile.full > .content > * {
-    grid-column: 1;
+  .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text {
+    order: 10;
+  }
+
+  .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot {
+    order: 20;
+    width: clamp(140px, 52%, 220px);
+    margin-top: var(--space-050);
   }
 
   .page-node-type-profile article.profile.full > .content > .field--name-field-bio {
-    margin-top: var(--space-150);
+    order: 100;
+    margin-top: var(--space-100);
   }
 }
 
