@@ -3829,6 +3829,158 @@ footer.submitted {
 }
 
 /* ===================================
+   PROFILE: FULL CONTENT VIEW
+=================================== */
+.page-node-type-profile h1.page-title {
+  display: none !important;
+}
+
+.page-node-type-profile footer.submitted {
+  display: none !important;
+}
+
+@media (min-width: 992px) {
+  .page-node-type-profile .page-title-container {
+    max-width: 800px;
+  }
+
+  .page-node-type-profile .block-system-main-block > article.profile.full {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+.page-node-type-profile article.profile.full > .content {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  column-gap: var(--space-300);
+  row-gap: var(--space-150);
+  align-items: start;
+}
+
+.page-node-type-profile article.profile.full > .content > :not(.field--name-field-profile-headshot):not(.field--name-field-bio) {
+  grid-column: 2;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot img,
+.page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot .img-fluid {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-100);
+  display: block;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-display-title {
+  grid-column: 2;
+  margin: 0 0 var(--space-050) 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-institution-affiliation {
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-institution-affiliation a {
+  display: inline-block;
+  padding: var(--space-025) var(--space-100);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-999);
+  background-color: rgba(255, 255, 255, 0.88);
+  color: var(--color-text-subdued-strong) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-reach-roles {
+  margin-top: var(--space-025);
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-reach-roles .field__item {
+  display: inline;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-reach-roles .field__item:not(:last-child)::after {
+  content: ", ";
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-titles {
+  margin-top: var(--space-050);
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-research-areas {
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-profile-link {
+  margin-top: var(--space-050);
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-profile-link a {
+  color: var(--color-text-link) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-bio {
+  grid-column: 1 / -1;
+  margin-top: var(--space-250);
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-bio,
+.page-node-type-profile article.profile.full > .content > .field--name-field-bio * {
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@media (max-width: 767px) {
+  .page-node-type-profile article.profile.full > .content {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-150);
+  }
+
+  .page-node-type-profile article.profile.full > .content > * {
+    grid-column: 1;
+  }
+
+  .page-node-type-profile article.profile.full > .content > .field--name-field-bio {
+    margin-top: var(--space-150);
+  }
+}
+
+/* ===================================
    POST: FULL CONTENT VIEW
 =================================== */
 .page-node-type-post h1.page-title {

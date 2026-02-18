@@ -403,6 +403,64 @@
     }
   };
 
+  function buildReachDisplayName(first, last, creds) {
+    var firstText = first ? (first.textContent || '').trim() : '';
+    var lastText = last ? (last.textContent || '').trim().replace(/,+\s*$/, '') : '';
+    var credsText = creds ? (creds.textContent || '').trim().replace(/^,\s*/, '') : '';
+
+    if (!firstText && !lastText) return '';
+
+    var parts = [];
+    if (firstText) parts.push(firstText);
+    if (lastText) {
+      var lastPart = lastText;
+      if (credsText) lastPart += ',';
+      parts.push(lastPart);
+    }
+    if (credsText) parts.push(credsText);
+
+    return parts.join(' ');
+  }
+
+  // Replaces profile node title with combined first/last/credentials display title.
+  Drupal.behaviors.reachProfileFullDisplayTitle = {
+    attach: function (context) {
+      once('reachProfileFullDisplayTitle', '.page-node-type-profile article.profile.full', context)
+        .forEach(function (article) {
+          var content = article.querySelector('.content') || article;
+          var first = article.querySelector('.field--name-field-first-name');
+          var last = article.querySelector('.field--name-field-last-name');
+          var creds = article.querySelector('.field--name-field-credentials-display');
+
+          var displayName = buildReachDisplayName(first, last, creds);
+          if (!displayName) return;
+
+          var displayTitle = content.querySelector('.reach-profile-display-title');
+          if (!displayTitle) {
+            displayTitle = document.createElement('h2');
+            displayTitle.className = 'reach-profile-display-title heading--h2-alt';
+          }
+          displayTitle.textContent = displayName;
+
+          [first, last, creds].forEach(function (node) {
+            if (!node) return;
+            node.setAttribute('aria-hidden', 'true');
+            node.classList.add('reach-name-hidden');
+            node.style.display = 'none';
+          });
+
+          var insertBeforeTarget = first || last || creds || content.firstChild;
+          if (displayTitle.parentNode !== content) {
+            if (insertBeforeTarget) {
+              content.insertBefore(displayTitle, insertBeforeTarget);
+            } else {
+              content.appendChild(displayTitle);
+            }
+          }
+        });
+    }
+  };
+
   // Moves institution pill into headshot container so it overlays with inset spacing.
   function findProfileInstitutionField(card) {
     if (!card) return null;
@@ -684,6 +742,29 @@
       } catch (e) {
         // Fail silently to avoid blocking Drupal behaviors or view rendering.
       }
+    }
+  };
+
+  // Hides "Leadership" role on full profile pages while keeping other role values.
+  Drupal.behaviors.reachProfileFullRoleFilter = {
+    attach: function (context) {
+      once('reachProfileFullRoleFilter', '.page-node-type-profile article.profile.full .field--name-field-reach-roles', context)
+        .forEach(function (field) {
+          var items = Array.prototype.slice.call(field.querySelectorAll('.field__item'));
+          if (!items.length) return;
+
+          items.forEach(function (item) {
+            var text = (item.textContent || '').trim().toLowerCase();
+            if (text === 'leadership' && item.parentNode) {
+              item.parentNode.removeChild(item);
+            }
+          });
+
+          if (!field.querySelector('.field__item')) {
+            field.setAttribute('aria-hidden', 'true');
+            field.style.display = 'none';
+          }
+        });
     }
   };
 
