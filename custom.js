@@ -422,12 +422,19 @@
     return parts.join(' ');
   }
 
-  // Replaces profile node title with combined first/last/credentials display title.
+  // Builds a profile hero text block and places display title + metadata in a fixed order.
   Drupal.behaviors.reachProfileFullDisplayTitle = {
     attach: function (context) {
       once('reachProfileFullDisplayTitle', '.page-node-type-profile article.profile.full', context)
         .forEach(function (article) {
           var content = article.querySelector('.content') || article;
+          var headshot = content.querySelector('.field--name-field-profile-headshot');
+          var heroText = content.querySelector('.reach-profile-hero-text');
+          var affiliation = article.querySelector('.field--name-field-institution-affiliation');
+          var roles = article.querySelector('.field--name-field-reach-roles');
+          var titles = article.querySelector('.field--name-field-titles');
+          var research = article.querySelector('.field--name-field-research-areas');
+          var profileLink = article.querySelector('.field--name-field-profile-link');
           var first = article.querySelector('.field--name-field-first-name');
           var last = article.querySelector('.field--name-field-last-name');
           var creds = article.querySelector('.field--name-field-credentials-display');
@@ -437,10 +444,26 @@
 
           var displayTitle = content.querySelector('.reach-profile-display-title');
           if (!displayTitle) {
-            displayTitle = document.createElement('h2');
+            displayTitle = document.createElement('h1');
             displayTitle.className = 'reach-profile-display-title heading--h2-alt';
           }
           displayTitle.textContent = displayName;
+
+          if (!heroText) {
+            heroText = document.createElement('div');
+            heroText.className = 'reach-profile-hero-text';
+            if (headshot && headshot.parentNode === content) {
+              if (headshot.nextSibling) {
+                content.insertBefore(heroText, headshot.nextSibling);
+              } else {
+                content.appendChild(heroText);
+              }
+            } else if (content.firstChild) {
+              content.insertBefore(heroText, content.firstChild);
+            } else {
+              content.appendChild(heroText);
+            }
+          }
 
           [first, last, creds].forEach(function (node) {
             if (!node) return;
@@ -449,14 +472,14 @@
             node.style.display = 'none';
           });
 
-          var insertBeforeTarget = first || last || creds || content.firstChild;
-          if (displayTitle.parentNode !== content) {
-            if (insertBeforeTarget) {
-              content.insertBefore(displayTitle, insertBeforeTarget);
-            } else {
-              content.appendChild(displayTitle);
-            }
+          if (displayTitle.parentNode !== heroText) {
+            heroText.insertBefore(displayTitle, heroText.firstChild);
           }
+
+          [affiliation, roles, titles, research, profileLink].forEach(function (field) {
+            if (!field) return;
+            heroText.appendChild(field);
+          });
         });
     }
   };

@@ -3840,6 +3840,10 @@ footer.submitted {
 }
 
 @media (min-width: 992px) {
+  .page-node-type-profile .main-container.container {
+    max-width: 800px;
+  }
+
   .page-node-type-profile .page-title-container {
     max-width: 800px;
   }
@@ -3860,10 +3864,6 @@ footer.submitted {
   align-items: start;
 }
 
-.page-node-type-profile article.profile.full > .content > :not(.field--name-field-profile-headshot):not(.field--name-field-bio) {
-  grid-column: 2;
-}
-
 .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot {
   grid-column: 1;
   grid-row: 1;
@@ -3880,16 +3880,23 @@ footer.submitted {
   display: block;
 }
 
-.page-node-type-profile article.profile.full > .content > .reach-profile-display-title {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text {
   grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-050);
+  min-width: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .reach-profile-display-title {
   margin: 0 0 var(--space-050) 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-institution-affiliation {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation {
   margin: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-institution-affiliation a {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation a {
   display: inline-block;
   padding: var(--space-025) var(--space-100);
   border: var(--border-050) solid var(--color-border-subdued-strong);
@@ -3904,7 +3911,7 @@ footer.submitted {
   text-decoration: none;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-reach-roles {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles {
   margin-top: var(--space-025);
   color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
@@ -3913,15 +3920,15 @@ footer.submitted {
   line-height: 24px;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-reach-roles .field__item {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles .field__item {
   display: inline;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-reach-roles .field__item:not(:last-child)::after {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles .field__item:not(:last-child)::after {
   content: ", ";
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-titles {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-titles {
   margin-top: var(--space-050);
   color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
@@ -3930,25 +3937,29 @@ footer.submitted {
   line-height: 24px;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-research-areas {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-research-areas {
   color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 24px;
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-profile-link {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-profile-link {
   margin-top: var(--space-050);
 }
 
-.page-node-type-profile article.profile.full > .content > .field--name-field-profile-link a {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-profile-link a {
   color: var(--color-text-link) !important;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 24px;
   overflow-wrap: anywhere;
+}
+
+.page-node-type-profile article.profile.full > .content > .field--name-field-short-bio {
+  display: none !important;
 }
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-bio {
@@ -3963,6 +3974,17 @@ footer.submitted {
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > :is(
+  .field--name-field-institution-affiliation,
+  .field--name-field-reach-roles,
+  .field--name-field-titles,
+  .field--name-field-research-areas,
+  .field--name-field-profile-link,
+  .field--name-field-short-bio
+) > .field__label {
+  display: none !important;
 }
 
 @media (max-width: 767px) {
