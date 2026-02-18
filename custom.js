@@ -447,6 +447,7 @@
             displayTitle = document.createElement('h1');
             displayTitle.className = 'reach-profile-display-title heading--h2-alt';
           }
+          displayTitle.classList.add('mb--025');
           displayTitle.textContent = displayName;
 
           if (!heroText) {
@@ -480,6 +481,19 @@
             if (!field) return;
             heroText.appendChild(field);
           });
+
+          if (affiliation) {
+            affiliation.classList.add('mb--100');
+          }
+          if (roles) {
+            roles.classList.add('mt--000');
+          }
+          if (titles) {
+            titles.classList.add('mt--050');
+          }
+          if (profileLink) {
+            profileLink.classList.add('mt--050');
+          }
         });
     }
   };

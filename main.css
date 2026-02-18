@@ -3884,12 +3884,12 @@ footer.submitted {
   grid-column: 2;
   display: flex;
   flex-direction: column;
-  gap: var(--space-050);
+  gap: var(--space-000);
   min-width: 0;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .reach-profile-display-title {
-  margin: 0 0 var(--space-050) 0;
+  margin: 0;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation {
@@ -3912,7 +3912,7 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles {
-  margin-top: var(--space-025);
+  margin-top: 0;
   color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -3929,7 +3929,7 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-titles {
-  margin-top: var(--space-050);
+  margin-top: 0;
   color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -3946,7 +3946,7 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-profile-link {
-  margin-top: var(--space-050);
+  margin-top: 0;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-profile-link a {
