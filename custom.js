@@ -747,6 +747,54 @@
     }
   };
 
+  // Ensures Instructor profile cards link to the local profile page view.
+  Drupal.behaviors.instructorCardProfileLink = {
+    attach: function (context) {
+      once(
+        'instructorCardProfileLink',
+        '.view-id-profiles_cards .profile-card, .view-profiles-cards .profile-card',
+        context
+      ).forEach(function (card) {
+        var titleLink = card.querySelector('h2 a');
+        if (!titleLink) return;
+
+        var href = titleLink.getAttribute('href') || '';
+        if (!href) return;
+
+        var profileLink = card.querySelector('.field--name-field-profile-link a');
+
+        if (!profileLink) {
+          var container = card.querySelector('.field--name-field-profile-link');
+          if (!container) {
+            container = document.createElement('div');
+            container.className = 'field field--name-field-profile-link';
+            var anchor = document.createElement('a');
+            anchor.className = 'instructor-view-profile';
+            anchor.href = href;
+            anchor.textContent = 'View Profile';
+            container.appendChild(anchor);
+
+            var content = card.querySelector('.content') || card;
+            var shortBio = content.querySelector('.field--name-field-short-bio');
+            if (shortBio && shortBio.nextSibling) {
+              content.insertBefore(container, shortBio.nextSibling);
+            } else {
+              content.appendChild(container);
+            }
+            return;
+          }
+          profileLink = container.querySelector('a');
+          if (!profileLink) return;
+        }
+
+        profileLink.setAttribute('href', href);
+        profileLink.removeAttribute('target');
+        profileLink.removeAttribute('rel');
+        profileLink.textContent = 'View Profile';
+      });
+    }
+  };
+
   // Hides "Leadership" role tag from profile cards while keeping other roles.
   Drupal.behaviors.reachProfileRoleFilter = {
     attach: function (context) {
