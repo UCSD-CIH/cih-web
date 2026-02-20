@@ -2071,12 +2071,8 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 body.has-profile-card-view #page-title .page-title,
 body:has(
   :is(
-    .view-reach-profiles-leadership,
-    .view-reach-profiles-members,
-    .view-id-reach_profiles_leadership,
-    .view-id-reach_profiles_members,
     .view-id-profiles_cards,
-    .profile-cards
+    .view-profiles-cards
   )
 ) #page-title .page-title {
   font-family: 'Inter', sans-serif !important;

@@ -24,7 +24,7 @@
     attach: function (context) {
       once('profileCardPageClass', 'body', context).forEach(function (bodyEl) {
         if (document.querySelector(
-          '.view-id-profiles_cards, .view-id-reach_profiles_leadership, .view-id-reach_profiles_members, .profile-cards'
+          '.view-id-profiles_cards, .view-profiles-cards'
         )) {
           bodyEl.classList.add('has-profile-card-view');
         }
