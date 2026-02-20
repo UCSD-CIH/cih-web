@@ -351,7 +351,7 @@
     }
   };
 
-  // Keeps last name + credentials glued together so comma never wraps alone.
+  // Combines first/last/(optional credentials) into one display name on cards.
   Drupal.behaviors.reachProfileNameGlue = {
     attach: function (context) {
       once(
@@ -362,14 +362,14 @@
         var first = card.querySelector('.field--name-field-first-name');
         var last = card.querySelector('.field--name-field-last-name');
         var creds = card.querySelector('.field--name-field-credentials-display');
-        if (!last || !creds) return;
+        if (!last) return;
 
         if (last.parentElement && last.parentElement.classList.contains('reach-name-combined')) return;
-        if (creds.parentElement && creds.parentElement.classList.contains('reach-name-combined')) return;
+        if (creds && creds.parentElement && creds.parentElement.classList.contains('reach-name-combined')) return;
 
         var firstText = first ? (first.textContent || '').trim() : '';
         var lastText = (last.textContent || '').trim().replace(/,+\s*$/, '');
-        var credsText = (creds.textContent || '').trim().replace(/^,\s*/, '');
+        var credsText = creds ? (creds.textContent || '').trim().replace(/^,\s*/, '') : '';
 
         if (!firstText && !lastText) return;
 
