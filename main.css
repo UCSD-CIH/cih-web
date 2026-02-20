@@ -3987,7 +3987,7 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-bio {
   grid-column: 1 / -1;
-  margin-top: var(--space-250);
+  margin-top: var(--space-200);
 }
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-bio,
