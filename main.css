@@ -330,12 +330,16 @@ h1.page-title {
 /* H2 alternate style: Inter, title case */
 .heading--h2-alt,
 .heading--h2-alt * ,
+.page-title-container.heading--h2-alt .page-title,
+#page-title.heading--h2-alt .page-title,
+.main-container #page-title.heading--h2-alt .page-title,
 .main-container h1.page-title.heading--h2-alt,
 .main-container h2.heading--h2-alt,
 .main-container .heading--h2-alt h2 {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   font-size: 36px !important;
+  font-style: normal !important;
   line-height: 40px !important;
   letter-spacing: 0;
   margin-bottom: var(--space-250);
