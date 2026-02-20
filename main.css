@@ -330,6 +330,7 @@ h1.page-title {
 /* H2 alternate style: Inter, title case */
 .heading--h2-alt,
 .heading--h2-alt * ,
+.main-container h1.page-title.heading--h2-alt,
 .main-container h2.heading--h2-alt,
 .main-container .heading--h2-alt h2 {
   font-family: 'Inter', sans-serif !important;
