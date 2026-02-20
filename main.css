@@ -2067,6 +2067,27 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
   align-items: stretch;
 }
 
+/* Profile card listing pages: render page title with H2-alt typography. */
+body.has-profile-card-view #page-title .page-title,
+body:has(
+  :is(
+    .view-reach-profiles-leadership,
+    .view-reach-profiles-members,
+    .view-id-reach_profiles_leadership,
+    .view-id-reach_profiles_members,
+    .view-id-profiles_cards,
+    .profile-cards
+  )
+) #page-title .page-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 36px !important;
+  font-style: normal !important;
+  line-height: 40px !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
 :is(
   .view-reach-profiles-leadership,
   .view-reach-profiles-members,

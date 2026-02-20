@@ -20,6 +20,18 @@
     }
   };
 
+  Drupal.behaviors.profileCardPageClass = {
+    attach: function (context) {
+      once('profileCardPageClass', 'body', context).forEach(function (bodyEl) {
+        if (document.querySelector(
+          '.view-id-profiles_cards, .view-id-reach_profiles_leadership, .view-id-reach_profiles_members, .profile-cards'
+        )) {
+          bodyEl.classList.add('has-profile-card-view');
+        }
+      });
+    }
+  };
+
   Drupal.behaviors.webformLabelFontFix = {
     attach: function (context) {
       once('webformLabelFontFix', '.webform-submission-form .js-form-wrapper.form-wrapper, .webform-submission-form label.h3', context).forEach(function (node) {
