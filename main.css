@@ -2451,6 +2451,7 @@ body:has(
   font-weight: 400 !important;
   font-size: 14px;
   line-height: 20px;
+  text-decoration: none !important;
   display: inline-block;
   max-width: 100%;
   overflow-wrap: anywhere;
