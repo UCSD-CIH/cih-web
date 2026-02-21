@@ -308,6 +308,21 @@
     removeNoopener(link);
   }
 
+  // Ensures new REACH card view modes still receive legacy `.profile-card` styling/hooks.
+  Drupal.behaviors.reachProfileCardClassAdapter = {
+    attach: function (context) {
+      once(
+        'reachProfileCardClassAdapter',
+        '.view-reach-profiles-leadership article.profile, .view-reach-profiles-members article.profile, .view-id-reach_profiles_leadership article.profile, .view-id-reach_profiles_members article.profile, .profile-cards article.profile',
+        context
+      ).forEach(function (card) {
+        if (!card.classList.contains('profile-card')) {
+          card.classList.add('profile-card');
+        }
+      });
+    }
+  };
+
   // Adds a text-based placeholder when headshot images are missing/broken.
   Drupal.behaviors.reachProfileHeadshotPlaceholder = {
     attach: function (context) {
