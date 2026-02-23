@@ -2462,7 +2462,8 @@ body:has(
   font-weight: 400 !important;
   font-size: 14px;
   line-height: 20px;
-  text-decoration: none !important;
+  color: var(--color-text-blue) !important;
+  text-decoration: underline !important;
   display: inline-block;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -2476,6 +2477,24 @@ body:has(
   .profile-cards
 ) .field--name-field-profile-link a:hover {
   color: var(--color-text-navy) !important;
+  text-decoration: none !important;
+}
+
+/* Regular instructor/profile card views don't always include `.profile-cards` wrapper. */
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .field--name-field-profile-link a {
+  color: var(--color-text-blue) !important;
+  text-decoration: underline !important;
+}
+
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .field--name-field-profile-link a:hover {
+  color: var(--color-text-navy) !important;
+  text-decoration: none !important;
 }
 
 /* ---- Type pill pinned top-right of thumbnail ---- */
