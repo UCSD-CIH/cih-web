@@ -296,6 +296,32 @@
     }
   }
 
+  function readFieldText(field) {
+    if (!field) return '';
+
+    var items = Array.prototype.slice.call(field.querySelectorAll('.field__item'));
+    if (items.length) {
+      var itemText = items
+        .map(function (item) {
+          return (item.textContent || '').trim();
+        })
+        .filter(function (text) {
+          return !!text;
+        })
+        .join(', ')
+        .trim();
+      if (itemText) return itemText;
+    }
+
+    var link = field.querySelector('a');
+    if (link) {
+      var linkText = (link.textContent || '').trim();
+      if (linkText) return linkText;
+    }
+
+    return (field.textContent || '').trim();
+  }
+
   function enforceNavLink(link) {
     if (!link) return;
 
@@ -345,8 +371,10 @@
         var first = card.querySelector('.field--name-field-first-name');
         var last = card.querySelector('.field--name-field-last-name');
         var nameParts = [];
-        if (first && first.textContent) nameParts.push(first.textContent.trim());
-        if (last && last.textContent) nameParts.push(last.textContent.trim());
+        var firstTextForLabel = readFieldText(first);
+        var lastTextForLabel = readFieldText(last);
+        if (firstTextForLabel) nameParts.push(firstTextForLabel);
+        if (lastTextForLabel) nameParts.push(lastTextForLabel);
         var fallbackLabel = nameParts.join(' ');
         var emoji = '👤';
 
@@ -394,9 +422,9 @@
         if (last.parentElement && last.parentElement.classList.contains('reach-name-combined')) return;
         if (creds && creds.parentElement && creds.parentElement.classList.contains('reach-name-combined')) return;
 
-        var firstText = first ? (first.textContent || '').trim() : '';
-        var lastText = (last.textContent || '').trim().replace(/,+\s*$/, '');
-        var credsText = creds ? (creds.textContent || '').trim().replace(/^,\s*/, '') : '';
+        var firstText = first ? readFieldText(first) : '';
+        var lastText = readFieldText(last).replace(/,+\s*$/, '');
+        var credsText = creds ? readFieldText(creds).replace(/^,\s*/, '') : '';
 
         if (!firstText && !lastText) return;
 
@@ -431,9 +459,9 @@
   };
 
   function buildReachDisplayName(first, last, creds) {
-    var firstText = first ? (first.textContent || '').trim() : '';
-    var lastText = last ? (last.textContent || '').trim().replace(/,+\s*$/, '') : '';
-    var credsText = creds ? (creds.textContent || '').trim().replace(/^,\s*/, '') : '';
+    var firstText = first ? readFieldText(first) : '';
+    var lastText = last ? readFieldText(last).replace(/,+\s*$/, '') : '';
+    var credsText = creds ? readFieldText(creds).replace(/^,\s*/, '') : '';
 
     if (!firstText && !lastText) return '';
 
@@ -563,6 +591,10 @@
   function readInstitutionName(field) {
     if (!field) return '';
     var link = field.querySelector('a');
+    if (link) {
+      var linkText = (link.textContent || '').trim();
+      if (linkText) return linkText;
+    }
 
     var heading = field.querySelector('h2, h3');
     if (heading) {
@@ -611,7 +643,7 @@
       }
     }
 
-    return (field.textContent || '').trim();
+    return readFieldText(field);
   }
 
   function copyDataAttributes(source, target) {
@@ -632,7 +664,7 @@
     var labelClass = (existingLabelNode && existingLabelNode.className) || 'reach-institution-pill-label';
     var labelSpan = existingLabelNode && existingLabelNode.tagName.toLowerCase() === 'span' ? existingLabelNode : null;
     var link = field.querySelector('a');
-    var existing = (existingLabelNode && existingLabelNode.textContent ? existingLabelNode.textContent : field.textContent || '').trim();
+    var existing = (existingLabelNode && existingLabelNode.textContent ? existingLabelNode.textContent : readFieldText(field) || '').trim();
     var finalLabel = abbreviation || name || existing;
     if (!finalLabel) return '';
 
