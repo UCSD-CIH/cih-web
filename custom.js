@@ -579,9 +579,18 @@
       }
     }
 
-    var abbrField = field.querySelector('.field--name-field-abbreviation .field__item');
-    if (abbrField) {
-      var abbrText = (abbrField.textContent || '').trim();
+    var abbrNodes = field.querySelectorAll(
+      [
+        '.field--name-field-abbreviation .field__item',
+        '.field--name-field-abbrev .field__item',
+        '.field--name-field-abbr .field__item',
+        '[class*="field--name-field-"][class*="abbrev"] .field__item',
+        '[class*="field--name-field-"][class*="abbr"] .field__item',
+        'abbr'
+      ].join(',')
+    );
+    for (var k = 0; k < abbrNodes.length; k++) {
+      var abbrText = (abbrNodes[k].textContent || '').trim();
       if (abbrText) return abbrText;
     }
 
@@ -664,8 +673,9 @@
     var labelClass = (existingLabelNode && existingLabelNode.className) || 'reach-institution-pill-label';
     var labelSpan = existingLabelNode && existingLabelNode.tagName.toLowerCase() === 'span' ? existingLabelNode : null;
     var link = field.querySelector('a');
-    var existing = (existingLabelNode && existingLabelNode.textContent ? existingLabelNode.textContent : readFieldText(field) || '').trim();
-    var finalLabel = abbreviation || name || existing;
+    var existingLabel = (existingLabelNode && existingLabelNode.textContent ? existingLabelNode.textContent : '').trim();
+    var existing = (existingLabel || readFieldText(field) || '').trim();
+    var finalLabel = abbreviation || existingLabel || name || existing;
     if (!finalLabel) return '';
 
     if (!labelSpan) {
