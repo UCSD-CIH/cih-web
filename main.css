@@ -2497,6 +2497,79 @@ body:has(
   text-decoration: none !important;
 }
 
+/* Match regular card focus areas to REACH card research areas styling. */
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas {
+  margin-top: var(--space-200);
+  padding-top: var(--space-200);
+  border-top: var(--border-025) solid var(--color-border-subdued-strong);
+  color: var(--color-text-subdued-strong);
+}
+
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas,
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas * {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas .field__label {
+  display: none !important;
+}
+
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas .field__item {
+  display: inline;
+}
+
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas .field__item:not(:last-child)::after {
+  content: ", ";
+}
+
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas a,
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-program-focus-areas a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* Match regular card titles to REACH card roles styling. */
+:is(
+  .view-id-profiles_cards,
+  .view-profiles-cards
+) .profile-card .field--name-field-titles {
+  margin-top: var(--space-100);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--color-text-paragraph);
+}
+
 /* ---- Type pill pinned top-right of thumbnail ---- */
 .press-media.press-media-card .group--press-media-thumbnail
   .field--name-field-press-type {
