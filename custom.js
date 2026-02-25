@@ -539,6 +539,31 @@
     }
   };
 
+  // Hides the new profile research section only when it has no actual content.
+  Drupal.behaviors.reachProfileResearchSectionVisibility = {
+    attach: function (context) {
+      once(
+        'reachProfileResearchSectionVisibility',
+        '.page-node-type-profile article.profile.full .profile-section--research',
+        context
+      ).forEach(function (section) {
+        var affiliations = section.querySelector('.profile-section__affiliations');
+        var text = affiliations ? (affiliations.textContent || '').replace(/\s+/g, ' ').trim() : '';
+        var hasLinks = !!(affiliations && affiliations.querySelector('a'));
+        var hasContent = !!(text || hasLinks);
+
+        if (!hasContent) {
+          section.setAttribute('aria-hidden', 'true');
+          section.style.display = 'none';
+          return;
+        }
+
+        section.style.removeProperty('display');
+        section.removeAttribute('aria-hidden');
+      });
+    }
+  };
+
   // Moves institution pill into headshot container so it overlays with inset spacing.
   function findProfileInstitutionField(card) {
     if (!card) return null;
