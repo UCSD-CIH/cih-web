@@ -4024,6 +4024,14 @@ footer.submitted {
   min-width: 0;
 }
 
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .profile-identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  min-width: 0;
+  margin-top: var(--space-050);
+}
+
 .page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity > :is(
   .field--name-field-first-name,
   .field--name-field-last-name,
@@ -4032,11 +4040,11 @@ footer.submitted {
   display: none !important;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity .field--name-field-institution-affiliation {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-identity .field--name-field-institution-affiliation {
   margin: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity .field--name-field-institution-affiliation a {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-identity .field--name-field-institution-affiliation a {
   display: inline-block;
   padding: var(--space-025) var(--space-100);
   border: var(--border-050) solid var(--color-border-subdued-strong);
@@ -4053,7 +4061,7 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research {
   margin: 0;
-  padding: var(--space-250);
+  padding: var(--space-300);
   margin-bottom: var(--space-150);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
@@ -4061,15 +4069,15 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__heading,
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .profile-section__heading {
-  margin: 0 0 var(--space-075) 0;
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .profile-section__heading {
+  margin: 0 0 var(--space-150) 0;
   color: var(--color-text-heading);
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
   line-height: 24px;
   letter-spacing: 0;
-  text-transform: none;
+  text-transform: none !important;
 }
 
 .page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations {
@@ -4121,6 +4129,22 @@ footer.submitted {
   content: ", ";
 }
 
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .field--name-field-reach-roles {
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .field--name-field-research-areas {
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
 .page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .field--name-field-profile-link a {
   color: var(--color-text-link) !important;
   font-family: 'Inter', sans-serif;
@@ -4130,11 +4154,11 @@ footer.submitted {
   overflow-wrap: anywhere;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus {
   margin: var(--space-050) 0 0 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas {
   color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -4142,15 +4166,15 @@ footer.submitted {
   line-height: 20px;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas .field__item {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas .field__item {
   display: inline;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas .field__item:not(:last-child)::after {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas .field__item:not(:last-child)::after {
   content: ", ";
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas a {
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas a {
   color: var(--color-text-subdued-strong) !important;
   text-decoration: none;
 }
@@ -4177,6 +4201,15 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .reach-profile-display-title {
   margin: 0 0 var(--space-025) 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .profile-identity > .field--name-field-titles {
+  margin: 0 0 var(--space-050) 0;
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation {
@@ -4286,7 +4319,7 @@ footer.submitted {
   display: none !important;
 }
 
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .profile-body) :is(
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .profile-body, .reach-profile-hero-text) :is(
   .field--name-field-reach-roles,
   .field--name-field-research-areas,
   .field--name-field-profile-link,

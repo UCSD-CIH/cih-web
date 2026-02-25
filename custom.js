@@ -534,19 +534,39 @@
             heroText.insertBefore(displayTitle, heroText.firstChild);
           }
 
-          if (identitySection && affiliation) {
-            var focusSection = identitySection.querySelector('.profile-section--focus');
-            if (focusSection && focusSection.parentNode === identitySection) {
-              identitySection.insertBefore(affiliation, focusSection);
-            } else {
-              identitySection.appendChild(affiliation);
+          if (identitySection) {
+            if (identitySection.parentNode !== heroText) {
+              heroText.appendChild(identitySection);
             }
-          } else if (affiliation) {
-            heroText.appendChild(affiliation);
-          }
 
-          if (titles) {
-            heroText.appendChild(titles);
+            if (titles) {
+              var firstVisibleIdentityChild = null;
+              Array.prototype.forEach.call(identitySection.children, function (child) {
+                if (firstVisibleIdentityChild || child.classList.contains('reach-name-hidden')) return;
+                firstVisibleIdentityChild = child;
+              });
+              if (firstVisibleIdentityChild) {
+                identitySection.insertBefore(titles, firstVisibleIdentityChild);
+              } else {
+                identitySection.appendChild(titles);
+              }
+            }
+
+            if (affiliation) {
+              var focusSection = identitySection.querySelector('.profile-section--focus');
+              if (focusSection && focusSection.parentNode === identitySection) {
+                identitySection.insertBefore(affiliation, focusSection);
+              } else {
+                identitySection.appendChild(affiliation);
+              }
+            }
+          } else {
+            if (titles) {
+              heroText.appendChild(titles);
+            }
+            if (affiliation) {
+              heroText.appendChild(affiliation);
+            }
           }
 
           if (researchSection) {
