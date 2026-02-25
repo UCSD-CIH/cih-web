@@ -4062,20 +4062,30 @@ footer.submitted {
 .page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research {
   margin: 0;
   padding: var(--space-300);
-  margin-bottom: var(--space-150);
+  margin-bottom: var(--space-300);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
   background-color: var(--color-bg-lightest);
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__heading,
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .profile-section__heading {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__heading {
   margin: 0 0 var(--space-150) 0;
   color: var(--color-text-heading);
   font-family: 'Inter', sans-serif !important;
   font-size: 20px !important;
   font-weight: 700 !important;
   line-height: 24px;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .profile-section__heading {
+  margin: 0 0 var(--space-075) 0;
+  color: var(--color-text-heading);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 20px;
   letter-spacing: 0;
   text-transform: none !important;
 }
