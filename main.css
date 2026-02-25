@@ -4026,15 +4026,16 @@ footer.submitted {
   border-top: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__heading {
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__heading,
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .profile-section__heading {
   margin: 0 0 var(--space-075) 0;
   color: var(--color-text-heading);
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations {
@@ -4050,6 +4051,74 @@ footer.submitted {
   color: var(--color-text-link) !important;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .reach-profile-research-badge {
+  display: inline-block;
+  margin: 0 0 var(--space-075) 0;
+  padding: 2px var(--space-075);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-999);
+  background-color: rgba(255, 255, 255, 0.88);
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-reach-roles,
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-research-areas,
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-profile-link {
+  margin: 0 0 var(--space-050) 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-profile-link {
+  margin-bottom: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .field--name-field-reach-roles .field__item {
+  display: inline;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .field--name-field-reach-roles .field__item:not(:last-child)::after {
+  content: ", ";
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .field--name-field-profile-link a {
+  color: var(--color-text-link) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus {
+  margin: var(--space-050) 0 0 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas {
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas .field__item {
+  display: inline;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas .field__item:not(:last-child)::after {
+  content: ", ";
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .field--name-field-program-focus-areas a {
+  color: var(--color-text-subdued-strong) !important;
+  text-decoration: none;
 }
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot img,
@@ -4114,7 +4183,7 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-titles {
   margin: 0 0 var(--space-050) 0;
-  color: var(--color-text-subdued-strong);
+  color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -4179,6 +4248,15 @@ footer.submitted {
   .field--name-field-research-areas,
   .field--name-field-profile-link,
   .field--name-field-short-bio
+) > .field__label {
+  display: none !important;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero :is(
+  .field--name-field-reach-roles,
+  .field--name-field-research-areas,
+  .field--name-field-profile-link,
+  .field--name-field-program-focus-areas
 ) > .field__label {
   display: none !important;
 }

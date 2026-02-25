@@ -490,6 +490,8 @@
           var titles = article.querySelector('.field--name-field-titles');
           var research = article.querySelector('.field--name-field-research-areas');
           var profileLink = article.querySelector('.field--name-field-profile-link');
+          var researchSection = article.querySelector('.profile-section--research');
+          var researchAffiliations = researchSection && researchSection.querySelector('.profile-section__affiliations');
           var first = article.querySelector('.field--name-field-first-name');
           var last = article.querySelector('.field--name-field-last-name');
           var creds = article.querySelector('.field--name-field-credentials-display');
@@ -531,10 +533,43 @@
             heroText.insertBefore(displayTitle, heroText.firstChild);
           }
 
-          [affiliation, roles, titles, research, profileLink].forEach(function (field) {
+          [affiliation, titles].forEach(function (field) {
             if (!field) return;
             heroText.appendChild(field);
           });
+
+          if (researchSection) {
+            if (!researchAffiliations) {
+              researchAffiliations = document.createElement('div');
+              researchAffiliations.className = 'profile-section__affiliations';
+              researchSection.appendChild(researchAffiliations);
+            }
+
+            var hasReachRoles = !!(roles && readFieldText(roles));
+            var badge = researchSection.querySelector('.reach-profile-research-badge');
+            if (hasReachRoles) {
+              if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'reach-profile-research-badge';
+                badge.textContent = 'REACH';
+              }
+              if (badge.parentNode !== researchAffiliations) {
+                researchAffiliations.insertBefore(badge, researchAffiliations.firstChild);
+              }
+            } else if (badge && badge.parentNode) {
+              badge.parentNode.removeChild(badge);
+            }
+
+            [roles, research, profileLink].forEach(function (field) {
+              if (!field) return;
+              researchAffiliations.appendChild(field);
+            });
+          } else {
+            [roles, research, profileLink].forEach(function (field) {
+              if (!field) return;
+              heroText.appendChild(field);
+            });
+          }
         });
     }
   };
