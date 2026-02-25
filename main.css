@@ -4010,23 +4010,57 @@ footer.submitted {
   margin: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity,
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-hero__content .profile-identity {
-  display: none !important;
-}
-
 .page-node-type-profile article.profile.full > .content > .profile-hero .profile-hero__content {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
   min-width: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research {
-  margin: 0;
-  padding-top: var(--space-125);
-  border-top: var(--border-050) solid var(--color-border-subdued-strong);
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  min-width: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__heading,
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity > :is(
+  .field--name-field-first-name,
+  .field--name-field-last-name,
+  .field--name-field-credentials-display
+) {
+  display: none !important;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity .field--name-field-institution-affiliation {
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-hero .profile-identity .field--name-field-institution-affiliation a {
+  display: inline-block;
+  padding: var(--space-025) var(--space-100);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-999);
+  background-color: rgba(255, 255, 255, 0.88);
+  color: var(--color-text-subdued-strong) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research {
+  margin: 0;
+  padding: var(--space-250);
+  margin-bottom: var(--space-150);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  background-color: var(--color-bg-lightest);
+}
+
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__heading,
 .page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--focus .profile-section__heading {
   margin: 0 0 var(--space-075) 0;
   color: var(--color-text-heading);
@@ -4038,7 +4072,7 @@ footer.submitted {
   text-transform: none;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations {
   margin: 0;
   color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
@@ -4047,13 +4081,13 @@ footer.submitted {
   line-height: 20px;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations a {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations a {
   color: var(--color-text-link) !important;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .reach-profile-research-badge {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .reach-profile-research-badge {
   display: inline-block;
   margin: 0 0 var(--space-075) 0;
   padding: 2px var(--space-075);
@@ -4069,25 +4103,25 @@ footer.submitted {
   text-transform: uppercase;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-reach-roles,
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-research-areas,
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-profile-link {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations > .field--name-field-reach-roles,
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations > .field--name-field-research-areas,
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations > .field--name-field-profile-link {
   margin: 0 0 var(--space-050) 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .profile-section__affiliations > .field--name-field-profile-link {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .profile-section__affiliations > .field--name-field-profile-link {
   margin-bottom: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .field--name-field-reach-roles .field__item {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .field--name-field-reach-roles .field__item {
   display: inline;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .field--name-field-reach-roles .field__item:not(:last-child)::after {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .field--name-field-reach-roles .field__item:not(:last-child)::after {
   content: ", ";
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero .profile-section--research .field--name-field-profile-link a {
+.page-node-type-profile article.profile.full > .content > .profile-body .profile-section--research .field--name-field-profile-link a {
   color: var(--color-text-link) !important;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -4252,7 +4286,7 @@ footer.submitted {
   display: none !important;
 }
 
-.page-node-type-profile article.profile.full > .content > .profile-hero :is(
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .profile-body) :is(
   .field--name-field-reach-roles,
   .field--name-field-research-areas,
   .field--name-field-profile-link,

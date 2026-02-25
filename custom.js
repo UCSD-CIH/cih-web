@@ -490,6 +490,7 @@
           var titles = article.querySelector('.field--name-field-titles');
           var research = article.querySelector('.field--name-field-research-areas');
           var profileLink = article.querySelector('.field--name-field-profile-link');
+          var identitySection = article.querySelector('.profile-hero .profile-identity');
           var researchSection = article.querySelector('.profile-section--research');
           var researchAffiliations = researchSection && researchSection.querySelector('.profile-section__affiliations');
           var first = article.querySelector('.field--name-field-first-name');
@@ -533,10 +534,20 @@
             heroText.insertBefore(displayTitle, heroText.firstChild);
           }
 
-          [affiliation, titles].forEach(function (field) {
-            if (!field) return;
-            heroText.appendChild(field);
-          });
+          if (identitySection && affiliation) {
+            var focusSection = identitySection.querySelector('.profile-section--focus');
+            if (focusSection && focusSection.parentNode === identitySection) {
+              identitySection.insertBefore(affiliation, focusSection);
+            } else {
+              identitySection.appendChild(affiliation);
+            }
+          } else if (affiliation) {
+            heroText.appendChild(affiliation);
+          }
+
+          if (titles) {
+            heroText.appendChild(titles);
+          }
 
           if (researchSection) {
             if (!researchAffiliations) {
