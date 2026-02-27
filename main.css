@@ -4365,18 +4365,14 @@ footer.submitted {
 /* Full profile badge row override:
    keep affiliation and focus badges in one flow, and match pill metrics. */
 .page-node-type-profile article.profile.full .group--program-badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-100);
+  display: block !important;
   margin: 0 0 var(--space-100) 0;
   min-width: 0;
   overflow-x: visible;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation {
-  display: flex;
-  flex: 0 0 auto;
+  display: inline !important;
   width: auto;
   margin: 0;
 }
@@ -4398,25 +4394,20 @@ footer.submitted {
   white-space: nowrap;
 }
 
-/* Full-profile badges: force a single inline wrapping flow regardless of Drupal field wrappers. */
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges {
-  display: block;
-  margin: 0 0 var(--space-100) 0;
-  min-width: 0;
-}
-
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__items,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas.field__items,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__item {
-  display: inline;
+/* Hard override: collapse all focus-area wrappers into inline flow on full profile pages. */
+.page-node-type-profile article.profile.full .group--program-badges > .field,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas.field__items,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__item {
+  display: inline !important;
+  float: none !important;
   margin: 0;
 }
 
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-institution-affiliation a,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__item a {
-  display: inline-flex;
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation a,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__item a {
+  display: inline-flex !important;
   vertical-align: top;
   margin: 0 var(--space-100) var(--space-100) 0;
 }
