@@ -4170,6 +4170,7 @@ footer.submitted {
 
 /* Profile badges row: left->right with affiliation first, then focus badges. */
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation {
+  order: 1;
   flex: 0 0 auto;
   margin: 0 0 var(--space-100) 0;
 }
@@ -4179,7 +4180,7 @@ footer.submitted {
   .field--name-field-program-focus-areas,
   .profile-section--focus
 ) {
-  order: 1;
+  order: 2;
   flex: 0 1 auto;
   display: inline-flex;
   flex-wrap: wrap;
@@ -4192,9 +4193,9 @@ footer.submitted {
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges {
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-100);
-  width: 100%;
+  width: auto;
   min-width: 0;
 }
 
@@ -4206,7 +4207,12 @@ footer.submitted {
   margin: 0;
 }
 
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-institution-affiliation {
+  order: 1;
+}
+
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas {
+  order: 2;
   flex: 1 1 auto;
   min-width: 0;
   width: auto;
