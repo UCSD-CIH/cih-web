@@ -4357,10 +4357,11 @@ footer.submitted {
    keep affiliation and focus badges in one flow, and match pill metrics. */
 .page-node-type-profile article.profile.full .group--program-badges {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
   margin: 0 0 var(--space-100) 0;
+  min-width: 0;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation {
@@ -4388,12 +4389,13 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas {
-  display: flex;
-  flex: 1 1 auto;
+  display: inline-flex;
+  flex: 0 1 auto;
   min-width: 0;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
+  width: auto;
   margin: 0;
 }
 
@@ -4403,6 +4405,14 @@ footer.submitted {
   align-items: center;
   gap: var(--space-100);
   margin: 0;
+}
+
+/* Full profile only: term 71 affiliation badge uses UCSD yellow treatment. */
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation a[href="/taxonomy/term/71"],
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation a[href$="/taxonomy/term/71"] {
+  background-color: var(--color-bg-yellow-20) !important;
+  border-color: var(--color-bg-yellow-100) !important;
+  color: var(--color-text-navy) !important;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles {
