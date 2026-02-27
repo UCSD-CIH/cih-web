@@ -4165,50 +4165,71 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus {
-  margin: var(--space-050) 0 0 0;
+  margin: 0;
 }
 
-/* Keep affiliation + focus badges on one metadata row when both are present. */
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-program-focus-areas,
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .profile-section--focus {
+/* Profile badges row: left->right with affiliation first, then focus badges. */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation {
+  flex: 0 0 auto;
+  margin: 0 0 var(--space-100) 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > :is(
+  .group--program-badges,
+  .field--name-field-program-focus-areas,
+  .profile-section--focus
+) {
+  order: 1;
+  flex: 0 1 auto;
   display: inline-flex;
-  align-items: center;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--space-100);
   margin: 0 0 var(--space-100) 0;
 }
 
-/* Profile focus areas: render as program-style badges (supports with/without .profile-section--focus wrapper) */
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
-  :is(.profile-section--focus .field--name-field-program-focus-areas, .field--name-field-program-focus-areas) {
-  margin: var(--space-050) 0 0 0;
-}
-
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
-  :is(.profile-section--focus .field--name-field-program-focus-areas .field__items, .field--name-field-program-focus-areas .field__items) {
-  display: flex;
+/* Focus badges: support both Drupal structures:
+   1) .field--name-field-program-focus-areas > .field__items > .field__item
+   2) .field--name-field-program-focus-areas.field__items > .field__item */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  :is(.group--program-badges, .profile-section--focus, .field--name-field-program-focus-areas)
+  .field--name-field-program-focus-areas,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  .field--name-field-program-focus-areas.field__items {
+  margin: 0;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
 }
 
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
-  :is(.profile-section--focus .field--name-field-program-focus-areas .field__item, .field--name-field-program-focus-areas .field__item) {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  .field--name-field-program-focus-areas .field__items {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  .field--name-field-program-focus-areas .field__item,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  .field--name-field-program-focus-areas.field__items > .field__item {
   display: flex;
   flex: 0 0 auto;
   width: auto;
 }
 
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
-  :is(.profile-section--focus .field--name-field-program-focus-areas a, .field--name-field-program-focus-areas a) {
+/* Match Program page focus badge look + icon. */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  .field--name-field-program-focus-areas .field__item a {
   display: inline-block;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.01em;
-  color: var(--color-text-disabled-strong) !important;
+  color: var(--color-text-disabled-strong);
   text-decoration: none;
   padding: var(--space-100) var(--space-150);
   margin: 0;
@@ -4220,8 +4241,8 @@ footer.submitted {
   white-space: nowrap;
 }
 
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
-  :is(.profile-section--focus .field--name-field-program-focus-areas a::before, .field--name-field-program-focus-areas a::before) {
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  .field--name-field-program-focus-areas .field__item a::before {
   content: "";
   display: inline-block;
   width: 1em;
@@ -4233,20 +4254,6 @@ footer.submitted {
   mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
-}
-
-/* Inline placement inside the profile hero row (no extra top offset). */
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
-  :is(.profile-section--focus .field--name-field-program-focus-areas, .field--name-field-program-focus-areas) {
-  margin: 0;
-}
-
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
-  :is(.profile-section--focus .field--name-field-program-focus-areas .field__items, .field--name-field-program-focus-areas .field__items) {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-100);
 }
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot img,
@@ -4264,9 +4271,15 @@ footer.submitted {
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text {
   grid-column: 2;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-000);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: var(--space-100);
+  row-gap: var(--space-050);
   min-width: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > * {
+  flex: 1 0 100%;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .reach-profile-display-title {
@@ -4443,10 +4456,11 @@ footer.submitted {
   }
 
   .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > :is(
+    .group--program-badges,
     .field--name-field-program-focus-areas,
     .profile-section--focus
   ) {
-    order: 30;
+    order: 31;
     margin: 0 0 var(--space-100) 0;
   }
 

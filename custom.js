@@ -485,7 +485,6 @@
           var content = article.querySelector('.content') || article;
           var headshot = content.querySelector('.field--name-field-profile-headshot');
           var heroText = content.querySelector('.reach-profile-hero-text');
-          var affiliation = article.querySelector('.field--name-field-institution-affiliation');
           var roles = article.querySelector('.field--name-field-reach-roles');
           var titles = article.querySelector('.field--name-field-titles');
           var research = article.querySelector('.field--name-field-research-areas');
@@ -552,20 +551,9 @@
               }
             }
 
-            if (affiliation) {
-              var focusSection = identitySection.querySelector('.profile-section--focus');
-              if (focusSection && focusSection.parentNode === identitySection) {
-                identitySection.insertBefore(affiliation, focusSection);
-              } else {
-                identitySection.appendChild(affiliation);
-              }
-            }
           } else {
             if (titles) {
               heroText.appendChild(titles);
-            }
-            if (affiliation) {
-              heroText.appendChild(affiliation);
             }
           }
 
