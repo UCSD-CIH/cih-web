@@ -4398,40 +4398,27 @@ footer.submitted {
   white-space: nowrap;
 }
 
-.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas {
-  display: contents;
-  flex: 0 1 auto;
+/* Full-profile badges: force a single inline wrapping flow regardless of Drupal field wrappers. */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges {
+  display: block;
+  margin: 0 0 var(--space-100) 0;
   min-width: 0;
-  width: auto;
-  margin: 0;
-  overflow-x: visible;
 }
 
-.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items {
-  display: contents;
-  margin: 0;
-}
-
-.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__item {
-  display: inline-flex;
-  flex: 0 0 auto;
-  margin: 0;
-}
-
-/* Ensure full-content hero badges share one wrapping flow:
-   affiliation pill first, then focus pills wrapping at container edge. */
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas {
-  display: contents;
-}
-
-.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__items {
-  display: contents;
-}
-
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__items,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas.field__items,
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__item {
-  display: inline-flex;
-  flex: 0 0 auto;
+  display: inline;
   margin: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-institution-affiliation a,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__item a {
+  display: inline-flex;
+  vertical-align: top;
+  margin: 0 var(--space-100) var(--space-100) 0;
 }
 
 /* Full profile only: term 71 affiliation badge uses UCSD yellow treatment. */
