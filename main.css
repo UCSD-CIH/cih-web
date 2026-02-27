@@ -4241,6 +4241,14 @@ footer.submitted {
   text-decoration: none;
 }
 
+/* UC San Diego affiliation badge variant */
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .field--name-field-institution-affiliation a[href="/taxonomy/term/71"],
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .field--name-field-institution-affiliation a[href$="/taxonomy/term/71"] {
+  background-color: var(--color-bg-yellow-20);
+  border-color: var(--color-bg-yellow-100);
+  color: var(--color-text-navy) !important;
+}
+
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles {
   margin: 0 0 var(--space-050) 0;
   color: var(--color-text-paragraph);
