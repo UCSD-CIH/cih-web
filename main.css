@@ -4353,6 +4353,58 @@ footer.submitted {
   color: var(--color-text-navy) !important;
 }
 
+/* Full profile badge row override:
+   keep affiliation and focus badges in one flow, and match pill metrics. */
+.page-node-type-profile article.profile.full .group--program-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+  margin: 0 0 var(--space-100) 0;
+}
+
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation {
+  display: flex;
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation a {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-100) var(--space-150) !important;
+  border: var(--border-050) solid var(--color-border-subdued-strong) !important;
+  border-radius: var(--radius-999) !important;
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  color: var(--color-text-subdued-strong) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+  margin: 0;
+}
+
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles {
   margin: 0 0 var(--space-050) 0;
   color: var(--color-text-paragraph);
