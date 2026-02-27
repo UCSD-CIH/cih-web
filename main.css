@@ -4197,6 +4197,7 @@ footer.submitted {
   gap: var(--space-100);
   width: auto;
   min-width: 0;
+  overflow-x: auto;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field {
@@ -4217,10 +4218,11 @@ footer.submitted {
   min-width: 0;
   width: auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
   margin: 0;
+  overflow-x: auto;
 }
 
 /* Focus badges: support both Drupal structures:
@@ -4233,7 +4235,7 @@ footer.submitted {
   .field--name-field-program-focus-areas.field__items {
   margin: 0;
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
 }
@@ -4241,9 +4243,10 @@ footer.submitted {
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
   .field--name-field-program-focus-areas .field__items {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
+  white-space: nowrap;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
@@ -4368,6 +4371,7 @@ footer.submitted {
   gap: var(--space-100);
   margin: 0 0 var(--space-100) 0;
   min-width: 0;
+  overflow-x: auto;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation {
@@ -4398,19 +4402,21 @@ footer.submitted {
   display: inline-flex;
   flex: 0 1 auto;
   min-width: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
   width: auto;
   margin: 0;
+  overflow-x: auto;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items {
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
   margin: 0;
+  white-space: nowrap;
 }
 
 /* Full profile only: term 71 affiliation badge uses UCSD yellow treatment. */
