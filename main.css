@@ -4192,7 +4192,7 @@ footer.submitted {
 /* Keep affiliation + focus fields in one flowing row before wrapping. */
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
   width: auto;
@@ -4218,11 +4218,11 @@ footer.submitted {
   min-width: 0;
   width: auto;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
   margin: 0;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 /* Focus badges: support both Drupal structures:
@@ -4235,7 +4235,7 @@ footer.submitted {
   .field--name-field-program-focus-areas.field__items {
   margin: 0;
   display: inline-flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
 }
@@ -4243,10 +4243,10 @@ footer.submitted {
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
   .field--name-field-program-focus-areas .field__items {
   display: inline-flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
@@ -4366,7 +4366,7 @@ footer.submitted {
    keep affiliation and focus badges in one flow, and match pill metrics. */
 .page-node-type-profile article.profile.full .group--program-badges {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
   margin: 0 0 var(--space-100) 0;
@@ -4376,7 +4376,7 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation {
   display: flex;
-  flex: 0 0 100%;
+  flex: 0 0 auto;
   width: auto;
   margin: 0;
 }
@@ -4400,9 +4400,9 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas {
   display: inline-flex;
-  flex: 0 0 100%;
+  flex: 1 1 auto;
   min-width: 0;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
   width: auto;
@@ -4412,11 +4412,11 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items {
   display: inline-flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
   margin: 0;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 /* Full profile only: term 71 affiliation badge uses UCSD yellow treatment. */
