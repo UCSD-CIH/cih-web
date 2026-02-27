@@ -4197,7 +4197,7 @@ footer.submitted {
   gap: var(--space-100);
   width: auto;
   min-width: 0;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field {
@@ -4371,12 +4371,12 @@ footer.submitted {
   gap: var(--space-100);
   margin: 0 0 var(--space-100) 0;
   min-width: 0;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation {
   display: flex;
-  flex: 0 0 auto;
+  flex: 0 0 100%;
   width: auto;
   margin: 0;
 }
@@ -4400,14 +4400,14 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas {
   display: inline-flex;
-  flex: 0 1 auto;
+  flex: 0 0 100%;
   min-width: 0;
   flex-wrap: nowrap;
   align-items: center;
   gap: var(--space-100);
   width: auto;
   margin: 0;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items {
