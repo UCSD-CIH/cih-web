@@ -4188,6 +4188,25 @@ footer.submitted {
   margin: 0 0 var(--space-100) 0;
 }
 
+/* Keep affiliation + focus fields in one flowing row before wrapping. */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges {
+  width: auto;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+}
+
 /* Focus badges: support both Drupal structures:
    1) .field--name-field-program-focus-areas > .field__items > .field__item
    2) .field--name-field-program-focus-areas.field__items > .field__item */
@@ -4301,17 +4320,18 @@ footer.submitted {
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation a {
   display: inline-block;
-  padding: var(--space-025) var(--space-100);
+  padding: var(--space-100) var(--space-150);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-999);
   background-color: rgba(255, 255, 255, 0.88);
   color: var(--color-text-subdued-strong) !important;
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
   letter-spacing: 0.01em;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 /* UC San Diego affiliation badge variant */
