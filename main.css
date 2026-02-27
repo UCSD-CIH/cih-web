@@ -4190,7 +4190,12 @@ footer.submitted {
 
 /* Keep affiliation + focus fields in one flowing row before wrapping. */
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges {
-  width: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: var(--space-100);
+  width: 100%;
+  min-width: 0;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field {
@@ -4202,8 +4207,13 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas {
-  display: inline-flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-100);
   margin: 0;
 }
 
@@ -4319,15 +4329,16 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: var(--space-100) var(--space-150);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-999);
   background-color: rgba(255, 255, 255, 0.88);
   color: var(--color-text-subdued-strong) !important;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 14px !important;
+  font-weight: 400 !important;
   line-height: 1;
   letter-spacing: 0.01em;
   text-decoration: none;
