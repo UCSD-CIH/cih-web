@@ -4533,15 +4533,20 @@ footer.submitted {
     margin: 0;
   }
 
-  .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot {
+  .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .profile-identity {
     order: 20;
+    margin: 0 0 var(--space-100) 0;
+  }
+
+  .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot {
+    order: 40;
     width: clamp(150px, 52%, 240px);
     margin-top: var(--space-050);
     margin-bottom: var(--space-100);
   }
 
   .page-node-type-profile article.profile.full > .content > .profile-hero {
-    order: 20;
+    order: 40;
     width: clamp(150px, 52%, 240px);
     margin-top: var(--space-050);
     margin-bottom: var(--space-100);
@@ -4563,12 +4568,12 @@ footer.submitted {
   }
 
   .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-reach-roles {
-    order: 40;
+    order: 50;
     margin: 0 0 var(--space-050) 0;
   }
 
   .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-titles {
-    order: 50;
+    order: 20;
     margin: 0 0 var(--space-050) 0;
   }
 
