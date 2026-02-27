@@ -4399,24 +4399,39 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas {
-  display: inline-flex;
-  flex: 1 1 auto;
+  display: contents;
+  flex: 0 1 auto;
   min-width: 0;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-100);
   width: auto;
   margin: 0;
   overflow-x: visible;
 }
 
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-100);
+  display: contents;
   margin: 0;
-  white-space: normal;
+}
+
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__item {
+  display: inline-flex;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Ensure full-content hero badges share one wrapping flow:
+   affiliation pill first, then focus pills wrapping at container edge. */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas {
+  display: contents;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__items {
+  display: contents;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .group--program-badges > .field--name-field-program-focus-areas .field__item {
+  display: inline-flex;
+  flex: 0 0 auto;
+  margin: 0;
 }
 
 /* Full profile only: term 71 affiliation badge uses UCSD yellow treatment. */
