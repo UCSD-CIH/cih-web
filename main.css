@@ -4168,25 +4168,85 @@ footer.submitted {
   margin: var(--space-050) 0 0 0;
 }
 
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas {
-  color: var(--color-text-subdued-strong);
+/* Keep affiliation + focus badges on one metadata row when both are present. */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-program-focus-areas,
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .profile-section--focus {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-100);
+  margin: 0 0 var(--space-100) 0;
+}
+
+/* Profile focus areas: render as program-style badges (supports with/without .profile-section--focus wrapper) */
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
+  :is(.profile-section--focus .field--name-field-program-focus-areas, .field--name-field-program-focus-areas) {
+  margin: var(--space-050) 0 0 0;
+}
+
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
+  :is(.profile-section--focus .field--name-field-program-focus-areas .field__items, .field--name-field-program-focus-areas .field__items) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+}
+
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
+  :is(.profile-section--focus .field--name-field-program-focus-areas .field__item, .field--name-field-program-focus-areas .field__item) {
+  display: flex;
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
+  :is(.profile-section--focus .field--name-field-program-focus-areas a, .field--name-field-program-focus-areas a) {
+  display: inline-block;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
-}
-
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas .field__item {
-  display: inline;
-}
-
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas .field__item:not(:last-child)::after {
-  content: ", ";
-}
-
-.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text) .profile-section--focus .field--name-field-program-focus-areas a {
-  color: var(--color-text-subdued-strong) !important;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--color-text-disabled-strong) !important;
   text-decoration: none;
+  padding: var(--space-100) var(--space-150);
+  margin: 0;
+  background-color: transparent;
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  border-radius: var(--radius-999);
+  cursor: default;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-node-type-profile article.profile.full > .content > :is(.profile-hero, .reach-profile-hero-text)
+  :is(.profile-section--focus .field--name-field-program-focus-areas a::before, .field--name-field-program-focus-areas a::before) {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  mask-size: contain;
+  vertical-align: middle;
+}
+
+/* Inline placement inside the profile hero row (no extra top offset). */
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  :is(.profile-section--focus .field--name-field-program-focus-areas, .field--name-field-program-focus-areas) {
+  margin: 0;
+}
+
+.page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
+  :is(.profile-section--focus .field--name-field-program-focus-areas .field__items, .field--name-field-program-focus-areas .field__items) {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
 }
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-profile-headshot img,
@@ -4378,6 +4438,14 @@ footer.submitted {
   }
 
   .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > .field--name-field-institution-affiliation {
+    order: 30;
+    margin: 0 0 var(--space-100) 0;
+  }
+
+  .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text > :is(
+    .field--name-field-program-focus-areas,
+    .profile-section--focus
+  ) {
     order: 30;
     margin: 0 0 var(--space-100) 0;
   }
