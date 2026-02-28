@@ -3419,7 +3419,7 @@ footer.submitted {
   gap: var(--space-150);
 }
 
-:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id {
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id:has(> select) {
   flex: 0 0 auto;
   position: relative;
 }
@@ -3430,11 +3430,11 @@ footer.submitted {
   min-width: 280px;
 }
 
-:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id label {
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id label:not(.option) {
   display: none;
 }
 
-:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id select {
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id:has(> select) select {
   min-height: 56px;
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-150);
@@ -3449,11 +3449,11 @@ footer.submitted {
   appearance: none;
 }
 
-:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id select.form-select {
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id:has(> select) select.form-select {
   min-width: 220px;
 }
 
-:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id::after {
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id:has(> select)::after {
   content: "";
   position: absolute;
   right: var(--space-200);
