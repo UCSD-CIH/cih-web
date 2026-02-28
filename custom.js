@@ -1081,7 +1081,11 @@
   // Formats program event dates as a single range line.
   Drupal.behaviors.programEventDateRange = {
     attach: function (context) {
-      once('programEventDateRangeV4', '.page-node-type-program .field--name-field-event-dates', context)
+      once(
+        'programEventDateRangeV5',
+        '.page-node-type-program .field--name-field-event-dates, .view-programs-cfm .field--name-field-event-dates, .view-id-programs_cfm .field--name-field-event-dates',
+        context
+      )
         .forEach(function (field) {
           var items = field.querySelectorAll('.field__item');
           if (!items || items.length < 2) return;
