@@ -3421,6 +3421,7 @@ footer.submitted {
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id {
   flex: 0 0 auto;
+  position: relative;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-keys {
@@ -3434,19 +3435,36 @@ footer.submitted {
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id select {
-  min-height: 44px;
-  border: var(--border-050) solid var(--color-border-strong);
-  border-radius: var(--radius-999);
-  background-color: var(--shade-white);
+  min-height: 56px;
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-150);
+  background-color: var(--color-bg-lightest);
   color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  padding: var(--space-100) var(--space-500) var(--space-100) var(--space-200);
+  font-size: 18px;
+  line-height: 32px;
+  padding: var(--space-100) var(--space-600) var(--space-100) var(--space-200);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id select.form-select {
-  min-width: 160px;
+  min-width: 220px;
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id::after {
+  content: "";
+  position: absolute;
+  right: var(--space-200);
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23282929' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-actions {
