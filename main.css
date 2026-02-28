@@ -3239,6 +3239,207 @@ footer.submitted {
 }
 
 /* ===================================
+   PROGRAM CARDS VIEW (PROFILECARDPAGECLASS)
+   Mirrors Study card + exposed filter styling
+=================================== */
+
+.profileCardPageClass .view-programs-cfm .view-content {
+  column-count: 2;
+  column-gap: var(--space-400);
+  margin-top: var(--space-400);
+}
+
+.profileCardPageClass .view-programs-cfm .views-row {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: var(--space-400);
+  break-inside: avoid;
+}
+
+@media (max-width: 640px) {
+  .profileCardPageClass .view-programs-cfm .view-content {
+    column-count: 1;
+  }
+}
+
+.profileCardPageClass .view-programs-cfm .program-card {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  color: var(--color-text-paragraph);
+  padding: var(--space-400);
+  display: flex;
+  flex-direction: column;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .field__label,
+.profileCardPageClass .view-programs-cfm .program-card footer.submitted {
+  display: none !important;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card h2,
+.profileCardPageClass .view-programs-cfm .program-card h2 a {
+  color: var(--color-text-heading);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0;
+  line-height: 28px !important;
+  margin: 0 0 var(--space-150) 0;
+  text-transform: none !important;
+  text-decoration: none;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card h2 a:visited {
+  color: var(--color-text-heading);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card h2 a:hover {
+  text-decoration: underline;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card h2 a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__header {
+  margin-bottom: var(--space-200);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__body > .field {
+  margin-bottom: var(--space-150);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__body > .field:last-child {
+  margin-bottom: 0;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__body,
+.profileCardPageClass .view-programs-cfm .program-card .program-card__body * {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-paragraph);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__tags {
+  margin-top: var(--space-200);
+  padding-top: var(--space-200);
+  border-top: var(--border-025) solid var(--color-border-subdued-strong);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .field--name-field-program-focus-areas .field__item,
+.profileCardPageClass .view-programs-cfm .program-card .field--name-field-audience-type {
+  display: inline-block;
+  margin: 0 var(--space-100) var(--space-100) 0;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card :is(
+  .field--name-field-program-format,
+  .field--name-field-program-focus-areas,
+  .field--name-field-audience-type
+) a {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: var(--space-100) var(--space-150);
+  border-radius: var(--radius-999);
+  cursor: default;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .field--name-field-program-format a {
+  color: var(--color-text-blue);
+  border: var(--border-050) solid var(--color-border-blue);
+  background-color: var(--color-bg-lightest);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .field--name-field-program-focus-areas .field__item a,
+.profileCardPageClass .view-programs-cfm .program-card .field--name-field-audience-type a {
+  color: var(--color-text-disabled-strong);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  background-color: transparent;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .field--name-field-program-focus-areas .field__item a::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center;
+  mask-size: contain;
+  vertical-align: middle;
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__cta {
+  margin-top: var(--space-300);
+}
+
+.profileCardPageClass .view-programs-cfm .program-card .program-card__cta .btn {
+  margin: 0;
+  border-radius: var(--radius-999);
+  font-size: 14px;
+  padding: var(--space-150) var(--space-300);
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters {
+  margin: var(--space-200) 0 0 0;
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters .form--inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-150);
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters .form-item-field-audience-type-target-id {
+  flex: 0 0 auto;
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters .form-item-keys {
+  flex: 1 1 320px;
+  min-width: 240px;
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters .form-item-field-audience-type-target-id label {
+  display: none;
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters .form-item-field-audience-type-target-id select {
+  min-height: 44px;
+  border: var(--border-050) solid var(--color-border-strong);
+  border-radius: var(--radius-999);
+  background-color: var(--shade-white);
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  padding: var(--space-100) var(--space-500) var(--space-100) var(--space-200);
+}
+
+.profileCardPageClass .view-programs-cfm .view-filters .form-actions {
+  display: none !important;
+}
+
+/* ===================================
    COMPONENT: STUDY PAGE
 =================================== */
 

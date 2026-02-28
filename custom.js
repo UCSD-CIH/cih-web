@@ -1139,6 +1139,45 @@
     }
   };
 
+  // Adds a Study-card style "Learn More" CTA to each Programs view card.
+  Drupal.behaviors.programCardsLearnMoreCta = {
+    attach: function (context) {
+      once('programCardsLearnMoreCta', '.view-programs-cfm article.program-card', context)
+        .forEach(function (card) {
+          var titleLink = card.querySelector('h2 a[href]');
+          if (!titleLink) return;
+
+          var href = titleLink.getAttribute('href') || '';
+          if (!href) return;
+
+          var ctaWrap = card.querySelector('.program-card__cta');
+          if (!ctaWrap) {
+            ctaWrap = document.createElement('div');
+            ctaWrap.className = 'program-card__cta';
+          }
+
+          var ctaLink = ctaWrap.querySelector('a');
+          if (!ctaLink) {
+            ctaLink = document.createElement('a');
+            ctaLink.className = 'btn btn-secondary btn-inline';
+            ctaWrap.appendChild(ctaLink);
+          }
+
+          ctaLink.setAttribute('href', href);
+          ctaLink.textContent = 'Learn More';
+
+          var tags = card.querySelector('.program-card__tags');
+          var content = card.querySelector('.content') || card;
+
+          if (tags && tags.parentNode === content) {
+            content.insertBefore(ctaWrap, tags);
+          } else {
+            content.appendChild(ctaWrap);
+          }
+        });
+    }
+  };
+
   // Toggles program registration state based on registration date window.
   Drupal.behaviors.programRegistrationToggle = {
     attach: function (context) {
