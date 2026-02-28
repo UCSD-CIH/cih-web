@@ -3424,8 +3424,9 @@ footer.submitted {
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-keys {
-  flex: 1 1 320px;
-  min-width: 240px;
+  flex: 0 1 360px;
+  width: min(360px, 100%);
+  min-width: 280px;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id label {
@@ -3444,8 +3445,20 @@ footer.submitted {
   padding: var(--space-100) var(--space-500) var(--space-100) var(--space-200);
 }
 
+:is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-field-audience-type-target-id select.form-select {
+  min-width: 160px;
+}
+
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-actions {
   display: none !important;
+}
+
+@media (max-width: 640px) {
+  :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters .form-item-keys {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 /* ===================================

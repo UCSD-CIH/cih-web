@@ -1182,6 +1182,35 @@
     }
   };
 
+  // Aligns Programs card field order with Study cards by moving format above title.
+  Drupal.behaviors.programCardsFormatBeforeTitle = {
+    attach: function (context) {
+      once('programCardsFormatBeforeTitle', '.view-programs-cfm article.program-card, .view-id-programs_cfm article.program-card', context)
+        .forEach(function (card) {
+          var formatField = card.querySelector('.program-card__header');
+          var title = card.querySelector('h2');
+          if (!formatField || !title) return;
+          if (formatField.parentNode === card && formatField.nextElementSibling === title) return;
+          card.insertBefore(formatField, title);
+        });
+    }
+  };
+
+  // Matches Programs exposed search control behavior with Study view search UI.
+  Drupal.behaviors.programsFilterSearchPlaceholder = {
+    attach: function (context) {
+      once('programsFilterSearchPlaceholder', '.view-programs-cfm .view-filters .form-item-keys input.form-text, .view-id-programs_cfm .view-filters .form-item-keys input.form-text', context)
+        .forEach(function (input) {
+          if (!input.getAttribute('placeholder')) {
+            input.setAttribute('placeholder', 'Search Programs');
+          }
+          if (!input.getAttribute('aria-label')) {
+            input.setAttribute('aria-label', 'Search Programs');
+          }
+        });
+    }
+  };
+
   // Toggles program registration state based on registration date window.
   Drupal.behaviors.programRegistrationToggle = {
     attach: function (context) {
