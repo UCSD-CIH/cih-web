@@ -322,6 +322,93 @@
     return (field.textContent || '').trim();
   }
 
+  function normalizeToken(text) {
+    return (text || '')
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+  }
+
+  function getResourceDestinationType(card) {
+    var field = card.querySelector('.field--name-field-resource-destination-type');
+    var text = normalizeToken(readFieldText(field));
+    if (text) return text;
+
+    if (card.querySelector('.field--name-field-primary-file a[href]')) {
+      return 'file_download';
+    }
+    if (card.querySelector('.field--name-field-primary-url a[href*="soundcloud.com"]')) {
+      return 'soundcloud';
+    }
+    return '';
+  }
+
+  function getResourceType(card) {
+    var field = card.querySelector('.field--name-field-resource-type');
+    return normalizeToken(readFieldText(field));
+  }
+
+  function resourceCtaLabel(destinationType, resourceType) {
+    if (destinationType === 'file_download') return 'Download';
+    if (destinationType === 'soundcloud') return 'Listen';
+    if (destinationType === 'video_platform') return 'Watch';
+    if (resourceType === 'audio') return 'Listen';
+    if (resourceType === 'video') return 'Watch';
+    return 'Open Resource';
+  }
+
+  function findPrimaryResourceLink(card, destinationType) {
+    var fileLink = card.querySelector('.field--name-field-primary-file a[href]');
+    if (destinationType === 'file_download' && fileLink) {
+      return fileLink;
+    }
+
+    var urlLink = card.querySelector('.field--name-field-primary-url a[href]');
+    if (urlLink) return urlLink;
+
+    if (fileLink) return fileLink;
+    return card.querySelector('h2 a[href]');
+  }
+
+  function syncResourceCardCta(card) {
+    if (!card) return;
+
+    var destinationType = getResourceDestinationType(card);
+    var resourceType = getResourceType(card);
+    var sourceLink = findPrimaryResourceLink(card, destinationType);
+    if (!sourceLink) return;
+
+    var href = sourceLink.getAttribute('href') || '';
+    if (!href) return;
+
+    var ctaLabel = resourceCtaLabel(destinationType, resourceType);
+    var cta = card.querySelector('.resource-card__cta');
+    if (!cta) {
+      cta = document.createElement('a');
+      cta.className = 'resource-card__cta';
+      card.appendChild(cta);
+    }
+
+    cta.setAttribute('href', href);
+    cta.textContent = ctaLabel;
+
+    var sourceTarget = sourceLink.getAttribute('target');
+    var sourceRel = sourceLink.getAttribute('rel');
+    if (sourceTarget) {
+      cta.setAttribute('target', sourceTarget);
+    } else {
+      cta.removeAttribute('target');
+    }
+    if (sourceRel) {
+      cta.setAttribute('rel', sourceRel);
+    } else {
+      cta.removeAttribute('rel');
+    }
+
+    card.setAttribute('data-resource-destination-type', destinationType || 'unknown');
+    card.setAttribute('data-resource-type', resourceType || 'unknown');
+  }
+
   function enforceNavLink(link) {
     if (!link) return;
 
@@ -333,6 +420,72 @@
     }
     removeNoopener(link);
   }
+
+  Drupal.behaviors.resourceCardEnhancements = {
+    attach: function (context) {
+      once(
+        'resourceCardEnhancements',
+        '.view-resources article.resource, .view-id-resources article.resource, .view-guided-meditations article.resource, .view-id-guided_meditations article.resource',
+        context
+      ).forEach(function (card) {
+        if (!card.classList.contains('resource-card')) {
+          card.classList.add('resource-card');
+        }
+        syncResourceCardCta(card);
+      });
+    }
+  };
+
+  Drupal.behaviors.resourceFilterUI = {
+    attach: function (context) {
+      once(
+        'resourceFilterUI',
+        '.view-resources .view-filters, .view-id-resources .view-filters, .view-guided-meditations .view-filters, .view-id-guided_meditations .view-filters',
+        context
+      ).forEach(function (filters) {
+        var searchInput = filters.querySelector('.form-item-keys input.form-text');
+        if (searchInput && !searchInput.getAttribute('placeholder')) {
+          searchInput.setAttribute('placeholder', 'Search Resources');
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var hasTypeParam = false;
+        var hasCategoryParam = false;
+        var hasQueryParam = false;
+
+        params.forEach(function (value, key) {
+          if (!value) return;
+          if (key.indexOf('field_resource_type_target_id') === 0) hasTypeParam = true;
+          if (key.indexOf('field_resource_categories_target_id') === 0) hasCategoryParam = true;
+          if (key === 'keys') hasQueryParam = true;
+        });
+
+        filters.querySelectorAll('details').forEach(function (details) {
+          details.removeAttribute('open');
+        });
+
+        if (hasTypeParam) {
+          var typeInput = filters.querySelector('input[name*="field_resource_type_target_id"]');
+          if (typeInput) {
+            var typeDetails = typeInput.closest('details');
+            if (typeDetails) typeDetails.setAttribute('open', 'open');
+          }
+        }
+
+        if (hasCategoryParam) {
+          var categoryInput = filters.querySelector('input[name*="field_resource_categories_target_id"]');
+          if (categoryInput) {
+            var categoryDetails = categoryInput.closest('details');
+            if (categoryDetails) categoryDetails.setAttribute('open', 'open');
+          }
+        }
+
+        if (hasTypeParam || hasCategoryParam || hasQueryParam) {
+          filters.classList.add('has-active-filters');
+        }
+      });
+    }
+  };
 
   // Ensures new REACH card view modes still receive legacy `.profile-card` styling/hooks.
   Drupal.behaviors.reachProfileCardClassAdapter = {

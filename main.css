@@ -2750,6 +2750,318 @@ body:has(
 .press-media-card .field--name-field-press-link { display: none !important; } /* hide raw link field */
 
 /* ===================================
+   RESOURCE CONTENT TYPE + GUIDED MEDITATIONS VIEW
+=================================== */
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .view-content {
+  margin-top: var(--space-400);
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .view-filters {
+  margin-top: 0;
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .view-filters .form--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-150);
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .view-filters .form--inline > *:not(.form-item-keys) {
+  flex: 0 0 auto;
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .view-filters .form-item-keys {
+  flex: 1 1 320px;
+  min-width: 240px;
+  width: auto;
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .views-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-300);
+  margin-bottom: var(--space-300);
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .views-row:last-child {
+  margin-bottom: 0;
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .views-col {
+  display: block;
+  flex: 0 0 calc((100% - (var(--space-300) * 2)) / 3) !important;
+  width: calc((100% - (var(--space-300) * 2)) / 3) !important;
+  float: none !important;
+  margin: 0 !important;
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  :is(
+    .view-resources,
+    .view-id-resources,
+    .view-guided-meditations,
+    .view-id-guided_meditations
+  ) .views-row {
+    flex-wrap: wrap;
+  }
+
+  :is(
+    .view-resources,
+    .view-id-resources,
+    .view-guided-meditations,
+    .view-id-guided_meditations
+  ) .views-col {
+    flex-basis: calc((100% - var(--space-300)) / 2) !important;
+    width: calc((100% - var(--space-300)) / 2) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :is(
+    .view-resources,
+    .view-id-resources,
+    .view-guided-meditations,
+    .view-id-guided_meditations
+  ) .views-col {
+    flex-basis: 100% !important;
+    width: 100% !important;
+  }
+}
+
+.resource.resource-card {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  padding: var(--space-250);
+  color: var(--color-text-paragraph);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  box-shadow: none;
+  min-width: 0;
+}
+
+.resource.resource-card .content {
+  display: contents;
+}
+
+.resource.resource-card .field__label {
+  display: none !important;
+}
+
+.resource-card .field--name-field-thumbnail-image {
+  position: relative;
+  margin: 0;
+  order: 10;
+}
+
+.resource-card .field--name-field-thumbnail-image .field__item {
+  border-radius: var(--radius-100);
+  overflow: hidden;
+}
+
+.resource-card .field--name-field-thumbnail-image img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-100);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  object-fit: cover;
+  display: block;
+}
+
+.resource-card .field--name-field-resource-type {
+  position: absolute;
+  top: var(--space-100);
+  right: var(--space-100);
+  z-index: 2;
+}
+
+.resource-card .field--name-field-resource-type .field__item,
+.resource-card .field--name-field-resource-categories .field__item {
+  display: inline-flex;
+}
+
+.resource-card .field--name-field-resource-type .field__item a,
+.resource-card .field--name-field-resource-type .field__item,
+.resource-card .field--name-field-resource-categories .field__item a,
+.resource-card .field--name-field-resource-categories .field__item {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: var(--radius-999);
+}
+
+.resource-card .field--name-field-resource-type .field__item a,
+.resource-card .field--name-field-resource-type .field__item {
+  padding: var(--space-075) var(--space-150);
+  font-weight: 500;
+  color: var(--color-text-subdued-strong);
+  background-color: rgba(255, 255, 255, 0.92);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+}
+
+.resource-card .field--name-field-resource-categories {
+  order: 40;
+  margin-top: var(--space-200);
+}
+
+.resource-card .field--name-field-resource-categories .field__item a,
+.resource-card .field--name-field-resource-categories .field__item {
+  margin: 0 var(--space-075) var(--space-075) 0;
+  padding: var(--space-050) var(--space-125);
+  font-weight: 400;
+  color: var(--color-text-disabled-strong);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  background-color: transparent;
+}
+
+.resource-card h2,
+.resource-card h2 a {
+  order: 20;
+  margin: var(--space-200) 0 0 0;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 20px !important;
+  letter-spacing: 0;
+  color: var(--color-text-heading);
+  text-decoration: none;
+  text-transform: none !important;
+}
+
+.resource-card h2 a:hover {
+  text-decoration: underline;
+}
+
+.resource-card h2 a:focus-visible,
+.resource-card .resource-card__cta:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+}
+
+.resource-card .field--name-field-summary {
+  order: 30;
+  margin-top: var(--space-150);
+}
+
+.resource-card .field--name-field-summary .field__item {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-paragraph);
+}
+
+.resource-card .field--name-field-duration,
+.resource-card .field--name-field-language {
+  order: 35;
+  margin-top: var(--space-100);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-subdued-strong);
+}
+
+.resource-card .resource-card__cta {
+  order: 60;
+  margin-top: auto;
+  padding-top: var(--space-200);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-blue);
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+}
+
+.resource-card .resource-card__cta:hover {
+  color: var(--color-text-navy);
+  text-decoration: none;
+}
+
+.resource-card .resource-card__cta::after {
+  content: "→";
+  font-size: 12px;
+  line-height: 1;
+}
+
+.resource-card .field--name-field-primary-url,
+.resource-card .field--name-field-primary-file,
+.resource-card .field--name-field-secondary-links,
+.resource-card .field--name-field-resource-destination-type {
+  display: none !important;
+}
+
+.view-resources .view-empty,
+.view-guided-meditations .view-empty,
+.view-id-resources .view-empty,
+.view-id-guided_meditations .view-empty {
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  background: var(--color-bg-lightest);
+  color: var(--color-text-paragraph);
+  padding: var(--space-300);
+}
+
+:is(
+  .view-resources,
+  .view-id-resources,
+  .view-guided-meditations,
+  .view-id-guided_meditations
+) .view-filters details summary {
+  cursor: pointer;
+}
+
+/* ===================================
    PUBLICATION CONTENT TYPE
 =================================== */
 
