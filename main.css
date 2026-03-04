@@ -4103,13 +4103,14 @@ footer.submitted {
   display: block;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
   letter-spacing: 0;
   color: var(--color-text-heading);
+  border: 0;
 }
 
 .page-node-type-program .group-program-body .field--name-body > .field__label {
+  font-size: 28px;
+  line-height: 32px;
   margin: 0 0 var(--space-200) 0;
 }
 
@@ -4119,7 +4120,20 @@ footer.submitted {
   .field--name-field-contact-email > .field__label,
   .program-section-heading
 ) {
+  font-size: 24px;
+  line-height: 28px;
   margin: var(--space-400) 0 var(--space-200) 0;
+}
+
+/* Divider + spacing before secondary program sections. */
+.page-node-type-program .group-program-body :is(
+  .field--name-field-cancellation-policy > .field__label,
+  .field--name-field-continuing-education > .field__label,
+  .field--name-field-contact-email > .field__label,
+  .program-section-heading
+) {
+  border-top: var(--border-050) solid var(--color-border-subdued-strong);
+  padding-top: var(--space-300);
 }
 
 .page-node-type-program .field--name-field-contact-email a {
