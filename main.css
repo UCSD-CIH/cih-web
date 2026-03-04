@@ -3953,6 +3953,10 @@ footer.submitted {
   display: none !important;
 }
 
+.page-node-type-program article.program.full .field--name-field-program-summary {
+  display: none !important;
+}
+
 .page-node-type-program .group-program-layout {
   align-items: flex-start;
   display: flex;
