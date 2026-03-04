@@ -1231,6 +1231,56 @@
     }
   };
 
+  function promoteHeadingToH3(node, textOverride) {
+    if (!node || !node.parentNode) return null;
+    var h3 = document.createElement('h3');
+    Array.prototype.forEach.call(node.attributes || [], function (attr) {
+      h3.setAttribute(attr.name, attr.value);
+    });
+    h3.textContent = typeof textOverride === 'string' ? textOverride : (node.textContent || '').trim();
+    node.parentNode.replaceChild(h3, node);
+    return h3;
+  }
+
+  // Uses semantic h3 headings for key Program body sections.
+  Drupal.behaviors.programBodyHeadingLevels = {
+    attach: function (context) {
+      once('programBodyHeadingLevels', '.page-node-type-program .group-program-body', context)
+        .forEach(function (body) {
+          var labelMappings = [
+            { selector: '.field--name-body > .field__label', text: 'Program Overview' },
+            { selector: '.field--name-field-continuing-education > .field__label' },
+            { selector: '.field--name-field-cancellation-policy > .field__label' },
+            { selector: '.field--name-field-contact-email > .field__label', text: 'Questions' }
+          ];
+
+          labelMappings.forEach(function (mapping) {
+            var label = body.querySelector(mapping.selector);
+            if (!label) return;
+            if (label.tagName && label.tagName.toLowerCase() === 'h3') {
+              if (typeof mapping.text === 'string') {
+                label.textContent = mapping.text;
+              }
+              return;
+            }
+            promoteHeadingToH3(label, mapping.text);
+          });
+
+          var instructorsField = body.querySelector('.field--name-field-instructors');
+          if (instructorsField) {
+            var heading = instructorsField.previousElementSibling;
+            if (!heading || !heading.classList.contains('program-section-heading') || heading.getAttribute('data-program-heading-for') !== 'instructors') {
+              heading = document.createElement('h3');
+              heading.className = 'program-section-heading';
+              heading.setAttribute('data-program-heading-for', 'instructors');
+              heading.textContent = 'About the Instructor';
+              instructorsField.parentNode.insertBefore(heading, instructorsField);
+            }
+          }
+        });
+    }
+  };
+
   // Formats program event dates as a single range line.
   Drupal.behaviors.programEventDateRange = {
     attach: function (context) {

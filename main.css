@@ -4071,6 +4071,10 @@ footer.submitted {
   order: 20;
 }
 
+.page-node-type-program .group-program-body > .group--program-badges {
+  margin-bottom: var(--space-400);
+}
+
 .page-node-type-program .group-program-body p {
   font-size: 16px;
   font-weight: 400;
@@ -4088,45 +4092,34 @@ footer.submitted {
   margin-bottom: var(--space-150);
 }
 
-/* Program body field labels that should read like subheadings */
-.page-node-type-program .group-program-body
-  :is(.field--name-field-cancellation-policy, .field--name-field-continuing-education)
-  .field__label {
+/* Program body section headings */
+.page-node-type-program .group-program-body :is(
+  .field--name-body > .field__label,
+  .field--name-field-cancellation-policy > .field__label,
+  .field--name-field-continuing-education > .field__label,
+  .field--name-field-contact-email > .field__label,
+  .program-section-heading
+) {
   display: block;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0;
+  color: var(--color-text-heading);
+}
+
+.page-node-type-program .group-program-body .field--name-body > .field__label {
+  margin: 0 0 var(--space-200) 0;
+}
+
+.page-node-type-program .group-program-body :is(
+  .field--name-field-cancellation-policy > .field__label,
+  .field--name-field-continuing-education > .field__label,
+  .field--name-field-contact-email > .field__label,
+  .program-section-heading
+) {
   margin: var(--space-400) 0 var(--space-200) 0;
-  color: var(--color-text-heading);
-}
-
-/* Hardcoded section headings */
-.page-node-type-program .field--name-field-instructors::before {
-  content: "About the Instructor";
-  display: block;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 24px;
-  margin: var(--space-400) 0 var(--space-200) 0;
-  color: var(--color-text-heading);
-}
-
-.page-node-type-program .field--name-field-contact-email::before {
-  content: "Questions?";
-  display: block;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 24px;
-  margin: var(--space-400) 0 var(--space-100) 0;
-  color: var(--color-text-heading);
-}
-
-.page-node-type-program .field--name-field-contact-email .field__label {
-  display: none !important;
 }
 
 .page-node-type-program .field--name-field-contact-email a {
@@ -4163,6 +4156,19 @@ footer.submitted {
 
 .page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content > .field--name-field-profile-headshot {
   grid-column: 1;
+}
+
+.page-node-type-program .field--name-field-post-featured-image .field__item {
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  overflow: hidden;
+}
+
+.page-node-type-program .field--name-field-post-featured-image .field__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
 }
 
 .page-node-type-program .field--name-field-instructors article.profile.inline-instructor .content > :not(.field--name-field-profile-headshot) {
