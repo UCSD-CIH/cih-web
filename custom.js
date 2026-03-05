@@ -813,9 +813,14 @@
 
     var abbrNodes = field.querySelectorAll(
       [
+        '.field--name-field-abbreviation',
+        '.field--name-field-abbrev',
+        '.field--name-field-abbr',
         '.field--name-field-abbreviation .field__item',
         '.field--name-field-abbrev .field__item',
         '.field--name-field-abbr .field__item',
+        '[class*="field--name-field-"][class*="abbrev"]',
+        '[class*="field--name-field-"][class*="abbr"]',
         '[class*="field--name-field-"][class*="abbrev"] .field__item',
         '[class*="field--name-field-"][class*="abbr"] .field__item',
         'abbr'
