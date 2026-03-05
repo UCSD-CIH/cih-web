@@ -33,9 +33,9 @@
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.92) 75%,
-    rgba(255, 255, 255, 1) 100%
+    rgba(225, 236, 247, 0.08) 40%,
+    rgba(225, 236, 247, 0.82) 72%,
+    rgba(225, 236, 247, 1) 100%
   );
 }
 
@@ -59,12 +59,19 @@
 .paragraph--type--hero-full-width > .field--name-field-background-image {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   margin: 0;
 }
 
 .paragraph--type--hero-full-width > .field--name-field-background-image .field__item,
 .paragraph--type--hero-full-width > .field--name-field-background-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image article,
+.paragraph--type--hero-full-width > .field--name-field-background-image .field--name-field-media-image,
+.paragraph--type--hero-full-width > .field--name-field-background-image .field__items {
   width: 100%;
   height: 100%;
 }
@@ -91,13 +98,36 @@
   grid-area: headline;
 }
 
+.paragraph--type--hero-full-width > .field--name-field-headline .field__item {
+  max-width: 18ch;
+  margin: 0;
+  color: var(--color-text-navy);
+  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
+  font-weight: 800;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 0.95;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
 .paragraph--type--hero-full-width > .field--name-field-intro-text {
   grid-area: intro;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-intro-text .field__item,
+.paragraph--type--hero-full-width > .field--name-field-intro-text .field__item p {
+  margin: 0;
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2vw, 44px);
+  line-height: clamp(28px, 3vw, 54px);
+  letter-spacing: -0.005em;
 }
 
 .paragraph--type--hero-full-width > .field--name-field-cta-link {
   grid-area: cta;
   align-self: center;
+  justify-self: end;
 }
 
 /* Hide standalone CTA label field for now (used later in Twig pass). */
@@ -105,11 +135,45 @@
   display: none;
 }
 
+.paragraph--type--hero-full-width > .field--name-field-cta-link a {
+  display: inline-block;
+  min-width: 292px;
+  padding: var(--space-200) var(--space-300);
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  background-color: var(--color-bg-yellow-100);
+  color: var(--color-text-on-light) !important;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  text-decoration: none !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link a:hover {
+  background-color: var(--color-bg-turquoise-100);
+  color: var(--color-text-on-light) !important;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link a:active {
+  background-color: var(--color-bg-turquoise-120) !important;
+  color: var(--color-text-navy) !important;
+}
+
 /* If hero is present, hide top page title to avoid duplicate H1s. */
 .page:has(.paragraph--type--hero-full-width) h1.page-title,
 .page:has(.paragraph--type--hero-full-width) .page-header,
+.page:has(.paragraph--type--hero-full-width) .page-title-container,
+.page:has(.paragraph--type--hero-full-width) .field--name-title,
 .page.has-hero-full-width h1.page-title,
-.page.has-hero-full-width .page-header {
+.page.has-hero-full-width .page-header,
+.page.has-hero-full-width .page-title-container,
+.page.has-hero-full-width .field--name-title {
+  display: none;
+}
+
+.field--name-field-page-sections:has(.paragraph--type--hero-full-width) > .field__label {
   display: none;
 }
 
@@ -126,6 +190,11 @@
 
   .paragraph--type--hero-full-width > .field--name-field-cta-link {
     justify-self: start;
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-cta-link a {
+    min-width: 0;
+    width: auto;
   }
 }
 
