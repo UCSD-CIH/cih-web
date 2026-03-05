@@ -11,7 +11,7 @@
 .paragraph--type--hero-full-width {
   --hero-content-max-width: 1200px;
   --hero-inline-padding: clamp(16px, 4vw, 40px);
-  --hero-block-padding: clamp(48px, 8vw, 88px);
+  --hero-block-padding: clamp(40px, 6vw, 72px);
 
   position: relative;
   isolation: isolate;
@@ -33,9 +33,10 @@
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(225, 236, 247, 0.02) 25%,
-    rgba(225, 236, 247, 0.28) 62%,
-    rgba(225, 236, 247, 0.58) 100%
+    rgba(225, 236, 247, 0.04) 0%,
+    rgba(225, 236, 247, 0.42) 44%,
+    rgba(225, 236, 247, 0.24) 66%,
+    rgba(225, 236, 247, 0.06) 100%
   );
 }
 
@@ -79,6 +80,7 @@
 .paragraph--type--hero-full-width > .field--name-field-background-image img {
   display: block;
   object-fit: cover;
+  object-position: center bottom;
 }
 
 .paragraph--type--hero-full-width > .field--name-field-headline,
@@ -99,13 +101,13 @@
 }
 
 .paragraph--type--hero-full-width > .field--name-field-headline .field__item {
-  max-width: 18ch;
+  max-width: 34ch;
   margin: 0;
   color: var(--color-text-navy);
   font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
   font-weight: 800;
-  font-size: clamp(36px, 5.4vw, 72px);
-  line-height: 0.98;
+  font-size: clamp(34px, 4.2vw, 60px);
+  line-height: 1;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -119,14 +121,14 @@
   margin: 0;
   color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 1.8vw, 28px);
-  line-height: clamp(28px, 2.4vw, 38px);
+  font-size: clamp(16px, 1.25vw, 22px);
+  line-height: clamp(24px, 1.8vw, 32px);
   letter-spacing: -0.005em;
 }
 
 .paragraph--type--hero-full-width > .field--name-field-cta-link {
   grid-area: cta;
-  align-self: center;
+  align-self: start;
   justify-self: end;
 }
 
@@ -192,11 +194,22 @@ body:has(.paragraph--type--hero-full-width) .field--name-title,
       "intro"
       "cta";
     min-height: 0;
-    --hero-block-padding: clamp(48px, 12vw, 72px);
+    --hero-block-padding: clamp(36px, 10vw, 56px);
   }
 
   .paragraph--type--hero-full-width > .field--name-field-cta-link {
     justify-self: start;
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-headline .field__item {
+    max-width: 16ch;
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-intro-text .field__item,
+  .paragraph--type--hero-full-width > .field--name-field-intro-text .field__item p {
+    font-size: clamp(16px, 4.4vw, 20px);
+    line-height: clamp(24px, 6vw, 30px);
   }
 
   .paragraph--type--hero-full-width > .field--name-field-cta-link a {
