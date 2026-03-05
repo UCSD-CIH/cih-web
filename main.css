@@ -9,9 +9,12 @@
 =================================== */
 
 .paragraph--type--hero-full-width {
-  --hero-content-max-width: 1200px;
-  --hero-inline-padding: clamp(16px, 4vw, 40px);
+  --hero-content-max-width: 1120px;
+  --hero-inline-padding: var(--space-300);
+  --hero-desktop-rail-inset: var(--space-200);
   --hero-block-padding: clamp(40px, 6vw, 72px);
+  --hero-cta-column-max: 320px;
+  --hero-column-gap: var(--space-300);
 
   position: relative;
   isolation: isolate;
@@ -48,11 +51,15 @@
 /* Build hero layout from paragraph fields. */
 .paragraph--type--hero-full-width {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns:
+    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr)
+    minmax(0, calc(var(--hero-content-max-width) - var(--hero-cta-column-max) - var(--hero-column-gap)))
+    minmax(220px, var(--hero-cta-column-max))
+    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr);
   grid-template-areas:
-    "headline headline"
-    "intro cta";
-  column-gap: clamp(24px, 6vw, 96px);
+    ". headline headline ."
+    ". intro cta .";
+  column-gap: var(--hero-column-gap);
   row-gap: var(--space-300);
   align-content: start;
 }
@@ -89,11 +96,10 @@
 .paragraph--type--hero-full-width > .field--name-field-cta-label {
   position: relative;
   z-index: 2;
-  max-width: var(--hero-content-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--hero-inline-padding);
-  padding-right: var(--hero-inline-padding);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 .paragraph--type--hero-full-width > .field--name-field-headline {
@@ -186,6 +192,20 @@ body:has(.paragraph--type--hero-full-width) .field--name-title,
   display: none;
 }
 
+/* Remove top gap between nav and hero when hero is first page section. */
+body:has(.paragraph--type--hero-full-width) .main-container.container,
+.page:has(.paragraph--type--hero-full-width) .main-container.container,
+.page.has-hero-full-width .main-container.container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
+.page:has(.paragraph--type--hero-full-width) .main-container.container > .row,
+.page.has-hero-full-width .main-container.container > .row {
+  margin-top: 0 !important;
+}
+
 @media (max-width: 767px) {
   .paragraph--type--hero-full-width {
     grid-template-columns: minmax(0, 1fr);
@@ -199,6 +219,14 @@ body:has(.paragraph--type--hero-full-width) .field--name-title,
 
   .paragraph--type--hero-full-width > .field--name-field-cta-link {
     justify-self: start;
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-headline,
+  .paragraph--type--hero-full-width > .field--name-field-intro-text,
+  .paragraph--type--hero-full-width > .field--name-field-cta-link,
+  .paragraph--type--hero-full-width > .field--name-field-cta-label {
+    padding-left: var(--hero-inline-padding);
+    padding-right: var(--hero-inline-padding);
   }
 
   .paragraph--type--hero-full-width > .field--name-field-headline .field__item {
