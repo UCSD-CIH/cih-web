@@ -829,6 +829,62 @@
     return '';
   }
 
+  function deriveInstitutionAbbreviation(name) {
+    if (!name) return '';
+    var source = name.replace(/\s+/g, ' ').trim();
+    if (!source) return '';
+
+    var acronymFromParens = source.match(/\(([A-Z0-9&.\-]{2,12})\)\s*$/);
+    if (acronymFromParens && acronymFromParens[1]) {
+      return acronymFromParens[1].replace(/[.\s]/g, '');
+    }
+
+    var stopWords = {
+      'of': true,
+      'for': true,
+      'the': true,
+      'and': true,
+      'at': true,
+      'in': true,
+      'to': true,
+      'a': true,
+      'an': true
+    };
+
+    var normalized = source
+      .replace(/&/g, ' and ')
+      .replace(/\bSt\.\b/g, 'Saint')
+      .replace(/[^\w\s-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!normalized) return '';
+
+    var words = normalized.split(' ').filter(Boolean);
+    if (words.length < 2) return '';
+
+    var parts = [];
+    for (var i = 0; i < words.length; i++) {
+      var token = words[i];
+      var lower = token.toLowerCase();
+      if (stopWords[lower]) continue;
+      parts.push(token);
+    }
+    if (parts.length < 2) return '';
+
+    var acronym = parts
+      .map(function (token) {
+        return token.charAt(0).toUpperCase();
+      })
+      .join('');
+
+    if (!acronym || acronym.length < 2) return '';
+    if (acronym.length > 10) {
+      acronym = acronym.slice(0, 10);
+    }
+    return acronym;
+  }
+
   function readInstitutionName(field) {
     if (!field) return '';
     var link = field.querySelector('a');
@@ -898,8 +954,8 @@
 
   function applyInstitutionLabel(field) {
     if (!field) return '';
-    var abbreviation = readInstitutionAbbreviation(field);
     var name = readInstitutionName(field);
+    var abbreviation = readInstitutionAbbreviation(field) || deriveInstitutionAbbreviation(name);
     var existingLabelNode = field.querySelector('.reach-institution-pill-label');
     var heading = field.querySelector('h2, h3, h4, h5, h6');
     var labelClass = (existingLabelNode && existingLabelNode.className) || 'reach-institution-pill-label';
