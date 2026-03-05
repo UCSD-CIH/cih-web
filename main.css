@@ -11,7 +11,7 @@
 .paragraph--type--hero-full-width {
   --hero-content-max-width: 1200px;
   --hero-inline-padding: clamp(16px, 4vw, 40px);
-  --hero-block-padding: clamp(64px, 10vw, 120px);
+  --hero-block-padding: clamp(48px, 8vw, 88px);
 
   position: relative;
   isolation: isolate;
@@ -33,9 +33,9 @@
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(225, 236, 247, 0.08) 40%,
-    rgba(225, 236, 247, 0.82) 72%,
-    rgba(225, 236, 247, 1) 100%
+    rgba(225, 236, 247, 0.02) 25%,
+    rgba(225, 236, 247, 0.28) 62%,
+    rgba(225, 236, 247, 0.58) 100%
   );
 }
 
@@ -104,8 +104,8 @@
   color: var(--color-text-navy);
   font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
   font-weight: 800;
-  font-size: clamp(48px, 7vw, 92px);
-  line-height: 0.95;
+  font-size: clamp(36px, 5.4vw, 72px);
+  line-height: 0.98;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -119,8 +119,8 @@
   margin: 0;
   color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
-  font-size: clamp(18px, 2vw, 44px);
-  line-height: clamp(28px, 3vw, 54px);
+  font-size: clamp(18px, 1.8vw, 28px);
+  line-height: clamp(28px, 2.4vw, 38px);
   letter-spacing: -0.005em;
 }
 
@@ -162,15 +162,22 @@
 }
 
 /* If hero is present, hide top page title to avoid duplicate H1s. */
+body:has(.paragraph--type--hero-full-width) .page-title-container,
+body:has(.paragraph--type--hero-full-width) #page-title,
+body:has(.paragraph--type--hero-full-width) h1.page-title,
+body:has(.paragraph--type--hero-full-width) .page-header,
+body:has(.paragraph--type--hero-full-width) .field--name-title,
+.page:has(.paragraph--type--hero-full-width) .page-title-container,
+.page:has(.paragraph--type--hero-full-width) #page-title,
 .page:has(.paragraph--type--hero-full-width) h1.page-title,
 .page:has(.paragraph--type--hero-full-width) .page-header,
-.page:has(.paragraph--type--hero-full-width) .page-title-container,
 .page:has(.paragraph--type--hero-full-width) .field--name-title,
+.page.has-hero-full-width .page-title-container,
+.page.has-hero-full-width #page-title,
 .page.has-hero-full-width h1.page-title,
 .page.has-hero-full-width .page-header,
-.page.has-hero-full-width .page-title-container,
 .page.has-hero-full-width .field--name-title {
-  display: none;
+  display: none !important;
 }
 
 .field--name-field-page-sections:has(.paragraph--type--hero-full-width) > .field__label {
