@@ -3,7 +3,131 @@
    Copy this section, replace this line with [Name] [Feature Description]
 =================================== */
 
-/* TEST */
+/* ===================================
+   NATIVE PARAGRAPHS HERO: FULL-BLEED WRAPPER
+   Targets Paragraph bundle class: Hero: Full width
+=================================== */
+
+.paragraph--type--hero-full-width {
+  --hero-content-max-width: 1200px;
+  --hero-inline-padding: clamp(16px, 4vw, 40px);
+  --hero-block-padding: clamp(64px, 10vw, 120px);
+
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: clamp(420px, 60vw, 760px);
+  padding-top: var(--hero-block-padding);
+  padding-bottom: var(--hero-block-padding);
+  overflow: hidden;
+  background-color: var(--color-bg-blue-100);
+}
+
+.paragraph--type--hero-full-width::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.92) 75%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+/* Hide field labels in rendered hero. */
+.paragraph--type--hero-full-width .field__label {
+  display: none;
+}
+
+/* Build hero layout from paragraph fields. */
+.paragraph--type--hero-full-width {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "headline headline"
+    "intro cta";
+  column-gap: clamp(24px, 6vw, 96px);
+  row-gap: var(--space-300);
+  align-content: start;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  margin: 0;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image .field__item,
+.paragraph--type--hero-full-width > .field--name-field-background-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image img {
+  display: block;
+  object-fit: cover;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-headline,
+.paragraph--type--hero-full-width > .field--name-field-intro-text,
+.paragraph--type--hero-full-width > .field--name-field-cta-link,
+.paragraph--type--hero-full-width > .field--name-field-cta-label {
+  position: relative;
+  z-index: 2;
+  max-width: var(--hero-content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--hero-inline-padding);
+  padding-right: var(--hero-inline-padding);
+}
+
+.paragraph--type--hero-full-width > .field--name-field-headline {
+  grid-area: headline;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-intro-text {
+  grid-area: intro;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link {
+  grid-area: cta;
+  align-self: center;
+}
+
+/* Hide standalone CTA label field for now (used later in Twig pass). */
+.paragraph--type--hero-full-width > .field--name-field-cta-label {
+  display: none;
+}
+
+/* If hero is present, hide top page title to avoid duplicate H1s. */
+.page:has(.paragraph--type--hero-full-width) h1.page-title,
+.page:has(.paragraph--type--hero-full-width) .page-header,
+.page.has-hero-full-width h1.page-title,
+.page.has-hero-full-width .page-header {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .paragraph--type--hero-full-width {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "headline"
+      "intro"
+      "cta";
+    min-height: 0;
+    --hero-block-padding: clamp(48px, 12vw, 72px);
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-cta-link {
+    justify-self: start;
+  }
+}
 
 /* ===================================
   MASTER CSS FILE BEGINS - DO NOT MODIFY CODE BELOW HERE - COMMIT TO GIT FIRST

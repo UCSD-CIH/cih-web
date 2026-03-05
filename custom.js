@@ -1502,6 +1502,32 @@
     }
   };
 
+  // Uses Hero paragraph CTA label as link text and marks page for title suppression.
+  Drupal.behaviors.heroFullWidthEnhancements = {
+    attach: function (context) {
+      once('heroFullWidthEnhancements', '.paragraph--type--hero-full-width', context).forEach(function (hero) {
+        var ctaLabelField = hero.querySelector('.field--name-field-cta-label');
+        var ctaLabelItem = ctaLabelField ? ctaLabelField.querySelector('.field__item') : null;
+        var ctaLabelText = ctaLabelItem ? (ctaLabelItem.textContent || '').trim() : '';
+
+        var ctaLink = hero.querySelector('.field--name-field-cta-link a');
+        if (ctaLink && ctaLabelText) {
+          ctaLink.textContent = ctaLabelText;
+          ctaLink.setAttribute('aria-label', ctaLabelText);
+        }
+
+        if (ctaLabelField) {
+          ctaLabelField.style.display = 'none';
+        }
+
+        var page = hero.closest('.page');
+        if (page) {
+          page.classList.add('has-hero-full-width');
+        }
+      });
+    }
+  };
+
   // Forces main-nav external links to open in the current tab and strips noopener.
   Drupal.behaviors.extLinkOverride = {
     attach: function (context) {
