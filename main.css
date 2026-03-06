@@ -112,7 +112,7 @@
   color: var(--color-text-navy);
   font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
   font-weight: 800;
-  font-size: clamp(34px, 4.2vw, 60px);
+  font-size: 60px;
   line-height: 1;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -127,8 +127,8 @@
   margin: 0;
   color: var(--color-text-paragraph);
   font-family: 'Inter', sans-serif;
-  font-size: clamp(16px, 1.25vw, 22px);
-  line-height: clamp(24px, 1.8vw, 32px);
+  font-size: 22px;
+  line-height: 32px;
   letter-spacing: -0.005em;
 }
 
@@ -172,16 +172,22 @@
 /* If hero is present, hide top page title to avoid duplicate H1s. */
 body:has(.paragraph--type--hero-full-width) .page-title-container,
 body:has(.paragraph--type--hero-full-width) #page-title,
+body:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
+body:has(.paragraph--type--hero-full-width) .page-title-full-width-container,
 body:has(.paragraph--type--hero-full-width) h1.page-title,
 body:has(.paragraph--type--hero-full-width) .page-header,
 body:has(.paragraph--type--hero-full-width) .field--name-title,
 .page:has(.paragraph--type--hero-full-width) .page-title-container,
 .page:has(.paragraph--type--hero-full-width) #page-title,
+.page:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
+.page:has(.paragraph--type--hero-full-width) .page-title-full-width-container,
 .page:has(.paragraph--type--hero-full-width) h1.page-title,
 .page:has(.paragraph--type--hero-full-width) .page-header,
 .page:has(.paragraph--type--hero-full-width) .field--name-title,
 .page.has-hero-full-width .page-title-container,
 .page.has-hero-full-width #page-title,
+.page.has-hero-full-width #page-title-full-width-container,
+.page.has-hero-full-width .page-title-full-width-container,
 .page.has-hero-full-width h1.page-title,
 .page.has-hero-full-width .page-header,
 .page.has-hero-full-width .field--name-title {
