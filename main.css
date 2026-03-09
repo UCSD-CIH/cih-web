@@ -253,111 +253,6 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 }
 
 /* ===================================
-   NATIVE PARAGRAPHS: CARD GRID + GRID CARD
-   Targets Paragraph bundle classes: Card Grid and Grid Card
-=================================== */
-
-.paragraph--type--card-grid > .field--name-field-section-heading > .field__label,
-.paragraph--type--card-grid > .field--name-field-cards > .field__label,
-.paragraph--type--grid-card .field__label {
-  display: none;
-}
-
-.paragraph--type--card-grid > .field--name-field-cards > .field__items {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-400);
-}
-
-/* Desktop auto-balance for short rows: 1/2/3 cards should fill available width. */
-.paragraph--type--card-grid > .field--name-field-cards > .field__items:has(> .field__item:nth-child(1):last-child) {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.paragraph--type--card-grid > .field--name-field-cards > .field__items:has(> .field__item:nth-child(2):last-child) {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.paragraph--type--card-grid > .field--name-field-cards > .field__items:has(> .field__item:nth-child(3):last-child) {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.paragraph--type--card-grid > .field--name-field-cards > .field__items > .field__item {
-  min-width: 0;
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: var(--border-050) solid var(--color-border-subdued-strong);
-  border-radius: var(--radius-100);
-  overflow: hidden;
-  background-color: var(--color-bg-plain);
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image {
-  margin: 0;
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image .field__item,
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image article,
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image .field--name-field-media-image,
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image .field__items {
-  width: 100%;
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title {
-  margin: 0;
-  padding: var(--space-250) var(--space-250) 0;
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title .field__item {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: 0;
-  color: var(--color-text-heading);
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary {
-  margin: 0;
-  padding: var(--space-100) var(--space-250) var(--space-300);
-}
-
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary .field__item,
-.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary .field__item p {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0;
-  color: var(--color-text-paragraph);
-}
-
-@media (max-width: 989.98px) {
-  .paragraph--type--card-grid > .field--name-field-cards > .field__items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .paragraph--type--card-grid > .field--name-field-cards > .field__items {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* ===================================
   MASTER CSS FILE BEGINS - DO NOT MODIFY CODE BELOW HERE - COMMIT TO GIT FIRST
 =================================== */
 
@@ -1896,6 +1791,131 @@ code.bg-light {
 
 .container {
   padding-inline: var(--space-300);
+}
+
+/* ===================================
+   NATIVE PARAGRAPHS: CARD GRID + GRID CARD
+   Targets Paragraph bundle classes: Card Grid and Grid Card
+=================================== */
+
+.paragraph--type--card-grid {
+  margin-top: var(--space-600);
+}
+
+.paragraph--type--card-grid > .field--name-field-section-heading > .field__label,
+.paragraph--type--card-grid > .field--name-field-cards > .field__label,
+.paragraph--type--grid-card .field__label {
+  display: none;
+}
+
+.paragraph--type--card-grid > .field--name-field-section-heading {
+  margin: 0 0 var(--space-400) 0;
+}
+
+.paragraph--type--card-grid > .field--name-field-section-heading .field__item {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  font-style: normal;
+  line-height: 40px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--card-grid > .field--name-field-cards > .field__items {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-400);
+}
+
+/* Desktop auto-balance for short rows: 1/2/3 cards should fill available width. */
+.paragraph--type--card-grid > .field--name-field-cards > .field__items:has(> .field__item:nth-child(1):last-child) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.paragraph--type--card-grid > .field--name-field-cards > .field__items:has(> .field__item:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.paragraph--type--card-grid > .field--name-field-cards > .field__items:has(> .field__item:nth-child(3):last-child) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.paragraph--type--card-grid > .field--name-field-cards > .field__items > .field__item {
+  min-width: 0;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-100);
+  overflow: hidden;
+  background-color: var(--color-bg-plain);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image {
+  margin: 0;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image .field__item,
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image article,
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image .field--name-field-media-image,
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image .field__items {
+  width: 100%;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title {
+  margin: 0;
+  padding: var(--space-250) var(--space-250) 0;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title .field__item {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary {
+  margin: 0;
+  padding: var(--space-100) var(--space-250) var(--space-300);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary .field__item,
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary .field__item p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-text-paragraph);
+}
+
+@media (max-width: 989.98px) {
+  .paragraph--type--card-grid > .field--name-field-cards > .field__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .paragraph--type--card-grid > .field--name-field-cards > .field__items {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .img-rounded {
