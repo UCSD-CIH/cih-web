@@ -1564,7 +1564,7 @@ code.bg-light {
   --hero-inline-padding: var(--space-300);
   --hero-desktop-rail-inset: var(--space-200);
   --hero-block-padding: clamp(40px, 6vw, 72px);
-  --hero-block-padding-top: var(--space-900);
+  --hero-block-padding-top: clamp(32px, 4.5vw, 56px);
   --hero-cta-column-max: 320px;
   --hero-column-gap: var(--space-300);
   --hero-vertical-scrim: linear-gradient(
@@ -1888,7 +1888,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   flex-direction: column;
   height: 100%;
   border: var(--border-050) solid var(--color-border-subdued-strong);
-  border-radius: var(--radius-100);
+  border-radius: var(--radius-200);
   overflow: hidden;
   background-color: var(--color-bg-plain);
   box-shadow: none;
