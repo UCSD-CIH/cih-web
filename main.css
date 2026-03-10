@@ -2043,6 +2043,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   margin: 0;
 }
 
+.paragraph--type--feature-split > .field--name-field-cta-link > a,
+.paragraph--type--feature-split > .field--name-field-cta-link > a:visited,
 .paragraph--type--feature-split > .field--name-field-cta-link .field__item a,
 .paragraph--type--feature-split > .field--name-field-cta-link .field__item a:visited {
   display: inline-block;
@@ -2057,6 +2059,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   padding: var(--space-200) var(--space-300);
 }
 
+.paragraph--type--feature-split > .field--name-field-cta-link > a:hover,
+.paragraph--type--feature-split > .field--name-field-cta-link > a:visited:hover,
 .paragraph--type--feature-split > .field--name-field-cta-link .field__item a:hover,
 .paragraph--type--feature-split > .field--name-field-cta-link .field__item a:visited:hover {
   border: var(--border-100) solid transparent;
@@ -2065,6 +2069,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   text-decoration: none !important;
 }
 
+.paragraph--type--feature-split > .field--name-field-cta-link > a:active,
 .paragraph--type--feature-split > .field--name-field-cta-link .field__item a:active {
   border: var(--border-100) solid transparent !important;
   background-color: var(--color-bg-blue-120) !important;
@@ -2072,6 +2077,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   border-color: transparent !important;
 }
 
+.paragraph--type--feature-split > .field--name-field-cta-link > a:focus-visible,
 .paragraph--type--feature-split > .field--name-field-cta-link .field__item a:focus-visible {
   outline: 2px solid var(--color-bg-navy-100);
   outline-offset: 2px;
@@ -2090,6 +2096,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   width: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
+  border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
 }
 
