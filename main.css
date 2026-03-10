@@ -1993,7 +1993,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: grid;
   grid-template-columns: minmax(0, var(--feature-split-col-1)) minmax(0, var(--feature-split-col-2));
   gap: var(--feature-split-gap);
-  align-items: center;
+  align-items: start;
+  align-content: start;
 }
 
 .paragraph--type--feature-split .field__label {
@@ -2009,6 +2010,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 .paragraph--type--feature-split > .field--name-field-image {
   grid-column: var(--feature-split-media-column);
+  grid-row: 1 / span 3;
+  align-self: start;
   margin: 0;
 }
 
