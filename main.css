@@ -1565,6 +1565,14 @@ code.bg-light {
   --hero-block-padding: clamp(40px, 6vw, 72px);
   --hero-cta-column-max: 320px;
   --hero-column-gap: var(--space-300);
+  --hero-vertical-scrim: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.74) 32%,
+    rgba(255, 255, 255, 0.54) 58%,
+    rgba(255, 255, 255, 0.14) 84%,
+    rgba(255, 255, 255, 0) 100%
+  );
 
   position: relative;
   isolation: isolate;
@@ -1584,13 +1592,7 @@ code.bg-light {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(225, 236, 247, 0.04) 0%,
-    rgba(225, 236, 247, 0.42) 44%,
-    rgba(225, 236, 247, 0.24) 66%,
-    rgba(225, 236, 247, 0.06) 100%
-  );
+  background: var(--hero-vertical-scrim);
 }
 
 /* Hide field labels in rendered hero. */
@@ -1764,6 +1766,14 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 @media (max-width: 767px) {
   .paragraph--type--hero-full-width {
+    --hero-vertical-scrim: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 255, 255, 0.84) 38%,
+      rgba(255, 255, 255, 0.68) 64%,
+      rgba(255, 255, 255, 0.34) 86%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "headline"
