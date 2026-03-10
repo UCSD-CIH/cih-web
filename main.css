@@ -1581,7 +1581,7 @@ code.bg-light {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  min-height: clamp(420px, 60vw, 760px);
+  min-height: clamp(352px, 50vw, 640px);
   padding-top: var(--hero-block-padding-top);
   padding-bottom: var(--hero-block-padding);
   overflow: hidden;
@@ -2126,20 +2126,66 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   border-radius: var(--radius-200);
 }
 
-/* Modifier: media starts on the left. */
-.paragraph--type--feature-split:is(.--media-left, .feature-split--media-left, .paragraph--type--feature-split--media-left) {
+/* Layout variant: media on the left. Includes legacy and variant field class patterns. */
+.paragraph--type--feature-split:is(
+  .--media-left,
+  .feature-split--media-left,
+  .paragraph--type--feature-split--media-left,
+  .layout-variant--media-left,
+  .layout-variant-media-left,
+  .layout_variant_media_left,
+  [class*="layout-variant--media-left"],
+  [class*="layout-variant-media-left"],
+  [class*="layout_variant_media_left"]
+) {
   --feature-split-text-column: 2;
   --feature-split-media-column: 1;
 }
 
-/* Modifier: emphasize text width with a 3:2 split. */
-.paragraph--type--feature-split:is(.--text-emphasis, .feature-split--text-emphasis, .paragraph--type--feature-split--text-emphasis) {
+/* Width variant: text emphasis (60/40). */
+.paragraph--type--feature-split:is(
+  .--text-emphasis,
+  .feature-split--text-emphasis,
+  .paragraph--type--feature-split--text-emphasis,
+  .width-variant--text-emphasis,
+  .width-variant-text-emphasis,
+  .width_variant_text_emphasis,
+  .width-variant--text-emphasis-60-40,
+  .width-variant-text-emphasis-60-40,
+  .width_variant_text_emphasis_60_40,
+  [class*="width-variant--text-emphasis"],
+  [class*="width-variant-text-emphasis"],
+  [class*="width_variant_text_emphasis"]
+) {
   --feature-split-col-1: 3fr;
   --feature-split-col-2: 2fr;
 }
 
 /* Combined modifier: keep text as the wider column when media is left. */
-.paragraph--type--feature-split:is(.--media-left, .feature-split--media-left, .paragraph--type--feature-split--media-left):is(.--text-emphasis, .feature-split--text-emphasis, .paragraph--type--feature-split--text-emphasis) {
+.paragraph--type--feature-split:is(
+  .--media-left,
+  .feature-split--media-left,
+  .paragraph--type--feature-split--media-left,
+  .layout-variant--media-left,
+  .layout-variant-media-left,
+  .layout_variant_media_left,
+  [class*="layout-variant--media-left"],
+  [class*="layout-variant-media-left"],
+  [class*="layout_variant_media_left"]
+):is(
+  .--text-emphasis,
+  .feature-split--text-emphasis,
+  .paragraph--type--feature-split--text-emphasis,
+  .width-variant--text-emphasis,
+  .width-variant-text-emphasis,
+  .width_variant_text_emphasis,
+  .width-variant--text-emphasis-60-40,
+  .width-variant-text-emphasis-60-40,
+  .width_variant_text_emphasis_60_40,
+  [class*="width-variant--text-emphasis"],
+  [class*="width-variant-text-emphasis"],
+  [class*="width_variant_text_emphasis"]
+) {
   --feature-split-col-1: 2fr;
   --feature-split-col-2: 3fr;
 }
@@ -2157,6 +2203,80 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   .paragraph--type--feature-split > .field--name-field-image {
     grid-column: 1;
   }
+
+  /* Mobile order variant: text first. */
+  .paragraph--type--feature-split:is(
+    .mobile-order--text-first,
+    .mobile-order-text-first,
+    .mobile_order_text_first,
+    [class*="mobile-order--text-first"],
+    [class*="mobile-order-text-first"],
+    [class*="mobile_order_text_first"]
+  ) > .field--name-field-section-heading { order: 1; }
+
+  .paragraph--type--feature-split:is(
+    .mobile-order--text-first,
+    .mobile-order-text-first,
+    .mobile_order_text_first,
+    [class*="mobile-order--text-first"],
+    [class*="mobile-order-text-first"],
+    [class*="mobile_order_text_first"]
+  ) > .field--name-field-intro-text { order: 2; }
+
+  .paragraph--type--feature-split:is(
+    .mobile-order--text-first,
+    .mobile-order-text-first,
+    .mobile_order_text_first,
+    [class*="mobile-order--text-first"],
+    [class*="mobile-order-text-first"],
+    [class*="mobile_order_text_first"]
+  ) > .field--name-field-cta-link { order: 3; }
+
+  .paragraph--type--feature-split:is(
+    .mobile-order--text-first,
+    .mobile-order-text-first,
+    .mobile_order_text_first,
+    [class*="mobile-order--text-first"],
+    [class*="mobile-order-text-first"],
+    [class*="mobile_order_text_first"]
+  ) > .field--name-field-image { order: 4; }
+
+  /* Mobile order variant: media first. */
+  .paragraph--type--feature-split:is(
+    .mobile-order--media-first,
+    .mobile-order-media-first,
+    .mobile_order_media_first,
+    [class*="mobile-order--media-first"],
+    [class*="mobile-order-media-first"],
+    [class*="mobile_order_media_first"]
+  ) > .field--name-field-image { order: 1; }
+
+  .paragraph--type--feature-split:is(
+    .mobile-order--media-first,
+    .mobile-order-media-first,
+    .mobile_order_media_first,
+    [class*="mobile-order--media-first"],
+    [class*="mobile-order-media-first"],
+    [class*="mobile_order_media_first"]
+  ) > .field--name-field-section-heading { order: 2; }
+
+  .paragraph--type--feature-split:is(
+    .mobile-order--media-first,
+    .mobile-order-media-first,
+    .mobile_order_media_first,
+    [class*="mobile-order--media-first"],
+    [class*="mobile-order-media-first"],
+    [class*="mobile_order_media_first"]
+  ) > .field--name-field-intro-text { order: 3; }
+
+  .paragraph--type--feature-split:is(
+    .mobile-order--media-first,
+    .mobile-order-media-first,
+    .mobile_order_media_first,
+    [class*="mobile-order--media-first"],
+    [class*="mobile-order-media-first"],
+    [class*="mobile_order_media_first"]
+  ) > .field--name-field-cta-link { order: 4; }
 }
 
 @media (max-width: 640px) {

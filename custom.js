@@ -1502,6 +1502,57 @@
     }
   };
 
+  // Fallback for feature split variants when Twig class mapping is unavailable.
+  Drupal.behaviors.featureSplitVariantAdapter = {
+    attach: function (context) {
+      once('featureSplitVariantAdapter', '.paragraph--type--feature-split', context).forEach(function (split) {
+        var layoutField = split.querySelector(
+          '.field--name-field-layout-variant, .field--name-field-layout_variant, [data-field-name="field_layout_variant"]'
+        );
+        var widthField = split.querySelector(
+          '.field--name-field-width-variant, .field--name-field-width_variant, [data-field-name="field_width_variant"]'
+        );
+        var mobileOrderField = split.querySelector(
+          '.field--name-field-mobile-order, .field--name-field-mobile_order, [data-field-name="field_mobile_order"]'
+        );
+
+        function getFieldText(fieldEl) {
+          if (!fieldEl) return '';
+          var item = fieldEl.querySelector('.field__item');
+          var raw = item ? item.textContent : fieldEl.textContent;
+          return (raw || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        }
+
+        function hideField(fieldEl) {
+          if (!fieldEl) return;
+          fieldEl.style.display = 'none';
+        }
+
+        var layoutText = getFieldText(layoutField);
+        var widthText = getFieldText(widthField);
+        var mobileOrderText = getFieldText(mobileOrderField);
+
+        if (/media[\s_-]*left/.test(layoutText)) {
+          split.classList.add('layout-variant--media-left');
+        }
+
+        if (/text[\s_-]*emphasis/.test(widthText)) {
+          split.classList.add('width-variant--text-emphasis');
+        }
+
+        if (/text[\s_-]*first/.test(mobileOrderText)) {
+          split.classList.add('mobile-order--text-first');
+        } else if (/media[\s_-]*first/.test(mobileOrderText)) {
+          split.classList.add('mobile-order--media-first');
+        }
+
+        hideField(layoutField);
+        hideField(widthField);
+        hideField(mobileOrderField);
+      });
+    }
+  };
+
   // Uses Hero paragraph CTA label as link text and marks page for title suppression.
   Drupal.behaviors.heroFullWidthEnhancements = {
     attach: function (context) {
