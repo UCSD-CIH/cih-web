@@ -684,6 +684,7 @@ code.bg-light {
   --space-600: 48px;
   --space-700: 56px;
   --space-800: 64px;
+  --space-900: 72px;
   --space-1000: 80px;
   --space-1200: 96px;
   --space-1600: 128px;
@@ -1563,6 +1564,7 @@ code.bg-light {
   --hero-inline-padding: var(--space-300);
   --hero-desktop-rail-inset: var(--space-200);
   --hero-block-padding: clamp(40px, 6vw, 72px);
+  --hero-block-padding-top: var(--space-900);
   --hero-cta-column-max: 320px;
   --hero-column-gap: var(--space-300);
   --hero-vertical-scrim: linear-gradient(
@@ -1580,7 +1582,7 @@ code.bg-light {
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   min-height: clamp(420px, 60vw, 760px);
-  padding-top: var(--hero-block-padding);
+  padding-top: var(--hero-block-padding-top);
   padding-bottom: var(--hero-block-padding);
   overflow: hidden;
   background-color: var(--color-bg-blue-100);
@@ -1781,6 +1783,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
       "cta";
     min-height: 0;
     --hero-block-padding: clamp(36px, 10vw, 56px);
+    --hero-block-padding-top: var(--hero-block-padding);
   }
 
   .paragraph--type--hero-full-width > .field--name-field-cta-link {
@@ -3523,14 +3526,14 @@ body:has(
 }
 
 .resource-card .field--name-field-thumbnail-image .field__item {
-  border-radius: var(--radius-100);
+  border-radius: var(--radius-200);
   overflow: hidden;
 }
 
 .resource-card .field--name-field-thumbnail-image img {
   width: 100%;
   aspect-ratio: 16 / 10;
-  border-radius: var(--radius-100);
+  border-radius: var(--radius-200);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   object-fit: cover;
   display: block;
