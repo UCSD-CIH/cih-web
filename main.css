@@ -1975,6 +1975,128 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   }
 }
 
+/* ===================================
+   NATIVE PARAGRAPHS: FEATURE SPLIT
+   Two-column text/media split with responsive stacking
+=================================== */
+
+.paragraph--type--feature-split {
+  --feature-split-col-1: 1fr;
+  --feature-split-col-2: 1fr;
+  --feature-split-gap: var(--space-400);
+  --feature-split-text-column: 1;
+  --feature-split-media-column: 2;
+
+  width: 100%;
+  margin-top: var(--space-600);
+
+  display: grid;
+  grid-template-columns: minmax(0, var(--feature-split-col-1)) minmax(0, var(--feature-split-col-2));
+  gap: var(--feature-split-gap);
+  align-items: center;
+}
+
+.paragraph--type--feature-split .field__label {
+  display: none;
+}
+
+.paragraph--type--feature-split > .field--name-field-section-heading,
+.paragraph--type--feature-split > .field--name-field-intro-text,
+.paragraph--type--feature-split > .field--name-field-cta-link {
+  grid-column: var(--feature-split-text-column);
+  margin: 0;
+}
+
+.paragraph--type--feature-split > .field--name-field-image {
+  grid-column: var(--feature-split-media-column);
+  margin: 0;
+}
+
+.paragraph--type--feature-split > .field--name-field-section-heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 0;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--feature-split > .field--name-field-intro-text .field__item,
+.paragraph--type--feature-split > .field--name-field-intro-text .field__item p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0;
+  color: var(--color-text-paragraph);
+}
+
+.paragraph--type--feature-split > .field--name-field-cta-link {
+  margin-top: var(--space-100);
+}
+
+.paragraph--type--feature-split > .field--name-field-image .field__item,
+.paragraph--type--feature-split > .field--name-field-image article,
+.paragraph--type--feature-split > .field--name-field-image .field--name-field-media-image,
+.paragraph--type--feature-split > .field--name-field-image .field__items {
+  width: 100%;
+}
+
+.paragraph--type--feature-split > .field--name-field-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius-200);
+}
+
+/* Modifier: media starts on the left. */
+.paragraph--type--feature-split:is(.--media-left, .feature-split--media-left, .paragraph--type--feature-split--media-left) {
+  --feature-split-text-column: 2;
+  --feature-split-media-column: 1;
+}
+
+/* Modifier: emphasize text width with a 3:2 split. */
+.paragraph--type--feature-split:is(.--text-emphasis, .feature-split--text-emphasis, .paragraph--type--feature-split--text-emphasis) {
+  --feature-split-col-1: 3fr;
+  --feature-split-col-2: 2fr;
+}
+
+/* Combined modifier: keep text as the wider column when media is left. */
+.paragraph--type--feature-split:is(.--media-left, .feature-split--media-left, .paragraph--type--feature-split--media-left):is(.--text-emphasis, .feature-split--text-emphasis, .paragraph--type--feature-split--text-emphasis) {
+  --feature-split-col-1: 2fr;
+  --feature-split-col-2: 3fr;
+}
+
+@media (max-width: 989.98px) {
+  .paragraph--type--feature-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-250);
+    align-items: start;
+  }
+
+  .paragraph--type--feature-split > .field--name-field-section-heading,
+  .paragraph--type--feature-split > .field--name-field-intro-text,
+  .paragraph--type--feature-split > .field--name-field-cta-link,
+  .paragraph--type--feature-split > .field--name-field-image {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .paragraph--type--feature-split > .field--name-field-section-heading {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .paragraph--type--feature-split > .field--name-field-intro-text .field__item,
+  .paragraph--type--feature-split > .field--name-field-intro-text .field__item p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
 .img-rounded {
   border-radius: var(--radius-200);
   overflow: hidden;
