@@ -720,6 +720,15 @@ code.bg-light {
 }
 
 /* ===================================
+   DESIGN TOKENS: SHADOW
+   Elevation token for subtle interactive lift states
+=================================== */
+
+:root {
+  --shadow-100: 0 6px 18px rgba(24, 43, 73, 0.1);
+}
+
+/* ===================================
    DESIGN TOKENS: SPACING UTILITIES
    Padding, margin and gap utility classes based on the spacing scale
 =================================== */
@@ -1856,6 +1865,27 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   border-radius: var(--radius-100);
   overflow: hidden;
   background-color: var(--color-bg-plain);
+  box-shadow: none;
+  transform: translateY(0);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card:hover,
+.paragraph--type--card-grid .paragraph--type--grid-card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paragraph--type--card-grid .paragraph--type--grid-card {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .paragraph--type--card-grid .paragraph--type--grid-card:hover,
+  .paragraph--type--card-grid .paragraph--type--grid-card:focus-within {
+    transform: none;
+  }
 }
 
 .paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-image {
