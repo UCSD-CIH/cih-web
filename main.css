@@ -4,255 +4,6 @@
 =================================== */
 
 /* ===================================
-   NATIVE PARAGRAPHS HERO: FULL-BLEED WRAPPER
-   Targets Paragraph bundle class: Hero: Full width
-=================================== */
-
-.paragraph--type--hero-full-width {
-  --hero-content-max-width: 1120px;
-  --hero-inline-padding: var(--space-300);
-  --hero-desktop-rail-inset: var(--space-200);
-  --hero-block-padding: clamp(40px, 6vw, 72px);
-  --hero-cta-column-max: 320px;
-  --hero-column-gap: var(--space-300);
-
-  position: relative;
-  isolation: isolate;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  min-height: clamp(420px, 60vw, 760px);
-  padding-top: var(--hero-block-padding);
-  padding-bottom: var(--hero-block-padding);
-  overflow: hidden;
-  background-color: var(--color-bg-blue-100);
-}
-
-.paragraph--type--hero-full-width::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(225, 236, 247, 0.04) 0%,
-    rgba(225, 236, 247, 0.42) 44%,
-    rgba(225, 236, 247, 0.24) 66%,
-    rgba(225, 236, 247, 0.06) 100%
-  );
-}
-
-/* Hide field labels in rendered hero. */
-.paragraph--type--hero-full-width .field__label {
-  display: none;
-}
-
-/* Build hero layout from paragraph fields. */
-.paragraph--type--hero-full-width {
-  display: grid;
-  grid-template-columns:
-    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr)
-    minmax(0, calc(var(--hero-content-max-width) - var(--hero-cta-column-max) - var(--hero-column-gap)))
-    minmax(220px, var(--hero-cta-column-max))
-    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr);
-  grid-template-areas:
-    ". headline headline ."
-    ". intro cta .";
-  column-gap: var(--hero-column-gap);
-  row-gap: var(--space-300);
-  align-content: start;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-background-image {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  margin: 0;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-background-image .field__item,
-.paragraph--type--hero-full-width > .field--name-field-background-image img {
-  width: 100%;
-  height: 100%;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-background-image article,
-.paragraph--type--hero-full-width > .field--name-field-background-image .field--name-field-media-image,
-.paragraph--type--hero-full-width > .field--name-field-background-image .field__items {
-  width: 100%;
-  height: 100%;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-background-image img {
-  display: block;
-  object-fit: cover;
-  object-position: center bottom;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-headline,
-.paragraph--type--hero-full-width > .field--name-field-intro-text,
-.paragraph--type--hero-full-width > .field--name-field-cta-link,
-.paragraph--type--hero-full-width > .field--name-field-cta-label {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-headline {
-  grid-area: headline;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-headline .field__item {
-  max-width: 34ch;
-  margin: 0;
-  color: var(--color-text-navy);
-  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
-  font-weight: 800;
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-intro-text {
-  grid-area: intro;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-intro-text .field__item,
-.paragraph--type--hero-full-width > .field--name-field-intro-text .field__item p {
-  margin: 0;
-  color: var(--color-text-paragraph);
-  font-family: 'Inter', sans-serif;
-  font-size: 22px;
-  line-height: 32px;
-  letter-spacing: -0.005em;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-cta-link {
-  grid-area: cta;
-  align-self: start;
-  justify-self: end;
-}
-
-/* Hide standalone CTA label field for now (used later in Twig pass). */
-.paragraph--type--hero-full-width > .field--name-field-cta-label {
-  display: none;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-cta-link a {
-  display: inline-block;
-  min-width: 292px;
-  padding: var(--space-200) var(--space-300);
-  border: var(--border-100) solid transparent;
-  border-radius: var(--radius-100);
-  background-color: var(--color-bg-yellow-100);
-  color: var(--color-text-on-light) !important;
-  font: var(--font-label-medium-caps);
-  letter-spacing: var(--letter-spacing-label);
-  text-transform: uppercase;
-  text-decoration: none !important;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-cta-link a:hover {
-  background-color: var(--color-bg-turquoise-100);
-  color: var(--color-text-on-light) !important;
-}
-
-.paragraph--type--hero-full-width > .field--name-field-cta-link a:active {
-  background-color: var(--color-bg-turquoise-120) !important;
-  color: var(--color-text-navy) !important;
-}
-
-/* If hero is present, hide top page title to avoid duplicate H1s. */
-body:has(.paragraph--type--hero-full-width) .page-title-container,
-body:has(.paragraph--type--hero-full-width) #page-title,
-body:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
-body:has(.paragraph--type--hero-full-width) .page-title-full-width-container,
-body:has(.paragraph--type--hero-full-width) h1.page-title,
-body:has(.paragraph--type--hero-full-width) .page-header,
-body:has(.paragraph--type--hero-full-width) .field--name-title,
-.page:has(.paragraph--type--hero-full-width) .page-title-container,
-.page:has(.paragraph--type--hero-full-width) #page-title,
-.page:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
-.page:has(.paragraph--type--hero-full-width) .page-title-full-width-container,
-.page:has(.paragraph--type--hero-full-width) h1.page-title,
-.page:has(.paragraph--type--hero-full-width) .page-header,
-.page:has(.paragraph--type--hero-full-width) .field--name-title,
-.page.has-hero-full-width .page-title-container,
-.page.has-hero-full-width #page-title,
-.page.has-hero-full-width #page-title-full-width-container,
-.page.has-hero-full-width .page-title-full-width-container,
-.page.has-hero-full-width h1.page-title,
-.page.has-hero-full-width .page-header,
-.page.has-hero-full-width .field--name-title {
-  display: none !important;
-}
-
-.field--name-field-page-sections:has(.paragraph--type--hero-full-width) > .field__label {
-  display: none;
-}
-
-/* Remove top gap between nav and hero when hero is first page section. */
-body:has(.paragraph--type--hero-full-width) .main-container.container,
-.page:has(.paragraph--type--hero-full-width) .main-container.container,
-.page.has-hero-full-width .main-container.container {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
-.page:has(.paragraph--type--hero-full-width) .main-container.container > .row,
-.page.has-hero-full-width .main-container.container > .row {
-  margin-top: 0 !important;
-}
-
-@media (max-width: 767px) {
-  .paragraph--type--hero-full-width {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "headline"
-      "intro"
-      "cta";
-    min-height: 0;
-    --hero-block-padding: clamp(36px, 10vw, 56px);
-  }
-
-  .paragraph--type--hero-full-width > .field--name-field-cta-link {
-    justify-self: start;
-  }
-
-  .paragraph--type--hero-full-width > .field--name-field-headline,
-  .paragraph--type--hero-full-width > .field--name-field-intro-text,
-  .paragraph--type--hero-full-width > .field--name-field-cta-link,
-  .paragraph--type--hero-full-width > .field--name-field-cta-label {
-    padding-left: var(--hero-inline-padding);
-    padding-right: var(--hero-inline-padding);
-  }
-
-  .paragraph--type--hero-full-width > .field--name-field-headline .field__item {
-    max-width: 16ch;
-    font-size: clamp(32px, 10vw, 44px);
-  }
-
-  .paragraph--type--hero-full-width > .field--name-field-intro-text .field__item,
-  .paragraph--type--hero-full-width > .field--name-field-intro-text .field__item p {
-    font-size: clamp(16px, 4.4vw, 20px);
-    line-height: clamp(24px, 6vw, 30px);
-  }
-
-  .paragraph--type--hero-full-width > .field--name-field-cta-link a {
-    min-width: 0;
-    width: auto;
-  }
-}
-
-/* ===================================
   MASTER CSS FILE BEGINS - DO NOT MODIFY CODE BELOW HERE - COMMIT TO GIT FIRST
 =================================== */
 
@@ -1794,6 +1545,255 @@ code.bg-light {
 }
 
 /* ===================================
+   NATIVE PARAGRAPHS HERO: FULL-BLEED WRAPPER
+   Targets Paragraph bundle class: Hero: Full width
+=================================== */
+
+.paragraph--type--hero-full-width {
+  --hero-content-max-width: 1120px;
+  --hero-inline-padding: var(--space-300);
+  --hero-desktop-rail-inset: var(--space-200);
+  --hero-block-padding: clamp(40px, 6vw, 72px);
+  --hero-cta-column-max: 320px;
+  --hero-column-gap: var(--space-300);
+
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: clamp(420px, 60vw, 760px);
+  padding-top: var(--hero-block-padding);
+  padding-bottom: var(--hero-block-padding);
+  overflow: hidden;
+  background-color: var(--color-bg-blue-100);
+}
+
+.paragraph--type--hero-full-width::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(225, 236, 247, 0.04) 0%,
+    rgba(225, 236, 247, 0.42) 44%,
+    rgba(225, 236, 247, 0.24) 66%,
+    rgba(225, 236, 247, 0.06) 100%
+  );
+}
+
+/* Hide field labels in rendered hero. */
+.paragraph--type--hero-full-width .field__label {
+  display: none;
+}
+
+/* Build hero layout from paragraph fields. */
+.paragraph--type--hero-full-width {
+  display: grid;
+  grid-template-columns:
+    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr)
+    minmax(0, calc(var(--hero-content-max-width) - var(--hero-cta-column-max) - var(--hero-column-gap)))
+    minmax(220px, var(--hero-cta-column-max))
+    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr);
+  grid-template-areas:
+    ". headline headline ."
+    ". intro cta .";
+  column-gap: var(--hero-column-gap);
+  row-gap: var(--space-300);
+  align-content: start;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image .field__item,
+.paragraph--type--hero-full-width > .field--name-field-background-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image article,
+.paragraph--type--hero-full-width > .field--name-field-background-image .field--name-field-media-image,
+.paragraph--type--hero-full-width > .field--name-field-background-image .field__items {
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-background-image img {
+  display: block;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-headline,
+.paragraph--type--hero-full-width > .field--name-field-intro-text,
+.paragraph--type--hero-full-width > .field--name-field-cta-link,
+.paragraph--type--hero-full-width > .field--name-field-cta-label {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-headline {
+  grid-area: headline;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-headline .field__item {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--color-text-navy);
+  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-intro-text {
+  grid-area: intro;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-intro-text .field__item,
+.paragraph--type--hero-full-width > .field--name-field-intro-text .field__item p {
+  margin: 0;
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: -0.005em;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link {
+  grid-area: cta;
+  align-self: start;
+  justify-self: end;
+}
+
+/* Hide standalone CTA label field for now (used later in Twig pass). */
+.paragraph--type--hero-full-width > .field--name-field-cta-label {
+  display: none;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link a {
+  display: inline-block;
+  min-width: 292px;
+  padding: var(--space-200) var(--space-300);
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  background-color: var(--color-bg-yellow-100);
+  color: var(--color-text-on-light) !important;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  text-decoration: none !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link a:hover {
+  background-color: var(--color-bg-turquoise-100);
+  color: var(--color-text-on-light) !important;
+}
+
+.paragraph--type--hero-full-width > .field--name-field-cta-link a:active {
+  background-color: var(--color-bg-turquoise-120) !important;
+  color: var(--color-text-navy) !important;
+}
+
+/* If hero is present, hide top page title to avoid duplicate H1s. */
+body:has(.paragraph--type--hero-full-width) .page-title-container,
+body:has(.paragraph--type--hero-full-width) #page-title,
+body:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
+body:has(.paragraph--type--hero-full-width) .page-title-full-width-container,
+body:has(.paragraph--type--hero-full-width) h1.page-title,
+body:has(.paragraph--type--hero-full-width) .page-header,
+body:has(.paragraph--type--hero-full-width) .field--name-title,
+.page:has(.paragraph--type--hero-full-width) .page-title-container,
+.page:has(.paragraph--type--hero-full-width) #page-title,
+.page:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
+.page:has(.paragraph--type--hero-full-width) .page-title-full-width-container,
+.page:has(.paragraph--type--hero-full-width) h1.page-title,
+.page:has(.paragraph--type--hero-full-width) .page-header,
+.page:has(.paragraph--type--hero-full-width) .field--name-title,
+.page.has-hero-full-width .page-title-container,
+.page.has-hero-full-width #page-title,
+.page.has-hero-full-width #page-title-full-width-container,
+.page.has-hero-full-width .page-title-full-width-container,
+.page.has-hero-full-width h1.page-title,
+.page.has-hero-full-width .page-header,
+.page.has-hero-full-width .field--name-title {
+  display: none !important;
+}
+
+.field--name-field-page-sections:has(.paragraph--type--hero-full-width) > .field__label {
+  display: none;
+}
+
+/* Remove top gap between nav and hero when hero is first page section. */
+body:has(.paragraph--type--hero-full-width) .main-container.container,
+.page:has(.paragraph--type--hero-full-width) .main-container.container,
+.page.has-hero-full-width .main-container.container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
+.page:has(.paragraph--type--hero-full-width) .main-container.container > .row,
+.page.has-hero-full-width .main-container.container > .row {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .paragraph--type--hero-full-width {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "headline"
+      "intro"
+      "cta";
+    min-height: 0;
+    --hero-block-padding: clamp(36px, 10vw, 56px);
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-cta-link {
+    justify-self: start;
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-headline,
+  .paragraph--type--hero-full-width > .field--name-field-intro-text,
+  .paragraph--type--hero-full-width > .field--name-field-cta-link,
+  .paragraph--type--hero-full-width > .field--name-field-cta-label {
+    padding-left: var(--hero-inline-padding);
+    padding-right: var(--hero-inline-padding);
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-headline .field__item {
+    max-width: 16ch;
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-intro-text .field__item,
+  .paragraph--type--hero-full-width > .field--name-field-intro-text .field__item p {
+    font-size: clamp(16px, 4.4vw, 20px);
+    line-height: clamp(24px, 6vw, 30px);
+  }
+
+  .paragraph--type--hero-full-width > .field--name-field-cta-link a {
+    min-width: 0;
+    width: auto;
+  }
+}
+
+/* ===================================
    NATIVE PARAGRAPHS: CARD GRID + GRID CARD
    Targets Paragraph bundle classes: Card Grid and Grid Card
 =================================== */
@@ -1848,6 +1848,7 @@ code.bg-light {
 }
 
 .paragraph--type--card-grid .paragraph--type--grid-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1904,6 +1905,32 @@ code.bg-light {
   line-height: 24px;
   letter-spacing: 0;
   color: var(--color-text-paragraph);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link .field__item,
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link .field__item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link .field__item a {
+  border-radius: inherit;
+  text-decoration: none;
+  font-size: 0;
+  color: transparent;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link .field__item a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
 }
 
 @media (max-width: 989.98px) {
