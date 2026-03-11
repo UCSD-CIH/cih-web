@@ -1553,6 +1553,21 @@
     }
   };
 
+  // Renders top divider only when boolean field value is enabled.
+  Drupal.behaviors.topDividerFieldAdapter = {
+    attach: function (context) {
+      once('topDividerFieldAdapter', '.field--name-field-show-top-divider', context).forEach(function (field) {
+        var item = field.querySelector('.field__item');
+        var raw = item ? item.textContent : field.textContent;
+        var value = (raw || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        var isOn = /^(on|yes|true|1)$/.test(value);
+
+        field.classList.remove('is-on', 'is-off');
+        field.classList.add(isOn ? 'is-on' : 'is-off');
+      });
+    }
+  };
+
   // Uses Hero paragraph CTA label as link text and marks page for title suppression.
   Drupal.behaviors.heroFullWidthEnhancements = {
     attach: function (context) {
