@@ -1995,6 +1995,122 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   }
 }
 
+/* Compatibility: Card Grid field-group wrappers where fields also carry .field__item. */
+.paragraph--type--card-grid .field--name-field-section-heading.field__item {
+  margin: 0 0 var(--space-400) 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  font-style: normal;
+  line-height: 40px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--card-grid :is(
+  .field--name-field-cards.field__items,
+  .field--name-field-cards > .field__items
+) {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-400);
+}
+
+.paragraph--type--card-grid :is(
+  .field--name-field-cards.field__items,
+  .field--name-field-cards > .field__items
+):has(> .field__item:nth-child(1):last-child) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.paragraph--type--card-grid :is(
+  .field--name-field-cards.field__items,
+  .field--name-field-cards > .field__items
+):has(> .field__item:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.paragraph--type--card-grid :is(
+  .field--name-field-cards.field__items,
+  .field--name-field-cards > .field__items
+):has(> .field__item:nth-child(3):last-child) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.paragraph--type--card-grid :is(
+  .field--name-field-cards.field__items,
+  .field--name-field-cards > .field__items
+) > .field__item {
+  min-width: 0;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title.field__item {
+  margin: 0;
+  padding: var(--space-250) var(--space-250) 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary.field__item {
+  margin: 0;
+  padding: var(--space-100) var(--space-250) var(--space-300);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary.field__item,
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-summary.field__item p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-text-paragraph);
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link.field__item {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link.field__item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  text-decoration: none;
+  font-size: 0;
+  color: transparent;
+}
+
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-card-link.field__item a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+}
+
+@media (max-width: 989.98px) {
+  .paragraph--type--card-grid :is(
+    .field--name-field-cards.field__items,
+    .field--name-field-cards > .field__items
+  ) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .paragraph--type--card-grid :is(
+    .field--name-field-cards.field__items,
+    .field--name-field-cards > .field__items
+  ) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* ===================================
    NATIVE PARAGRAPHS: FEATURE SPLIT
    Two-column text/media split with responsive stacking
@@ -2293,6 +2409,79 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   .paragraph--type--feature-split .field--name-field-intro-text .field__item p {
     font-size: 16px;
     line-height: 24px;
+  }
+}
+
+/* Compatibility: Feature Split field-group wrappers use section-content as the grid container. */
+.paragraph--type--feature-split {
+  margin-top: 0;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.paragraph--type--feature-split > .section-content {
+  display: grid;
+  grid-template-columns: minmax(0, var(--feature-split-col-1)) minmax(0, var(--feature-split-col-2));
+  gap: var(--feature-split-gap);
+  align-items: start;
+  align-content: start;
+}
+
+.paragraph--type--feature-split > .section-content > .field--name-field-section-heading,
+.paragraph--type--feature-split > .section-content > .field--name-field-intro-text,
+.paragraph--type--feature-split > .section-content > .field--name-field-cta-link {
+  grid-column: var(--feature-split-text-column);
+  margin: 0;
+}
+
+.paragraph--type--feature-split > .section-content > .field--name-field-image {
+  grid-column: var(--feature-split-media-column);
+  grid-row: 1 / span 3;
+  align-self: start;
+  margin: 0;
+}
+
+.paragraph--type--feature-split > .section-content > .field--name-field-section-heading.field__item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 0;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--feature-split > .section-content > .field--name-field-intro-text.field__item,
+.paragraph--type--feature-split > .section-content > .field--name-field-intro-text .field__item,
+.paragraph--type--feature-split > .section-content > .field--name-field-intro-text .field__item p {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0;
+  color: var(--color-text-paragraph);
+}
+
+.paragraph--type--feature-split > .section-content > .field--name-field-cta-link {
+  margin-top: var(--space-100);
+}
+
+.paragraph--type--feature-split > .section-content > .field--name-field-cta-link > a,
+.paragraph--type--feature-split > .section-content > .field--name-field-cta-link .field__item a {
+  display: inline-block;
+}
+
+@media (max-width: 989.98px) {
+  .paragraph--type--feature-split > .section-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-250);
+  }
+
+  .paragraph--type--feature-split > .section-content > .field--name-field-section-heading,
+  .paragraph--type--feature-split > .section-content > .field--name-field-intro-text,
+  .paragraph--type--feature-split > .section-content > .field--name-field-cta-link,
+  .paragraph--type--feature-split > .section-content > .field--name-field-image {
+    grid-column: 1;
   }
 }
 
