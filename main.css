@@ -2313,6 +2313,19 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   margin: var(--space-300) 0;
 }
 
+/* Paragraph boolean field divider (rendered when enabled). */
+.field--name-field-show-top-divider {
+  margin: var(--space-500) 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+.field--name-field-show-top-divider::before {
+  content: "";
+  display: block;
+  border-top: var(--border-050) solid var(--color-border-subdued-strong);
+}
+
 /* ===================================
    BUTTON COMPONENT (DXPR CUSTOMIZED)
    Standardizes default DXPR buttons:
