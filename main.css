@@ -2120,7 +2120,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   --feature-split-col-1: 1fr;
   --feature-split-col-2: 1fr;
   --feature-split-gap: var(--space-400);
-  --feature-split-stack-gap: var(--space-200);
+  --feature-split-heading-body-gap: var(--space-300);
+  --feature-split-body-cta-gap: var(--space-400);
   --feature-split-text-column: 1;
   --feature-split-media-column: 2;
 
@@ -2130,7 +2131,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: grid;
   grid-template-columns: minmax(0, var(--feature-split-col-1)) minmax(0, var(--feature-split-col-2));
   column-gap: var(--feature-split-gap);
-  row-gap: var(--feature-split-stack-gap);
+  row-gap: 0;
   grid-auto-rows: max-content;
   align-items: start;
   align-content: start;
@@ -2185,8 +2186,12 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   color: var(--color-text-paragraph);
 }
 
+.paragraph--type--feature-split .field--name-field-intro-text {
+  margin-top: var(--feature-split-heading-body-gap);
+}
+
 .paragraph--type--feature-split .field--name-field-cta-link {
-  margin-top: 0;
+  margin-top: var(--feature-split-body-cta-gap);
 }
 
 .paragraph--type--feature-split .field--name-field-cta-link .field__item {
@@ -2318,7 +2323,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   .paragraph--type--feature-split {
     grid-template-columns: minmax(0, 1fr);
     column-gap: 0;
-    row-gap: var(--space-250);
+    row-gap: 0;
     align-items: start;
   }
 
@@ -2428,7 +2433,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: grid;
   grid-template-columns: minmax(0, var(--feature-split-col-1)) minmax(0, var(--feature-split-col-2));
   column-gap: var(--feature-split-gap);
-  row-gap: var(--feature-split-stack-gap);
+  row-gap: 0;
   grid-auto-rows: max-content;
   align-items: start;
   align-content: start;
@@ -2470,8 +2475,12 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   color: var(--color-text-paragraph);
 }
 
+.paragraph--type--feature-split > .section-content > .field--name-field-intro-text {
+  margin-top: var(--feature-split-heading-body-gap);
+}
+
 .paragraph--type--feature-split > .section-content > .field--name-field-cta-link {
-  margin-top: 0;
+  margin-top: var(--feature-split-body-cta-gap);
 }
 
 .paragraph--type--feature-split > .section-content > .field--name-field-cta-link > a,
@@ -2483,7 +2492,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   .paragraph--type--feature-split > .section-content {
     grid-template-columns: minmax(0, 1fr);
     column-gap: 0;
-    row-gap: var(--space-250);
+    row-gap: 0;
   }
 
   .paragraph--type--feature-split > .section-content > .field--name-field-section-heading,
