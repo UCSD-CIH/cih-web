@@ -2503,6 +2503,160 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   }
 }
 
+/* ===================================
+   NATIVE PARAGRAPHS: CTA SECTION
+   Centered heading/body/button over background image
+=================================== */
+
+.paragraph--type--cta-section {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: var(--space-800) var(--space-300);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-items: center;
+  row-gap: 0;
+  text-align: center;
+  background-color: var(--color-bg-sand-100);
+}
+
+.paragraph--type--cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(245, 240, 230, 0.8);
+}
+
+.paragraph--type--cta-section .field__label {
+  display: none;
+}
+
+.paragraph--type--cta-section > .field--name-field-cta-style {
+  display: none;
+}
+
+.paragraph--type--cta-section > :is(
+  .field--name-field-show-top-divider,
+  .field--name-field-section-heading,
+  .field--name-field-intro-text,
+  .field--name-field-cta-link
+) {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 560px);
+  margin: 0;
+}
+
+.paragraph--type--cta-section > .field--name-field-background-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+.paragraph--type--cta-section > .field--name-field-background-image .field__item,
+.paragraph--type--cta-section > .field--name-field-background-image article,
+.paragraph--type--cta-section > .field--name-field-background-image .field--name-field-media-image,
+.paragraph--type--cta-section > .field--name-field-background-image .field__items,
+.paragraph--type--cta-section > .field--name-field-background-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--cta-section > .field--name-field-background-image img {
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.paragraph--type--cta-section > .field--name-field-section-heading {
+  margin-bottom: var(--space-200);
+}
+
+.paragraph--type--cta-section > .field--name-field-section-heading .field__item {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--cta-section > .field--name-field-intro-text {
+  margin-bottom: var(--space-400);
+}
+
+.paragraph--type--cta-section > .field--name-field-intro-text .field__item,
+.paragraph--type--cta-section > .field--name-field-intro-text .field__item p {
+  margin: 0;
+}
+
+.paragraph--type--cta-section > .field--name-field-cta-link .field__item {
+  margin: 0;
+}
+
+.paragraph--type--cta-section > .field--name-field-cta-link > a,
+.paragraph--type--cta-section > .field--name-field-cta-link .field__item a {
+  display: inline-block;
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  background-color: var(--color-bg-yellow-100);
+  color: var(--color-text-on-light) !important;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: var(--text-transform-label-caps);
+  text-decoration: none !important;
+  padding: var(--space-200) var(--space-300);
+}
+
+.paragraph--type--cta-section > .field--name-field-cta-link > a:hover,
+.paragraph--type--cta-section > .field--name-field-cta-link .field__item a:hover {
+  background-color: var(--color-bg-turquoise-100);
+  color: var(--color-text-on-light) !important;
+}
+
+.paragraph--type--cta-section > .field--name-field-cta-link > a:active,
+.paragraph--type--cta-section > .field--name-field-cta-link .field__item a:active {
+  background-color: var(--color-bg-turquoise-120) !important;
+  color: var(--color-text-navy) !important;
+}
+
+.paragraph--type--cta-section > .field--name-field-cta-link > a:focus-visible,
+.paragraph--type--cta-section > .field--name-field-cta-link .field__item a:focus-visible {
+  outline: 2px solid var(--color-bg-navy-100);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .paragraph--type--cta-section {
+    padding-top: var(--space-600);
+    padding-bottom: var(--space-600);
+  }
+
+  .paragraph--type--cta-section > .field--name-field-background-image img {
+    filter: blur(8px);
+    transform: scale(1.04);
+  }
+
+  .paragraph--type--cta-section > .field--name-field-cta-link {
+    width: min(100%, 560px);
+  }
+
+  .paragraph--type--cta-section > .field--name-field-cta-link > a,
+  .paragraph--type--cta-section > .field--name-field-cta-link .field__item a {
+    display: block;
+    width: 100%;
+  }
+}
+
 .img-rounded {
   border-radius: var(--radius-200);
   overflow: hidden;
