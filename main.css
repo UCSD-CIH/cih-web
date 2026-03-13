@@ -2574,14 +2574,15 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: block;
   object-fit: cover;
   object-position: center center;
-  filter: blur(6px);
-  transform: scale(1.03);
+  filter: blur(4px);
+  transform: scale(1.02);
 }
 
 .paragraph--type--cta-section > .field--name-field-section-heading {
   margin-bottom: var(--space-200);
 }
 
+.paragraph--type--cta-section > .field--name-field-section-heading.field__item,
 .paragraph--type--cta-section > .field--name-field-section-heading .field__item {
   margin: 0;
   font-family: 'Inter', sans-serif;
