@@ -2321,9 +2321,11 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 @media (max-width: 989.98px) {
   .paragraph--type--feature-split {
+    --feature-split-heading-body-gap: 0;
+    --feature-split-body-cta-gap: 0;
     grid-template-columns: minmax(0, 1fr);
     column-gap: 0;
-    row-gap: 0;
+    row-gap: var(--space-250);
     align-items: start;
   }
 
@@ -2492,7 +2494,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   .paragraph--type--feature-split > .section-content {
     grid-template-columns: minmax(0, 1fr);
     column-gap: 0;
-    row-gap: 0;
+    row-gap: var(--space-250);
   }
 
   .paragraph--type--feature-split > .section-content > .field--name-field-section-heading,
