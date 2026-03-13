@@ -2574,6 +2574,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: block;
   object-fit: cover;
   object-position: center center;
+  filter: blur(6px);
+  transform: scale(1.03);
 }
 
 .paragraph--type--cta-section > .field--name-field-section-heading {
@@ -2583,10 +2585,11 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 .paragraph--type--cta-section > .field--name-field-section-heading .field__item {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
+  font-weight: 700 !important;
+  font-size: 28px !important;
   line-height: 32px;
   letter-spacing: 0;
+  text-transform: none !important;
   color: var(--color-text-heading);
 }
 
@@ -2639,11 +2642,6 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   .paragraph--type--cta-section {
     padding-top: var(--space-600);
     padding-bottom: var(--space-600);
-  }
-
-  .paragraph--type--cta-section > .field--name-field-background-image img {
-    filter: blur(8px);
-    transform: scale(1.04);
   }
 
   .paragraph--type--cta-section > .field--name-field-cta-link {
