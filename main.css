@@ -500,14 +500,17 @@ p,
 
 /* Meta styles for captions and breadcrumbs (small text) */
 
+.text--meta-caption,
 .text--meta-caption * {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.01em;
+  color: var(--color-text-subdued-strong);
 }
 
+.text--meta-breadcrumb,
 .text--meta-breadcrumb * {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -638,11 +641,10 @@ address,
 }
 
 /* Small caption */
-.small.text-muted,
 .caption-small {
   font-size: 12px;
   line-height: 16px;
-  color: var(--color-text-subdued-soft);
+  color: var(--color-text-subdued-strong);
 }
 
 /* Emphasis mark */
