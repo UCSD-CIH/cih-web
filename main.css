@@ -4,6 +4,144 @@
 =================================== */
 
 /* ===================================
+   Scott Parish Funding Opportunity Cards
+=================================== */
+
+.view-reach-funding-opportunities .view-content,
+.view-id-reach_funding_opportunities .view-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-300);
+  margin-top: var(--space-400);
+}
+
+.view-reach-funding-opportunities .views-row,
+.view-id-reach_funding_opportunities .views-row {
+  min-width: 0;
+}
+
+.funding-opportunity-card {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  color: var(--color-text-paragraph);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  padding: var(--space-300);
+}
+
+.funding-opportunity-card .content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.funding-opportunity-card .field__label {
+  display: none;
+}
+
+.main-container .funding-opportunity-card h2,
+.main-container .funding-opportunity-card h2 a {
+  margin: 0;
+  color: var(--color-text-heading);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 24px !important;
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: none !important;
+}
+
+.funding-opportunity-card h2 a:hover {
+  text-decoration: underline;
+}
+
+.funding-opportunity-card h2 a:focus-visible,
+.funding-opportunity-card__cta a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+.funding-opportunity-card__content {
+  margin-top: var(--space-200);
+}
+
+.funding-opportunity-card__content .field--name-field-short-summary {
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.funding-opportunity-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+  margin-top: var(--space-250);
+}
+
+.funding-opportunity-card__meta .field--name-field-mechanism {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-075) var(--space-150);
+  border: var(--border-050) solid var(--color-border-blue);
+  border-radius: var(--radius-999);
+  background-color: var(--color-bg-lightest);
+  color: var(--color-text-blue);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+}
+
+.funding-opportunity-card__meta .field--name-field-application-due-date {
+  color: var(--color-text-subdued-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.funding-opportunity-card__meta .field--name-field-primary-center {
+  display: none;
+}
+
+.funding-opportunity-card__cta {
+  margin-top: auto;
+  padding-top: var(--space-250);
+}
+
+.funding-opportunity-card__cta a {
+  color: var(--color-text-blue) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.funding-opportunity-card__cta a:hover {
+  color: var(--color-text-navy) !important;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .view-reach-funding-opportunities .view-content,
+  .view-id-reach_funding_opportunities .view-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ===================================
   MASTER CSS FILE BEGINS - DO NOT MODIFY CODE BELOW HERE - COMMIT TO GIT FIRST
 =================================== */
 
