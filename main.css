@@ -4,7 +4,7 @@
 =================================== */
 
 /* ===================================
-   Scott Parish Funding Opportunity Cards
+   Scotty Funding Opportunity Cards
 =================================== */
 
 .view-reach-funding-opportunities .view-content,
@@ -42,6 +42,39 @@
   flex-direction: column;
   min-height: 0;
   height: 100%;
+}
+
+.funding-opportunity-card .field--name-field-mechanism {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin: 0 0 var(--space-150) 0;
+  padding: var(--space-075) var(--space-150);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  border-radius: var(--radius-999);
+  background-color: transparent;
+  color: var(--color-text-disabled-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.funding-opportunity-card .field--name-field-application-due-date {
+  margin: 0 0 var(--space-200) 0;
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.funding-opportunity-card .field--name-field-application-due-date .field__label {
+  display: inline;
+  margin-right: var(--space-050);
+  color: inherit;
+  font: inherit;
 }
 
 .main-container .funding-opportunity-card h2,
@@ -89,30 +122,13 @@
 }
 
 .funding-opportunity-card__meta .field--name-field-mechanism {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--space-075) var(--space-150);
-  border: var(--border-050) solid var(--color-border-disabled-soft);
-  border-radius: var(--radius-999);
-  background-color: transparent;
-  color: var(--color-text-disabled-strong);
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0.01em;
+  margin: 0;
 }
 
 .funding-opportunity-card__meta .field--name-field-application-due-date {
-  color: var(--color-text-subdued-strong);
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-}
-
-.funding-opportunity-card__meta .field--name-field-application-due-date .field__label {
-  display: none;
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .funding-opportunity-card__meta .field--name-field-primary-center {
@@ -1211,7 +1227,7 @@ code.bg-light {
   margin-top: var(--space-600);
 }
 
-/* Scott Parish - Breadcrumbs + UAM alignment in hero region */
+/* Scotty - Breadcrumbs + UAM alignment in hero region */
 .region-highlighted {
   width: 100%;
   max-width: 1200px;
