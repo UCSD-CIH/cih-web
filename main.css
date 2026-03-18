@@ -17,6 +17,8 @@
 
 .view-reach-funding-opportunities .views-row,
 .view-id-reach_funding_opportunities .views-row {
+  display: flex;
+  height: auto;
   min-width: 0;
 }
 
@@ -30,6 +32,7 @@
   height: 100%;
   min-width: 0;
   padding: var(--space-300);
+  width: 100%;
 }
 
 .funding-opportunity-card .content {
@@ -37,10 +40,6 @@
   flex: 1;
   flex-direction: column;
   min-height: 100%;
-}
-
-.funding-opportunity-card .field__label {
-  display: none;
 }
 
 .main-container .funding-opportunity-card h2,
@@ -91,15 +90,15 @@
   display: inline-flex;
   align-items: center;
   padding: var(--space-075) var(--space-150);
-  border: var(--border-050) solid var(--color-border-blue);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
   border-radius: var(--radius-999);
-  background-color: var(--color-bg-lightest);
-  color: var(--color-text-blue);
+  background-color: transparent;
+  color: var(--color-text-disabled-strong);
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 16px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
 }
 
 .funding-opportunity-card__meta .field--name-field-application-due-date {
@@ -108,6 +107,10 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
+}
+
+.funding-opportunity-card__meta .field--name-field-application-due-date .field__label {
+  display: none;
 }
 
 .funding-opportunity-card__meta .field--name-field-primary-center {
@@ -130,6 +133,27 @@
 }
 
 .funding-opportunity-card__cta a:hover {
+  color: var(--color-text-navy) !important;
+  text-decoration: none;
+}
+
+.funding-opportunity-card .field--name-field-external-link {
+  margin-top: auto;
+  padding-top: var(--space-250);
+}
+
+.funding-opportunity-card .field--name-field-external-link a {
+  color: var(--color-text-blue) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.funding-opportunity-card .field--name-field-external-link a:hover {
   color: var(--color-text-navy) !important;
   text-decoration: none;
 }
