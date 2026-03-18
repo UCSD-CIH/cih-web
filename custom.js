@@ -1397,6 +1397,44 @@
     }
   };
 
+  // Forces Funding Opportunity external links to render as a consistent CTA label.
+  Drupal.behaviors.fundingOpportunityCardCtaLabel = {
+    attach: function (context) {
+      once(
+        'fundingOpportunityCardCtaLabel',
+        '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
+        context
+      ).forEach(function (card) {
+        var field = card.querySelector('.field--name-field-external-link');
+        if (!field) return;
+
+        var link = field.querySelector('a[href]');
+        if (!link) return;
+
+        var original = (link.textContent || '').trim();
+        if (original && original.toLowerCase() !== 'learn more') {
+          link.setAttribute('data-original-url', original);
+        }
+
+        var ctaWrap = card.querySelector('.funding-opportunity-card__cta');
+        var content = card.querySelector('.content') || card;
+
+        if (!ctaWrap) {
+          ctaWrap = document.createElement('div');
+          ctaWrap.className = 'funding-opportunity-card__cta';
+          content.appendChild(ctaWrap);
+        }
+
+        if (field.parentNode !== ctaWrap) {
+          ctaWrap.appendChild(field);
+        }
+
+        link.textContent = 'Learn More';
+        card.classList.add('is-cta-ready');
+      });
+    }
+  };
+
   // Aligns Programs card field order with Study cards by moving format above title.
   Drupal.behaviors.programCardsFormatBeforeTitle = {
     attach: function (context) {

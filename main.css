@@ -11,13 +11,14 @@
 .view-id-reach_funding_opportunities .view-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-300);
+  gap: var(--space-400);
   margin-top: var(--space-400);
 }
 
 .view-reach-funding-opportunities .views-row,
 .view-id-reach_funding_opportunities .views-row {
   display: flex;
+  align-items: stretch;
   height: auto;
   min-width: 0;
 }
@@ -39,7 +40,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 0;
+  height: 100%;
 }
 
 .main-container .funding-opportunity-card h2,
@@ -118,8 +120,11 @@
 }
 
 .funding-opportunity-card__cta {
+  display: flex;
+  flex-direction: column;
   margin-top: auto;
   padding-top: var(--space-250);
+  min-height: 0;
 }
 
 .funding-opportunity-card__cta a {
@@ -138,8 +143,20 @@
 }
 
 .funding-opportunity-card .field--name-field-external-link {
-  margin-top: auto;
+  margin-top: 0;
   padding-top: var(--space-250);
+}
+
+.funding-opportunity-card__cta > .field--name-field-external-link {
+  padding-top: 0;
+}
+
+html.js .funding-opportunity-card .field--name-field-external-link {
+  visibility: hidden;
+}
+
+html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link {
+  visibility: visible;
 }
 
 .funding-opportunity-card .field--name-field-external-link a {
