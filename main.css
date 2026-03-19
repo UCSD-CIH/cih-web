@@ -160,7 +160,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
-  margin-top: var(--space-250);
+  margin-top: 0;
 }
 
 .funding-opportunity-card__meta .field--name-field-mechanism {
