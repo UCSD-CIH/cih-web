@@ -2149,6 +2149,23 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: none;
 }
 
+.paragraph--type--feature-split :is(
+  .field--name-field-layout-variant,
+  .field--name-field-layout_variant,
+  .field--name-field-width-variant,
+  .field--name-field-width_variant,
+  .field--name-field-mobile-order,
+  .field--name-field-mobile_order,
+  .field--name-field-split-layout,
+  .field--name-field-split_layout,
+  .field--name-field-split-width,
+  .field--name-field-split_width,
+  .field--name-field-split-mobile-order,
+  .field--name-field-split-mobile_order
+) {
+  display: none !important;
+}
+
 /* Top divider should span both columns on split paragraph layouts. */
 .paragraph--type--feature-split > :is(.field--name-field-show-top-divider, .section-divider) {
   grid-column: 1 / -1;

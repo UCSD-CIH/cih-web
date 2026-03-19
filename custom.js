@@ -1670,13 +1670,13 @@
     attach: function (context) {
       once('featureSplitVariantAdapter', '.paragraph--type--feature-split', context).forEach(function (split) {
         var layoutField = split.querySelector(
-          '.field--name-field-layout-variant, .field--name-field-layout_variant, [data-field-name="field_layout_variant"]'
+          '.field--name-field-layout-variant, .field--name-field-layout_variant, [data-field-name="field_layout_variant"], .field--name-field-split-layout, .field--name-field-split_layout, [data-field-name="field_split_layout"]'
         );
         var widthField = split.querySelector(
-          '.field--name-field-width-variant, .field--name-field-width_variant, [data-field-name="field_width_variant"]'
+          '.field--name-field-width-variant, .field--name-field-width_variant, [data-field-name="field_width_variant"], .field--name-field-split-width, .field--name-field-split_width, [data-field-name="field_split_width"]'
         );
         var mobileOrderField = split.querySelector(
-          '.field--name-field-mobile-order, .field--name-field-mobile_order, [data-field-name="field_mobile_order"]'
+          '.field--name-field-mobile-order, .field--name-field-mobile_order, [data-field-name="field_mobile_order"], .field--name-field-split-mobile-order, .field--name-field-split-mobile_order, [data-field-name="field_split_mobile_order"]'
         );
 
         function getFieldText(fieldEl) {
