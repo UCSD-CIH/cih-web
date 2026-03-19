@@ -1397,6 +1397,62 @@
     }
   };
 
+  function buildLocalEndOfDay(year, monthIndex, day) {
+    return new Date(year, monthIndex, day, 23, 59, 59, 999);
+  }
+
+  function parseFundingOpportunityDueDate(card) {
+    if (!card) return null;
+
+    var field = card.querySelector('.field--name-field-application-due-date');
+    if (!field) return null;
+
+    var timeEl = field.querySelector('time[datetime]');
+    var datetime = timeEl ? (timeEl.getAttribute('datetime') || '').trim() : '';
+    var match;
+
+    if (datetime) {
+      match = datetime.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if (match) {
+        return buildLocalEndOfDay(
+          parseInt(match[1], 10),
+          parseInt(match[2], 10) - 1,
+          parseInt(match[3], 10)
+        );
+      }
+
+      var parsedDatetime = new Date(datetime);
+      if (!isNaN(parsedDatetime.getTime())) return parsedDatetime;
+    }
+
+    var text = (field.textContent || '')
+      .replace(/\s+/g, ' ')
+      .replace(/^application due date\s*/i, '')
+      .trim();
+
+    if (!text) return null;
+
+    match = text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (match) {
+      return buildLocalEndOfDay(
+        parseInt(match[3], 10),
+        parseInt(match[1], 10) - 1,
+        parseInt(match[2], 10)
+      );
+    }
+
+    var parsedText = new Date(text);
+    if (!isNaN(parsedText.getTime())) {
+      return buildLocalEndOfDay(
+        parsedText.getFullYear(),
+        parsedText.getMonth(),
+        parsedText.getDate()
+      );
+    }
+
+    return null;
+  }
+
   // Forces Funding Opportunity external links to render as a consistent CTA label.
   Drupal.behaviors.fundingOpportunityCardCtaLabel = {
     attach: function (context) {
@@ -1431,6 +1487,28 @@
 
         link.textContent = 'Learn More';
         card.classList.add('is-cta-ready');
+        });
+    }
+  };
+
+  // Hides Funding Opportunity cards after their due date passes.
+  Drupal.behaviors.fundingOpportunityCardHideExpired = {
+    attach: function (context) {
+      once(
+        'fundingOpportunityCardHideExpired',
+        '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
+        context
+      ).forEach(function (card) {
+        var dueDate = parseFundingOpportunityDueDate(card);
+        if (!dueDate) return;
+
+        var now = new Date();
+        var row = card.closest('.views-row');
+        var target = row || card;
+        var isExpired = dueDate.getTime() < now.getTime();
+
+        target.style.display = isExpired ? 'none' : '';
+        card.setAttribute('data-funding-expired', isExpired ? 'true' : 'false');
       });
     }
   };
