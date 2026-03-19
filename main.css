@@ -4090,17 +4090,21 @@ body:has(
   right: var(--space-100);
   z-index: 2;
   order: 20;
+  margin: 0;
 }
 
-.resource-card .field--name-field-resource-type .field__item,
-.resource-card .field--name-field-resource-categories .field__item {
-  display: inline-flex;
+.resource-card .field--name-field-resource-type .field__items,
+.resource-card .field--name-field-resource-categories .field__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-075);
+  margin: 0;
+  padding: 0;
 }
 
 .resource-card .field--name-field-resource-type .field__item a,
 .resource-card .field--name-field-resource-type .field__item,
-.resource-card .field--name-field-resource-categories .field__item a,
-.resource-card .field--name-field-resource-categories .field__item {
+.resource-card .field--name-field-resource-type .field__item {
   display: inline-flex;
   align-items: center;
   font-family: 'Inter', sans-serif;
@@ -4109,6 +4113,7 @@ body:has(
   letter-spacing: 0.03em;
   text-decoration: none;
   border-radius: var(--radius-999);
+  white-space: nowrap;
 }
 
 .resource-card .field--name-field-resource-type .field__item a,
@@ -4118,6 +4123,25 @@ body:has(
   color: var(--color-text-subdued-strong);
   background-color: rgba(255, 255, 255, 0.92);
   border: var(--border-050) solid var(--color-border-disabled-soft);
+  box-shadow: none;
+}
+
+.resource-card .field--name-field-resource-type .field__item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.resource-card .field--name-field-resource-type .field__item::before,
+.resource-card .field--name-field-resource-type .field__item a::before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: var(--space-050);
+  vertical-align: -0.1em;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
 }
 
 .resource-card .field--name-field-primary-center {
@@ -4186,14 +4210,65 @@ body:has(
   margin-top: var(--space-200);
 }
 
-.resource-card .field--name-field-resource-categories .field__item a,
 .resource-card .field--name-field-resource-categories .field__item {
-  margin: 0 var(--space-075) var(--space-075) 0;
+  margin: 0;
+}
+
+.resource-card .field--name-field-resource-categories .field__item {
+  display: inline-flex;
+}
+
+.resource-card .field--name-field-resource-categories .field__item a,
+.resource-card .field--name-field-resource-categories .field__item > span,
+.resource-card .field--name-field-resource-categories .field__item {
   padding: var(--space-050) var(--space-125);
   font-weight: 400;
   color: var(--color-text-disabled-strong);
   border: var(--border-050) solid var(--color-border-disabled-soft);
   background-color: transparent;
+  border-radius: var(--radius-999);
+  text-decoration: none;
+  line-height: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  box-shadow: none;
+}
+
+.resource-card .field--name-field-resource-categories .field__item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.resource-card .field--name-field-resource-categories .field__item::before,
+.resource-card .field--name-field-resource-categories .field__item a::before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: var(--space-050);
+  vertical-align: -0.1em;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
+}
+
+.resource-card .field--name-field-resource-categories .field__item > span::before {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: var(--space-050);
+  vertical-align: -0.1em;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
+}
+
+.resource-card .field--name-field-resource-type .field__item:hover,
+.resource-card .field--name-field-resource-type .field__item a:hover {
+  background: var(--color-bg-sand-100);
+  border-color: var(--color-border-subdued-strong);
 }
 
 .resource-card .resource-card__cta {
