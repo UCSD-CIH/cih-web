@@ -4276,8 +4276,8 @@ body:has(
   margin-right: var(--space-050);
   vertical-align: -0.1em;
   background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
-          mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
+  -webkit-mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-07/leaf-fill-icon_0.svg") no-repeat center / contain;
 }
 
 .resource-card .field--name-field-resource-type .field__item:hover,
