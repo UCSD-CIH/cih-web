@@ -4311,6 +4311,238 @@ footer.submitted {
   margin-bottom: 0 !important;
 }
 
+/* ===================================
+   FUNDING OPPORTUNITY CARDS
+=================================== */
+
+.view-reach-funding-opportunities .view-content,
+.view-id-reach_funding_opportunities .view-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-400);
+  margin-top: var(--space-400);
+}
+
+.view-reach-funding-opportunities .views-row,
+.view-id-reach_funding_opportunities .views-row {
+  display: flex;
+  align-items: stretch;
+  height: auto;
+  min-width: 0;
+}
+
+.funding-opportunity-card {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  box-shadow: none;
+  color: var(--color-text-paragraph);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  padding: var(--space-300);
+  transform: translateY(0);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.funding-opportunity-card.is-clickable {
+  cursor: pointer;
+}
+
+.funding-opportunity-card:hover,
+.funding-opportunity-card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funding-opportunity-card {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .funding-opportunity-card:hover,
+  .funding-opportunity-card:focus-within {
+    transform: none;
+  }
+}
+
+.funding-opportunity-card .content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.funding-opportunity-card .field--name-field-mechanism {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin: 0 0 var(--space-150) 0;
+  padding: var(--space-075) var(--space-150);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  border-radius: var(--radius-999);
+  background-color: transparent;
+  color: var(--color-text-disabled-strong);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.funding-opportunity-card .field--name-field-application-due-date {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--space-075);
+  margin: var(--space-200) 0 0 0;
+  padding: var(--space-075) var(--space-150);
+  border: var(--border-050) solid var(--color-border-sand);
+  border-radius: var(--radius-999);
+  background-color: var(--color-bg-sand-100);
+  color: var(--color-text-sand);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+}
+
+.funding-opportunity-card .field--name-field-application-due-date::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  background-color: currentColor;
+  -webkit-mask: url("/sites/default/files/2026-03/calendar.svg") no-repeat center / contain;
+  mask: url("/sites/default/files/2026-03/calendar.svg") no-repeat center / contain;
+}
+
+.funding-opportunity-card .field--name-field-application-due-date .field__label {
+  display: none;
+}
+
+.main-container .funding-opportunity-card h2,
+.main-container .funding-opportunity-card h2 a,
+.main-container .funding-opportunity-card h2 a:visited {
+  margin: 0;
+  color: var(--color-text-heading);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 24px !important;
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: none !important;
+}
+
+.main-container .funding-opportunity-card h2 a:hover,
+.main-container .funding-opportunity-card h2 a:focus {
+  color: var(--color-text-heading);
+  text-decoration: underline;
+}
+
+.main-container .funding-opportunity-card h2 a:focus-visible,
+.main-container .funding-opportunity-card__cta a:focus-visible,
+.main-container .funding-opportunity-card .field--name-field-external-link a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+.funding-opportunity-card__content {
+  margin-top: var(--space-200);
+}
+
+.funding-opportunity-card__content .field--name-field-short-summary {
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.funding-opportunity-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+  margin-top: 0;
+}
+
+.funding-opportunity-card__meta .field--name-field-mechanism {
+  margin: 0;
+}
+
+.funding-opportunity-card__meta .field--name-field-application-due-date {
+  margin: 0;
+  padding: var(--space-050) var(--space-125);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.funding-opportunity-card__meta .field--name-field-primary-center {
+  display: none;
+}
+
+.funding-opportunity-card__cta {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: var(--space-250);
+  min-height: 0;
+}
+
+.main-container .funding-opportunity-card__cta a,
+.main-container .funding-opportunity-card .field--name-field-external-link a,
+.main-container .funding-opportunity-card .field--name-field-external-link a:visited {
+  color: var(--color-text-blue) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.main-container .funding-opportunity-card__cta a:hover,
+.main-container .funding-opportunity-card__cta a:focus,
+.main-container .funding-opportunity-card .field--name-field-external-link a:hover,
+.main-container .funding-opportunity-card .field--name-field-external-link a:focus {
+  color: var(--color-text-navy) !important;
+  text-decoration: none;
+}
+
+.funding-opportunity-card .field--name-field-external-link {
+  margin-top: 0;
+  padding-top: var(--space-250);
+}
+
+.funding-opportunity-card__cta > .field--name-field-external-link {
+  padding-top: 0;
+}
+
+html.js .funding-opportunity-card .field--name-field-external-link {
+  visibility: hidden;
+}
+
+html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link {
+  visibility: visible;
+}
+
+@media (max-width: 640px) {
+  .view-reach-funding-opportunities .view-content,
+  .view-id-reach_funding_opportunities .view-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* Study Card: layout ordering */
 .study-card > * { order: 30; }
 .study-card .group--study-status { order: 10; }
@@ -6762,238 +6994,6 @@ footer.submitted {
 .hero--overlay .row {
   padding-left: 0 !important;
   padding-right: 0 !important;
-}
-
-/* ===================================
-   HOME: FUNDING OPPORTUNITY CARDS
-=================================== */
-
-.view-reach-funding-opportunities .view-content,
-.view-id-reach_funding_opportunities .view-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-400);
-  margin-top: var(--space-400);
-}
-
-.view-reach-funding-opportunities .views-row,
-.view-id-reach_funding_opportunities .views-row {
-  display: flex;
-  align-items: stretch;
-  height: auto;
-  min-width: 0;
-}
-
-.funding-opportunity-card {
-  background-color: var(--color-bg-lightest);
-  border: var(--border-050) solid var(--color-border-subdued-strong);
-  border-radius: var(--radius-200);
-  box-shadow: none;
-  color: var(--color-text-paragraph);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-width: 0;
-  padding: var(--space-300);
-  transform: translateY(0);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  width: 100%;
-}
-
-.funding-opportunity-card.is-clickable {
-  cursor: pointer;
-}
-
-.funding-opportunity-card:hover,
-.funding-opportunity-card:focus-within {
-  transform: translateY(-2px);
-  border-color: var(--color-border-strong);
-  box-shadow: var(--shadow-100);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .funding-opportunity-card {
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .funding-opportunity-card:hover,
-  .funding-opportunity-card:focus-within {
-    transform: none;
-  }
-}
-
-.funding-opportunity-card .content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
-  height: 100%;
-}
-
-.funding-opportunity-card .field--name-field-mechanism {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  margin: 0 0 var(--space-150) 0;
-  padding: var(--space-075) var(--space-150);
-  border: var(--border-050) solid var(--color-border-disabled-soft);
-  border-radius: var(--radius-999);
-  background-color: transparent;
-  color: var(--color-text-disabled-strong);
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0.01em;
-}
-
-.funding-opportunity-card .field--name-field-application-due-date {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  gap: var(--space-075);
-  margin: var(--space-200) 0 0 0;
-  padding: var(--space-075) var(--space-150);
-  border: var(--border-050) solid var(--color-border-sand);
-  border-radius: var(--radius-999);
-  background-color: var(--color-bg-sand-100);
-  color: var(--color-text-sand);
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.01em;
-}
-
-.funding-opportunity-card .field--name-field-application-due-date::before {
-  content: "";
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-  background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2026-03/calendar.svg") no-repeat center / contain;
-  mask: url("/sites/default/files/2026-03/calendar.svg") no-repeat center / contain;
-}
-
-.funding-opportunity-card .field--name-field-application-due-date .field__label {
-  display: none;
-}
-
-.main-container .funding-opportunity-card h2,
-.main-container .funding-opportunity-card h2 a,
-.main-container .funding-opportunity-card h2 a:visited {
-  margin: 0;
-  color: var(--color-text-heading);
-  font-family: 'Inter', sans-serif !important;
-  font-size: 20px !important;
-  font-weight: 700 !important;
-  line-height: 24px !important;
-  letter-spacing: 0;
-  text-decoration: none;
-  text-transform: none !important;
-}
-
-.main-container .funding-opportunity-card h2 a:hover,
-.main-container .funding-opportunity-card h2 a:focus {
-  color: var(--color-text-heading);
-  text-decoration: underline;
-}
-
-.main-container .funding-opportunity-card h2 a:focus-visible,
-.main-container .funding-opportunity-card__cta a:focus-visible,
-.main-container .funding-opportunity-card .field--name-field-external-link a:focus-visible {
-  outline: 2px solid var(--color-bg-blue-100);
-  outline-offset: 2px;
-  text-decoration: none;
-}
-
-.funding-opportunity-card__content {
-  margin-top: var(--space-200);
-}
-
-.funding-opportunity-card__content .field--name-field-short-summary {
-  color: var(--color-text-paragraph);
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-.funding-opportunity-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-100);
-  margin-top: 0;
-}
-
-.funding-opportunity-card__meta .field--name-field-mechanism {
-  margin: 0;
-}
-
-.funding-opportunity-card__meta .field--name-field-application-due-date {
-  margin: 0;
-  padding: var(--space-050) var(--space-125);
-  font-size: 12px;
-  line-height: 20px;
-}
-
-.funding-opportunity-card__meta .field--name-field-primary-center {
-  display: none;
-}
-
-.funding-opportunity-card__cta {
-  display: flex;
-  flex-direction: column;
-  margin-top: auto;
-  padding-top: var(--space-250);
-  min-height: 0;
-}
-
-.main-container .funding-opportunity-card__cta a,
-.main-container .funding-opportunity-card .field--name-field-external-link a,
-.main-container .funding-opportunity-card .field--name-field-external-link a:visited {
-  color: var(--color-text-blue) !important;
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  overflow-wrap: anywhere;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.main-container .funding-opportunity-card__cta a:hover,
-.main-container .funding-opportunity-card__cta a:focus,
-.main-container .funding-opportunity-card .field--name-field-external-link a:hover,
-.main-container .funding-opportunity-card .field--name-field-external-link a:focus {
-  color: var(--color-text-navy) !important;
-  text-decoration: none;
-}
-
-.funding-opportunity-card .field--name-field-external-link {
-  margin-top: 0;
-  padding-top: var(--space-250);
-}
-
-.funding-opportunity-card__cta > .field--name-field-external-link {
-  padding-top: 0;
-}
-
-html.js .funding-opportunity-card .field--name-field-external-link {
-  visibility: hidden;
-}
-
-html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link {
-  visibility: visible;
-}
-
-@media (max-width: 640px) {
-  .view-reach-funding-opportunities .view-content,
-  .view-id-reach_funding_opportunities .view-content {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 /* ===================================
