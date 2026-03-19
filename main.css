@@ -4091,22 +4091,9 @@ body:has(
   z-index: 2;
   order: 20;
   margin: 0;
-}
-
-.resource-card .field--name-field-resource-type .field__items,
-.resource-card .field--name-field-resource-categories .field__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-075);
-  margin: 0;
-  padding: 0;
-}
-
-.resource-card .field--name-field-resource-type .field__item {
   display: inline-flex;
   align-items: center;
   gap: var(--space-050);
-  margin: 0;
   padding: var(--space-075) var(--space-150);
   border: var(--border-050) solid var(--color-border-disabled-soft);
   border-radius: var(--radius-999);
@@ -4121,12 +4108,38 @@ body:has(
   color: var(--color-text-subdued-strong);
 }
 
-.resource-card .field--name-field-resource-type .field__item > a,
-.resource-card .field--name-field-resource-type .field__item > span,
-.resource-card .field--name-field-resource-type .field__item {
-  box-shadow: none;
+.resource-card .field--name-field-resource-type .field__items,
+.resource-card .field--name-field-resource-categories .field__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-075);
+  margin: 0;
+  padding: 0;
 }
 
+.resource-card .field--name-field-resource-type .field__item {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  display: contents;
+}
+
+.resource-card .field--name-field-resource-type > a,
+.resource-card .field--name-field-resource-type .field__item > a,
+.resource-card .field--name-field-resource-type > span,
+.resource-card .field--name-field-resource-type .field__item > span,
+.resource-card .field--name-field-resource-type .field__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
+  box-shadow: none;
+  color: inherit;
+}
+
+.resource-card .field--name-field-resource-type > a,
+.resource-card .field--name-field-resource-type > span,
 .resource-card .field--name-field-resource-type .field__item > a,
 .resource-card .field--name-field-resource-type .field__item > span {
   display: inline;
@@ -4137,6 +4150,8 @@ body:has(
   color: inherit;
 }
 
+.resource-card .field--name-field-resource-type > a::before,
+.resource-card .field--name-field-resource-type > span::before,
 .resource-card .field--name-field-resource-type .field__item > a::before,
 .resource-card .field--name-field-resource-type .field__item > span::before,
 .resource-card .field--name-field-resource-type .field__item::before {
@@ -4233,6 +4248,7 @@ body:has(
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .resource-card .field--name-field-resource-categories .field__item > a,
@@ -4243,7 +4259,9 @@ body:has(
 
 .resource-card .field--name-field-resource-categories .field__item > a,
 .resource-card .field--name-field-resource-categories .field__item > span {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-050);
   padding: 0;
   border: 0;
   background: transparent;
