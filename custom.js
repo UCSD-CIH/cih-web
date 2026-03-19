@@ -1435,6 +1435,53 @@
     }
   };
 
+  // Aligns Funding Opportunity card field order with other cards by moving mechanism above title.
+  Drupal.behaviors.fundingOpportunityCardMechanismBeforeTitle = {
+    attach: function (context) {
+      once(
+        'fundingOpportunityCardMechanismBeforeTitle',
+        '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
+        context
+      ).forEach(function (card) {
+        var mechanism = card.querySelector('.field--name-field-mechanism');
+        var title = card.querySelector('h2');
+        if (!mechanism || !title) return;
+
+        if (mechanism.parentNode === card && mechanism.nextElementSibling === title) return;
+
+        title.parentNode.insertBefore(mechanism, title);
+      });
+    }
+  };
+
+  // Makes the Funding Opportunity card body clickable while preserving native link behavior.
+  Drupal.behaviors.fundingOpportunityCardClickable = {
+    attach: function (context) {
+      once(
+        'fundingOpportunityCardClickable',
+        '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
+        context
+      ).forEach(function (card) {
+        var ctaLink = card.querySelector('.field--name-field-external-link a[href]');
+        if (!ctaLink) return;
+
+        card.classList.add('is-clickable');
+
+        card.addEventListener('click', function (event) {
+          if (event.defaultPrevented) return;
+
+          var selection = window.getSelection ? window.getSelection() : null;
+          if (selection && String(selection).trim()) return;
+
+          var interactive = event.target.closest('a, button, input, select, textarea, summary, [role="button"]');
+          if (interactive) return;
+
+          ctaLink.click();
+        });
+      });
+    }
+  };
+
   // Aligns Programs card field order with Study cards by moving format above title.
   Drupal.behaviors.programCardsFormatBeforeTitle = {
     attach: function (context) {
