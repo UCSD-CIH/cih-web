@@ -4267,8 +4267,7 @@ body:has(
 }
 
 .resource-card .field--name-field-resource-categories .field__item > a::before,
-.resource-card .field--name-field-resource-categories .field__item > span::before,
-.resource-card .field--name-field-resource-categories .field__item::before {
+.resource-card .field--name-field-resource-categories .field__item > span::before {
   content: "";
   display: inline-block;
   width: 0.9em;
