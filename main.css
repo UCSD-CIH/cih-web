@@ -4086,8 +4086,8 @@ body:has(
 
 .resource-card .field--name-field-resource-type {
   position: absolute;
-  top: var(--space-100);
-  right: var(--space-100);
+  top: calc(var(--space-250) + var(--space-100));
+  right: calc(var(--space-250) + var(--space-100));
   z-index: 2;
   order: 20;
   margin: 0;
@@ -4102,22 +4102,16 @@ body:has(
   padding: 0;
 }
 
-.resource-card .field--name-field-resource-type .field__item a,
-.resource-card .field--name-field-resource-type .field__item,
 .resource-card .field--name-field-resource-type .field__item {
   display: inline-flex;
   align-items: center;
+  padding: var(--space-075) var(--space-150);
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.03em;
-  text-decoration: none;
   border-radius: var(--radius-999);
   white-space: nowrap;
-}
-
-.resource-card .field--name-field-resource-type .field__item a,
-.resource-card .field--name-field-resource-type .field__item {
   padding: var(--space-075) var(--space-150);
   font-weight: 500;
   color: var(--color-text-subdued-strong);
@@ -4126,13 +4120,7 @@ body:has(
   box-shadow: none;
 }
 
-.resource-card .field--name-field-resource-type .field__item a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.resource-card .field--name-field-resource-type .field__item::before,
-.resource-card .field--name-field-resource-type .field__item a::before {
+.resource-card .field--name-field-resource-type .field__item::before {
   content: "";
   display: inline-block;
   width: 0.9em;
@@ -4212,15 +4200,8 @@ body:has(
 
 .resource-card .field--name-field-resource-categories .field__item {
   margin: 0;
-}
-
-.resource-card .field--name-field-resource-categories .field__item {
   display: inline-flex;
-}
-
-.resource-card .field--name-field-resource-categories .field__item a,
-.resource-card .field--name-field-resource-categories .field__item > span,
-.resource-card .field--name-field-resource-categories .field__item {
+  align-items: center;
   padding: var(--space-050) var(--space-125);
   font-weight: 400;
   color: var(--color-text-disabled-strong);
@@ -4235,25 +4216,7 @@ body:has(
   box-shadow: none;
 }
 
-.resource-card .field--name-field-resource-categories .field__item a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.resource-card .field--name-field-resource-categories .field__item::before,
-.resource-card .field--name-field-resource-categories .field__item a::before {
-  content: "";
-  display: inline-block;
-  width: 0.9em;
-  height: 0.9em;
-  margin-right: var(--space-050);
-  vertical-align: -0.1em;
-  background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
-          mask: url("/sites/default/files/2025-08/tag-fill-icon.svg") no-repeat center / contain;
-}
-
-.resource-card .field--name-field-resource-categories .field__item > span::before {
+.resource-card .field--name-field-resource-categories .field__item::before {
   content: "";
   display: inline-block;
   width: 0.9em;
@@ -4266,7 +4229,7 @@ body:has(
 }
 
 .resource-card .field--name-field-resource-type .field__item:hover,
-.resource-card .field--name-field-resource-type .field__item a:hover {
+.resource-card .field--name-field-resource-type .field__item:hover {
   background: var(--color-bg-sand-100);
   border-color: var(--color-border-subdued-strong);
 }
