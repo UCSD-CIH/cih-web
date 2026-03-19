@@ -4104,22 +4104,39 @@ body:has(
 
 .resource-card .field--name-field-resource-type .field__item {
   display: inline-flex;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.resource-card .field--name-field-resource-type .field__item > a,
+.resource-card .field--name-field-resource-type .field__item > span,
+.resource-card .field--name-field-resource-type .field__item {
   align-items: center;
-  padding: var(--space-075) var(--space-150);
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.03em;
   border-radius: var(--radius-999);
   white-space: nowrap;
-  padding: var(--space-075) var(--space-150);
   font-weight: 500;
   color: var(--color-text-subdued-strong);
-  background-color: rgba(255, 255, 255, 0.92);
-  border: var(--border-050) solid var(--color-border-disabled-soft);
   box-shadow: none;
 }
 
+.resource-card .field--name-field-resource-type .field__item > a,
+.resource-card .field--name-field-resource-type .field__item > span {
+  display: inline-flex;
+  padding: var(--space-075) var(--space-150);
+  background-color: rgba(255, 255, 255, 0.92);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  text-decoration: none;
+}
+
+.resource-card .field--name-field-resource-type .field__item > a::before,
+.resource-card .field--name-field-resource-type .field__item > span::before,
 .resource-card .field--name-field-resource-type .field__item::before {
   content: "";
   display: inline-block;
@@ -4201,14 +4218,18 @@ body:has(
 .resource-card .field--name-field-resource-categories .field__item {
   margin: 0;
   display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.resource-card .field--name-field-resource-categories .field__item > a,
+.resource-card .field--name-field-resource-categories .field__item > span,
+.resource-card .field--name-field-resource-categories .field__item {
   align-items: center;
-  padding: var(--space-050) var(--space-125);
   font-weight: 400;
   color: var(--color-text-disabled-strong);
-  border: var(--border-050) solid var(--color-border-disabled-soft);
-  background-color: transparent;
-  border-radius: var(--radius-999);
-  text-decoration: none;
   line-height: 16px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -4216,6 +4237,18 @@ body:has(
   box-shadow: none;
 }
 
+.resource-card .field--name-field-resource-categories .field__item > a,
+.resource-card .field--name-field-resource-categories .field__item > span {
+  display: inline-flex;
+  padding: var(--space-050) var(--space-125);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  background-color: transparent;
+  border-radius: var(--radius-999);
+  text-decoration: none;
+}
+
+.resource-card .field--name-field-resource-categories .field__item > a::before,
+.resource-card .field--name-field-resource-categories .field__item > span::before,
 .resource-card .field--name-field-resource-categories .field__item::before {
   content: "";
   display: inline-block;
@@ -4229,7 +4262,8 @@ body:has(
 }
 
 .resource-card .field--name-field-resource-type .field__item:hover,
-.resource-card .field--name-field-resource-type .field__item:hover {
+.resource-card .field--name-field-resource-type .field__item > a:hover,
+.resource-card .field--name-field-resource-type .field__item > span:hover {
   background: var(--color-bg-sand-100);
   border-color: var(--color-border-subdued-strong);
 }
