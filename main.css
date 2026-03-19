@@ -4235,20 +4235,10 @@ body:has(
 .resource-card .field--name-field-resource-categories .field__item {
   margin: 0;
   display: inline-flex;
-  align-items: center;
-  gap: var(--space-050);
-  padding: var(--space-050) var(--space-125);
-  border: var(--border-050) solid var(--color-border-disabled-soft);
-  border-radius: var(--radius-999);
+  padding: 0;
+  border: 0;
   background: transparent;
   box-shadow: none;
-  font-weight: 400;
-  color: var(--color-text-disabled-strong);
-  line-height: 16px;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
 }
 
 .resource-card .field--name-field-resource-categories .field__item > a,
@@ -4262,11 +4252,18 @@ body:has(
   display: inline-flex;
   align-items: center;
   gap: var(--space-050);
-  padding: 0;
-  border: 0;
+  padding: var(--space-075) var(--space-150);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  border-radius: var(--radius-999);
   background: transparent;
   text-decoration: none;
-  color: inherit;
+  color: var(--color-text-disabled-strong);
+  line-height: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 .resource-card .field--name-field-resource-categories .field__item > a::before,
