@@ -1910,7 +1910,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   width: min(100%, var(--text-section-shell-width));
   margin: 0 auto;
   display: grid;
-  row-gap: var(--space-300);
+  row-gap: var(--space-200);
 }
 
 .paragraph--type--text-section .field__label,
@@ -1924,7 +1924,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 }
 
 .paragraph--type--text-section > .field--name-field-show-top-divider.is-on {
-  margin: var(--space-800) 0;
+  margin: var(--space-600) 0 var(--space-400) 0;
 }
 
 .paragraph--type--text-section > .field--name-field-section-heading,
@@ -1980,8 +1980,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 .paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item p {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 20px !important;
+  line-height: 32px !important;
   letter-spacing: -0.005em;
 }
 
@@ -2013,11 +2013,14 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 .paragraph--type--text-section.text-section--callout > .field--name-field-show-top-divider {
   grid-column: 1 / -1;
   grid-row: 1;
+  display: block !important;
 }
 
 .paragraph--type--text-section.text-section--callout > .field--name-field-section-heading,
 .paragraph--type--text-section.text-section--callout > .field--name-field-intro-text {
   grid-column: 3;
+  width: 100%;
+  max-width: 758px;
 }
 
 .paragraph--type--text-section.text-section--callout > .field--name-field-section-heading {
@@ -2032,21 +2035,29 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 .paragraph--type--text-section.text-section--callout > .field--name-field-section-heading.field__item,
 .paragraph--type--text-section.text-section--callout > .field--name-field-section-heading .field__item {
+  margin: 0;
   font-family: 'Inter', sans-serif;
   font-weight: 700 !important;
   font-size: 28px !important;
   line-height: 32px;
   letter-spacing: 0;
   text-transform: none !important;
+  text-align: left;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-intro-text {
+  justify-self: center;
 }
 
 .paragraph--type--text-section.text-section--callout > .field--name-field-intro-text .field__item,
 .paragraph--type--text-section.text-section--callout > .field--name-field-intro-text .field__item p {
+  margin: 0;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0;
+  text-align: left;
 }
 
 .paragraph--type--text-section.text-section--callout.bg-blue {
@@ -2071,7 +2082,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 @media (max-width: 767px) {
   .paragraph--type--text-section {
-    row-gap: var(--space-250);
+    row-gap: var(--space-150);
   }
 
   .paragraph--type--text-section.text-section--callout {
