@@ -4767,10 +4767,10 @@ footer.submitted {
   align-self: flex-start;
   margin: 0;
   padding: var(--space-100) var(--space-150);
-  border: var(--border-050) solid var(--color-border-disabled-soft);
+  border: var(--border-050) solid var(--color-border-sand);
   border-radius: var(--radius-999);
   background-color: transparent;
-  color: var(--color-text-disabled-strong);
+  color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
