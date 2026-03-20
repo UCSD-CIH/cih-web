@@ -1998,6 +1998,10 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   letter-spacing: 0;
 }
 
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text.field__item,
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text.field__item p,
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text.field__item span,
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text.field__item *,
 .paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item,
 .paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item p,
 .paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item span,
