@@ -5172,9 +5172,9 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   height: 1.35em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2025-07/plus-circle-fill-icon_1_0.svg") no-repeat center;
+  -webkit-mask: url("/sites/default/files/2026-03/plus-circle-fill.svg") no-repeat center;
   -webkit-mask-size: contain;
-  mask: url("/sites/default/files/2025-07/plus-circle-fill-icon_1_0.svg") no-repeat center;
+  mask: url("/sites/default/files/2026-03/plus-circle-fill.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
 }
@@ -5191,9 +5191,9 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   height: 1.35em;
   margin-right: 0.4em;
   background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2025-07/check-circle-fill-icon_0.svg") no-repeat center;
+  -webkit-mask: url("/sites/default/files/2025-07/check-circle-fill-icon.svg") no-repeat center;
   -webkit-mask-size: contain;
-  mask: url("/sites/default/files/2025-07/check-circle-fill-icon_0.svg") no-repeat center;
+  mask: url("/sites/default/files/2025-07/check-circle-fill-icon.svg") no-repeat center;
   mask-size: contain;
   vertical-align: middle;
 }
