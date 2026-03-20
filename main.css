@@ -2792,7 +2792,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  margin-top: var(--space-500);
+  margin-top: var(--space-800);
   padding: var(--space-800) var(--space-300);
   overflow: hidden;
   display: grid;
