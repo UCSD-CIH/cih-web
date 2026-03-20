@@ -2028,6 +2028,9 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   grid-row: 2 / 4;
   width: 16px;
   align-self: stretch;
+  margin-top: var(--space-075);
+  margin-bottom: var(--space-050);
+  border-radius: var(--radius-025);
   background-color: var(--text-section-accent-color);
 }
 
