@@ -1910,6 +1910,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   width: min(100%, var(--text-section-shell-width));
   margin: 0 auto;
   display: grid;
+  justify-items: center;
   row-gap: var(--space-200);
 }
 
@@ -1923,14 +1924,35 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   display: none;
 }
 
-.paragraph--type--text-section > .field--name-field-show-top-divider.is-on {
+.paragraph--type--text-section > .field--name-field-show-top-divider {
+  width: 100%;
+  justify-self: stretch;
+  font-size: 0;
+  line-height: 0;
+}
+
+.paragraph--type--text-section:not(.text-section--callout) > .field--name-field-show-top-divider:not(.is-off) {
+  display: block;
   margin: var(--space-600) 0 var(--space-400) 0;
+}
+
+.paragraph--type--text-section:not(.text-section--callout) > .field--name-field-show-top-divider:not(.is-off)::before {
+  content: "";
+  display: block;
+  border-top: var(--border-050) solid var(--color-border-subdued-strong);
+}
+
+.paragraph--type--text-section > .field--name-field-show-top-divider.is-off {
+  display: none !important;
+  margin: 0 !important;
 }
 
 .paragraph--type--text-section > .field--name-field-section-heading,
 .paragraph--type--text-section > .field--name-field-intro-text {
-  width: min(100%, var(--text-section-max-width));
+  width: 100%;
+  max-width: var(--text-section-max-width);
   margin: 0 auto;
+  justify-self: center;
 }
 
 .paragraph--type--text-section > .field--name-field-section-heading {
@@ -1977,12 +1999,14 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 }
 
 .paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item,
-.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item p {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item p,
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item span,
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item * {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
   font-size: 20px !important;
   line-height: 32px !important;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.005em !important;
 }
 
 .paragraph--type--text-section.text-section--callout {
@@ -2014,6 +2038,16 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   grid-column: 1 / -1;
   grid-row: 1;
   display: block !important;
+  width: 100%;
+  justify-self: stretch;
+  align-self: stretch;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-show-top-divider.is-on::before {
+  content: "";
+  display: block;
+  width: 100%;
+  border-top: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
 .paragraph--type--text-section.text-section--callout > .field--name-field-section-heading,

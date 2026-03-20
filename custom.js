@@ -1789,6 +1789,13 @@
 
         field.classList.remove('is-on', 'is-off');
         field.classList.add(isOn ? 'is-on' : 'is-off');
+
+        if (item) {
+          item.textContent = '';
+          item.setAttribute('aria-hidden', 'true');
+        } else {
+          field.textContent = '';
+        }
       });
     }
   };
