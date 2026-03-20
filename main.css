@@ -105,6 +105,7 @@
   --color-text-disabled-strong: #7A8999;
   --color-text-magenta: #A1357C;
   --color-text-citron: #777100;
+  --color-text-sand-subtle: #7D735F;
   --color-text-sand: #664B14;
   --color-text-on-light: #182B49;
   --color-text-on-dark: #FFFFFF;
@@ -4770,7 +4771,7 @@ footer.submitted {
   border: var(--border-050) solid var(--color-border-sand);
   border-radius: var(--radius-999);
   background-color: transparent;
-  color: var(--color-text-subdued-strong);
+  color: var(--color-text-sand-subtle);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
