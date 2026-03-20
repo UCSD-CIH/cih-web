@@ -1728,6 +1728,10 @@ code.bg-light {
 }
 
 /* If hero is present, hide top page title to avoid duplicate H1s. */
+.field--name-field-page-sections > .field__label {
+  display: none;
+}
+
 body:has(.paragraph--type--hero-full-width) .page-title-container,
 body:has(.paragraph--type--hero-full-width) #page-title,
 body:has(.paragraph--type--hero-full-width) #page-title-full-width-container,
@@ -1892,6 +1896,191 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   box-shadow: none;
   transform: translateY(0);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ===================================
+   NATIVE PARAGRAPHS: TEXT SECTION
+   Supports Default, Lead, and Callout variants
+=================================== */
+
+.paragraph--type--text-section {
+  --text-section-max-width: 100%;
+  --text-section-accent-color: var(--color-bg-turquoise-100);
+  display: grid;
+  row-gap: var(--space-300);
+  margin-top: var(--space-600);
+}
+
+.paragraph--type--text-section .field__label,
+.paragraph--type--text-section :is(
+  .field--name-field-section-style,
+  .field--name-field-section_style,
+  .field--name-field-accent-color,
+  .field--name-field-accent_color
+) {
+  display: none;
+}
+
+.paragraph--type--text-section > .field--name-field-show-top-divider.is-on {
+  margin: var(--space-800) 0;
+}
+
+.paragraph--type--text-section > .field--name-field-section-heading,
+.paragraph--type--text-section > .field--name-field-intro-text {
+  width: min(100%, var(--text-section-max-width));
+  margin: 0 auto;
+}
+
+.paragraph--type--text-section > .field--name-field-section-heading {
+  text-align: center;
+}
+
+.paragraph--type--text-section > .field--name-field-section-heading.field__item,
+.paragraph--type--text-section > .field--name-field-section-heading .field__item {
+  margin: 0;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--text-section > .field--name-field-intro-text,
+.paragraph--type--text-section > .field--name-field-intro-text .field__item,
+.paragraph--type--text-section > .field--name-field-intro-text .field__item p {
+  margin: 0;
+  color: var(--color-text-paragraph);
+}
+
+.paragraph--type--text-section.text-section--default,
+.paragraph--type--text-section.text-section--callout {
+  --text-section-max-width: 758px;
+}
+
+.paragraph--type--text-section.text-section--default > .field--name-field-section-heading.field__item,
+.paragraph--type--text-section.text-section--default > .field--name-field-section-heading .field__item,
+.paragraph--type--text-section.text-section--lead > .field--name-field-section-heading.field__item,
+.paragraph--type--text-section.text-section--lead > .field--name-field-section-heading .field__item {
+  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 48px !important;
+  line-height: 48px;
+  letter-spacing: 0;
+  text-transform: uppercase !important;
+}
+
+.paragraph--type--text-section.text-section--default > .field--name-field-intro-text .field__item,
+.paragraph--type--text-section.text-section--default > .field--name-field-intro-text .field__item p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item,
+.paragraph--type--text-section.text-section--lead > .field--name-field-intro-text .field__item p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -0.005em;
+}
+
+.paragraph--type--text-section.text-section--callout {
+  width: min(100%, 758px);
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: var(--space-300);
+  justify-content: center;
+  align-items: start;
+}
+
+.paragraph--type--text-section.text-section--callout::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 2 / 4;
+  width: 16px;
+  align-self: stretch;
+  background-color: var(--text-section-accent-color);
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-show-top-divider,
+.paragraph--type--text-section.text-section--callout > .field--name-field-section-heading,
+.paragraph--type--text-section.text-section--callout > .field--name-field-intro-text {
+  width: auto;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-show-top-divider {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-section-heading,
+.paragraph--type--text-section.text-section--callout > .field--name-field-intro-text {
+  grid-column: 2;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-section-heading {
+  position: relative;
+  grid-row: 2;
+  text-align: left;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-intro-text {
+  grid-row: 3;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-section-heading.field__item,
+.paragraph--type--text-section.text-section--callout > .field--name-field-section-heading .field__item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+  line-height: 32px;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
+.paragraph--type--text-section.text-section--callout > .field--name-field-intro-text .field__item,
+.paragraph--type--text-section.text-section--callout > .field--name-field-intro-text .field__item p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.paragraph--type--text-section.text-section--callout.bg-blue {
+  --text-section-accent-color: var(--color-bg-blue-100);
+}
+
+.paragraph--type--text-section.text-section--callout.bg-turquoise {
+  --text-section-accent-color: var(--color-bg-turquoise-100);
+}
+
+.paragraph--type--text-section.text-section--callout.bg-gold {
+  --text-section-accent-color: var(--color-bg-gold-100);
+}
+
+.paragraph--type--text-section.text-section--callout.bg-stone {
+  --text-section-accent-color: var(--color-bg-stone-100);
+}
+
+.paragraph--type--text-section.text-section--callout.bg-sand {
+  --text-section-accent-color: var(--color-bg-sand-100);
+}
+
+@media (max-width: 767px) {
+  .paragraph--type--text-section {
+    row-gap: var(--space-250);
+  }
+
+  .paragraph--type--text-section.text-section--default > .field--name-field-section-heading.field__item,
+  .paragraph--type--text-section.text-section--default > .field--name-field-section-heading .field__item,
+  .paragraph--type--text-section.text-section--lead > .field--name-field-section-heading.field__item,
+  .paragraph--type--text-section.text-section--lead > .field--name-field-section-heading .field__item {
+    font-size: 40px !important;
+    line-height: 40px;
+  }
 }
 
 .paragraph--type--card-grid .paragraph--type--grid-card:hover,
@@ -2718,7 +2907,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 .field--name-field-show-top-divider.is-on {
   display: block;
-  margin: var(--space-500) 0;
+  margin: var(--space-800) 0 var(--space-500) 0;
   font-size: 0;
   line-height: 0;
 }

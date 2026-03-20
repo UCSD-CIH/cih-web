@@ -1716,6 +1716,68 @@
     }
   };
 
+  // Fallback for text section variants and accent colors when Twig class mapping is unavailable.
+  Drupal.behaviors.textSectionVariantAdapter = {
+    attach: function (context) {
+      once('textSectionVariantAdapter', '.paragraph--type--text-section', context).forEach(function (section) {
+        var styleField = section.querySelector(
+          '.field--name-field-section-style, .field--name-field-section_style, [data-field-name="field_section_style"]'
+        );
+        var accentField = section.querySelector(
+          '.field--name-field-accent-color, .field--name-field-accent_color, [data-field-name="field_accent_color"]'
+        );
+
+        function getFieldText(fieldEl) {
+          if (!fieldEl) return '';
+          var item = fieldEl.querySelector('.field__item');
+          var raw = item ? item.textContent : fieldEl.textContent;
+          return (raw || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        }
+
+        function hideField(fieldEl) {
+          if (!fieldEl) return;
+          fieldEl.style.display = 'none';
+        }
+
+        var styleText = getFieldText(styleField);
+        var accentText = getFieldText(accentField);
+        var variantClass = 'text-section--default';
+        var accentClass = '';
+
+        if (/lead/.test(styleText)) {
+          variantClass = 'text-section--lead';
+        } else if (/callout/.test(styleText)) {
+          variantClass = 'text-section--callout';
+        }
+
+        if (variantClass === 'text-section--callout') {
+          if (/blue/.test(accentText)) {
+            accentClass = 'bg-blue';
+          } else if (/gold/.test(accentText)) {
+            accentClass = 'bg-gold';
+          } else if (/stone/.test(accentText)) {
+            accentClass = 'bg-stone';
+          } else if (/sand/.test(accentText)) {
+            accentClass = 'bg-sand';
+          } else {
+            accentClass = 'bg-turquoise';
+          }
+        }
+
+        section.classList.remove('text-section--default', 'text-section--lead', 'text-section--callout');
+        section.classList.add(variantClass);
+        section.classList.remove('bg-blue', 'bg-turquoise', 'bg-gold', 'bg-stone', 'bg-sand');
+
+        if (accentClass) {
+          section.classList.add(accentClass);
+        }
+
+        hideField(styleField);
+        hideField(accentField);
+      });
+    }
+  };
+
   // Renders top divider only when boolean field value is enabled.
   Drupal.behaviors.topDividerFieldAdapter = {
     attach: function (context) {
