@@ -4716,8 +4716,8 @@ footer.submitted {
 }
 
 .funding-opportunity-card {
-  background-color: var(--color-bg-lightest);
-  border: var(--border-050) solid var(--color-border-subdued-strong);
+  background-color: var(--color-bg-sand-20);
+  border: var(--border-050) solid var(--color-border-sand);
   border-radius: var(--radius-200);
   box-shadow: none;
   color: var(--color-text-paragraph);
@@ -4766,7 +4766,7 @@ footer.submitted {
   align-items: center;
   align-self: flex-start;
   margin: 0;
-  padding: var(--space-075) var(--space-150);
+  padding: var(--space-100) var(--space-150);
   border: var(--border-050) solid var(--color-border-disabled-soft);
   border-radius: var(--radius-999);
   background-color: transparent;
@@ -4774,8 +4774,9 @@ footer.submitted {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 16px;
+  line-height: 1;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .funding-opportunity-card .field--name-field-application-due-date {
@@ -4784,16 +4785,17 @@ footer.submitted {
   align-self: flex-start;
   gap: var(--space-075);
   margin: 0;
-  padding: var(--space-075) var(--space-150);
+  padding: var(--space-100) var(--space-150);
   border: var(--border-050) solid var(--color-border-sand);
   border-radius: var(--radius-999);
   background-color: var(--color-bg-sand-100);
   color: var(--color-text-sand);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
+  font-weight: 400;
+  line-height: 1;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .funding-opportunity-card .field--name-field-application-due-date::before {
@@ -4816,7 +4818,7 @@ footer.submitted {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-100);
-  margin-bottom: var(--space-150);
+  margin-bottom: var(--space-250);
 }
 
 .main-container .funding-opportunity-card h2,
