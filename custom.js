@@ -1513,21 +1513,36 @@
     }
   };
 
-  // Aligns Funding Opportunity card field order with other cards by moving mechanism above title.
-  Drupal.behaviors.fundingOpportunityCardMechanismBeforeTitle = {
+  // Aligns Funding Opportunity card field order with other cards by moving top badges above the title.
+  Drupal.behaviors.fundingOpportunityCardMetaBeforeTitle = {
     attach: function (context) {
       once(
-        'fundingOpportunityCardMechanismBeforeTitle',
+        'fundingOpportunityCardMetaBeforeTitle',
         '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
         context
       ).forEach(function (card) {
+        var dueDate = card.querySelector('.field--name-field-application-due-date');
         var mechanism = card.querySelector('.field--name-field-mechanism');
         var title = card.querySelector('h2');
-        if (!mechanism || !title) return;
+        if (!title) return;
 
-        if (mechanism.parentNode === card && mechanism.nextElementSibling === title) return;
+        var topMeta = card.querySelector('.funding-opportunity-card__top-meta');
+        if (!topMeta) {
+          topMeta = document.createElement('div');
+          topMeta.className = 'funding-opportunity-card__top-meta';
+        }
 
-        title.parentNode.insertBefore(mechanism, title);
+        if (topMeta.parentNode !== title.parentNode || topMeta.nextElementSibling !== title) {
+          title.parentNode.insertBefore(topMeta, title);
+        }
+
+        [dueDate, mechanism].forEach(function (field) {
+          if (!field || field.parentNode === topMeta) {
+            return;
+          }
+
+          topMeta.appendChild(field);
+        });
       });
     }
   };
