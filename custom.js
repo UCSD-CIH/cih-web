@@ -32,6 +32,36 @@
     }
   };
 
+  function normalizePathSegment(segment) {
+    return (segment || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function getPrimaryPathSection() {
+    var pathname = (window.location.pathname || '/').replace(/\/+/g, '/');
+    var segments = pathname.split('/').filter(function (segment) {
+      return !!segment;
+    });
+
+    if (!segments.length) return 'home';
+    return normalizePathSegment(segments[0]) || 'home';
+  }
+
+  Drupal.behaviors.footerParallaxSectionClass = {
+    attach: function (context) {
+      once('footerParallaxSectionClass', 'body', context).forEach(function (bodyEl) {
+        var section = getPrimaryPathSection();
+        if (!section) return;
+
+        bodyEl.classList.add('has-footer-parallax');
+        bodyEl.classList.add('site-section-' + section);
+        bodyEl.setAttribute('data-site-section', section);
+      });
+    }
+  };
+
   Drupal.behaviors.webformLabelFontFix = {
     attach: function (context) {
       once('webformLabelFontFix', '.webform-submission-form .js-form-wrapper.form-wrapper, .webform-submission-form label.h3', context).forEach(function (node) {

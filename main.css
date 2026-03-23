@@ -3238,8 +3238,54 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 }
 
 .dxpr-theme-footer {
-  margin-top: var(--space-800);
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
 }
+
+body.has-footer-parallax {
+  --footer-parallax-image: none;
+  --footer-parallax-opacity: 0;
+  --footer-parallax-fade-color: #ffffff;
+}
+
+body.has-footer-parallax .dxpr-theme-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: clamp(240px, 32vw, 420px);
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--footer-parallax-fade-color, #ffffff) 0%,
+      rgba(255, 255, 255, 0.88) 18%,
+      rgba(255, 255, 255, 0.42) 40%,
+      rgba(255, 255, 255, 0) 62%
+    ),
+    var(--footer-parallax-image);
+  background-position: center top, center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%, cover;
+  background-attachment: scroll, fixed;
+  opacity: var(--footer-parallax-opacity, 0);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body.site-section-home {
+  --footer-parallax-fade-color: #ffffff;
+}
+
+/*
+  Map each top-level section to its footer image here.
+  Example:
+  body.site-section-research {
+    --footer-parallax-opacity: 1;
+    --footer-parallax-image: url("/sites/default/files/footer-parallax/research-footer.jpg");
+  }
+*/
 
 
 /* ===================================
