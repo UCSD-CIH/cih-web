@@ -3568,6 +3568,7 @@ body.has-footer-parallax {
   --footer-parallax-image: none;
   --footer-parallax-opacity: 0;
   --footer-parallax-fade-color: #ffffff;
+  --footer-parallax-height: clamp(240px, 32vw, 420px);
 }
 
 body.has-footer-parallax .dxpr-theme-footer::before {
@@ -3575,8 +3576,8 @@ body.has-footer-parallax .dxpr-theme-footer::before {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 100%;
-  height: clamp(240px, 32vw, 420px);
+  top: 0;
+  height: var(--footer-parallax-height);
   background-image:
     linear-gradient(
       to bottom,
@@ -3592,7 +3593,16 @@ body.has-footer-parallax .dxpr-theme-footer::before {
   background-attachment: scroll, fixed;
   opacity: var(--footer-parallax-opacity, 0);
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
+}
+
+body.has-footer-parallax .dxpr-theme-footer {
+  padding-top: calc(var(--footer-parallax-height) * var(--footer-parallax-opacity, 0));
+}
+
+body.has-footer-parallax .dxpr-theme-footer > * {
+  position: relative;
+  z-index: 1;
 }
 
 /*
