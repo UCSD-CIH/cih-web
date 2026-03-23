@@ -2014,6 +2014,8 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 .paragraph--type--hero.hero-layout-contained {
   display: grid;
+  width: 100%;
+  margin: 0;
   grid-template-columns: minmax(0, 1fr) minmax(220px, var(--hero-cta-column-max));
   grid-template-areas:
     "headline headline"
