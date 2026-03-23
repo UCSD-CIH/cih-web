@@ -1889,6 +1889,25 @@
     }
   };
 
+  // Maps View Embed alignment control values to heading alignment modifier classes.
+  Drupal.behaviors.viewEmbedAlignmentAdapter = {
+    attach: function (context) {
+      once('viewEmbedAlignmentAdapter', '.paragraph--type--view-embed', context).forEach(function (embed) {
+        var alignmentField = embed.querySelector('.field--name-field-content-alignment');
+        var alignmentText = alignmentField
+          ? (alignmentField.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase()
+          : '';
+
+        embed.classList.remove('view-embed-align-left', 'view-embed-align-center');
+        embed.classList.add(alignmentText === 'center' ? 'view-embed-align-center' : 'view-embed-align-left');
+
+        if (alignmentField) {
+          alignmentField.style.display = 'none';
+        }
+      });
+    }
+  };
+
   // Renders top divider only when boolean field value is enabled.
   Drupal.behaviors.topDividerFieldAdapter = {
     attach: function (context) {

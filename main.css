@@ -2287,6 +2287,10 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   display: none !important;
 }
 
+.paragraph--type--view-embed > .field--name-field-content-alignment {
+  display: none !important;
+}
+
 .paragraph--type--view-embed > .field--name-field-show-top-divider {
   width: 100%;
   font-size: 0;
@@ -2306,6 +2310,15 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
 
 .paragraph--type--view-embed > .field--name-field-section-heading {
   margin: 0;
+}
+
+.paragraph--type--view-embed.view-embed-align-left > .field--name-field-section-heading,
+.paragraph--type--view-embed:not(.view-embed-align-center) > .field--name-field-section-heading {
+  text-align: left;
+}
+
+.paragraph--type--view-embed.view-embed-align-center > .field--name-field-section-heading {
+  text-align: center;
 }
 
 .paragraph--type--view-embed > .field--name-field-section-heading.field__item,
