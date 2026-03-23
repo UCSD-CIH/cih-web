@@ -2037,7 +2037,7 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 .paragraph--type--hero.hero-layout-contained > .field--name-field-background-image img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2.34 / 1;
   height: auto;
   object-fit: cover;
   border: var(--border-050) solid var(--color-border-subdued-strong);
