@@ -1871,6 +1871,41 @@
     }
   };
 
+  // Maps Hero paragraph control field values to modifier classes and page state.
+  Drupal.behaviors.heroEnhancements = {
+    attach: function (context) {
+      once('heroEnhancements', '.paragraph--type--hero', context).forEach(function (hero) {
+        var layoutField = hero.querySelector('.field--name-field-layout-width');
+        var alignmentField = hero.querySelector('.field--name-field-content-alignment');
+        var layoutText = layoutField ? (layoutField.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase() : '';
+        var alignmentText = alignmentField ? (alignmentField.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase() : '';
+
+        hero.classList.remove(
+          'hero-layout-contained',
+          'hero-layout-full-width',
+          'hero-align-left',
+          'hero-align-center'
+        );
+
+        hero.classList.add(layoutText === 'contained' ? 'hero-layout-contained' : 'hero-layout-full-width');
+        hero.classList.add(alignmentText === 'center' ? 'hero-align-center' : 'hero-align-left');
+
+        if (layoutField) {
+          layoutField.style.display = 'none';
+        }
+
+        if (alignmentField) {
+          alignmentField.style.display = 'none';
+        }
+
+        var page = hero.closest('.page');
+        if (page) {
+          page.classList.add('has-hero');
+        }
+      });
+    }
+  };
+
   // Forces main-nav external links to open in the current tab and strips noopener.
   Drupal.behaviors.extLinkOverride = {
     attach: function (context) {

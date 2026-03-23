@@ -1838,6 +1838,325 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 }
 
 /* ===================================
+   NATIVE PARAGRAPHS HERO
+   Targets Paragraph bundle class: Hero
+=================================== */
+
+.paragraph--type--hero {
+  --hero-content-max-width: 1120px;
+  --hero-inline-padding: var(--space-300);
+  --hero-block-padding: clamp(40px, 6vw, 72px);
+  --hero-block-padding-top: clamp(32px, 4.5vw, 56px);
+  --hero-cta-column-max: 320px;
+  --hero-column-gap: var(--space-300);
+  --hero-vertical-scrim: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.74) 32%,
+    rgba(255, 255, 255, 0.54) 58%,
+    rgba(255, 255, 255, 0.14) 84%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  position: relative;
+  width: min(100%, var(--hero-content-max-width));
+  margin: 0 auto;
+  padding-top: var(--hero-block-padding-top);
+  padding-bottom: var(--hero-block-padding);
+}
+
+.paragraph--type--hero .field__label,
+.paragraph--type--hero > .field--name-field-layout-width,
+.paragraph--type--hero > .field--name-field-content-alignment {
+  display: none;
+}
+
+.paragraph--type--hero.hero-layout-full-width {
+  isolation: isolate;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: clamp(352px, 50vw, 640px);
+  overflow: hidden;
+  background-color: var(--color-bg-blue-100);
+  display: grid;
+  grid-template-columns:
+    minmax(var(--hero-inline-padding), 1fr)
+    minmax(0, calc(var(--hero-content-max-width) - var(--hero-cta-column-max) - var(--hero-column-gap)))
+    minmax(220px, var(--hero-cta-column-max))
+    minmax(var(--hero-inline-padding), 1fr);
+  grid-template-areas:
+    ". headline headline ."
+    ". intro cta .";
+  column-gap: var(--hero-column-gap);
+  row-gap: var(--space-300);
+  align-content: start;
+}
+
+.paragraph--type--hero.hero-layout-full-width::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--hero-vertical-scrim);
+}
+
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image .field__item,
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image article,
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image .field--name-field-media-image,
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image .field__items,
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-background-image img {
+  display: block;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.paragraph--type--hero > .field--name-field-headline,
+.paragraph--type--hero > .field--name-field-intro-text,
+.paragraph--type--hero > .field--name-field-background-image,
+.paragraph--type--hero > .field--name-field-cta-link {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-headline,
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-intro-text,
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-cta-link {
+  position: relative;
+  z-index: 2;
+}
+
+.paragraph--type--hero > .field--name-field-headline {
+  grid-area: headline;
+}
+
+.paragraph--type--hero > .field--name-field-headline.field__item {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--color-text-navy);
+  font-family: 'Refrigerator Deluxe', 'Teko', sans-serif;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.paragraph--type--hero.hero-align-center > .field--name-field-headline.field__item {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.paragraph--type--hero > .field--name-field-intro-text {
+  grid-area: intro;
+}
+
+.paragraph--type--hero > .field--name-field-intro-text.field__item,
+.paragraph--type--hero > .field--name-field-intro-text.field__item p {
+  margin: 0;
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: -0.005em;
+}
+
+.paragraph--type--hero > .field--name-field-cta-link {
+  grid-area: cta;
+}
+
+.paragraph--type--hero.hero-layout-full-width > .field--name-field-cta-link {
+  align-self: start;
+  justify-self: end;
+}
+
+.paragraph--type--hero > .field--name-field-cta-link a {
+  display: inline-block;
+  min-width: 292px;
+  padding: var(--space-200) var(--space-300);
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  background-color: var(--color-bg-yellow-100);
+  color: var(--color-text-on-light) !important;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  text-decoration: none !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.paragraph--type--hero > .field--name-field-cta-link a:hover {
+  background-color: var(--color-bg-turquoise-100);
+  color: var(--color-text-on-light) !important;
+}
+
+.paragraph--type--hero > .field--name-field-cta-link a:active {
+  background-color: var(--color-bg-turquoise-120) !important;
+  color: var(--color-text-navy) !important;
+}
+
+.paragraph--type--hero.hero-layout-contained {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, var(--hero-cta-column-max));
+  grid-template-areas:
+    "headline headline"
+    "intro cta"
+    "image image";
+  column-gap: var(--hero-column-gap);
+  row-gap: var(--space-400);
+}
+
+.paragraph--type--hero.hero-layout-contained > .field--name-field-background-image {
+  grid-area: image;
+}
+
+.paragraph--type--hero.hero-layout-contained > .field--name-field-background-image .field__item,
+.paragraph--type--hero.hero-layout-contained > .field--name-field-background-image article,
+.paragraph--type--hero.hero-layout-contained > .field--name-field-background-image .field--name-field-media-image,
+.paragraph--type--hero.hero-layout-contained > .field--name-field-background-image .field__items {
+  display: block;
+}
+
+.paragraph--type--hero.hero-layout-contained > .field--name-field-background-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+}
+
+body:has(.paragraph--type--hero) .page-title-container,
+body:has(.paragraph--type--hero) #page-title,
+body:has(.paragraph--type--hero) #page-title-full-width-container,
+body:has(.paragraph--type--hero) .page-title-full-width-container,
+body:has(.paragraph--type--hero) h1.page-title,
+body:has(.paragraph--type--hero) .page-header,
+body:has(.paragraph--type--hero) .field--name-title,
+.page:has(.paragraph--type--hero) .page-title-container,
+.page:has(.paragraph--type--hero) #page-title,
+.page:has(.paragraph--type--hero) #page-title-full-width-container,
+.page:has(.paragraph--type--hero) .page-title-full-width-container,
+.page:has(.paragraph--type--hero) h1.page-title,
+.page:has(.paragraph--type--hero) .page-header,
+.page:has(.paragraph--type--hero) .field--name-title,
+.page.has-hero .page-title-container,
+.page.has-hero #page-title,
+.page.has-hero #page-title-full-width-container,
+.page.has-hero .page-title-full-width-container,
+.page.has-hero h1.page-title,
+.page.has-hero .page-header,
+.page.has-hero .field--name-title {
+  display: none !important;
+}
+
+.field--name-field-page-sections:has(.paragraph--type--hero) > .field__label {
+  display: none;
+}
+
+body:has(.paragraph--type--hero) .main-container.container,
+.page:has(.paragraph--type--hero) .main-container.container,
+.page.has-hero .main-container.container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body:has(.paragraph--type--hero) .main-container.container > .row,
+.page:has(.paragraph--type--hero) .main-container.container > .row,
+.page.has-hero .main-container.container > .row {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .paragraph--type--hero {
+    --hero-block-padding: clamp(36px, 10vw, 56px);
+    --hero-block-padding-top: var(--hero-block-padding);
+  }
+
+  .paragraph--type--hero.hero-layout-full-width {
+    --hero-vertical-scrim: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.9) 38%,
+      rgba(255, 255, 255, 0.78) 66%,
+      rgba(255, 255, 255, 0.56) 84%,
+      rgba(255, 255, 255, 0.24) 100%
+    );
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "headline"
+      "intro"
+      "cta";
+    min-height: 0;
+  }
+
+  .paragraph--type--hero.hero-layout-contained {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "headline"
+      "intro"
+      "cta"
+      "image";
+  }
+
+  .paragraph--type--hero.hero-layout-full-width > .field--name-field-cta-link {
+    justify-self: start;
+  }
+
+  .paragraph--type--hero.hero-layout-full-width > .field--name-field-headline,
+  .paragraph--type--hero.hero-layout-full-width > .field--name-field-intro-text,
+  .paragraph--type--hero.hero-layout-full-width > .field--name-field-cta-link {
+    padding-left: var(--hero-inline-padding);
+    padding-right: var(--hero-inline-padding);
+  }
+
+  .paragraph--type--hero > .field--name-field-headline.field__item {
+    max-width: 16ch;
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .paragraph--type--hero > .field--name-field-intro-text.field__item,
+  .paragraph--type--hero > .field--name-field-intro-text.field__item p {
+    font-size: clamp(16px, 4.4vw, 20px);
+    line-height: clamp(24px, 6vw, 30px);
+  }
+
+  .paragraph--type--hero > .field--name-field-cta-link a {
+    min-width: 0;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .paragraph--type--hero.hero-layout-full-width {
+    --hero-vertical-scrim: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.92) 42%,
+      rgba(255, 255, 255, 0.82) 70%,
+      rgba(255, 255, 255, 0.64) 88%,
+      rgba(255, 255, 255, 0.34) 100%
+    );
+  }
+}
+
+/* ===================================
    NATIVE PARAGRAPHS: CARD GRID + GRID CARD
    Targets Paragraph bundle classes: Card Grid and Grid Card
 =================================== */
