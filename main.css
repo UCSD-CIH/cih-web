@@ -2273,6 +2273,59 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
 }
 
 /* ===================================
+   NATIVE PARAGRAPHS: VIEW EMBED
+   Section heading + embedded view wrapper
+=================================== */
+
+.paragraph--type--view-embed {
+  width: 100%;
+  margin-top: var(--space-600);
+}
+
+.paragraph--type--view-embed .field__label,
+.paragraph--type--view-embed .viewsreference--view-title {
+  display: none !important;
+}
+
+.paragraph--type--view-embed > .field--name-field-show-top-divider {
+  width: 100%;
+  font-size: 0;
+  line-height: 0;
+}
+
+.paragraph--type--view-embed > .field--name-field-show-top-divider.is-on {
+  display: block;
+  margin: 0 0 var(--space-400) 0;
+}
+
+.paragraph--type--view-embed > .field--name-field-show-top-divider.is-on::before {
+  content: "";
+  display: block;
+  border-top: var(--border-050) solid var(--color-border-subdued-strong);
+}
+
+.paragraph--type--view-embed > .field--name-field-section-heading {
+  margin: 0 0 var(--space-300) 0;
+}
+
+.paragraph--type--view-embed > .field--name-field-section-heading > h2,
+.paragraph--type--view-embed > .field--name-field-section-heading > .heading--h2-alt {
+  margin: 0;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 36px !important;
+  font-style: normal !important;
+  line-height: 40px !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+  color: var(--color-text-heading);
+}
+
+.paragraph--type--view-embed > .field--name-field-view {
+  margin: 0;
+}
+
+/* ===================================
    NATIVE PARAGRAPHS: TEXT SECTION
    Supports Default, Lead, and Callout variants
 =================================== */

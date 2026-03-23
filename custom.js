@@ -1761,6 +1761,32 @@
     }
   };
 
+  // Promote View Embed section headings to semantic H2s and suppress duplicate view titles.
+  Drupal.behaviors.viewEmbedHeadingAdapter = {
+    attach: function (context) {
+      once('viewEmbedHeadingAdapter', '.paragraph--type--view-embed', context).forEach(function (embed) {
+        var headingField = embed.querySelector('.field--name-field-section-heading');
+        if (headingField) {
+          var rawHeading = (headingField.textContent || '').replace(/\s+/g, ' ').trim();
+
+          if (rawHeading && !headingField.querySelector('h2')) {
+            headingField.textContent = '';
+
+            var heading = document.createElement('h2');
+            heading.className = 'heading--h2-alt';
+            heading.textContent = rawHeading;
+            headingField.appendChild(heading);
+          }
+        }
+
+        embed.querySelectorAll('.viewsreference--view-title').forEach(function (title) {
+          title.style.display = 'none';
+          title.setAttribute('aria-hidden', 'true');
+        });
+      });
+    }
+  };
+
   // Fallback for text section variants and accent colors when Twig class mapping is unavailable.
   Drupal.behaviors.textSectionVariantAdapter = {
     attach: function (context) {
