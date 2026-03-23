@@ -1851,6 +1851,8 @@
           paragraph.classList.contains('paragraph--type--hero-full-width')
         ) {
           tagName = 'h1';
+        } else if (paragraph.classList.contains('paragraph--type--grid-card')) {
+          tagName = 'h5';
         } else if (paragraph.classList.contains('paragraph--type--cta-section')) {
           tagName = 'h3';
         } else if (paragraph.classList.contains('paragraph--type--text-section')) {
@@ -1871,8 +1873,18 @@
           }
         }
 
-        if (field.tagName && field.tagName.toLowerCase() === tagName) return;
-        promoteHeading(field, tagName);
+        var headingField = field;
+        if (!(field.tagName && field.tagName.toLowerCase() === tagName)) {
+          headingField = promoteHeading(field, tagName);
+        }
+
+        if (!headingField) return;
+
+        if (tagName === 'h2') {
+          headingField.classList.add('heading--h2-alt');
+        } else {
+          headingField.classList.remove('heading--h2-alt');
+        }
       });
     }
   };
