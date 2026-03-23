@@ -1877,18 +1877,32 @@
       once('heroEnhancements', '.paragraph--type--hero', context).forEach(function (hero) {
         var layoutField = hero.querySelector('.field--name-field-layout-width');
         var alignmentField = hero.querySelector('.field--name-field-content-alignment');
+        var ctaField = hero.querySelector('.field--name-field-cta-link');
+        var imageField = hero.querySelector('.field--name-field-background-image');
         var layoutText = layoutField ? (layoutField.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase() : '';
         var alignmentText = alignmentField ? (alignmentField.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase() : '';
+        var ctaLink = ctaField ? ctaField.querySelector('a[href]') : null;
+        var ctaHref = ctaLink ? (ctaLink.getAttribute('href') || '').trim() : '';
+        var hasCta = Boolean(ctaLink && ctaHref && ctaHref !== '#');
+        var image = imageField ? imageField.querySelector('img') : null;
+        var imageSrc = image ? (image.getAttribute('src') || '').trim() : '';
+        var hasImage = Boolean(image && imageSrc);
 
         hero.classList.remove(
           'hero-layout-contained',
           'hero-layout-full-width',
           'hero-align-left',
-          'hero-align-center'
+          'hero-align-center',
+          'hero-has-cta',
+          'hero-no-cta',
+          'hero-has-image',
+          'hero-no-image'
         );
 
         hero.classList.add(layoutText === 'contained' ? 'hero-layout-contained' : 'hero-layout-full-width');
         hero.classList.add(alignmentText === 'center' ? 'hero-align-center' : 'hero-align-left');
+        hero.classList.add(hasCta ? 'hero-has-cta' : 'hero-no-cta');
+        hero.classList.add(hasImage ? 'hero-has-image' : 'hero-no-image');
 
         if (layoutField) {
           layoutField.style.display = 'none';
@@ -1896,6 +1910,14 @@
 
         if (alignmentField) {
           alignmentField.style.display = 'none';
+        }
+
+        if (ctaField && !hasCta) {
+          ctaField.style.display = 'none';
+        }
+
+        if (imageField && !hasImage) {
+          imageField.style.display = 'none';
         }
 
         var page = hero.closest('.page');
