@@ -2308,6 +2308,7 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   margin: 0 0 var(--space-300) 0;
 }
 
+.paragraph--type--view-embed > .field--name-field-section-heading.field__item,
 .paragraph--type--view-embed > .field--name-field-section-heading > h2,
 .paragraph--type--view-embed > .field--name-field-section-heading > .heading--h2-alt {
   margin: 0;
@@ -2620,6 +2621,7 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   padding: var(--space-250) var(--space-250) 0;
 }
 
+.paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title.field__item,
 .paragraph--type--card-grid .paragraph--type--grid-card > .field--name-field-title .field__item {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -3162,6 +3164,7 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   margin: 0;
 }
 
+.paragraph--type--feature-split > .section-content > .field--name-field-section-heading,
 .paragraph--type--feature-split > .section-content > .field--name-field-section-heading.field__item {
   font-family: 'Inter', sans-serif;
   font-weight: 700;

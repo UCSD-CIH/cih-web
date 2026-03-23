@@ -1761,32 +1761,6 @@
     }
   };
 
-  // Promote View Embed section headings to semantic H2s and suppress duplicate view titles.
-  Drupal.behaviors.viewEmbedHeadingAdapter = {
-    attach: function (context) {
-      once('viewEmbedHeadingAdapter', '.paragraph--type--view-embed', context).forEach(function (embed) {
-        var headingField = embed.querySelector('.field--name-field-section-heading');
-        if (headingField) {
-          var rawHeading = (headingField.textContent || '').replace(/\s+/g, ' ').trim();
-
-          if (rawHeading && !headingField.querySelector('h2')) {
-            headingField.textContent = '';
-
-            var heading = document.createElement('h2');
-            heading.className = 'heading--h2-alt';
-            heading.textContent = rawHeading;
-            headingField.appendChild(heading);
-          }
-        }
-
-        embed.querySelectorAll('.viewsreference--view-title').forEach(function (title) {
-          title.style.display = 'none';
-          title.setAttribute('aria-hidden', 'true');
-        });
-      });
-    }
-  };
-
   // Fallback for text section variants and accent colors when Twig class mapping is unavailable.
   Drupal.behaviors.textSectionVariantAdapter = {
     attach: function (context) {
@@ -1845,6 +1819,60 @@
 
         hideField(styleField);
         hideField(accentField);
+      });
+    }
+  };
+
+  // Promotes paragraph heading fields to semantic heading elements by paragraph type/variant.
+  Drupal.behaviors.paragraphSemanticHeadingAdapter = {
+    attach: function (context) {
+      once(
+        'paragraphSemanticHeadingAdapter',
+        [
+          '.paragraph--type--hero > .field--name-field-headline',
+          '.paragraph--type--hero-full-width > .field--name-field-headline',
+          '.paragraph--type--grid-card > .field--name-field-title',
+          '.paragraph--type--card-grid > .field--name-field-section-heading',
+          '.paragraph--type--feature-split > .field--name-field-section-heading',
+          '.paragraph--type--feature-split > .section-content > .field--name-field-section-heading',
+          '.paragraph--type--text-section > .field--name-field-section-heading',
+          '.paragraph--type--cta-section > .field--name-field-section-heading',
+          '.paragraph--type--view-embed > .field--name-field-section-heading'
+        ].join(', '),
+        context
+      ).forEach(function (field) {
+        var paragraph = field.closest('.paragraph');
+        if (!paragraph) return;
+
+        var tagName = 'h2';
+
+        if (
+          paragraph.classList.contains('paragraph--type--hero') ||
+          paragraph.classList.contains('paragraph--type--hero-full-width')
+        ) {
+          tagName = 'h1';
+        } else if (paragraph.classList.contains('paragraph--type--cta-section')) {
+          tagName = 'h3';
+        } else if (paragraph.classList.contains('paragraph--type--text-section')) {
+          var styleField = paragraph.querySelector(
+            '.field--name-field-section-style, .field--name-field-section_style, [data-field-name="field_section_style"]'
+          );
+          var styleText = '';
+          if (styleField) {
+            var styleItem = styleField.querySelector('.field__item');
+            styleText = ((styleItem ? styleItem.textContent : styleField.textContent) || '')
+              .replace(/\s+/g, ' ')
+              .trim()
+              .toLowerCase();
+          }
+
+          if (paragraph.classList.contains('text-section--callout') || /callout/.test(styleText)) {
+            tagName = 'h3';
+          }
+        }
+
+        if (field.tagName && field.tagName.toLowerCase() === tagName) return;
+        promoteHeading(field, tagName);
       });
     }
   };
