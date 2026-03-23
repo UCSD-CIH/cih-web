@@ -3274,10 +3274,6 @@ body.has-footer-parallax .dxpr-theme-footer::before {
   z-index: -1;
 }
 
-body.site-section-home {
-  --footer-parallax-fade-color: #ffffff;
-}
-
 /*
   Map each top-level section to its footer image here.
   Example:
@@ -3286,6 +3282,22 @@ body.site-section-home {
     --footer-parallax-image: url("/sites/default/files/footer-parallax/research-footer.jpg");
   }
 */
+
+body.site-section-home {
+  --footer-parallax-opacity: 1;
+  --footer-parallax-image: url("/sites/default/files/2026-03/cih-footer-image.png");
+}
+
+body.site-section-research {
+  --footer-parallax-opacity: 1;
+  --footer-parallax-image: url("/sites/default/files/footer-parallax/research-footer.jpg");
+}
+
+body.site-section-reach {
+  --footer-parallax-opacity: 1;
+  --footer-parallax-image: url("/sites/default/files/footer-parallax/reach-footer.jpg");
+}
+
 
 
 /* ===================================
