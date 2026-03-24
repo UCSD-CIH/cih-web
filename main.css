@@ -1692,6 +1692,25 @@ code.bg-light {
   justify-self: end;
 }
 
+.paragraph--type--hero-full-width:not(:has(> .field--name-field-cta-link a)) {
+  grid-template-columns:
+    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr)
+    minmax(0, var(--hero-content-max-width))
+    minmax(calc(var(--hero-inline-padding) + var(--hero-desktop-rail-inset)), 1fr);
+  grid-template-areas:
+    ". headline ."
+    ". intro .";
+}
+
+.paragraph--type--hero-full-width:not(:has(> .field--name-field-cta-link a)) > .field--name-field-intro-text {
+  max-width: 100%;
+}
+
+.paragraph--type--hero-full-width:not(:has(> .field--name-field-background-image img)) {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
 /* Hide standalone CTA label field for now (used later in Twig pass). */
 .paragraph--type--hero-full-width > .field--name-field-cta-label {
   display: none;
@@ -1981,6 +2000,20 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
   justify-self: end;
 }
 
+.paragraph--type--hero.hero-layout-full-width:not(:has(> .field--name-field-cta-link a)) {
+  grid-template-columns:
+    minmax(var(--hero-inline-padding), 1fr)
+    minmax(0, var(--hero-content-max-width))
+    minmax(var(--hero-inline-padding), 1fr);
+  grid-template-areas:
+    ". headline ."
+    ". intro .";
+}
+
+.paragraph--type--hero.hero-layout-full-width:not(:has(> .field--name-field-cta-link a)) > .field--name-field-intro-text {
+  max-width: 100%;
+}
+
 .paragraph--type--hero > .field--name-field-cta-link a {
   display: inline-block;
   min-width: 292px;
@@ -2030,6 +2063,29 @@ body:has(.paragraph--type--hero-full-width) .main-container.container > .row,
 
 .paragraph--type--hero.hero-layout-contained.hero-no-image {
   padding-bottom: 0;
+}
+
+.paragraph--type--hero.hero-layout-contained:not(:has(> .field--name-field-cta-link a)) {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "headline"
+    "intro"
+    "image";
+}
+
+.paragraph--type--hero.hero-layout-contained:not(:has(> .field--name-field-background-image img)) {
+  padding-bottom: 0;
+}
+
+.paragraph--type--hero.hero-layout-contained:not(:has(> .field--name-field-cta-link a)):not(:has(> .field--name-field-background-image img)) {
+  grid-template-areas:
+    "headline"
+    "intro";
+  row-gap: var(--space-300);
+}
+
+.paragraph--type--hero.hero-layout-contained:not(:has(> .field--name-field-cta-link a)) > .field--name-field-intro-text {
+  max-width: 100%;
 }
 
 .paragraph--type--hero.hero-layout-contained.hero-no-cta.hero-no-image {
