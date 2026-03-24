@@ -4903,6 +4903,10 @@ body:has(
   width: 100%;
 }
 
+.resource-card .field--name-field-resource-categories .field__items {
+  display: block;
+}
+
 .resource-card .field--name-field-resource-type .field__item {
   margin: 0;
   padding: 0;
@@ -5034,8 +5038,8 @@ body:has(
 }
 
 .resource-card .field--name-field-resource-categories .field__item {
-  margin: 0;
-  display: inline-flex;
+  margin: 0 var(--space-100) 0 0;
+  display: inline-block;
   padding: 0;
   border: 0;
   background: transparent;
@@ -5054,6 +5058,7 @@ body:has(
   align-items: center;
   gap: var(--space-050);
   padding: var(--space-075) var(--space-150);
+  margin: 0 0 var(--space-100) 0;
   border: var(--border-050) solid var(--color-border-disabled-soft);
   border-radius: var(--radius-999);
   background: transparent;
@@ -5065,6 +5070,10 @@ body:has(
   font-weight: 300;
   letter-spacing: 0.03em;
   white-space: nowrap;
+}
+
+.resource-card .field--name-field-resource-categories .field__item:last-child {
+  margin-right: 0;
 }
 
 .resource-card .field--name-field-resource-categories .field__item > a::before,
