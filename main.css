@@ -4956,6 +4956,38 @@ body:has(
           mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
 }
 
+.resource-card[data-resource-type="audio"] .field--name-field-resource-type > a::before,
+.resource-card[data-resource-type="audio"] .field--name-field-resource-type > span::before,
+.resource-card[data-resource-type="audio"] .field--name-field-resource-type .field__item > a::before,
+.resource-card[data-resource-type="audio"] .field--name-field-resource-type .field__item > span::before,
+.resource-card[data-resource-type="audio"] .field--name-field-resource-type .field__item::before {
+  -webkit-mask: url("/sites/default/files/2026-02/triangle-side-fill.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2026-02/triangle-side-fill.svg") no-repeat center / contain;
+}
+
+.resource-card[data-resource-type="video"] .field--name-field-resource-type > a::before,
+.resource-card[data-resource-type="video"] .field--name-field-resource-type > span::before,
+.resource-card[data-resource-type="video"] .field--name-field-resource-type .field__item > a::before,
+.resource-card[data-resource-type="video"] .field--name-field-resource-type .field__item > span::before,
+.resource-card[data-resource-type="video"] .field--name-field-resource-type .field__item::before {
+  -webkit-mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+}
+
+.resource-card[data-resource-type="link"] .field--name-field-resource-type > a::before,
+.resource-card[data-resource-type="link"] .field--name-field-resource-type > span::before,
+.resource-card[data-resource-type="link"] .field--name-field-resource-type .field__item > a::before,
+.resource-card[data-resource-type="link"] .field--name-field-resource-type .field__item > span::before,
+.resource-card[data-resource-type="link"] .field--name-field-resource-type .field__item::before,
+.resource-card[data-resource-type="webpage"] .field--name-field-resource-type > a::before,
+.resource-card[data-resource-type="webpage"] .field--name-field-resource-type > span::before,
+.resource-card[data-resource-type="webpage"] .field--name-field-resource-type .field__item > a::before,
+.resource-card[data-resource-type="webpage"] .field--name-field-resource-type .field__item > span::before,
+.resource-card[data-resource-type="webpage"] .field--name-field-resource-type .field__item::before {
+  -webkit-mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
+}
+
 .resource-card .field--name-field-primary-center {
   display: none;
 }
@@ -5027,8 +5059,8 @@ body:has(
   height: 0.9em;
   flex: 0 0 auto;
   background-color: currentColor;
-  -webkit-mask: url("/sites/default/files/2026-03/calendar.svg") no-repeat center / contain;
-          mask: url("/sites/default/files/2026-03/calendar.svg") no-repeat center / contain;
+  -webkit-mask: url("/sites/default/files/2026-03/clock-fill.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2026-03/clock-fill.svg") no-repeat center / contain;
 }
 
 .resource-card .field--name-field-resource-categories {
