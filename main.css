@@ -4893,10 +4893,14 @@ body:has(
 .resource-card .field--name-field-resource-categories .field__items {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
   column-gap: var(--space-100);
   row-gap: var(--space-100);
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .resource-card .field--name-field-resource-type .field__item {
@@ -5026,6 +5030,7 @@ body:has(
 .resource-card .field--name-field-resource-categories {
   order: 70;
   margin-top: var(--space-200);
+  width: 100%;
 }
 
 .resource-card .field--name-field-resource-categories .field__item {
