@@ -2400,7 +2400,7 @@ html.js .view-id-reach_profiles_committees:not(.is-committee-enhanced) .view-con
 .view-id-reach_profiles_committees .view-content > h3,
 .view-reach-profiles-committees .view-content > h4,
 .view-id-reach_profiles_committees .view-content > h4 {
-  margin-top: var(--space-300);
+  margin-top: var(--space-400);
   margin-bottom: var(--space-100);
 }
 
@@ -2418,7 +2418,7 @@ html.js .view-id-reach_profiles_committees:not(.is-committee-enhanced) .view-con
 
 .view-reach-profiles-committees .committee-role-label,
 .view-id-reach_profiles_committees .committee-role-label {
-  font-weight: 700;
+  font-weight: 400;
   color: var(--color-text-paragraph);
 }
 
