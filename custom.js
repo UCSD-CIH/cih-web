@@ -1319,6 +1319,8 @@
             }
           });
         });
+
+        view.classList.add('is-committee-enhanced');
       });
     }
   };

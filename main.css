@@ -2391,12 +2391,21 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
 }
 
 /* REACH committees view: group role rows and match committee titles to h4 spacing. */
+html.js .view-reach-profiles-committees:not(.is-committee-enhanced) .view-content > .views-row,
+html.js .view-id-reach_profiles_committees:not(.is-committee-enhanced) .view-content > .views-row {
+  display: none;
+}
+
+.view-reach-profiles-committees .view-content > h3,
+.view-id-reach_profiles_committees .view-content > h3,
 .view-reach-profiles-committees .view-content > h4,
 .view-id-reach_profiles_committees .view-content > h4 {
   margin-top: var(--space-300);
   margin-bottom: var(--space-100);
 }
 
+.view-reach-profiles-committees .view-content > h3:first-child,
+.view-id-reach_profiles_committees .view-content > h3:first-child,
 .view-reach-profiles-committees .view-content > h4:first-child,
 .view-id-reach_profiles_committees .view-content > h4:first-child {
   margin-top: 0;
