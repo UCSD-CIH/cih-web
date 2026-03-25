@@ -378,6 +378,47 @@
     return normalizeToken(readFieldText(field));
   }
 
+  function getResourceFallbackThumbnail(resourceType) {
+    var fallbackMap = {
+      video: '/sites/default/files/2026-03/resource-default-video-cih-3x2.png',
+      link: '/sites/default/files/2026-03/resource-default-link-cih-3x2.png',
+      webpage: '/sites/default/files/2026-03/resource-default-link-cih-3x2.png',
+      audio: '/sites/default/files/2026-03/resource-default-audio-cih-3x2.png',
+      article: '/sites/default/files/2026-03/resource-default-article-cih-3x2.png'
+    };
+
+    return fallbackMap[resourceType] || fallbackMap.article;
+  }
+
+  function ensureResourceThumbnail(card, resourceType) {
+    if (!card) return;
+
+    var content = card.querySelector('.content');
+    if (!content) return;
+
+    var thumbnailField = card.querySelector('.field--name-field-thumbnail-image');
+    if (thumbnailField && thumbnailField.querySelector('img')) {
+      return;
+    }
+
+    var fallbackSrc = getResourceFallbackThumbnail(resourceType || 'article');
+    var fallbackAlt = ((resourceType || 'resource') + ' default thumbnail').replace(/^\w/, function (char) {
+      return char.toUpperCase();
+    });
+
+    if (!thumbnailField) {
+      thumbnailField = document.createElement('div');
+      thumbnailField.className =
+        'field field--name-field-thumbnail-image field--type-entity-reference field--label-hidden field__item';
+      content.insertBefore(thumbnailField, content.firstChild);
+    }
+
+    thumbnailField.innerHTML =
+      '<div class="field__item">' +
+      '<img loading="lazy" src="' + fallbackSrc + '" alt="' + fallbackAlt + '" class="img-fluid" />' +
+      '</div>';
+  }
+
   function resourceCtaLabel(destinationType, resourceType) {
     if (destinationType === 'file_download') return 'Download';
     if (destinationType === 'soundcloud') return 'Listen';
@@ -405,6 +446,7 @@
 
     var destinationType = getResourceDestinationType(card);
     var resourceType = getResourceType(card);
+    ensureResourceThumbnail(card, resourceType);
     var sourceLink = findPrimaryResourceLink(card, destinationType);
     if (!sourceLink) return;
 
