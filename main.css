@@ -3790,6 +3790,7 @@ body.has-footer-parallax {
   --footer-parallax-overlay: none;
   --footer-parallax-fade-color: #ffffff;
   --footer-parallax-height: clamp(240px, 32vw, 420px);
+  --footer-parallax-height-empty: calc(var(--footer-parallax-height) * 0.4);
 }
 
 body.has-footer-parallax .dxpr-theme-footer::before {
@@ -3810,7 +3811,7 @@ body.has-footer-parallax .dxpr-theme-footer::before {
 }
 
 body.has-footer-parallax .dxpr-theme-footer {
-  padding-top: var(--footer-parallax-height);
+  padding-top: var(--footer-parallax-height-empty);
 }
 
 body.has-footer-parallax .dxpr-theme-footer > * {
@@ -3844,6 +3845,7 @@ body.site-section-home {
       rgba(255, 255, 255, 0) 62%
     );
   --footer-parallax-image: url("/sites/default/files/2026-03/cih-footer-image.jpg");
+  --footer-parallax-height-empty: var(--footer-parallax-height);
 }
 
 body.site-section-research {
@@ -3856,6 +3858,7 @@ body.site-section-research {
       rgba(255, 255, 255, 0) 62%
     );
   --footer-parallax-image: url("/sites/default/files/2025-09/hero-lab-microscope_0.jpg");
+  --footer-parallax-height-empty: var(--footer-parallax-height);
 }
 
 body.site-section-reach {
@@ -3868,6 +3871,7 @@ body.site-section-reach {
       rgba(255, 255, 255, 0) 62%
     );
   --footer-parallax-image: url("/sites/default/files/footer-parallax/reach-footer.jpg");
+  --footer-parallax-height-empty: var(--footer-parallax-height);
 }
 
 
