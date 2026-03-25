@@ -1258,6 +1258,8 @@
             section.heading = heading;
           }
 
+          var insertAfterNode = heading;
+
           var grouped = {
             lead: [],
             member: []
@@ -1312,11 +1314,13 @@
               }
             });
 
-            if (heading.nextSibling) {
-              heading.parentNode.insertBefore(line, heading.nextSibling);
+            if (insertAfterNode.nextSibling) {
+              insertAfterNode.parentNode.insertBefore(line, insertAfterNode.nextSibling);
             } else {
-              heading.parentNode.appendChild(line);
+              insertAfterNode.parentNode.appendChild(line);
             }
+
+            insertAfterNode = line;
           });
         });
 
