@@ -3787,7 +3787,7 @@ input.button--primary.btn-primary.js-form-submit.form-submit:disabled {
 
 body.has-footer-parallax {
   --footer-parallax-image: none;
-  --footer-parallax-opacity: 0;
+  --footer-parallax-overlay: none;
   --footer-parallax-fade-color: #ffffff;
   --footer-parallax-height: clamp(240px, 32vw, 420px);
 }
@@ -3799,26 +3799,18 @@ body.has-footer-parallax .dxpr-theme-footer::before {
   right: 0;
   top: 0;
   height: var(--footer-parallax-height);
-  background-image:
-    linear-gradient(
-      to bottom,
-      var(--footer-parallax-fade-color, #ffffff) 0%,
-      rgba(255, 255, 255, 0.88) 18%,
-      rgba(255, 255, 255, 0.42) 40%,
-      rgba(255, 255, 255, 0) 62%
-    ),
-    var(--footer-parallax-image);
+  background-color: #ffffff;
+  background-image: var(--footer-parallax-overlay), var(--footer-parallax-image);
   background-position: center top, center center;
   background-repeat: no-repeat;
   background-size: 100% 100%, cover;
   background-attachment: scroll, fixed;
-  opacity: var(--footer-parallax-opacity, 0);
   pointer-events: none;
   z-index: 0;
 }
 
 body.has-footer-parallax .dxpr-theme-footer {
-  padding-top: calc(var(--footer-parallax-height) * var(--footer-parallax-opacity, 0));
+  padding-top: var(--footer-parallax-height);
 }
 
 body.has-footer-parallax .dxpr-theme-footer > * {
@@ -3830,23 +3822,51 @@ body.has-footer-parallax .dxpr-theme-footer > * {
   Map each top-level section to its footer image here.
   Example:
   body.site-section-research {
-    --footer-parallax-opacity: 1;
+    --footer-parallax-overlay:
+      linear-gradient(
+        to bottom,
+        var(--footer-parallax-fade-color, #ffffff) 0%,
+        rgba(255, 255, 255, 0.88) 18%,
+        rgba(255, 255, 255, 0.42) 40%,
+        rgba(255, 255, 255, 0) 62%
+      );
     --footer-parallax-image: url("/sites/default/files/footer-parallax/research-footer.jpg");
   }
 */
 
 body.site-section-home {
-  --footer-parallax-opacity: 1;
+  --footer-parallax-overlay:
+    linear-gradient(
+      to bottom,
+      var(--footer-parallax-fade-color, #ffffff) 0%,
+      rgba(255, 255, 255, 0.88) 18%,
+      rgba(255, 255, 255, 0.42) 40%,
+      rgba(255, 255, 255, 0) 62%
+    );
   --footer-parallax-image: url("/sites/default/files/2026-03/cih-footer-image.jpg");
 }
 
 body.site-section-research {
-  --footer-parallax-opacity: 1;
+  --footer-parallax-overlay:
+    linear-gradient(
+      to bottom,
+      var(--footer-parallax-fade-color, #ffffff) 0%,
+      rgba(255, 255, 255, 0.88) 18%,
+      rgba(255, 255, 255, 0.42) 40%,
+      rgba(255, 255, 255, 0) 62%
+    );
   --footer-parallax-image: url("/sites/default/files/2025-09/hero-lab-microscope_0.jpg");
 }
 
 body.site-section-reach {
-  --footer-parallax-opacity: 1;
+  --footer-parallax-overlay:
+    linear-gradient(
+      to bottom,
+      var(--footer-parallax-fade-color, #ffffff) 0%,
+      rgba(255, 255, 255, 0.88) 18%,
+      rgba(255, 255, 255, 0.42) 40%,
+      rgba(255, 255, 255, 0) 62%
+    );
   --footer-parallax-image: url("/sites/default/files/footer-parallax/reach-footer.jpg");
 }
 
