@@ -1585,38 +1585,22 @@
     return new Date(year, monthIndex, day, 23, 59, 59, 999);
   }
 
-  function parseFundingOpportunityDueDate(card) {
-    if (!card) return null;
-
-    var field = card.querySelector('.field--name-field-application-due-date');
-    if (!field) return null;
-
-    var timeEl = field.querySelector('time[datetime]');
-    var datetime = timeEl ? (timeEl.getAttribute('datetime') || '').trim() : '';
+  function parseFundingOpportunityDateValue(rawValue) {
+    var value = (rawValue || '').trim();
     var match;
 
-    if (datetime) {
-      match = datetime.match(/^(\d{4})-(\d{2})-(\d{2})/);
-      if (match) {
-        return buildLocalEndOfDay(
-          parseInt(match[1], 10),
-          parseInt(match[2], 10) - 1,
-          parseInt(match[3], 10)
-        );
-      }
+    if (!value) return null;
 
-      var parsedDatetime = new Date(datetime);
-      if (!isNaN(parsedDatetime.getTime())) return parsedDatetime;
+    match = value.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (match) {
+      return buildLocalEndOfDay(
+        parseInt(match[1], 10),
+        parseInt(match[2], 10) - 1,
+        parseInt(match[3], 10)
+      );
     }
 
-    var text = (field.textContent || '')
-      .replace(/\s+/g, ' ')
-      .replace(/^application due date\s*/i, '')
-      .trim();
-
-    if (!text) return null;
-
-    match = text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    match = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
     if (match) {
       return buildLocalEndOfDay(
         parseInt(match[3], 10),
@@ -1625,13 +1609,77 @@
       );
     }
 
-    var parsedText = new Date(text);
-    if (!isNaN(parsedText.getTime())) {
+    var parsedValue = new Date(value);
+    if (!isNaN(parsedValue.getTime())) {
       return buildLocalEndOfDay(
-        parsedText.getFullYear(),
-        parsedText.getMonth(),
-        parsedText.getDate()
+        parsedValue.getFullYear(),
+        parsedValue.getMonth(),
+        parsedValue.getDate()
       );
+    }
+
+    return null;
+  }
+
+  function parseFundingOpportunityDueDates(card) {
+    if (!card) return [];
+
+    var field = card.querySelector('.field--name-field-application-due-date');
+    if (!field) return [];
+
+    var timeElements = field.querySelectorAll('time[datetime]');
+    var dueDates = [];
+
+    timeElements.forEach(function (timeEl) {
+      var parsedDate = parseFundingOpportunityDateValue(timeEl.getAttribute('datetime') || '');
+      if (parsedDate) {
+        dueDates.push({
+          date: parsedDate,
+          timeEl: timeEl
+        });
+      }
+    });
+
+    if (dueDates.length) {
+      return dueDates.sort(function (a, b) {
+        return a.date.getTime() - b.date.getTime();
+      });
+    }
+
+    var text = (field.textContent || '')
+      .replace(/\s+/g, ' ')
+      .replace(/^application due dates?\s*/i, '')
+      .trim();
+
+    if (!text) return [];
+
+    var parsedTextDate = parseFundingOpportunityDateValue(text);
+    return parsedTextDate ? [{ date: parsedTextDate, timeEl: null }] : [];
+  }
+
+  function updateFundingOpportunityDueDateDisplay(card, activeDueDate) {
+    if (!card || !activeDueDate || !activeDueDate.timeEl) return;
+
+    var field = card.querySelector('.field--name-field-application-due-date');
+    if (!field) return;
+
+    var items = field.querySelectorAll('.field__item');
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      item.style.display = item.contains(activeDueDate.timeEl) ? '' : 'none';
+    });
+  }
+
+  function getCurrentFundingOpportunityDueDate(card, now) {
+    var dueDates = parseFundingOpportunityDueDates(card);
+    if (!dueDates.length) return null;
+
+    var currentTime = now ? now.getTime() : Date.now();
+    for (var i = 0; i < dueDates.length; i += 1) {
+      if (dueDates[i].date.getTime() >= currentTime) {
+        return dueDates[i];
+      }
     }
 
     return null;
@@ -1683,13 +1731,15 @@
         '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
         context
       ).forEach(function (card) {
-        var dueDate = parseFundingOpportunityDueDate(card);
-        if (!dueDate) return;
-
         var now = new Date();
+        var dueDate = getCurrentFundingOpportunityDueDate(card, now);
         var row = card.closest('.views-row');
         var target = row || card;
-        var isExpired = dueDate.getTime() < now.getTime();
+        var isExpired = !dueDate;
+
+        if (dueDate) {
+          updateFundingOpportunityDueDateDisplay(card, dueDate);
+        }
 
         target.style.display = isExpired ? 'none' : '';
         card.setAttribute('data-funding-expired', isExpired ? 'true' : 'false');
