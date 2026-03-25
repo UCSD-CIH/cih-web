@@ -1096,19 +1096,32 @@
     ensureInstitutionOverlayRuns();
   }
 
-  // Normalizes profile link labels to "View Profile" to avoid long URL overflow.
+  // Forces profile card CTA links to use the local Drupal entity URL.
   Drupal.behaviors.reachProfileLinkLabel = {
     attach: function (context) {
       once(
         'reachProfileLinkLabel',
-        '.view-reach-profiles-leadership .profile-card .field--name-field-profile-link a, .view-reach-profiles-members .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_leadership .profile-card .field--name-field-profile-link a, .view-id-reach_profiles_members .profile-card .field--name-field-profile-link a, .profile-cards .profile-card .field--name-field-profile-link a',
+        '.view-reach-profiles-leadership .profile-card, .view-reach-profiles-members .profile-card, .view-id-reach_profiles_leadership .profile-card, .view-id-reach_profiles_members .profile-card, .profile-cards .profile-card',
         context
-      ).forEach(function (link) {
+      ).forEach(function (card) {
+        var titleLink = card.querySelector('h2 a[href]');
+        if (!titleLink) return;
+
+        var localHref = (titleLink.getAttribute('href') || '').trim();
+        if (!localHref) return;
+
+        var link = card.querySelector('.field--name-field-profile-link a');
+        if (!link) return;
+
         var original = (link.textContent || '').trim();
         if (original && original.toLowerCase() !== 'view profile') {
           link.setAttribute('data-original-url', original);
-          link.textContent = 'View Profile';
         }
+
+        link.setAttribute('href', localHref);
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+        link.textContent = 'View Profile';
       });
     }
   };
