@@ -2419,7 +2419,7 @@ html.js .view-id-reach_profiles_committees:not(.is-committee-enhanced) .view-con
 .view-reach-profiles-committees .committee-role-label,
 .view-id-reach_profiles_committees .committee-role-label {
   font-weight: 700;
-  color: var(--color-text-heading);
+  color: var(--color-text-paragraph);
 }
 
 /* ===================================
