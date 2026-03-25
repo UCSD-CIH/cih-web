@@ -1685,6 +1685,24 @@
     return null;
   }
 
+  function getFundingOpportunityCardKey(card) {
+    if (!card) return '';
+
+    var titleLink = card.querySelector('h2 a[href]');
+    if (titleLink) {
+      var href = (titleLink.getAttribute('href') || '').trim();
+      if (href) return href;
+    }
+
+    var externalLink = card.querySelector('.field--name-field-external-link a[href]');
+    if (externalLink) {
+      var externalHref = (externalLink.getAttribute('href') || '').trim();
+      if (externalHref) return externalHref;
+    }
+
+    return (card.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
   // Forces Funding Opportunity external links to render as a consistent CTA label.
   Drupal.behaviors.fundingOpportunityCardCtaLabel = {
     attach: function (context) {
@@ -1743,6 +1761,33 @@
 
         target.style.display = isExpired ? 'none' : '';
         card.setAttribute('data-funding-expired', isExpired ? 'true' : 'false');
+      });
+    }
+  };
+
+  // Hides duplicate Funding Opportunity rows created by multi-value due date output.
+  Drupal.behaviors.fundingOpportunityCardDeduplicate = {
+    attach: function (context) {
+      var seenCardKeys = Object.create(null);
+
+      once(
+        'fundingOpportunityCardDeduplicate',
+        '.view-reach-funding-opportunities article.funding-opportunity-card, .view-id-reach_funding_opportunities article.funding-opportunity-card',
+        context
+      ).forEach(function (card) {
+        var cardKey = getFundingOpportunityCardKey(card);
+        if (!cardKey) return;
+
+        if (seenCardKeys[cardKey]) {
+          var row = card.closest('.views-row');
+          var target = row || card;
+          target.style.display = 'none';
+          card.setAttribute('data-funding-duplicate', 'true');
+          return;
+        }
+
+        seenCardKeys[cardKey] = true;
+        card.setAttribute('data-funding-duplicate', 'false');
       });
     }
   };
