@@ -1217,6 +1217,112 @@
     }
   };
 
+  // Groups REACH committee members by role and normalizes committee headings.
+  Drupal.behaviors.reachCommitteeViewEnhancements = {
+    attach: function (context) {
+      once(
+        'reachCommitteeViewEnhancements',
+        '.view-reach-profiles-committees, .view-id-reach_profiles_committees',
+        context
+      ).forEach(function (view) {
+        var viewContent = view.querySelector('.view-content');
+        if (!viewContent) return;
+
+        var children = Array.prototype.slice.call(viewContent.children || []);
+        var sections = [];
+        var currentSection = null;
+
+        children.forEach(function (child) {
+          if (!child) return;
+
+          if (child.tagName && child.tagName.toLowerCase() === 'h3') {
+            currentSection = {
+              heading: child,
+              rows: []
+            };
+            sections.push(currentSection);
+            return;
+          }
+
+          if (currentSection && child.classList && child.classList.contains('views-row')) {
+            currentSection.rows.push(child);
+          }
+        });
+
+        sections.forEach(function (section) {
+          if (!section.heading) return;
+
+          var heading = section.heading;
+          if (heading.tagName.toLowerCase() !== 'h4') {
+            heading = promoteHeading(heading, 'h4');
+            section.heading = heading;
+          }
+
+          var grouped = {
+            lead: [],
+            member: []
+          };
+
+          section.rows.forEach(function (row) {
+            var content = row.querySelector('.views-field-field-role .field-content');
+            if (!content) {
+              row.remove();
+              return;
+            }
+
+            var link = content.querySelector('a[href]');
+            var rawText = (content.textContent || '').replace(/\s+/g, ' ').trim();
+            var match = rawText.match(/^([^:]+):\s*(.*)$/);
+            var roleText = match && match[1] ? match[1].trim().toLowerCase() : '';
+            var nameText = match && match[2] ? match[2].trim() : rawText;
+            var bucket = roleText === 'lead' ? grouped.lead : roleText === 'member' ? grouped.member : null;
+
+            if (bucket && nameText) {
+              bucket.push({
+                link: link ? link.cloneNode(true) : null,
+                text: nameText
+              });
+            }
+
+            row.remove();
+          });
+
+          ['lead', 'member'].forEach(function (roleKey) {
+            if (!grouped[roleKey].length) return;
+
+            var line = document.createElement('p');
+            line.className = 'committee-role-line committee-role-line--' + roleKey;
+
+            var label = document.createElement('span');
+            label.className = 'committee-role-label';
+            label.textContent = roleKey === 'lead' ? 'Leads:' : 'Members:';
+            line.appendChild(label);
+            line.appendChild(document.createTextNode(' '));
+
+            grouped[roleKey].forEach(function (person, index) {
+              if (index > 0) {
+                line.appendChild(document.createTextNode(', '));
+              }
+
+              if (person.link) {
+                person.link.textContent = person.text;
+                line.appendChild(person.link);
+              } else {
+                line.appendChild(document.createTextNode(person.text));
+              }
+            });
+
+            if (heading.nextSibling) {
+              heading.parentNode.insertBefore(line, heading.nextSibling);
+            } else {
+              heading.parentNode.appendChild(line);
+            }
+          });
+        });
+      });
+    }
+  };
+
   // Program instructor layout handled by dedicated view mode; no DOM surgery here.
 
   // Injects "View Profile" link after short bio using the profile title link.

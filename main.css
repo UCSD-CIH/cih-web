@@ -2390,6 +2390,29 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   margin: 0;
 }
 
+/* REACH committees view: group role rows and match committee titles to h4 spacing. */
+.view-reach-profiles-committees .view-content > h4,
+.view-id-reach_profiles_committees .view-content > h4 {
+  margin-top: var(--space-300);
+  margin-bottom: var(--space-100);
+}
+
+.view-reach-profiles-committees .view-content > h4:first-child,
+.view-id-reach_profiles_committees .view-content > h4:first-child {
+  margin-top: 0;
+}
+
+.view-reach-profiles-committees .committee-role-line,
+.view-id-reach_profiles_committees .committee-role-line {
+  margin: 0 0 var(--space-100) 0;
+}
+
+.view-reach-profiles-committees .committee-role-label,
+.view-id-reach_profiles_committees .committee-role-label {
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
 /* ===================================
    NATIVE PARAGRAPHS: TEXT SECTION
    Supports Default, Lead, and Callout variants
