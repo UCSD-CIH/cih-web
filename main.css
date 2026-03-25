@@ -3861,21 +3861,6 @@ body.site-section-research {
   --footer-parallax-current-height: var(--footer-parallax-height);
 }
 
-body.site-section-reach {
-  --footer-parallax-overlay:
-    linear-gradient(
-      to bottom,
-      var(--footer-parallax-fade-color, #ffffff) 0%,
-      rgba(255, 255, 255, 0.88) 18%,
-      rgba(255, 255, 255, 0.42) 40%,
-      rgba(255, 255, 255, 0) 62%
-    );
-  --footer-parallax-image: url("/sites/default/files/footer-parallax/reach-footer.jpg");
-  --footer-parallax-current-height: var(--footer-parallax-height);
-}
-
-
-
 /* ===================================
    SEARCH AND FILTER CONTROLS
 =================================== */
