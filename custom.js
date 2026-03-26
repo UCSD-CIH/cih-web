@@ -1745,7 +1745,7 @@
         '.paragraph--type--program-feed',
         context
       ).forEach(function (embed) {
-        if (!embed.querySelector('.view-programs-cfm article.program-card-compact, .view-id-programs_cfm article.program-card-compact')) {
+        if (!embed.querySelector('article.program-card-compact')) {
           return;
         }
 
@@ -1757,7 +1757,7 @@
           sectionHeading.classList.add('heading--h2-alt');
         }
 
-        var viewContent = embed.querySelector('.view-programs-cfm .view-content, .view-id-programs_cfm .view-content');
+        var viewContent = embed.querySelector('.view-content');
         if (!viewContent) return;
 
         var rows = Array.prototype.slice.call(viewContent.querySelectorAll(':scope > .views-row'));

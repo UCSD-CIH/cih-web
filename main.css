@@ -6289,6 +6289,10 @@ article.program-card-compact.is-clickable {
   cursor: pointer;
 }
 
+article.program-card-compact.is-clickable img {
+  cursor: pointer;
+}
+
 article.program-card-compact.is-clickable:hover,
 article.program-card-compact.is-clickable:focus-within {
   transform: translateY(-2px);
@@ -6328,6 +6332,7 @@ article.program-card-compact .content {
 }
 
 article.program-card-compact h5 {
+  display: block !important;
   margin: 0 0 var(--space-100) 0;
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
