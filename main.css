@@ -5009,6 +5009,7 @@ body:has(
 .resource-card .field--name-field-thumbnail-image .field__item {
   border-radius: var(--radius-200);
   overflow: hidden;
+  position: relative;
 }
 
 .resource-card .field--name-field-thumbnail-image img {
@@ -5018,6 +5019,46 @@ body:has(
   border: var(--border-050) solid var(--color-border-subdued-strong);
   object-fit: cover;
   display: block;
+}
+
+.resource-card .field--name-field-thumbnail-image .field__item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.resource-card .field--name-field-thumbnail-image .field__item::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.96);
+  z-index: 2;
+  pointer-events: none;
+  -webkit-mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/doc-text-fill-icon.svg") no-repeat center / contain;
+}
+
+.resource-card[data-resource-type="audio"] .field--name-field-thumbnail-image .field__item::after {
+  -webkit-mask: url("/sites/default/files/2026-02/triangle-side-fill.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2026-02/triangle-side-fill.svg") no-repeat center / contain;
+}
+
+.resource-card[data-resource-type="video"] .field--name-field-thumbnail-image .field__item::after {
+  -webkit-mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/video-fill-icon.svg") no-repeat center / contain;
+}
+
+.resource-card[data-resource-type="link"] .field--name-field-thumbnail-image .field__item::after,
+.resource-card[data-resource-type="webpage"] .field--name-field-thumbnail-image .field__item::after {
+  -webkit-mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
+          mask: url("/sites/default/files/2025-08/link-icon.svg") no-repeat center / contain;
 }
 
 .resource-card .field--name-field-resource-type {
