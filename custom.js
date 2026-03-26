@@ -1886,7 +1886,8 @@
           'program-feed-grid',
           'program-feed-grid--one',
           'program-feed-grid--two',
-          'program-feed-grid--three'
+          'program-feed-grid--three',
+          'program-feed-grid--four'
         );
         viewContent.classList.add('program-feed-grid');
 
@@ -1894,6 +1895,8 @@
           viewContent.classList.add('program-feed-grid--one');
         } else if (openCount === 2) {
           viewContent.classList.add('program-feed-grid--two');
+        } else if (openCount === 4) {
+          viewContent.classList.add('program-feed-grid--four');
         } else {
           viewContent.classList.add('program-feed-grid--three');
         }
