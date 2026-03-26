@@ -1344,6 +1344,123 @@
 
   // Program instructor layout handled by dedicated view mode; no DOM surgery here.
 
+  function normalizeDateText(value) {
+    return (value || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function getFieldDateValue(field) {
+    if (!field) return '';
+
+    var timeNode = field.querySelector('time[datetime]');
+    if (timeNode) {
+      return (timeNode.getAttribute('datetime') || '').trim();
+    }
+
+    var item = field.querySelector('.field__item');
+    return normalizeDateText(item ? item.textContent : field.textContent);
+  }
+
+  function parseDateValue(value) {
+    if (!value) return null;
+    // ISO date-only strings (YYYY-MM-DD) are UTC midnight in spec — force local noon
+    // to prevent the date rolling back one day for US timezones.
+    var isoDate = value.match(/^(\d{4}-\d{2}-\d{2})$/);
+    if (isoDate) {
+      var parsed = new Date(isoDate[1] + 'T12:00:00');
+      return isNaN(parsed.getTime()) ? null : parsed;
+    }
+    var parsed = new Date(value);
+    return isNaN(parsed.getTime()) ? null : parsed;
+  }
+
+  function orderDatePair(startValue, endValue) {
+    var startDate = parseDateValue(startValue);
+    var endDate = parseDateValue(endValue);
+
+    if (startDate && endDate && startDate.getTime() > endDate.getTime()) {
+      return {
+        startValue: endValue,
+        endValue: startValue,
+        startDate: endDate,
+        endDate: startDate
+      };
+    }
+
+    return {
+      startValue: startValue,
+      endValue: endValue,
+      startDate: startDate,
+      endDate: endDate
+    };
+  }
+
+  function getDatePairFromFields(root, options) {
+    if (!root || !options) return null;
+
+    var combinedField = options.combinedSelector ? root.querySelector(options.combinedSelector) : null;
+    if (combinedField) {
+      var items = combinedField.querySelectorAll('.field__item');
+      if (items.length >= 2) {
+        var combinedStart = getFieldDateValue(items[0]);
+        var combinedEnd = getFieldDateValue(items[1]);
+        if (combinedStart && combinedEnd) {
+          return {
+            type: 'combined',
+            container: combinedField,
+            startField: items[0],
+            endField: items[1],
+            values: orderDatePair(combinedStart, combinedEnd)
+          };
+        }
+      }
+    }
+
+    var startField = options.startSelector ? root.querySelector(options.startSelector) : null;
+    var endField = options.endSelector ? root.querySelector(options.endSelector) : null;
+    var startValue = getFieldDateValue(startField);
+    var endValue = getFieldDateValue(endField);
+
+    if (!startField || !endField || !startValue || !endValue) return null;
+
+    return {
+      type: 'separate',
+      container: startField,
+      startField: startField,
+      endField: endField,
+      values: orderDatePair(startValue, endValue)
+    };
+  }
+
+  function formatDateRangeText(startValue, endValue, startDate, endDate) {
+    if (startDate && endDate) {
+      var sameYear = startDate.getFullYear() === endDate.getFullYear();
+      var startOptions = { month: 'long', day: 'numeric' };
+      var endOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+
+      if (!sameYear) {
+        startOptions.year = 'numeric';
+      }
+
+      return startDate.toLocaleDateString('en-US', startOptions) + ' – ' +
+        endDate.toLocaleDateString('en-US', endOptions);
+    }
+
+    var normalizedStart = normalizeDateText(startValue);
+    var normalizedEnd = normalizeDateText(endValue);
+    var startParts = normalizedStart.split(/\s*[–-]\s*/);
+    if (startParts.length >= 1) {
+      normalizedStart = startParts[0].trim();
+    }
+
+    var startYearMatch = normalizedStart.match(/(\d{4})/);
+    var endYearMatch = normalizedEnd.match(/(\d{4})/);
+    if (startYearMatch && endYearMatch && startYearMatch[1] === endYearMatch[1]) {
+      normalizedStart = normalizedStart.replace(/,\s*\d{4}\s*$/, '');
+    }
+
+    return normalizedStart + ' – ' + normalizedEnd;
+  }
+
   // Injects "View Profile" link after short bio using the profile title link.
   Drupal.behaviors.programInstructorProfileLink = {
     attach: function (context) {
@@ -1495,61 +1612,35 @@
     attach: function (context) {
       once(
         'programEventDateRangeV5',
-        '.page-node-type-program .field--name-field-event-dates, .view-programs-cfm .field--name-field-event-dates, .view-id-programs_cfm .field--name-field-event-dates, article.program-card-compact .field--name-field-event-dates',
+        '.page-node-type-program .field--name-field-event-dates, .page-node-type-program .field--name-field-program-start-date, .view-programs-cfm .field--name-field-event-dates, .view-programs-cfm .field--name-field-program-start-date, .view-id-programs_cfm .field--name-field-event-dates, .view-id-programs_cfm .field--name-field-program-start-date',
         context
       )
         .forEach(function (field) {
-          var items = field.querySelectorAll('.field__item');
-          if (!items || items.length < 2) return;
+          var root = field.parentNode || field;
+          var pair = getDatePairFromFields(root, {
+            combinedSelector: '.field--name-field-event-dates',
+            startSelector: '.field--name-field-program-start-date',
+            endSelector: '.field--name-field-program-end-date'
+          });
+          if (!pair) return;
 
-          var startTime = items[0].querySelector('time[datetime]');
-          var endTime = items[1].querySelector('time[datetime]');
-          var startText = (items[0].textContent || '').trim();
-          var endText = (items[1].textContent || '').trim();
-          if ((!startTime || !endTime) && (!startText || !endText)) return;
+          var rangeText = formatDateRangeText(
+            pair.values.startValue,
+            pair.values.endValue,
+            pair.values.startDate,
+            pair.values.endDate
+          );
 
-          if (startTime && endTime) {
-            var startValue = startTime.getAttribute('datetime') || '';
-            var endValue = endTime.getAttribute('datetime') || '';
-            if (startValue && endValue) {
-              var startDate = new Date(startValue);
-              var endDate = new Date(endValue);
-              if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
-                var sameYear = startDate.getFullYear() === endDate.getFullYear();
-                var startOptions = { month: 'long', day: 'numeric' };
-                var endOptions = { month: 'long', day: 'numeric', year: 'numeric' };
-                if (!sameYear) {
-                  startOptions.year = 'numeric';
-                }
-                startText = startDate.toLocaleDateString('en-US', startOptions);
-                endText = endDate.toLocaleDateString('en-US', endOptions);
-              }
+          if (pair.type === 'combined') {
+            pair.startField.textContent = rangeText;
+            for (var i = 1; i < pair.container.querySelectorAll('.field__item').length; i += 1) {
+              pair.container.querySelectorAll('.field__item')[i].style.display = 'none';
             }
           } else {
-            // Fallback: use second item as end date and strip duplicate year from start.
-            var normalizedStart = startText.replace(/\u00a0/g, ' ').trim();
-            var normalizedEnd = endText.replace(/\u00a0/g, ' ').trim();
-
-            var startParts = normalizedStart.split(/\s*[–-]\s*/);
-            if (startParts.length >= 1) {
-              normalizedStart = startParts[0].trim();
-            }
-
-            var startYearMatch = normalizedStart.match(/(\d{4})/);
-            var endYearMatch = normalizedEnd.match(/(\d{4})/);
-            if (startYearMatch && endYearMatch && startYearMatch[1] === endYearMatch[1]) {
-              normalizedStart = normalizedStart.replace(/,\s*\d{4}\s*$/, '');
-            }
-
-            startText = normalizedStart;
-            endText = normalizedEnd;
-          }
-
-          var target = items[0];
-          target.textContent = startText + ' – ' + endText;
-
-          for (var i = 1; i < items.length; i += 1) {
-            items[i].style.display = 'none';
+            var startItem = pair.startField.querySelector('.field__item') || pair.startField;
+            startItem.textContent = rangeText;
+            pair.startField.classList.add('program-date-range-field');
+            pair.endField.style.display = 'none';
           }
         });
     }
@@ -1626,23 +1717,24 @@
 
           var meta = content.querySelector('.program-card-compact__meta');
           var summaryField = content.querySelector('.field--name-field-program-summary');
-          var dateField = content.querySelector('.field--name-field-event-dates');
+          var dateField = content.querySelector('.field--name-field-event-dates, .field--name-field-program-start-date');
           var scheduleField = content.querySelector('.field--name-field-schedule');
 
           if (dateField) {
-            var dateItems = dateField.querySelectorAll('.field__item');
-            var startSource = dateItems.length ? dateItems[0] : dateField;
-            var startTime = startSource.querySelector('time[datetime]');
-            var startText = startTime ? (startTime.getAttribute('datetime') || '') : (startSource.textContent || '').trim();
-            var parsedStart = startText ? new Date(startText) : null;
+            var pair = getDatePairFromFields(content, {
+              combinedSelector: '.field--name-field-event-dates',
+              startSelector: '.field--name-field-program-start-date',
+              endSelector: '.field--name-field-program-end-date'
+            });
+            var startText = pair ? pair.values.startValue : getFieldDateValue(dateField);
+            var parsedStart = parseDateValue(startText);
             if (parsedStart && !isNaN(parsedStart.getTime())) {
               dateField.textContent = 'Starts ' + parsedStart.toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric'
               });
             } else {
-              var normalizedDate = (startSource.textContent || '')
-                .replace(/\s+/g, ' ')
+              var normalizedDate = normalizeDateText(pair ? pair.values.startValue : dateField.textContent)
                 .split(/\s*[–-]\s*/)[0]
                 .replace(/,\s*\d{4}\s*$/, '')
                 .trim();
@@ -1770,26 +1862,17 @@
           var card = row.querySelector('article.program-card-compact');
           if (!card) return;
 
-          var registrationField = card.querySelector('.field--name-field-registration-dates');
+          var registrationPair = getDatePairFromFields(card, {
+            combinedSelector: '.field--name-field-registration-dates',
+            startSelector: '.field--name-field-registration-start-date',
+            endSelector: '.field--name-field-registration-end-date'
+          });
           var visible = true;
 
-          if (registrationField) {
-            var times = registrationField.querySelectorAll('time[datetime]');
-            if (times.length >= 2) {
-              var startDate = new Date(times[0].getAttribute('datetime') || '');
-              var endDate = new Date(times[1].getAttribute('datetime') || '');
-
-              if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
-                if (startDate.getTime() > endDate.getTime()) {
-                  var temp = startDate;
-                  startDate = endDate;
-                  endDate = temp;
-                }
-
-                var now = Date.now();
-                visible = now >= startDate.getTime() && now <= endDate.getTime();
-              }
-            }
+          if (registrationPair && registrationPair.values.startDate && registrationPair.values.endDate) {
+            var now = Date.now();
+            visible = now >= registrationPair.values.startDate.getTime() &&
+              now <= registrationPair.values.endDate.getTime();
           }
 
           row.style.display = visible ? '' : 'none';
@@ -2126,25 +2209,15 @@
       once('programRegistrationToggle', '.page-node-type-program .group-program-sidebar', context)
         .forEach(function (sidebar) {
           var root = sidebar.closest('.page-node-type-program') || document;
-          var datesField = root.querySelector('.field--name-field-registration-dates');
-          if (!datesField) return;
+          var registrationPair = getDatePairFromFields(root, {
+            combinedSelector: '.field--name-field-registration-dates',
+            startSelector: '.field--name-field-registration-start-date',
+            endSelector: '.field--name-field-registration-end-date'
+          });
+          if (!registrationPair || !registrationPair.values.startDate || !registrationPair.values.endDate) return;
 
-          var timeNodes = datesField.querySelectorAll('time[datetime]');
-          if (timeNodes.length < 2) return;
-
-          var startValue = timeNodes[0].getAttribute('datetime') || '';
-          var endValue = timeNodes[1].getAttribute('datetime') || '';
-          if (!startValue || !endValue) return;
-
-          var startDate = new Date(startValue);
-          var endDate = new Date(endValue);
-          if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) return;
-
-          if (startDate.getTime() > endDate.getTime()) {
-            var temp = startDate;
-            startDate = endDate;
-            endDate = temp;
-          }
+          var startDate = registrationPair.values.startDate;
+          var endDate = registrationPair.values.endDate;
 
           var now = new Date();
           var nowTime = now.getTime();

@@ -6361,7 +6361,7 @@ article.program-card-compact .field--name-field-post-featured-image .field__item
 article.program-card-compact .field--name-field-post-featured-image img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
@@ -6401,6 +6401,7 @@ article.program-card-compact .program-card-compact__arrow:focus-visible {
 }
 
 article.program-card-compact .field--name-field-event-dates,
+article.program-card-compact .field--name-field-program-start-date,
 article.program-card-compact .field--name-field-schedule {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -6411,7 +6412,13 @@ article.program-card-compact .field--name-field-schedule {
   color: var(--color-text-paragraph);
 }
 
-article.program-card-compact .field--name-field-event-dates {
+article.program-card-compact :is(.field--name-field-event-dates, .field--name-field-program-start-date) .field__label,
+article.program-card-compact .field--name-field-program-end-date {
+  display: none !important;
+}
+
+article.program-card-compact .field--name-field-event-dates,
+article.program-card-compact .field--name-field-program-start-date {
   margin-bottom: var(--space-050);
 }
 
@@ -7186,11 +7193,11 @@ footer.submitted {
   color: var(--color-text-heading);
 }
 
-.page-node-type-program .group-program-sidebar .field--name-field-event-dates .field__label {
+.page-node-type-program .group-program-sidebar :is(.field--name-field-event-dates, .field--name-field-program-start-date) .field__label {
   display: none !important;
 }
 
-.page-node-type-program .group-program-sidebar .field--name-field-event-dates::before {
+.page-node-type-program .group-program-sidebar :is(.field--name-field-event-dates, .field--name-field-program-start-date)::before {
   content: "Dates";
   display: block;
   font-size: 16px;
@@ -7199,6 +7206,10 @@ footer.submitted {
   line-height: 20px;
   margin-bottom: var(--space-025);
   color: var(--color-text-heading);
+}
+
+.page-node-type-program .group-program-sidebar .field--name-field-program-end-date {
+  display: none !important;
 }
 
 .page-node-type-program .group-program-sidebar .field--name-field-pricing-details .field__label,
@@ -7337,8 +7348,12 @@ footer.submitted {
   display: none !important;
 }
 
-/* Hide registration dates field (used for logic) */
-.page-node-type-program .field--name-field-registration-dates {
+/* Hide registration dates fields (used for logic) */
+.page-node-type-program :is(
+  .field--name-field-registration-dates,
+  .field--name-field-registration-start-date,
+  .field--name-field-registration-end-date
+) {
   display: none !important;
 }
 
