@@ -1643,6 +1643,7 @@
             } else {
               var normalizedDate = (startSource.textContent || '')
                 .replace(/\s+/g, ' ')
+                .split(/\s*[–-]\s*/)[0]
                 .replace(/,\s*\d{4}\s*$/, '')
                 .trim();
               if (normalizedDate) {
@@ -1734,6 +1735,83 @@
             titleLink.click();
           });
         });
+    }
+  };
+
+  Drupal.behaviors.programFeedViewEmbedEnhancements = {
+    attach: function (context) {
+      once(
+        'programFeedViewEmbedEnhancements',
+        '.paragraph--type--view-embed',
+        context
+      ).forEach(function (embed) {
+        if (!embed.querySelector('.view-programs-cfm article.program-card-compact, .view-id-programs_cfm article.program-card-compact')) {
+          return;
+        }
+
+        var sectionHeading = embed.querySelector(':scope > .field--name-field-section-heading');
+        if (sectionHeading && (!sectionHeading.tagName || sectionHeading.tagName.toLowerCase() !== 'h2')) {
+          sectionHeading = promoteHeading(sectionHeading, 'h2');
+        }
+        if (sectionHeading) {
+          sectionHeading.classList.add('heading--h2-alt');
+        }
+
+        var viewContent = embed.querySelector('.view-programs-cfm .view-content, .view-id-programs_cfm .view-content');
+        if (!viewContent) return;
+
+        var rows = Array.prototype.slice.call(viewContent.querySelectorAll(':scope > .views-row'));
+        var openCount = 0;
+
+        rows.forEach(function (row) {
+          var card = row.querySelector('article.program-card-compact');
+          if (!card) return;
+
+          var registrationField = card.querySelector('.field--name-field-registration-dates');
+          var visible = true;
+
+          if (registrationField) {
+            var times = registrationField.querySelectorAll('time[datetime]');
+            if (times.length >= 2) {
+              var startDate = new Date(times[0].getAttribute('datetime') || '');
+              var endDate = new Date(times[1].getAttribute('datetime') || '');
+
+              if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                if (startDate.getTime() > endDate.getTime()) {
+                  var temp = startDate;
+                  startDate = endDate;
+                  endDate = temp;
+                }
+
+                var now = Date.now();
+                visible = now >= startDate.getTime() && now <= endDate.getTime();
+              }
+            }
+          }
+
+          row.style.display = visible ? '' : 'none';
+          card.setAttribute('data-registration-open', visible ? 'true' : 'false');
+          if (visible) {
+            openCount += 1;
+          }
+        });
+
+        viewContent.classList.remove(
+          'program-feed-grid',
+          'program-feed-grid--one',
+          'program-feed-grid--two',
+          'program-feed-grid--three'
+        );
+        viewContent.classList.add('program-feed-grid');
+
+        if (openCount <= 1) {
+          viewContent.classList.add('program-feed-grid--one');
+        } else if (openCount === 2) {
+          viewContent.classList.add('program-feed-grid--two');
+        } else {
+          viewContent.classList.add('program-feed-grid--three');
+        }
+      });
     }
   };
 

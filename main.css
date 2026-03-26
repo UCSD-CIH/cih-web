@@ -6191,7 +6191,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   padding: var(--space-150) var(--space-300);
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content {
+.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-300);
@@ -6200,12 +6200,15 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   margin-top: 0;
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content:has(> .views-row:only-child),
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content:has(> .views-row:nth-child(2):last-child) {
+.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .views-row {
+.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--one {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid .views-row {
   display: block;
   width: auto;
   margin: 0;
@@ -6286,6 +6289,10 @@ article.program-card-compact h5 a {
   text-decoration: none;
 }
 
+article.program-card-compact h5 .field--name-title {
+  display: inline !important;
+}
+
 article.program-card-compact h5 a:focus-visible,
 article.program-card-compact .program-card-compact__arrow:focus-visible {
   outline: 2px solid var(--color-bg-blue-100);
@@ -6361,7 +6368,7 @@ article.program-card-compact .field--name-field-program-format a {
 }
 
 article.program-card-compact .field--name-field-audience-type a {
-  color: var(--color-bg-gold-100);
+  color: var(--color-text-warning);
   border: var(--border-050) solid var(--color-bg-gold-100);
   background-color: var(--color-bg-gold-20);
 }
@@ -6405,15 +6412,15 @@ article.program-card-compact .program-card-compact__arrow img {
 }
 
 @media (max-width: 1080px) {
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content {
+  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content,
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content:has(> .views-row:only-child),
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm):has(article.program-card-compact) .view-content:has(> .views-row:nth-child(2):last-child) {
+  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid,
+  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--one,
+  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--two {
     grid-template-columns: 1fr;
   }
 
