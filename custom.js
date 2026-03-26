@@ -1655,11 +1655,14 @@
           if (scheduleField) {
             var scheduleText = (scheduleField.textContent || '')
               .replace(/\s+/g, ' ')
-              .replace(/\s*\([^)]*\)\.?\s*$/, '')
-              .replace(/\.\s*$/, '')
               .trim();
+            scheduleText = scheduleText.replace(/\s*\([^)]*\)/g, '');
+            var tzMatch = scheduleText.match(/^(.*?\b(?:PT|ET|PST|PDT|EST|EDT|MST|MDT|CST|CDT|MT|CT)\b)/i);
+            if (tzMatch) {
+              scheduleText = tzMatch[1];
+            }
+            scheduleText = scheduleText.replace(/\s+/g, ' ').replace(/[.,;]\s*$/, '').trim();
             if (scheduleText) {
-              scheduleText = scheduleText.replace(/\s*,\s*/, ' • ');
               scheduleField.textContent = scheduleText;
             }
           }
