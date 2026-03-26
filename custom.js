@@ -1742,7 +1742,7 @@
     attach: function (context) {
       once(
         'programFeedViewEmbedEnhancements',
-        '.paragraph--type--view-embed',
+        '.paragraph--type--program-feed',
         context
       ).forEach(function (embed) {
         if (!embed.querySelector('.view-programs-cfm article.program-card-compact, .view-id-programs_cfm article.program-card-compact')) {

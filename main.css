@@ -2341,8 +2341,18 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   margin-top: var(--space-600);
 }
 
+.paragraph--type--program-feed {
+  width: 100%;
+  margin-top: var(--space-600);
+}
+
 .paragraph--type--view-embed .field__label,
 .paragraph--type--view-embed .viewsreference--view-title {
+  display: none !important;
+}
+
+.paragraph--type--program-feed .field__label,
+.paragraph--type--program-feed .viewsreference--view-title {
   display: none !important;
 }
 
@@ -2367,7 +2377,28 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   border-top: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
+.paragraph--type--program-feed > .field--name-field-show-top-divider {
+  width: 100%;
+  font-size: 0;
+  line-height: 0;
+}
+
+.paragraph--type--program-feed > .field--name-field-show-top-divider.is-on {
+  display: block;
+  margin: 0 0 var(--space-400) 0;
+}
+
+.paragraph--type--program-feed > .field--name-field-show-top-divider.is-on::before {
+  content: "";
+  display: block;
+  border-top: var(--border-050) solid var(--color-border-subdued-strong);
+}
+
 .paragraph--type--view-embed > .field--name-field-section-heading {
+  margin: 0;
+}
+
+.paragraph--type--program-feed > .field--name-field-section-heading {
   margin: 0;
 }
 
@@ -2394,7 +2425,25 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
   color: var(--color-text-heading);
 }
 
+.paragraph--type--program-feed > .field--name-field-section-heading.field__item,
+.paragraph--type--program-feed > .field--name-field-section-heading > h2,
+.paragraph--type--program-feed > .field--name-field-section-heading > .heading--h2-alt {
+  margin: 0 0 var(--space-300) 0;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 36px !important;
+  font-style: normal !important;
+  line-height: 40px !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+  color: var(--color-text-heading);
+}
+
 .paragraph--type--view-embed > .field--name-field-view {
+  margin: 0;
+}
+
+.paragraph--type--program-feed > .field--name-field-view {
   margin: 0;
 }
 
@@ -3284,7 +3333,8 @@ html.js .view-id-reach_profiles_committees:not(.is-committee-enhanced) .view-con
   .paragraph--type--feature-split .field--name-field-section-heading.heading--h2-alt,
   .paragraph--type--feature-split > .section-content > .field--name-field-section-heading.heading--h2-alt,
   .paragraph--type--text-section > .field--name-field-section-heading.heading--h2-alt,
-  .paragraph--type--view-embed > .field--name-field-section-heading.heading--h2-alt
+  .paragraph--type--view-embed > .field--name-field-section-heading.heading--h2-alt,
+  .paragraph--type--program-feed > .field--name-field-section-heading.heading--h2-alt
 ) {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
@@ -6191,7 +6241,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   padding: var(--space-150) var(--space-300);
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid {
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-300);
@@ -6200,24 +6250,24 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   margin-top: 0;
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--two {
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid--two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--one {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid--one {
+  grid-template-columns: minmax(0, 1fr);
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid .views-row {
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid .views-row {
   display: block;
   width: auto;
   margin: 0;
   break-inside: auto;
 }
 
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) :is(.view-header, .view-content) > h2,
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-title,
-.paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .viewsreference--view-title {
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) :is(.view-header, .view-content) > h2,
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-title,
+.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .viewsreference--view-title {
   display: none !important;
 }
 
@@ -6233,6 +6283,10 @@ article.program-card-compact {
   box-shadow: none;
   transform: translateY(0);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+article.program-card-compact.is-clickable {
+  cursor: pointer;
 }
 
 article.program-card-compact.is-clickable:hover,
@@ -6412,15 +6466,15 @@ article.program-card-compact .program-card-compact__arrow img {
 }
 
 @media (max-width: 1080px) {
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid {
+  .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid,
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--one,
-  .paragraph--type--view-embed :is(.view-programs-cfm, .view-id-programs_cfm) .view-content.program-feed-grid--two {
+  .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid,
+  .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid--one,
+  .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid--two {
     grid-template-columns: 1fr;
   }
 
