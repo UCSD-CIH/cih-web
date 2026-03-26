@@ -6456,6 +6456,7 @@ article.program-card-compact :is(
   line-height: 1;
   letter-spacing: 0.01em;
   text-decoration: none;
+  margin-bottom: 0;
   padding: var(--space-100) var(--space-150);
   border-radius: var(--radius-999);
   white-space: nowrap;
