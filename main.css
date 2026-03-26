@@ -6296,7 +6296,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 }
 
 .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid--one {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid .views-row {
