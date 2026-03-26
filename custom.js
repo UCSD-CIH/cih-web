@@ -380,11 +380,11 @@
 
   function getResourceFallbackThumbnail(resourceType) {
     var fallbackMap = {
-      video: '/sites/default/files/2026-03/resource-default-video-cih-3x2.png',
-      link: '/sites/default/files/2026-03/resource-default-link-cih-3x2.png',
-      webpage: '/sites/default/files/2026-03/resource-default-link-cih-3x2.png',
-      audio: '/sites/default/files/2026-03/resource-default-audio-cih-3x2.png',
-      article: '/sites/default/files/2026-03/resource-default-article-cih-3x2.png'
+      video: '/sites/default/files/2026-03/resource-default-video-cih-3x2_1.png',
+      link: '/sites/default/files/2026-03/resource-default-link-cih-3x2_0.png',
+      webpage: '/sites/default/files/2026-03/resource-default-link-cih-3x2_0.png',
+      audio: '/sites/default/files/2026-03/resource-default-audio-cih-3x2_0.png',
+      article: '/sites/default/files/2026-03/resource-default-article-cih-3x2_0.png'
     };
 
     return fallbackMap[resourceType] || fallbackMap.article;
