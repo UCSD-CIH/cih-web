@@ -1495,7 +1495,7 @@
     attach: function (context) {
       once(
         'programEventDateRangeV5',
-        '.page-node-type-program .field--name-field-event-dates, .view-programs-cfm .field--name-field-event-dates, .view-id-programs_cfm .field--name-field-event-dates',
+        '.page-node-type-program .field--name-field-event-dates, .view-programs-cfm .field--name-field-event-dates, .view-id-programs_cfm .field--name-field-event-dates, article.program-card-compact .field--name-field-event-dates',
         context
       )
         .forEach(function (field) {
@@ -1590,6 +1590,65 @@
           } else {
             content.appendChild(ctaWrap);
           }
+        });
+    }
+  };
+
+  // Adapts compact Program Feed cards to the same CTA/date/meta pattern as other program cards.
+  Drupal.behaviors.programCompactCardsEnhancements = {
+    attach: function (context) {
+      once('programCompactCardsEnhancements', 'article.program-card-compact', context)
+        .forEach(function (card) {
+          var title = card.querySelector('h2');
+          var titleLink = title && title.querySelector('a[href]');
+          var content = card.querySelector('.content');
+          if (!title || !titleLink || !content) return;
+
+          var imageField = content.querySelector('.field--name-field-post-featured-image');
+          if (imageField && imageField.parentNode === content) {
+            card.insertBefore(imageField, card.firstChild);
+          }
+
+          var meta = content.querySelector('.program-card-compact__meta');
+          if (meta && meta.parentNode !== card) {
+            card.insertBefore(meta, title);
+          } else if (meta && meta.parentNode === card && meta.nextElementSibling !== title) {
+            card.insertBefore(meta, title);
+          }
+
+          var audienceField = meta && meta.querySelector('.field--name-field-audience-type');
+          var audienceLink = audienceField && audienceField.querySelector('a');
+          var audienceText = audienceLink ? (audienceLink.textContent || '').trim().toLowerCase() : '';
+
+          if (audienceField) {
+            if (audienceText === 'professional') {
+              if (audienceLink) {
+                audienceLink.textContent = 'Training';
+              }
+            } else if (audienceText === 'public') {
+              audienceField.style.display = 'none';
+            }
+          }
+
+          var href = titleLink.getAttribute('href') || '';
+          if (!href) return;
+
+          var ctaWrap = content.querySelector('.program-card-compact__cta');
+          if (!ctaWrap) {
+            ctaWrap = document.createElement('div');
+            ctaWrap.className = 'program-card-compact__cta';
+          }
+
+          var ctaLink = ctaWrap.querySelector('a');
+          if (!ctaLink) {
+            ctaLink = document.createElement('a');
+            ctaLink.className = 'btn btn-secondary btn-inline';
+            ctaWrap.appendChild(ctaLink);
+          }
+
+          ctaLink.setAttribute('href', href);
+          ctaLink.textContent = 'Learn More';
+          content.appendChild(ctaWrap);
         });
     }
   };

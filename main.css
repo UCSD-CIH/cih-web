@@ -6183,6 +6183,157 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   padding: var(--space-150) var(--space-300);
 }
 
+article.program-card-compact {
+  background-color: var(--color-bg-lightest);
+  border: var(--border-050) solid var(--color-border-subdued-strong);
+  border-radius: var(--radius-200);
+  color: var(--color-text-paragraph);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+article.program-card-compact .field__label,
+article.program-card-compact footer.submitted {
+  display: none !important;
+}
+
+article.program-card-compact .field--name-field-post-featured-image {
+  margin: 0;
+}
+
+article.program-card-compact .field--name-field-post-featured-image .field__item,
+article.program-card-compact .field--name-field-post-featured-image article,
+article.program-card-compact .field--name-field-post-featured-image .field--name-field-media-image,
+article.program-card-compact .field--name-field-post-featured-image .field__items {
+  margin: 0;
+}
+
+article.program-card-compact .field--name-field-post-featured-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}
+
+article.program-card-compact .program-card-compact__meta,
+article.program-card-compact h2,
+article.program-card-compact .content {
+  padding-left: var(--space-400);
+  padding-right: var(--space-400);
+}
+
+article.program-card-compact .program-card-compact__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-100);
+  margin: var(--space-300) 0 var(--space-150) 0;
+}
+
+article.program-card-compact h2,
+article.program-card-compact h2 a {
+  color: var(--color-text-heading);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0;
+  line-height: 28px !important;
+  margin: 0;
+  text-decoration: none;
+  text-transform: none !important;
+}
+
+article.program-card-compact h2 a:hover {
+  text-decoration: underline;
+}
+
+article.program-card-compact h2 a:focus-visible {
+  outline: 2px solid var(--color-bg-blue-100);
+  outline-offset: 2px;
+  text-decoration: none;
+}
+
+article.program-card-compact .content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--space-150);
+  padding-top: var(--space-150);
+  padding-bottom: var(--space-400);
+}
+
+article.program-card-compact .field--name-field-event-dates,
+article.program-card-compact .field--name-field-schedule,
+article.program-card-compact .field--name-field-program-summary {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+article.program-card-compact .field--name-field-event-dates {
+  color: var(--color-text-heading);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+article.program-card-compact .field--name-field-schedule,
+article.program-card-compact .field--name-field-program-summary {
+  color: var(--color-text-paragraph);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+article.program-card-compact :is(
+  .field--name-field-program-format a,
+  .field--name-field-audience-type a
+) {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: var(--space-100) var(--space-150);
+  border-radius: var(--radius-999);
+  white-space: nowrap;
+  color: var(--color-text-blue);
+  border: var(--border-050) solid var(--color-border-blue);
+  background-color: var(--color-bg-lightest);
+  pointer-events: none;
+}
+
+article.program-card-compact .field--name-field-audience-type a {
+  color: var(--color-text-disabled-strong);
+  border: var(--border-050) solid var(--color-border-disabled-soft);
+  background-color: transparent;
+}
+
+article.program-card-compact .program-card-compact__cta {
+  margin-top: auto;
+  padding-top: var(--space-100);
+}
+
+article.program-card-compact .program-card-compact__cta .btn {
+  margin: 0;
+  border-radius: var(--radius-999);
+  font-size: 14px;
+  padding: var(--space-150) var(--space-300);
+}
+
+@media (max-width: 640px) {
+  article.program-card-compact .program-card-compact__meta,
+  article.program-card-compact h2,
+  article.program-card-compact .content {
+    padding-left: var(--space-300);
+    padding-right: var(--space-300);
+  }
+
+  article.program-card-compact .program-card-compact__meta {
+    margin-top: var(--space-250);
+  }
+}
+
 :is(.view-programs-cfm, .view-id-programs_cfm) .view-filters {
   margin: var(--space-200) 0 0 0;
 }
