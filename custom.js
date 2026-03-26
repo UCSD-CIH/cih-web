@@ -1599,7 +1599,7 @@
     attach: function (context) {
       once('programCompactCardsEnhancements', 'article.program-card-compact', context)
         .forEach(function (card) {
-          var title = card.querySelector('h2');
+          var title = card.querySelector('h2, h5');
           var titleLink = title && title.querySelector('a[href]');
           var content = card.querySelector('.content');
           if (!title || !titleLink || !content) return;
@@ -1609,11 +1609,58 @@
             card.insertBefore(imageField, card.firstChild);
           }
 
+          if (title.tagName && title.tagName.toLowerCase() !== 'h5') {
+            var replacementTitle = document.createElement('h5');
+            replacementTitle.className = title.className;
+            while (title.firstChild) {
+              replacementTitle.appendChild(title.firstChild);
+            }
+            title.parentNode.replaceChild(replacementTitle, title);
+            title = replacementTitle;
+          }
+
+          var firstContentChild = content.firstElementChild;
+          if (firstContentChild !== title) {
+            content.insertBefore(title, firstContentChild);
+          }
+
           var meta = content.querySelector('.program-card-compact__meta');
-          if (meta && meta.parentNode !== card) {
-            card.insertBefore(meta, title);
-          } else if (meta && meta.parentNode === card && meta.nextElementSibling !== title) {
-            card.insertBefore(meta, title);
+          var summaryField = content.querySelector('.field--name-field-program-summary');
+          var dateField = content.querySelector('.field--name-field-event-dates');
+          var scheduleField = content.querySelector('.field--name-field-schedule');
+
+          if (dateField) {
+            var dateItems = dateField.querySelectorAll('.field__item');
+            var startSource = dateItems.length ? dateItems[0] : dateField;
+            var startTime = startSource.querySelector('time[datetime]');
+            var startText = startTime ? (startTime.getAttribute('datetime') || '') : (startSource.textContent || '').trim();
+            var parsedStart = startText ? new Date(startText) : null;
+            if (parsedStart && !isNaN(parsedStart.getTime())) {
+              dateField.textContent = 'Starts ' + parsedStart.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+              });
+            } else {
+              var normalizedDate = (startSource.textContent || '')
+                .replace(/\s+/g, ' ')
+                .replace(/,\s*\d{4}\s*$/, '')
+                .trim();
+              if (normalizedDate) {
+                dateField.textContent = 'Starts ' + normalizedDate;
+              }
+            }
+          }
+
+          if (scheduleField) {
+            var scheduleText = (scheduleField.textContent || '')
+              .replace(/\s+/g, ' ')
+              .replace(/\s*\([^)]*\)\.?\s*$/, '')
+              .replace(/\.\s*$/, '')
+              .trim();
+            if (scheduleText) {
+              scheduleText = scheduleText.replace(/\s*,\s*/, ' • ');
+              scheduleField.textContent = scheduleText;
+            }
           }
 
           var audienceField = meta && meta.querySelector('.field--name-field-audience-type');
@@ -1633,22 +1680,59 @@
           var href = titleLink.getAttribute('href') || '';
           if (!href) return;
 
-          var ctaWrap = content.querySelector('.program-card-compact__cta');
-          if (!ctaWrap) {
-            ctaWrap = document.createElement('div');
-            ctaWrap.className = 'program-card-compact__cta';
+          var oldCta = content.querySelector('.program-card-compact__cta');
+          if (oldCta) {
+            oldCta.remove();
           }
 
-          var ctaLink = ctaWrap.querySelector('a');
-          if (!ctaLink) {
-            ctaLink = document.createElement('a');
-            ctaLink.className = 'btn btn-secondary btn-inline';
-            ctaWrap.appendChild(ctaLink);
+          var footer = content.querySelector('.program-card-compact__footer');
+          if (!footer) {
+            footer = document.createElement('div');
+            footer.className = 'program-card-compact__footer';
           }
 
-          ctaLink.setAttribute('href', href);
-          ctaLink.textContent = 'Learn More';
-          content.appendChild(ctaWrap);
+          if (summaryField && summaryField.nextSibling !== footer) {
+            content.insertBefore(footer, summaryField.nextSibling);
+          } else if (!summaryField) {
+            content.appendChild(footer);
+          }
+
+          if (meta && meta.parentNode !== footer) {
+            footer.appendChild(meta);
+          }
+
+          var arrowLink = footer.querySelector('.program-card-compact__arrow');
+          if (!arrowLink) {
+            arrowLink = document.createElement('a');
+            arrowLink.className = 'program-card-compact__arrow';
+            arrowLink.setAttribute('aria-label', 'View program');
+            footer.appendChild(arrowLink);
+          }
+
+          arrowLink.setAttribute('href', href);
+
+          var arrowImage = arrowLink.querySelector('img');
+          if (!arrowImage) {
+            arrowImage = document.createElement('img');
+            arrowImage.setAttribute('alt', '');
+            arrowImage.setAttribute('aria-hidden', 'true');
+            arrowLink.appendChild(arrowImage);
+          }
+
+          arrowImage.setAttribute('src', '/sites/default/files/2026-03/arrow-right-circle-fill-blue.svg');
+
+          card.classList.add('is-clickable');
+          card.addEventListener('click', function (event) {
+            if (event.defaultPrevented) return;
+
+            var selection = window.getSelection ? window.getSelection() : null;
+            if (selection && String(selection).trim()) return;
+
+            var interactive = event.target.closest('a, button, input, select, textarea, summary, [role="button"]');
+            if (interactive) return;
+
+            titleLink.click();
+          });
         });
     }
   };
