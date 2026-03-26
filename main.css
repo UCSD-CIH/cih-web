@@ -6244,9 +6244,9 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-400);
   column-count: initial;
-  column-gap: 0;
+  column-gap: var(--space-400);
+  row-gap: var(--space-400);
   margin-top: 0;
 }
 
@@ -6388,7 +6388,7 @@ article.program-card-compact .field--name-field-program-summary {
 
 article.program-card-compact .program-card-compact__footer {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-150);
   margin-top: auto;
