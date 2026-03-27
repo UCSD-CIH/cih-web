@@ -6185,7 +6185,23 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-100);
   margin-bottom: var(--space-200);
+}
+
+/* Hide legacy top-level date/registration fields superseded by session paragraph data */
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card :is(
+  .field--name-field-program-start-date,
+  .field--name-field-program-end-date,
+  .field--name-field-registration-start-date,
+  .field--name-field-registration-end-date,
+  .field--name-field-registration-dates,
+  .field--name-field-event-dates
+) {
+  display: none !important;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__body > .field {
