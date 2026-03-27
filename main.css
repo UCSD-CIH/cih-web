@@ -6300,12 +6300,6 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Orphan centering: lone last card in a 3-up row spans full width, constrained to 1-column width */
-.paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid--three .views-row:last-child:nth-child(3n+1) {
-  grid-column: 1 / -1;
-  max-width: calc((100% - var(--space-400) * 2) / 3);
-  margin-inline: auto;
-}
 
 .paragraph--type--program-feed :is(.view-programs-cfm, .view-id-programs_cfm, .view-cfm-program-feed, .view-id-cfm_program_feed) .view-content.program-feed-grid .views-row {
   display: block;
