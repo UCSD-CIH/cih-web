@@ -1521,6 +1521,145 @@
     }
   };
 
+  // Renders session data in the Program page sidebar, replacing raw paragraph output.
+  // Single session: inserts formatted date range + location text; updates node-level register link href.
+  // Multi-session: builds a session list with date range, location, and individual text register links;
+  //   moves pricing to the top; adds has-multi-session class so CSS can hide the node-level CTA buttons.
+  Drupal.behaviors.programSidebarSessionEnhancements = {
+    attach: function (context) {
+      once('programSidebarSessionEnhancements', '.page-node-type-program .group-program-sidebar', context)
+        .forEach(function (sidebar) {
+          var sessionField = sidebar.querySelector('.field--name-field-program-session');
+          if (!sessionField) return;
+
+          var sessionItems = Array.prototype.slice.call(
+            sessionField.querySelectorAll('.field__items > .field__item')
+          );
+          if (!sessionItems.length) return;
+
+          var isMulti = sessionItems.length > 1;
+
+          // Extract data from each session paragraph.
+          var sessions = [];
+          sessionItems.forEach(function (item) {
+            var startEl = item.querySelector('.field--name-field-session-start-date time[datetime]');
+            var endEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
+            var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
+            var formatLinkEl = item.querySelector('.field--name-field-program-format a');
+            var locationEl = item.querySelector('.field--name-field-location .field__item');
+
+            var rangeText = '';
+            if (startEl && endEl) {
+              var ordered = orderDatePair(
+                startEl.getAttribute('datetime') || '',
+                endEl.getAttribute('datetime') || ''
+              );
+              rangeText = formatDateRangeText(
+                ordered.startValue, ordered.endValue,
+                ordered.startDate, ordered.endDate
+              );
+            }
+
+            // Prefer the format taxonomy term text (e.g. "Online", "In Person") over raw location.
+            var locationText = '';
+            if (formatLinkEl) {
+              locationText = (formatLinkEl.textContent || '').trim();
+            } else if (locationEl) {
+              locationText = (locationEl.textContent || '').trim();
+            }
+
+            sessions.push({
+              rangeText: rangeText,
+              locationText: locationText,
+              regHref: regLinkEl ? (regLinkEl.getAttribute('href') || '').trim() : ''
+            });
+          });
+
+          if (isMulti) {
+            sidebar.classList.add('has-multi-session');
+
+            // Build a session list: one row per session with date range, location, and register link.
+            var listEl = document.createElement('div');
+            listEl.className = 'program-sidebar__session-list';
+
+            sessions.forEach(function (session) {
+              var itemEl = document.createElement('div');
+              itemEl.className = 'program-sidebar__session-item';
+
+              if (session.rangeText) {
+                var datesEl = document.createElement('p');
+                datesEl.className = 'program-sidebar__session-dates';
+                datesEl.textContent = session.rangeText;
+                itemEl.appendChild(datesEl);
+              }
+
+              if (session.locationText) {
+                var locEl = document.createElement('p');
+                locEl.className = 'program-sidebar__session-location';
+                locEl.textContent = 'Location: ' + session.locationText;
+                itemEl.appendChild(locEl);
+              }
+
+              if (session.regHref) {
+                var regEl = document.createElement('a');
+                regEl.className = 'program-sidebar__session-register';
+                regEl.href = session.regHref;
+                regEl.textContent = 'Register \u2192';
+                regEl.setAttribute('target', '_blank');
+                regEl.setAttribute('rel', 'noopener noreferrer');
+                itemEl.appendChild(regEl);
+              }
+
+              listEl.appendChild(itemEl);
+            });
+
+            // Insert session list at the top of the sidebar.
+            sidebar.insertBefore(listEl, sidebar.firstChild);
+
+            // Move pricing above the session list so it is the first item (key decision factor).
+            var pricingField = sidebar.querySelector('.field--name-field-pricing-details');
+            if (pricingField) {
+              sidebar.insertBefore(pricingField, listEl);
+            }
+          } else {
+            // Single session: insert a formatted date/location block near the session field.
+            var single = sessions[0];
+            var blockEl = document.createElement('div');
+            blockEl.className = 'program-sidebar__session-block';
+
+            if (single.rangeText) {
+              var singleDatesEl = document.createElement('p');
+              singleDatesEl.className = 'program-sidebar__session-dates';
+              singleDatesEl.textContent = single.rangeText;
+              blockEl.appendChild(singleDatesEl);
+            }
+
+            if (single.locationText) {
+              var singleLocEl = document.createElement('p');
+              singleLocEl.className = 'program-sidebar__session-location';
+              singleLocEl.textContent = 'Location: ' + single.locationText;
+              blockEl.appendChild(singleLocEl);
+            }
+
+            if (blockEl.hasChildNodes()) {
+              sessionField.parentNode.insertBefore(blockEl, sessionField);
+            }
+
+            // Update the node-level registration link href from the session's link.
+            if (single.regHref) {
+              var nodeRegLink = sidebar.querySelector('.field--name-field-registration-link a');
+              if (nodeRegLink) {
+                nodeRegLink.setAttribute('href', single.regHref);
+              }
+            }
+          }
+
+          // Always hide the raw session paragraph field after extracting its data.
+          sessionField.style.display = 'none';
+        });
+    }
+  };
+
   // Forces program profile links to show "View Profile" text.
   Drupal.behaviors.programProfileLinkLabel = {
     attach: function (context) {
