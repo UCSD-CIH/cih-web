@@ -6187,7 +6187,6 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: var(--space-100);
   margin-bottom: var(--space-200);
 }
