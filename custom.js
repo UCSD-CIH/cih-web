@@ -1827,7 +1827,11 @@
             var interactive = event.target.closest('a, button, input, select, textarea, summary, [role="button"]');
             if (interactive) return;
 
-            titleLink.click();
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+              window.open(titleLink.href, '_blank');
+            } else {
+              titleLink.click();
+            }
           });
         });
     }
@@ -1886,8 +1890,7 @@
           'program-feed-grid',
           'program-feed-grid--one',
           'program-feed-grid--two',
-          'program-feed-grid--three',
-          'program-feed-grid--four'
+          'program-feed-grid--three'
         );
         viewContent.classList.add('program-feed-grid');
 
@@ -1895,8 +1898,6 @@
           viewContent.classList.add('program-feed-grid--one');
         } else if (openCount === 2) {
           viewContent.classList.add('program-feed-grid--two');
-        } else if (openCount === 4) {
-          viewContent.classList.add('program-feed-grid--four');
         } else {
           viewContent.classList.add('program-feed-grid--three');
         }
@@ -2171,7 +2172,11 @@
           var interactive = event.target.closest('a, button, input, select, textarea, summary, [role="button"]');
           if (interactive) return;
 
-          ctaLink.click();
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+            window.open(ctaLink.href, '_blank');
+          } else {
+            ctaLink.click();
+          }
         });
       });
     }
