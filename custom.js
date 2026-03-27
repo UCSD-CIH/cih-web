@@ -1685,6 +1685,101 @@
     }
   };
 
+  // Renders session date ranges and format badges on program cards from the session paragraph field.
+  Drupal.behaviors.programCardSessionEnhancements = {
+    attach: function (context) {
+      once('programCardSessionEnhancements', ':is(.view-programs-cfm, .view-id-programs_cfm) article.program-card', context)
+        .forEach(function (card) {
+          var sessionField = card.querySelector('.field--name-field-program-session');
+          if (!sessionField) return;
+
+          var sessionItems = Array.prototype.slice.call(
+            sessionField.querySelectorAll('.field__items > .field__item')
+          );
+          if (!sessionItems.length) return;
+
+          // Collect unique formats from sessions and rebuild the header badges.
+          var header = card.querySelector('.program-card__header');
+          if (header) {
+            var seenFormats = {};
+            var formatLinks = [];
+            sessionItems.forEach(function (item) {
+              var formatLink = item.querySelector('.field--name-field-program-format a[href]');
+              if (!formatLink) return;
+              var href = (formatLink.getAttribute('href') || '').trim();
+              if (href && !seenFormats[href]) {
+                seenFormats[href] = true;
+                formatLinks.push(formatLink.cloneNode(true));
+              }
+            });
+
+            if (formatLinks.length) {
+              header.innerHTML = '';
+              formatLinks.forEach(function (link) {
+                var wrap = document.createElement('div');
+                wrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
+                wrap.appendChild(link);
+                header.appendChild(wrap);
+              });
+            }
+          }
+
+          // Build formatted date ranges from session start/end date fields.
+          var dateRanges = [];
+          sessionItems.forEach(function (item) {
+            var startTimeEl = item.querySelector('.field--name-field-session-start-date time[datetime]');
+            var endTimeEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
+            if (!startTimeEl || !endTimeEl) return;
+
+            var ordered = orderDatePair(
+              startTimeEl.getAttribute('datetime') || '',
+              endTimeEl.getAttribute('datetime') || ''
+            );
+            var rangeText = formatDateRangeText(
+              ordered.startValue, ordered.endValue,
+              ordered.startDate, ordered.endDate
+            );
+            if (rangeText) dateRanges.push(rangeText);
+          });
+
+          // Insert session dates above the session field.
+          if (dateRanges.length > 0) {
+            var sessionDatesEl = document.createElement('div');
+            sessionDatesEl.className = 'program-card__session-dates';
+
+            if (dateRanges.length > 3) {
+              var multipleEl = document.createElement('p');
+              multipleEl.className = 'program-card__session-label';
+              multipleEl.textContent = 'Multiple sessions available';
+              sessionDatesEl.appendChild(multipleEl);
+            } else {
+              dateRanges.forEach(function (range) {
+                var p = document.createElement('p');
+                p.className = 'program-card__session-date';
+                p.textContent = range;
+                sessionDatesEl.appendChild(p);
+              });
+            }
+
+            var body = card.querySelector('.program-card__body');
+            if (body) {
+              body.insertBefore(sessionDatesEl, sessionField);
+            }
+          }
+
+          // Hide day-and-time when multiple sessions exist (each has different times).
+          if (sessionItems.length > 1) {
+            card.querySelectorAll('.field--name-field-day-and-time').forEach(function (f) {
+              f.style.display = 'none';
+            });
+          }
+
+          // Hide the raw session paragraph field — data has been extracted above.
+          sessionField.style.display = 'none';
+        });
+    }
+  };
+
   // Adapts compact Program Feed cards to the same CTA/date/meta pattern as other program cards.
   Drupal.behaviors.programCompactCardsEnhancements = {
     attach: function (context) {

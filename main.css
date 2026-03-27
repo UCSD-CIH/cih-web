@@ -6250,6 +6250,34 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   background-color: var(--color-bg-lightest);
 }
 
+/* In Person badge (term 114) — green fill */
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-program-format a[href$="/114"] {
+  color: var(--color-text-green);
+  border-color: var(--color-border-green-soft);
+  background-color: var(--color-bg-green-20);
+}
+
+/* Session dates rendered by JS */
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-dates {
+  margin-bottom: var(--space-150);
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-dates p {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-paragraph);
+  margin: 0;
+}
+
+/* Always hide location and registration link from session paragraphs on cards */
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card :is(
+  .field--name-field-location,
+  .field--name-field-registration-link
+) {
+  display: none !important;
+}
+
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-program-focus-areas .field__item a,
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-audience-type a {
   color: var(--color-text-disabled-strong);
