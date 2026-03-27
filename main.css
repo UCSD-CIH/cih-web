@@ -7402,6 +7402,104 @@ footer.submitted {
   display: none !important;
 }
 
+/* Multi-session: suppress node-level CTA buttons and registration notices — handled per-session */
+.page-node-type-program .group-program-sidebar.has-multi-session
+  :is(
+    .field--name-field-registration-link,
+    .field--name-field-subscribe-link,
+    .program-registration-closes,
+    .program-registration-message
+  ) {
+  display: none !important;
+}
+
+/* Session list (multi-session sidebar) */
+.program-sidebar__session-list {
+  margin-bottom: var(--space-300);
+}
+
+.program-sidebar__session-item {
+  padding: var(--space-150) 0;
+  border-bottom: var(--border-100) solid var(--color-border-soft, #e0e0e0);
+}
+
+.program-sidebar__session-item:first-child {
+  padding-top: 0;
+}
+
+.program-sidebar__session-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.program-sidebar__session-dates {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--color-text-heading);
+  margin: 0 0 var(--space-050) 0;
+}
+
+.program-sidebar__session-location {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-paragraph);
+  margin: 0 0 var(--space-100) 0;
+}
+
+.program-sidebar__session-register {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.program-sidebar__session-register:hover {
+  color: var(--color-text-blue);
+  text-decoration: none;
+}
+
+/* Single-session block (date range + location text) */
+.program-sidebar__session-block {
+  margin-bottom: var(--space-200);
+}
+
+.program-sidebar__session-block .program-sidebar__session-dates {
+  font-weight: 400;
+  color: var(--color-text-paragraph);
+}
+
+.program-sidebar__session-block .program-sidebar__session-location {
+  margin-bottom: 0;
+}
+
+/* Instructor compact view: render h2 as body-weight link, not Teko heading */
+.page-node-type-program .group-program-sidebar article.instructor-compact h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.page-node-type-program .group-program-sidebar article.instructor-compact h2 a {
+  color: var(--color-text-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-node-type-program .group-program-sidebar article.instructor-compact h2 a:hover {
+  color: var(--color-text-blue);
+  text-decoration: none;
+}
+
 /* Hide registration dates fields (used for logic) */
 .page-node-type-program :is(
   .field--name-field-registration-dates,
