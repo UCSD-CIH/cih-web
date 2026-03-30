@@ -573,6 +573,21 @@
     }
   };
 
+  function ensureResourceBehaviorsRun() {
+    try {
+      Drupal.behaviors.resourceCardEnhancements.attach(document);
+      Drupal.behaviors.resourceFilterUI.attach(document);
+    } catch (e) {
+      // Defensive no-op: do not block other site behaviors if resource cards are absent.
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureResourceBehaviorsRun, { once: true });
+  } else {
+    ensureResourceBehaviorsRun();
+  }
+
   // Ensures new REACH card view modes still receive legacy `.profile-card` styling/hooks.
   Drupal.behaviors.reachProfileCardClassAdapter = {
     attach: function (context) {
