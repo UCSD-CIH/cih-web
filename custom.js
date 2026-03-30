@@ -429,12 +429,16 @@
   }
 
   function findPrimaryResourceLink(card, destinationType) {
-    var fileLink = card.querySelector('.field--name-field-primary-file a[href]');
+    var fileLink =
+      card.querySelector('.field--name-field-resource-file a[href]') ||
+      card.querySelector('.field--name-field-primary-file a[href]');
     if (destinationType === 'file_download' && fileLink) {
       return fileLink;
     }
 
-    var urlLink = card.querySelector('.field--name-field-primary-url a[href]');
+    var urlLink =
+      card.querySelector('.field--name-field-resource-url a[href]') ||
+      card.querySelector('.field--name-field-primary-url a[href]');
     if (urlLink) return urlLink;
 
     if (fileLink) return fileLink;
@@ -497,7 +501,12 @@
     attach: function (context) {
       once(
         'resourceCardEnhancements',
-        '.view-resources article.resource, .view-id-resources article.resource, .view-guided-meditations article.resource, .view-id-guided_meditations article.resource',
+        [
+          '.view[class*="view-resources"] article.resource',
+          '.view[class*="view-guided-meditations"] article.resource',
+          '.view-id-resources article.resource',
+          '.view-id-guided_meditations article.resource'
+        ].join(', '),
         context
       ).forEach(function (card) {
         if (!card.classList.contains('resource-card')) {
@@ -512,7 +521,12 @@
     attach: function (context) {
       once(
         'resourceFilterUI',
-        '.view-resources .view-filters, .view-id-resources .view-filters, .view-guided-meditations .view-filters, .view-id-guided_meditations .view-filters',
+        [
+          '.view[class*="view-resources"] .view-filters',
+          '.view[class*="view-guided-meditations"] .view-filters',
+          '.view-id-resources .view-filters',
+          '.view-id-guided_meditations .view-filters'
+        ].join(', '),
         context
       ).forEach(function (filters) {
         var searchInput = filters.querySelector('.form-item-keys input.form-text');
