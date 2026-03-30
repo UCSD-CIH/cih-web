@@ -497,6 +497,76 @@
     removeNoopener(link);
   }
 
+  function enhanceResourceCards(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll(
+      [
+        '.view[class*="view-resources"] article.resource',
+        '.view[class*="view-guided-meditations"] article.resource',
+        '.view-id-resources article.resource',
+        '.view-id-guided_meditations article.resource'
+      ].join(', ')
+    ).forEach(function (card) {
+      if (!card.classList.contains('resource-card')) {
+        card.classList.add('resource-card');
+      }
+      syncResourceCardCta(card);
+    });
+  }
+
+  function enhanceResourceFilters(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll(
+      [
+        '.view[class*="view-resources"] .view-filters',
+        '.view[class*="view-guided-meditations"] .view-filters',
+        '.view-id-resources .view-filters',
+        '.view-id-guided_meditations .view-filters'
+      ].join(', ')
+    ).forEach(function (filters) {
+      var searchInput = filters.querySelector('.form-item-keys input.form-text');
+      if (searchInput && !searchInput.getAttribute('placeholder')) {
+        searchInput.setAttribute('placeholder', 'Search Resources');
+      }
+
+      var params = new URLSearchParams(window.location.search);
+      var hasTypeParam = false;
+      var hasCategoryParam = false;
+      var hasQueryParam = false;
+
+      params.forEach(function (value, key) {
+        if (!value) return;
+        if (key.indexOf('field_resource_type_target_id') === 0) hasTypeParam = true;
+        if (key.indexOf('field_resource_categories_target_id') === 0) hasCategoryParam = true;
+        if (key === 'keys') hasQueryParam = true;
+      });
+
+      filters.querySelectorAll('details').forEach(function (details) {
+        details.removeAttribute('open');
+      });
+
+      if (hasTypeParam) {
+        var typeInput = filters.querySelector('input[name*="field_resource_type_target_id"]');
+        if (typeInput) {
+          var typeDetails = typeInput.closest('details');
+          if (typeDetails) typeDetails.setAttribute('open', 'open');
+        }
+      }
+
+      if (hasCategoryParam) {
+        var categoryInput = filters.querySelector('input[name*="field_resource_categories_target_id"]');
+        if (categoryInput) {
+          var categoryDetails = categoryInput.closest('details');
+          if (categoryDetails) categoryDetails.setAttribute('open', 'open');
+        }
+      }
+
+      if (hasTypeParam || hasCategoryParam || hasQueryParam) {
+        filters.classList.add('has-active-filters');
+      }
+    });
+  }
+
   Drupal.behaviors.resourceCardEnhancements = {
     attach: function (context) {
       once(
@@ -508,12 +578,8 @@
           '.view-id-guided_meditations article.resource'
         ].join(', '),
         context
-      ).forEach(function (card) {
-        if (!card.classList.contains('resource-card')) {
-          card.classList.add('resource-card');
-        }
-        syncResourceCardCta(card);
-      });
+      );
+      enhanceResourceCards(context);
     }
   };
 
@@ -528,53 +594,15 @@
           '.view-id-guided_meditations .view-filters'
         ].join(', '),
         context
-      ).forEach(function (filters) {
-        var searchInput = filters.querySelector('.form-item-keys input.form-text');
-        if (searchInput && !searchInput.getAttribute('placeholder')) {
-          searchInput.setAttribute('placeholder', 'Search Resources');
-        }
-
-        var params = new URLSearchParams(window.location.search);
-        var hasTypeParam = false;
-        var hasCategoryParam = false;
-        var hasQueryParam = false;
-
-        params.forEach(function (value, key) {
-          if (!value) return;
-          if (key.indexOf('field_resource_type_target_id') === 0) hasTypeParam = true;
-          if (key.indexOf('field_resource_categories_target_id') === 0) hasCategoryParam = true;
-          if (key === 'keys') hasQueryParam = true;
-        });
-
-        filters.querySelectorAll('details').forEach(function (details) {
-          details.removeAttribute('open');
-        });
-
-        if (hasTypeParam) {
-          var typeInput = filters.querySelector('input[name*="field_resource_type_target_id"]');
-          if (typeInput) {
-            var typeDetails = typeInput.closest('details');
-            if (typeDetails) typeDetails.setAttribute('open', 'open');
-          }
-        }
-
-        if (hasCategoryParam) {
-          var categoryInput = filters.querySelector('input[name*="field_resource_categories_target_id"]');
-          if (categoryInput) {
-            var categoryDetails = categoryInput.closest('details');
-            if (categoryDetails) categoryDetails.setAttribute('open', 'open');
-          }
-        }
-
-        if (hasTypeParam || hasCategoryParam || hasQueryParam) {
-          filters.classList.add('has-active-filters');
-        }
-      });
+      );
+      enhanceResourceFilters(context);
     }
   };
 
   function ensureResourceBehaviorsRun() {
     try {
+      enhanceResourceCards(document);
+      enhanceResourceFilters(document);
       Drupal.behaviors.resourceCardEnhancements.attach(document);
       Drupal.behaviors.resourceFilterUI.attach(document);
     } catch (e) {
