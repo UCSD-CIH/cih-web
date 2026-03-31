@@ -7230,7 +7230,6 @@ footer.submitted {
   font-weight: 600;
   letter-spacing: 0;
   line-height: 28px;
-  margin-bottom: var(--space-100);
   color: var(--color-text-heading);
 }
 
@@ -7276,7 +7275,7 @@ footer.submitted {
   color: var(--color-text-paragraph);
   font-size: 14px;
   line-height: 20px;
-  padding-bottom: var(--space-200);
+  padding-bottom: var(--space-300);
   margin-bottom: 0;
   border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
 }
@@ -7414,14 +7413,6 @@ footer.submitted {
 }
 
 /* Session list (multi-session sidebar) */
-.program-sidebar__session-heading {
-  margin: 0 0 var(--space-150) 0;
-}
-
-.program-sidebar__session-list {
-  margin-bottom: var(--space-300);
-}
-
 .program-sidebar__session-item {
   padding: var(--space-150) 0;
   border-bottom: var(--border-100) solid var(--color-border-soft, #e0e0e0);
