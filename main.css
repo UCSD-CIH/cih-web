@@ -7284,13 +7284,15 @@ footer.submitted {
 .page-node-type-program .group-program-sidebar .field--name-field-registration-link a {
   background-color: var(--color-bg-yellow-100);
   border: var(--border-100) solid transparent;
-  border-radius: var(--radius-100);
+  border-radius: var(--radius-999);
   color: var(--color-text-on-light) !important;
   cursor: pointer;
   display: inline-block;
-  font: var(--font-label-medium-caps);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: var(--letter-spacing-label);
-  padding: var(--space-300) var(--space-300);
+  padding: var(--space-150) var(--space-300);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -7372,7 +7374,7 @@ footer.submitted {
 
 .page-node-type-program .group-program-sidebar .field--name-field-registration-link {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: var(--space-100);
 }
 
 /* Prevent flash: hide both buttons until state class exists */
@@ -7485,13 +7487,15 @@ footer.submitted {
 .program-sidebar__session-register--primary {
   background-color: var(--color-bg-yellow-100);
   border: var(--border-100) solid transparent;
-  border-radius: var(--radius-100);
+  border-radius: var(--radius-999);
   color: var(--color-text-on-light) !important;
   cursor: pointer;
   display: inline-block;
-  font: var(--font-label-medium-caps);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: var(--letter-spacing-label);
-  padding: var(--space-300) var(--space-300);
+  padding: var(--space-150) var(--space-300);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
