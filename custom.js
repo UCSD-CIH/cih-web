@@ -2193,6 +2193,20 @@
               }
             }
           }
+          var sessionCount = sessionWrapper
+            ? sessionWrapper.querySelectorAll('.paragraph--type--program-session').length
+            : 0;
+          if (sessionCount > 1) {
+            var sessionCountEl = document.createElement('p');
+            sessionCountEl.className = 'program-card-compact__session-count';
+            sessionCountEl.textContent = 'Multiple sessions available';
+            var scheduleInContent = content.querySelector('.field--name-field-schedule');
+            var anchorEl = scheduleInContent || content.querySelector('.field--name-field-program-start-date, .field--name-field-event-dates');
+            if (anchorEl) {
+              content.insertBefore(sessionCountEl, anchorEl.nextSibling);
+            }
+          }
+
           if (sessionWrapper) {
             sessionWrapper.style.display = 'none';
           }
