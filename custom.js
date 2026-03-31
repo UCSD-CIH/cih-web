@@ -2584,6 +2584,23 @@
                 sidebar.appendChild(message);
               }
             }
+
+            // Ensure the subscribe link opens in a new tab and has a fallback URL.
+            var subscribeAnchor = sidebar.querySelector('.field--name-field-subscribe-link a');
+            if (subscribeAnchor) {
+              subscribeAnchor.setAttribute('target', '_blank');
+              subscribeAnchor.setAttribute('rel', 'noopener noreferrer');
+            } else if (!sidebar.querySelector('.program-subscribe-fallback')) {
+              var fallbackEl = document.createElement('div');
+              fallbackEl.className = 'field field--name-field-subscribe-link program-subscribe-fallback';
+              var fallbackAnchor = document.createElement('a');
+              fallbackAnchor.href = 'https://visitor.r20.constantcontact.com/manage/optin?v=001wHcMLujjwHLLK0pqrlf2LXq4VrkJzKtz_wTd9vMJ9JdcBsklg4D32ejjkAWBVCX-cxbFPkbklT-bkmM2xDeCbz7Il96fHHmvhNzeqOmDqETofjAWhL0J5Savq_PX3gwtzNoOcasJyf7ZdlavmePiSA%3D%3D';
+              fallbackAnchor.textContent = 'Subscribe for Updates';
+              fallbackAnchor.setAttribute('target', '_blank');
+              fallbackAnchor.setAttribute('rel', 'noopener noreferrer');
+              fallbackEl.appendChild(fallbackAnchor);
+              sidebar.appendChild(fallbackEl);
+            }
           } else if (message) {
             message.parentNode.removeChild(message);
           }
