@@ -1615,9 +1615,13 @@
               );
             }
 
-            // Prefer the format taxonomy term text (e.g. "Online", "In Person") over raw location.
+            // For In Person sessions, show the actual address; otherwise use the format term label.
             var locationText = '';
-            if (formatLinkEl) {
+            var formatHref = formatLinkEl ? (formatLinkEl.getAttribute('href') || '') : '';
+            var isInPersonSession = formatHref.endsWith('/114');
+            if (isInPersonSession && locationEl) {
+              locationText = (locationEl.textContent || '').trim();
+            } else if (formatLinkEl) {
               locationText = (formatLinkEl.textContent || '').trim();
             } else if (locationEl) {
               locationText = (locationEl.textContent || '').trim();
@@ -2192,19 +2196,6 @@
                   }
                 }
 
-                var isInPerson = !!card.querySelector('.field--name-field-program-format a[href$="/114"]');
-                if (isInPerson) {
-                  var locField = nearestPara.querySelector('.field--name-field-location');
-                  var locItem = locField && (locField.querySelector('.field__item') || locField);
-                  var locText = locItem ? (locItem.textContent || '').replace(/\s+/g, ' ').trim() : '';
-                  if (locText) {
-                    var locEl = document.createElement('div');
-                    locEl.className = 'program-card-compact__location';
-                    locEl.textContent = locText;
-                    var locAnchor = sessionScheduleEl || sessionDateEl;
-                    content.insertBefore(locEl, locAnchor.nextSibling);
-                  }
-                }
               }
             }
           }
