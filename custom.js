@@ -1635,6 +1635,10 @@
           if (isMulti) {
             sidebar.classList.add('has-multi-session');
 
+            var sessionHeading = document.createElement('h5');
+            sessionHeading.className = 'program-sidebar__session-heading';
+            sessionHeading.textContent = 'Current Sessions';
+
             // Build a session list: one row per session with date range, location, and register link.
             var listEl = document.createElement('div');
             listEl.className = 'program-sidebar__session-list';
@@ -1683,9 +1687,11 @@
             }
 
             sidebar.insertBefore(
-              listEl,
+              sessionHeading,
               pricingField ? pricingField.nextSibling : (priceField ? priceField.nextSibling : sidebar.firstChild)
             );
+
+            sidebar.insertBefore(listEl, sessionHeading.nextSibling);
           } else {
             // Single session: insert a formatted date/location block near the session field.
             var single = sessions[0];

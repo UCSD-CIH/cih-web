@@ -7414,6 +7414,10 @@ footer.submitted {
 }
 
 /* Session list (multi-session sidebar) */
+.program-sidebar__session-heading {
+  margin: 0 0 var(--space-150) 0;
+}
+
 .program-sidebar__session-list {
   margin-bottom: var(--space-300);
 }
@@ -7437,7 +7441,7 @@ footer.submitted {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  color: var(--color-text-heading);
+  color: var(--color-text-paragraph);
   margin: 0 0 var(--space-050) 0;
 }
 
