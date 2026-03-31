@@ -6472,8 +6472,16 @@ article.program-card-compact .field--name-field-program-start-date {
   margin-bottom: var(--space-050);
 }
 
+article.program-card-compact .program-card-compact__location {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-subdued-strong);
+}
+
 article.program-card-compact .program-card-compact__session-count {
-  margin: 0 0 var(--space-100) 0;
+  margin: var(--space-100) 0 0 0;
   font-size: 12px;
   line-height: 16px;
   color: var(--color-text-subdued-strong);

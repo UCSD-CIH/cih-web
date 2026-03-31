@@ -2177,6 +2177,7 @@
 
               if (nearestPara) {
                 var dayTimeField = nearestPara.querySelector('.field--name-field-day-and-time');
+                var sessionScheduleEl = null;
                 if (dayTimeField) {
                   var dayTimeText = (dayTimeField.textContent || '').replace(/\s+/g, ' ').trim();
                   dayTimeText = dayTimeText.replace(/\s*\([^)]*\)/g, '');
@@ -2184,10 +2185,24 @@
                   if (tzMatch2) dayTimeText = tzMatch2[1];
                   dayTimeText = dayTimeText.replace(/\s+/g, ' ').replace(/[.,;]\s*$/, '').trim();
                   if (dayTimeText) {
-                    var sessionScheduleEl = document.createElement('div');
+                    sessionScheduleEl = document.createElement('div');
                     sessionScheduleEl.className = 'field field--name-field-schedule';
                     sessionScheduleEl.textContent = dayTimeText;
                     content.insertBefore(sessionScheduleEl, sessionDateEl.nextSibling);
+                  }
+                }
+
+                var isInPerson = !!card.querySelector('.field--name-field-program-format a[href$="/114"]');
+                if (isInPerson) {
+                  var locField = nearestPara.querySelector('.field--name-field-location');
+                  var locItem = locField && (locField.querySelector('.field__item') || locField);
+                  var locText = locItem ? (locItem.textContent || '').replace(/\s+/g, ' ').trim() : '';
+                  if (locText) {
+                    var locEl = document.createElement('div');
+                    locEl.className = 'program-card-compact__location';
+                    locEl.textContent = locText;
+                    var locAnchor = sessionScheduleEl || sessionDateEl;
+                    content.insertBefore(locEl, locAnchor.nextSibling);
                   }
                 }
               }
