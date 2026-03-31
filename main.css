@@ -7275,7 +7275,7 @@ footer.submitted {
   color: var(--color-text-paragraph);
   font-size: 14px;
   line-height: 20px;
-  padding-bottom: var(--space-300);
+  padding-bottom: var(--space-250);
   margin-bottom: 0;
   border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
 }
@@ -7290,7 +7290,7 @@ footer.submitted {
   display: inline-block;
   font: var(--font-label-medium-caps);
   letter-spacing: var(--letter-spacing-label);
-  padding: var(--space-200) var(--space-300);
+  padding: var(--space-300) var(--space-300);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -7413,11 +7413,12 @@ footer.submitted {
 
 /* Session list (multi-session sidebar) */
 .program-sidebar__session-heading {
-  margin-top: var(--space-200);
+  margin-top: var(--space-150);
+  margin-bottom: 0 !important;
 }
 
 .program-sidebar__session-item {
-  padding: var(--space-150) 0;
+  padding: var(--space-150) 0 var(--space-250) 0;
   border-bottom: var(--border-100) solid var(--color-border-soft, #e0e0e0);
 }
 
@@ -7444,7 +7445,7 @@ footer.submitted {
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-paragraph);
-  margin: 0 0 var(--space-100) 0;
+  margin: 0 0 var(--space-050) 0;
 }
 
 .program-sidebar__session-instructor {
@@ -7452,7 +7453,7 @@ footer.submitted {
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-paragraph);
-  margin: 0 0 var(--space-100) 0;
+  margin: 0 0 var(--space-200) 0;
 }
 
 .program-sidebar__session-instructor a {
@@ -7490,7 +7491,7 @@ footer.submitted {
   display: inline-block;
   font: var(--font-label-medium-caps);
   letter-spacing: var(--letter-spacing-label);
-  padding: var(--space-200) var(--space-300);
+  padding: var(--space-300) var(--space-300);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
