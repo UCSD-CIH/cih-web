@@ -1670,14 +1670,22 @@
               listEl.appendChild(itemEl);
             });
 
-            // Insert session list at the top of the sidebar.
-            sidebar.insertBefore(listEl, sidebar.firstChild);
-
-            // Move pricing above the session list so it is the first item (key decision factor).
+            // Keep the sidebar aligned to Drupal display order: Price, Pricing Details, then sessions.
+            var priceField = sidebar.querySelector('.field--name-field-price');
             var pricingField = sidebar.querySelector('.field--name-field-pricing-details');
-            if (pricingField) {
-              sidebar.insertBefore(pricingField, listEl);
+
+            if (priceField) {
+              sidebar.insertBefore(priceField, sidebar.firstChild);
             }
+
+            if (pricingField) {
+              sidebar.insertBefore(pricingField, priceField ? priceField.nextSibling : sidebar.firstChild);
+            }
+
+            sidebar.insertBefore(
+              listEl,
+              pricingField ? pricingField.nextSibling : (priceField ? priceField.nextSibling : sidebar.firstChild)
+            );
           } else {
             // Single session: insert a formatted date/location block near the session field.
             var single = sessions[0];
