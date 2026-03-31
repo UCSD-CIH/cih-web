@@ -7401,11 +7401,10 @@ footer.submitted {
   display: none !important;
 }
 
-/* Multi-session: suppress node-level CTA buttons and registration notices — handled per-session */
-.page-node-type-program .group-program-sidebar.has-multi-session
+/* Session-driven sidebar: suppress node-level registration CTA/notice when current sessions are shown */
+.page-node-type-program .group-program-sidebar.has-current-sessions
   :is(
     .field--name-field-registration-link,
-    .field--name-field-subscribe-link,
     .program-registration-closes,
     .program-registration-message
   ) {
@@ -7457,6 +7456,41 @@ footer.submitted {
 .program-sidebar__session-register:hover {
   color: var(--color-text-blue);
   text-decoration: none;
+}
+
+.program-sidebar__session-register--primary {
+  background-color: var(--color-bg-yellow-100);
+  border: var(--border-100) solid transparent;
+  border-radius: var(--radius-100);
+  color: var(--color-text-on-light) !important;
+  cursor: pointer;
+  display: inline-block;
+  font: var(--font-label-medium-caps);
+  letter-spacing: var(--letter-spacing-label);
+  padding: var(--space-200) var(--space-300);
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.program-sidebar__session-register--primary:hover,
+.program-sidebar__session-register--primary:visited:hover {
+  background-color: var(--color-bg-turquoise-100);
+  border: var(--border-100) solid transparent;
+  color: var(--color-text-on-light) !important;
+  text-decoration: none;
+}
+
+.program-sidebar__session-register--primary:active {
+  background-color: var(--color-bg-turquoise-120) !important;
+  border: var(--border-100) solid transparent !important;
+  color: var(--color-text-navy) !important;
+}
+
+.program-sidebar__session-register--primary:focus-visible {
+  outline: 2px solid var(--color-bg-navy-100);
+  outline-offset: 2px;
 }
 
 /* Single-session block (date range + location text) */

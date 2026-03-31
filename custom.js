@@ -1560,10 +1560,10 @@
           var registration = sidebar.querySelector('.field--name-field-registration-link a');
           if (registration) {
             var regOriginal = (registration.textContent || '').trim();
-            if (regOriginal && regOriginal.toLowerCase() !== 'register now') {
+            if (regOriginal && regOriginal.toLowerCase() !== 'register here') {
               registration.setAttribute('data-original-url', regOriginal);
             }
-            registration.textContent = 'Register Now';
+            registration.textContent = 'Register Here';
           }
 
           var subscribe = sidebar.querySelector('.field--name-field-subscribe-link a');
@@ -1578,10 +1578,10 @@
     }
   };
 
-  // Renders session data in the Program page sidebar, replacing raw paragraph output.
-  // Single session: inserts formatted date range + location text; updates node-level register link href.
-  // Multi-session: builds a session list with date range, location, and individual text register links;
-  //   moves pricing to the top; adds has-multi-session class so CSS can hide the node-level CTA buttons.
+  // Renders current session data in the Program page sidebar, replacing raw paragraph output.
+  // Always shows a "Current Sessions" heading. The first currently open session gets the primary CTA button,
+  // subsequent open sessions render as text links. If no sessions are currently open, the existing fallback
+  // message and Subscribe CTA are used instead.
   Drupal.behaviors.programSidebarSessionEnhancements = {
     attach: function (context) {
       once('programSidebarSessionEnhancements', '.page-node-type-program .group-program-sidebar', context)
@@ -1593,8 +1593,6 @@
             sessionField.querySelectorAll('.field__items > .field__item')
           );
           if (!sessionItems.length) return;
-
-          var isMulti = sessionItems.length > 1;
 
           // Extract data from each session paragraph.
           var sessions = [];
@@ -1625,105 +1623,108 @@
               locationText = (locationEl.textContent || '').trim();
             }
 
+            var registrationPair = getDatePairFromFields(item, {
+              combinedSelector: '.field--name-field-registration-dates',
+              startSelector: '.field--name-field-registration-start-date',
+              endSelector: '.field--name-field-registration-end-date'
+            });
+            var registrationStart = registrationPair && registrationPair.values
+              ? registrationPair.values.startDate
+              : null;
+            var registrationEnd = registrationPair && registrationPair.values
+              ? registrationPair.values.endDate
+              : null;
+            var isCurrent = false;
+
+            if (regLinkEl) {
+              if (registrationStart && registrationEnd) {
+                var nowTime = new Date().getTime();
+                isCurrent = nowTime >= registrationStart.getTime() && nowTime <= registrationEnd.getTime();
+              } else {
+                isCurrent = true;
+              }
+            }
+
             sessions.push({
               rangeText: rangeText,
               locationText: locationText,
-              regHref: regLinkEl ? (regLinkEl.getAttribute('href') || '').trim() : ''
+              regHref: regLinkEl ? (regLinkEl.getAttribute('href') || '').trim() : '',
+              isCurrent: isCurrent
             });
           });
 
-          if (isMulti) {
-            sidebar.classList.add('has-multi-session');
+          var currentSessions = sessions.filter(function (session) {
+            return session.isCurrent;
+          });
 
-            var sessionHeading = document.createElement('h5');
-            sessionHeading.className = 'program-sidebar__session-heading';
-            sessionHeading.textContent = 'Current Sessions';
+          var sessionHeading = document.createElement('h5');
+          sessionHeading.className = 'program-sidebar__session-heading';
+          sessionHeading.textContent = 'Current Sessions';
 
-            // Build a session list: one row per session with date range, location, and register link.
-            var listEl = document.createElement('div');
-            listEl.className = 'program-sidebar__session-list';
+          var listEl = document.createElement('div');
+          listEl.className = 'program-sidebar__session-list';
 
-            sessions.forEach(function (session) {
-              var itemEl = document.createElement('div');
-              itemEl.className = 'program-sidebar__session-item';
+          currentSessions.forEach(function (session, index) {
+            var itemEl = document.createElement('div');
+            itemEl.className = 'program-sidebar__session-item';
 
-              if (session.rangeText) {
-                var datesEl = document.createElement('p');
-                datesEl.className = 'program-sidebar__session-dates';
-                datesEl.textContent = session.rangeText;
-                itemEl.appendChild(datesEl);
-              }
-
-              if (session.locationText) {
-                var locEl = document.createElement('p');
-                locEl.className = 'program-sidebar__session-location';
-                locEl.textContent = 'Location: ' + session.locationText;
-                itemEl.appendChild(locEl);
-              }
-
-              if (session.regHref) {
-                var regEl = document.createElement('a');
-                regEl.className = 'program-sidebar__session-register';
-                regEl.href = session.regHref;
-                regEl.textContent = 'Register \u2192';
-                regEl.setAttribute('target', '_blank');
-                regEl.setAttribute('rel', 'noopener noreferrer');
-                itemEl.appendChild(regEl);
-              }
-
-              listEl.appendChild(itemEl);
-            });
-
-            // Keep the sidebar aligned to Drupal display order: Price, Pricing Details, then sessions.
-            var priceField = sidebar.querySelector('.field--name-field-price');
-            var pricingField = sidebar.querySelector('.field--name-field-pricing-details');
-
-            if (priceField) {
-              sidebar.insertBefore(priceField, sidebar.firstChild);
+            if (session.rangeText) {
+              var datesEl = document.createElement('p');
+              datesEl.className = 'program-sidebar__session-dates';
+              datesEl.textContent = session.rangeText;
+              itemEl.appendChild(datesEl);
             }
 
-            if (pricingField) {
-              sidebar.insertBefore(pricingField, priceField ? priceField.nextSibling : sidebar.firstChild);
+            if (session.locationText) {
+              var locEl = document.createElement('p');
+              locEl.className = 'program-sidebar__session-location';
+              locEl.textContent = 'Location: ' + session.locationText;
+              itemEl.appendChild(locEl);
             }
 
-            sidebar.insertBefore(
-              sessionHeading,
-              pricingField ? pricingField.nextSibling : (priceField ? priceField.nextSibling : sidebar.firstChild)
-            );
+            if (session.regHref) {
+              var regEl = document.createElement('a');
+              regEl.className = index === 0
+                ? 'program-sidebar__session-register program-sidebar__session-register--primary'
+                : 'program-sidebar__session-register';
+              regEl.href = session.regHref;
+              regEl.textContent = 'Register Here';
+              regEl.setAttribute('target', '_blank');
+              regEl.setAttribute('rel', 'noopener noreferrer');
+              itemEl.appendChild(regEl);
+            }
 
+            listEl.appendChild(itemEl);
+          });
+
+          // Keep the sidebar aligned to Drupal display order: Price, Pricing Details, then sessions.
+          var priceField = sidebar.querySelector('.field--name-field-price');
+          var pricingField = sidebar.querySelector('.field--name-field-pricing-details');
+
+          if (priceField) {
+            sidebar.insertBefore(priceField, sidebar.firstChild);
+          }
+
+          if (pricingField) {
+            sidebar.insertBefore(pricingField, priceField ? priceField.nextSibling : sidebar.firstChild);
+          }
+
+          var sessionAnchor = pricingField
+            ? pricingField.nextSibling
+            : (priceField ? priceField.nextSibling : sidebar.firstChild);
+
+          sidebar.insertBefore(sessionHeading, sessionAnchor);
+
+          if (currentSessions.length) {
+            sidebar.classList.add('has-current-sessions');
+            sidebar.classList.remove('has-no-current-sessions');
             sidebar.insertBefore(listEl, sessionHeading.nextSibling);
           } else {
-            // Single session: insert a formatted date/location block near the session field.
-            var single = sessions[0];
-            var blockEl = document.createElement('div');
-            blockEl.className = 'program-sidebar__session-block';
-
-            if (single.rangeText) {
-              var singleDatesEl = document.createElement('p');
-              singleDatesEl.className = 'program-sidebar__session-dates';
-              singleDatesEl.textContent = single.rangeText;
-              blockEl.appendChild(singleDatesEl);
-            }
-
-            if (single.locationText) {
-              var singleLocEl = document.createElement('p');
-              singleLocEl.className = 'program-sidebar__session-location';
-              singleLocEl.textContent = 'Location: ' + single.locationText;
-              blockEl.appendChild(singleLocEl);
-            }
-
-            if (blockEl.hasChildNodes()) {
-              sessionField.parentNode.insertBefore(blockEl, sessionField);
-            }
-
-            // Update the node-level registration link href from the session's link.
-            if (single.regHref) {
-              var nodeRegLink = sidebar.querySelector('.field--name-field-registration-link a');
-              if (nodeRegLink) {
-                nodeRegLink.setAttribute('href', single.regHref);
-              }
-            }
+            sidebar.classList.add('has-no-current-sessions');
+            sidebar.classList.remove('has-current-sessions');
           }
+
+          sidebar.setAttribute('data-current-session-count', String(currentSessions.length));
 
           // Always hide the raw session paragraph field after extracting its data.
           sessionField.style.display = 'none';
@@ -2521,27 +2522,36 @@
     attach: function (context) {
       once('programRegistrationToggle', '.page-node-type-program .group-program-sidebar', context)
         .forEach(function (sidebar) {
-          var root = sidebar.closest('.page-node-type-program') || document;
-          var registrationPair = getDatePairFromFields(root, {
-            combinedSelector: '.field--name-field-registration-dates',
-            startSelector: '.field--name-field-registration-start-date',
-            endSelector: '.field--name-field-registration-end-date'
-          });
-          if (!registrationPair || !registrationPair.values.startDate || !registrationPair.values.endDate) return;
+          var usesSessionState = sidebar.hasAttribute('data-current-session-count');
+          var startDate = null;
+          var endDate = null;
+          var isOpen = false;
 
-          var startDate = registrationPair.values.startDate;
-          var endDate = registrationPair.values.endDate;
+          if (usesSessionState) {
+            isOpen = parseInt(sidebar.getAttribute('data-current-session-count') || '0', 10) > 0;
+          } else {
+            var root = sidebar.closest('.page-node-type-program') || document;
+            var registrationPair = getDatePairFromFields(root, {
+              combinedSelector: '.field--name-field-registration-dates',
+              startSelector: '.field--name-field-registration-start-date',
+              endSelector: '.field--name-field-registration-end-date'
+            });
+            if (!registrationPair || !registrationPair.values.startDate || !registrationPair.values.endDate) return;
 
-          var now = new Date();
-          var nowTime = now.getTime();
-          var isOpen = nowTime >= startDate.getTime() && nowTime <= endDate.getTime();
+            startDate = registrationPair.values.startDate;
+            endDate = registrationPair.values.endDate;
+
+            var now = new Date();
+            var nowTime = now.getTime();
+            isOpen = nowTime >= startDate.getTime() && nowTime <= endDate.getTime();
+          }
 
           sidebar.classList.remove('is-registration-open', 'is-registration-closed');
           sidebar.classList.add(isOpen ? 'is-registration-open' : 'is-registration-closed');
           sidebar.setAttribute('data-registration-state', isOpen ? 'open' : 'closed');
 
           var closeNotice = sidebar.querySelector('.program-registration-closes');
-          if (isOpen) {
+          if (isOpen && endDate) {
             var closeText = endDate.toLocaleDateString('en-US', {
               month: 'long',
               day: 'numeric',
