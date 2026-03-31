@@ -2075,6 +2075,7 @@
                 dateField.textContent = 'Starts ' + normalizedDate;
               }
             }
+            content.insertBefore(dateField, title.nextSibling);
           }
 
           if (scheduleField) {
@@ -2090,6 +2091,7 @@
             if (scheduleText) {
               scheduleField.textContent = scheduleText;
             }
+            content.insertBefore(scheduleField, (dateField || title).nextSibling);
           }
 
           var audienceField = meta && meta.querySelector('.field--name-field-audience-type');
@@ -2149,6 +2151,50 @@
           }
 
           arrowImage.setAttribute('src', '/sites/default/files/2026-03/arrow-right-circle-fill-blue.svg');
+
+          // Hide session paragraph data; inject start date + schedule if no node-level date was found.
+          var sessionWrapper = content.querySelector('.field--name-field-program-session');
+          if (!dateField && sessionWrapper) {
+            var sessionParas = sessionWrapper.querySelectorAll('.paragraph--type--program-session');
+            var nearest = null;
+            var nearestPara = null;
+            Array.prototype.forEach.call(sessionParas, function (para) {
+              var timeEl = para.querySelector('.field--name-field-session-start-date time[datetime]');
+              if (!timeEl) return;
+              var d = new Date(timeEl.getAttribute('datetime'));
+              if (isNaN(d.getTime())) return;
+              if (!nearest || d < nearest) { nearest = d; nearestPara = para; }
+            });
+            if (nearest) {
+              var sessionDateEl = document.createElement('div');
+              sessionDateEl.className = 'field field--name-field-program-start-date';
+              sessionDateEl.textContent = 'Starts ' + nearest.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric'
+              });
+              content.insertBefore(sessionDateEl, title.nextSibling);
+
+              if (nearestPara) {
+                var dayTimeField = nearestPara.querySelector('.field--name-field-day-and-time');
+                if (dayTimeField) {
+                  var dayTimeText = (dayTimeField.textContent || '').replace(/\s+/g, ' ').trim();
+                  dayTimeText = dayTimeText.replace(/\s*\([^)]*\)/g, '');
+                  var tzMatch2 = dayTimeText.match(/^(.*?\b(?:PT|ET|PST|PDT|EST|EDT|MST|MDT|CST|CDT|MT|CT)\b)/i);
+                  if (tzMatch2) dayTimeText = tzMatch2[1];
+                  dayTimeText = dayTimeText.replace(/\s+/g, ' ').replace(/[.,;]\s*$/, '').trim();
+                  if (dayTimeText) {
+                    var sessionScheduleEl = document.createElement('div');
+                    sessionScheduleEl.className = 'field field--name-field-schedule';
+                    sessionScheduleEl.textContent = dayTimeText;
+                    content.insertBefore(sessionScheduleEl, sessionDateEl.nextSibling);
+                  }
+                }
+              }
+            }
+          }
+          if (sessionWrapper) {
+            sessionWrapper.style.display = 'none';
+          }
 
           card.classList.add('is-clickable');
           card.addEventListener('click', function (event) {
