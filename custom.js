@@ -1713,9 +1713,8 @@
             ? pricingField.nextSibling
             : (priceField ? priceField.nextSibling : sidebar.firstChild);
 
-          sidebar.insertBefore(sessionHeading, sessionAnchor);
-
           if (currentSessions.length) {
+            sidebar.insertBefore(sessionHeading, sessionAnchor);
             sidebar.classList.add('has-current-sessions');
             sidebar.classList.remove('has-no-current-sessions');
             sidebar.insertBefore(listEl, sessionHeading.nextSibling);
