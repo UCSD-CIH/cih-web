@@ -1645,11 +1645,22 @@
               }
             }
 
+            var instructorEls = item.querySelectorAll('.field--name-field-instructors .field--name-title');
+            var instructors = [];
+            Array.prototype.forEach.call(instructorEls, function (titleEl) {
+              var linkEl = titleEl.closest('article') && titleEl.closest('article').querySelector('h2 a');
+              instructors.push({
+                name: (titleEl.textContent || '').trim(),
+                href: linkEl ? (linkEl.getAttribute('href') || '') : ''
+              });
+            });
+
             sessions.push({
               rangeText: rangeText,
               locationText: locationText,
               regHref: regLinkEl ? (regLinkEl.getAttribute('href') || '').trim() : '',
-              isCurrent: isCurrent
+              isCurrent: isCurrent,
+              instructors: instructors
             });
           });
 
@@ -1680,6 +1691,23 @@
               locEl.className = 'program-sidebar__session-location';
               locEl.textContent = 'Location: ' + session.locationText;
               itemEl.appendChild(locEl);
+            }
+
+            if (currentSessions.length > 1 && session.instructors && session.instructors.length) {
+              var instrEl = document.createElement('p');
+              instrEl.className = 'program-sidebar__session-instructor';
+              session.instructors.forEach(function (instr, i) {
+                if (i > 0) instrEl.appendChild(document.createTextNode(', '));
+                if (instr.href) {
+                  var instrLink = document.createElement('a');
+                  instrLink.href = instr.href;
+                  instrLink.textContent = instr.name;
+                  instrEl.appendChild(instrLink);
+                } else {
+                  instrEl.appendChild(document.createTextNode(instr.name));
+                }
+              });
+              itemEl.appendChild(instrEl);
             }
 
             if (session.regHref) {

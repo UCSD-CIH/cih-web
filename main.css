@@ -7447,9 +7447,28 @@ footer.submitted {
   margin: 0 0 var(--space-100) 0;
 }
 
+.program-sidebar__session-instructor {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-paragraph);
+  margin: 0 0 var(--space-100) 0;
+}
+
+.program-sidebar__session-instructor a {
+  color: var(--color-text-paragraph);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-text-paragraph);
+}
+
+.program-sidebar__session-instructor a:hover {
+  text-decoration: none;
+}
+
 .program-sidebar__session-register {
   font-family: 'Inter', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 20px;
   color: var(--color-text-link);
