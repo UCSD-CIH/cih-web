@@ -7874,6 +7874,8 @@ footer.submitted {
   align-items: center;
   gap: var(--space-100);
   white-space: normal;
+  margin: 0;
+  padding: 0;
 }
 
 .page-node-type-profile article.profile.full > .content > .reach-profile-hero-text
@@ -7883,6 +7885,8 @@ footer.submitted {
   display: flex;
   flex: 0 0 auto;
   width: auto;
+  margin: 0;
+  padding: 0;
 }
 
 /* Match Program page focus badge look + icon. */
