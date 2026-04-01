@@ -8025,8 +8025,10 @@ footer.submitted {
   white-space: nowrap;
 }
 
-/* Hard override: collapse all focus-area wrappers into inline flow on full profile pages. */
+/* Hard override: collapse all badge wrappers into inline flow on full profile pages. */
 .page-node-type-profile article.profile.full .group--program-badges > .field,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation .field__items,
+.page-node-type-profile article.profile.full .group--program-badges > .field--name-field-institution-affiliation .field__item,
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas,
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__items,
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas.field__items,
