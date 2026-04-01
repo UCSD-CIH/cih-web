@@ -57,7 +57,7 @@ Create content type:
 - **Credentials (Display) vs Credentials (Search):** Display (`field_credentials_display`) is free-text for rendering. Search (`field_credentials_search`) is the list field used for filtering the directory. Both should be filled.
 - **Primary Center vs Additional Affiliations:** Both use the Center Affiliation vocabulary. `field_primary_center` = single primary assignment. `field_center_name` = additional affiliations. A profile can belong to multiple centers.
 - **REACH fields:** `field_reach_roles`, `field_reach_partner_role`, and `field_committee_memberships` are only relevant for REACH center profiles. Consider using Conditional Fields or field group visibility to hide these on non-REACH profiles.
-- **Committee Memberships:** Implemented as a Paragraph (entity reference revisions) with paragraph type REACH Committee Membership — not a flat taxonomy reference. Allows structured membership data per committee.
+- **Committee Memberships:** Implemented as a Paragraph (entity reference revisions) with paragraph type REACH Committee Membership — not a flat taxonomy reference. Allows structured membership data per committee. Field cannot be disabled via Drupal admin field settings on non-REACH profiles; hidden on the full profile page via `display: none !important` in CSS.
 
 ---
 
@@ -98,7 +98,18 @@ Display B: Per-center filtered listing *(as needed)*
 
 ---
 
-## 8) QA Checklist
+## 8) Badge CSS Architecture (Full Profile Page)
+
+The institution affiliation and focus area badges in `.group--program-badges` use an inline flow model:
+
+- A "Hard override" block in `main.css` forces all badge wrappers (`> .field`, `.field__items`, `.field__item`) to `display: inline !important` so all badges flow together regardless of field.
+- `gap` has no effect in inline context — spacing is controlled via `margin: 0 var(--space-100) var(--space-100) 0` on badge `a` elements.
+- That margin requires `!important` to beat a higher-specificity rule from the `.reach-profile-hero-text .content` selector chain (specificity 0,7,2 vs 0,6,2 for the Hard override rule).
+- `.field--name-field-institution-affiliation .field__items` and `.field__item` must be explicitly included in the Hard override `display: inline !important` block — they default to `display: block` and break the shared inline flow if omitted.
+
+---
+
+## 9) QA Checklist
 
 - [ ] Profile card displays correctly at 2:3 headshot ratio
 - [ ] Missing headshot falls back gracefully (placeholder or initials)
