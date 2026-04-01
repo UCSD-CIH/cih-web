@@ -8042,7 +8042,7 @@ footer.submitted {
 .page-node-type-profile article.profile.full .group--program-badges > .field--name-field-program-focus-areas .field__item a {
   display: inline-flex !important;
   vertical-align: top;
-  margin: 0 var(--space-100) var(--space-100) 0;
+  margin: 0 var(--space-100) var(--space-100) 0 !important;
 }
 
 /* Full profile only: term 71 affiliation badge uses UCSD yellow treatment. */
@@ -8102,6 +8102,10 @@ footer.submitted {
 }
 
 .page-node-type-profile article.profile.full > .content > .field--name-field-short-bio {
+  display: none !important;
+}
+
+.page-node-type-profile .field--name-field-committee-memberships {
   display: none !important;
 }
 
