@@ -1697,7 +1697,7 @@
               itemEl.appendChild(locEl);
             }
 
-            if (currentSessions.length > 1 && session.instructors && session.instructors.length) {
+            if (session.instructors && session.instructors.length) {
               var instrEl = document.createElement('p');
               instrEl.className = 'program-sidebar__session-instructor';
               instrEl.appendChild(document.createTextNode('Instructor: '));
