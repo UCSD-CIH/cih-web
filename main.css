@@ -1284,6 +1284,7 @@ code.bg-light {
 
 #navbar.dxpr-theme-header--top {
   background-color: var(--color-bg-blue-100) !important;
+  --dxt-setting-header-top-height: 48px;
 }
 
 #navbar.dxpr-theme-header--top .menu {
@@ -1454,6 +1455,9 @@ code.bg-light {
   background-color: var(--color-bg-lightest) !important;
   color: var(--color-text-paragraph) !important;
   text-decoration: none !important;
+  outline: var(--border-050) solid var(--color-border-subdued-strong) !important;
+  outline-offset: -1px;
+  box-shadow: var(--shadow-100) !important;
 }
 
 /* Override DXPR theme global link colors inside dropdowns */
