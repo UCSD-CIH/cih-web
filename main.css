@@ -1299,11 +1299,11 @@ code.bg-light {
 
 #navbar.dxpr-theme-header--top .menu > li > a {
   font-family: 'Inter', sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 15px !important;
   line-height: 15px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--color-text-on-dark) !important;
   background-color: transparent;
   text-decoration: none;
@@ -1312,8 +1312,8 @@ code.bg-light {
 #navbar.dxpr-theme-header--top .menu > li > a:hover,
 #navbar.dxpr-theme-header--top .menu > li > a:focus,
 #navbar.dxpr-theme-header--top .menu > li > a:focus-visible {
-  background-color: var(--color-bg-turquoise-100) !important;
-  color: var(--color-text-on-light) !important;
+  background-color: var(--color-bg-navy-100) !important;
+  color: var(--color-text-on-dark) !important;
   text-decoration: none !important;
 }
 
@@ -1409,7 +1409,7 @@ code.bg-light {
   display: none;
   z-index: 1000;
 
-  background: #D0DFE7;
+  background: var(--color-bg-navy-100);
   border: 0;
   border-radius: 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
@@ -1439,28 +1439,30 @@ code.bg-light {
   font-size: 14px !important;
   line-height: 20px !important;
   font-weight: 600 !important;
-  letter-spacing: normal !important;
+  letter-spacing: 0 !important;
   text-transform: none !important;
   font-family: var(--dxt-font-family, "Inter", system-ui, sans-serif) !important;
 
-  color: var(--color-text-on-light, #182B49) !important;
-  background-color: transparent !important; /* keep submenu links on-light */
+  color: var(--color-text-on-dark, #fff) !important;
+  background-color: transparent !important;
 }
 
 .center-nav > li > ul > li > a:hover,
 .center-nav > li > ul > li > a:focus {
-  background: none !important;
-  background-color: transparent !important;
-  color: var(--color-text-on-light, #182B49) !important;
-  text-decoration: underline !important;
+  background: var(--color-bg-lightest) !important;
+  background-color: var(--color-bg-lightest) !important;
+  color: var(--color-text-paragraph) !important;
+  text-decoration: none !important;
 }
 
 /* Override DXPR theme global link colors inside dropdowns */
 #navbar.dxpr-theme-header--top .center-nav > li > ul > li > a,
-#navbar.dxpr-theme-header--top .center-nav > li > ul > li > a:visited,
+#navbar.dxpr-theme-header--top .center-nav > li > ul > li > a:visited {
+  color: var(--color-text-on-dark, #fff) !important;
+}
 #navbar.dxpr-theme-header--top .center-nav > li > ul > li > a:hover,
 #navbar.dxpr-theme-header--top .center-nav > li > ul > li > a:focus {
-  color: var(--color-text-on-light, #182B49) !important;
+  color: var(--color-text-paragraph, #282929) !important;
 }
 
 /* Third level flyout (if used) */
@@ -1489,6 +1491,16 @@ code.bg-light {
 .center-nav > li > ul > li:hover > ul,
 .center-nav > li > ul > li:focus-within > ul {
   display: block;
+}
+
+/* Filled down-pointing triangle caret — replaces DXPR theme’s tilde character */
+.body--dxpr-theme-nav-desktop #navbar.dxpr-theme-header--top .dxpr-theme-menu--has-children a.dropdown-toggle::after {
+  content: "▾";
+  font-size: 1.1rem;
+  line-height: 1;
+  top: 0.125rem;
+  left: 0.25rem;
+  font-family: inherit;
 }
 
 /* Don’t interfere with mobile collapsible nav */
