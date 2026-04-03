@@ -1311,7 +1311,8 @@ code.bg-light {
 
 #navbar.dxpr-theme-header--top .menu > li > a:hover,
 #navbar.dxpr-theme-header--top .menu > li > a:focus,
-#navbar.dxpr-theme-header--top .menu > li > a:focus-visible {
+#navbar.dxpr-theme-header--top .menu > li > a:focus-visible,
+#navbar.dxpr-theme-header--top .menu > li:hover > a {
   background-color: var(--color-bg-navy-100) !important;
   color: var(--color-text-on-dark) !important;
   text-decoration: none !important;
@@ -1496,10 +1497,10 @@ code.bg-light {
 /* Filled down-pointing triangle caret — replaces DXPR theme’s tilde character */
 .body--dxpr-theme-nav-desktop #navbar.dxpr-theme-header--top .dxpr-theme-menu--has-children a.dropdown-toggle::after {
   content: "▾";
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   line-height: 1;
-  top: 0.125rem;
-  left: 0.25rem;
+  top: -0.05rem;
+  left: 0.2rem;
   font-family: inherit;
 }
 
@@ -9351,7 +9352,7 @@ textarea.form-textarea:focus {
   cursor: pointer;
 }
 .center-nav > li > ul > li.nav-item {
-  padding: 0 var(--space-050);
+  padding: 0;
 }
 
 .center-nav > li > ul > li > a.nav-link {
