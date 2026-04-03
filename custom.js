@@ -2296,19 +2296,23 @@
                 if (!regLinkEl) return;
                 hasAnyRegLink = true;
 
-                var sessionRegPair = getDatePairFromFields(item, {
-                  combinedSelector: '.field--name-field-registration-dates',
-                  startSelector: '.field--name-field-registration-start-date',
-                  endSelector: '.field--name-field-registration-end-date'
-                });
+                // Read registration end date directly — do NOT use orderDatePair here,
+                // as its auto-swap can incorrectly treat an expired session as open when
+                // the start/end fields are entered in reverse order.
+                var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+                var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
 
-                if (sessionRegPair && sessionRegPair.values.startDate && sessionRegPair.values.endDate) {
-                  if (now >= sessionRegPair.values.startDate.getTime() && now <= sessionRegPair.values.endDate.getTime()) {
+                if (regEndDate) {
+                  if (now <= regEndDate.getTime()) {
                     hasAnyOpenSession = true;
                   }
                 } else {
-                  // Has a registration link but no dates — treat as currently open.
-                  hasAnyOpenSession = true;
+                  // No registration end date in DOM — fall back to session end date.
+                  var sessionEndEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
+                  var sessionEndDate = sessionEndEl ? parseDateValue(sessionEndEl.getAttribute('datetime') || '') : null;
+                  if (!sessionEndDate || now <= sessionEndDate.getTime()) {
+                    hasAnyOpenSession = true;
+                  }
                 }
               });
 
