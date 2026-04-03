@@ -1416,7 +1416,7 @@ code.bg-light {
   box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
 
   margin: 0;
-  padding: 12px 0;
+  padding: 0;
   list-style: none;
   min-width: 260px;
 }
