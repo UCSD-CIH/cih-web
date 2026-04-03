@@ -2266,17 +2266,58 @@
           var card = row.querySelector('article.program-card-compact');
           if (!card) return;
 
+          var now = Date.now();
+          var visible = true;
+
+          // Try node-level registration dates first.
           var registrationPair = getDatePairFromFields(card, {
             combinedSelector: '.field--name-field-registration-dates',
             startSelector: '.field--name-field-registration-start-date',
             endSelector: '.field--name-field-registration-end-date'
           });
-          var visible = true;
 
           if (registrationPair && registrationPair.values.startDate && registrationPair.values.endDate) {
-            var now = Date.now();
             visible = now >= registrationPair.values.startDate.getTime() &&
               now <= registrationPair.values.endDate.getTime();
+          } else {
+            // Fall back to session-level registration dates, mirroring sidebar logic:
+            // a session is open if it has a registration link and either no dates or
+            // dates that currently bracket now.
+            var sessionItems = Array.prototype.slice.call(
+              card.querySelectorAll('.field--name-field-program-session .field__items > .field__item')
+            );
+
+            if (sessionItems.length) {
+              var hasAnyRegLink = false;
+              var hasAnyOpenSession = false;
+
+              sessionItems.forEach(function (item) {
+                var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
+                if (!regLinkEl) return;
+                hasAnyRegLink = true;
+
+                var sessionRegPair = getDatePairFromFields(item, {
+                  combinedSelector: '.field--name-field-registration-dates',
+                  startSelector: '.field--name-field-registration-start-date',
+                  endSelector: '.field--name-field-registration-end-date'
+                });
+
+                if (sessionRegPair && sessionRegPair.values.startDate && sessionRegPair.values.endDate) {
+                  if (now >= sessionRegPair.values.startDate.getTime() && now <= sessionRegPair.values.endDate.getTime()) {
+                    hasAnyOpenSession = true;
+                  }
+                } else {
+                  // Has a registration link but no dates — treat as currently open.
+                  hasAnyOpenSession = true;
+                }
+              });
+
+              // Only gate visibility if at least one session had a registration link.
+              // If none did, we can't determine state — default to visible.
+              if (hasAnyRegLink) {
+                visible = hasAnyOpenSession;
+              }
+            }
           }
 
           row.style.display = visible ? '' : 'none';
