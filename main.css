@@ -9046,7 +9046,8 @@ section.announcement-banner.view-hide-if-empty:has(.view-empty) {
    Classes for all webform fields
 =================================== */
 
-.path-webform h1.page-title {
+.path-webform h1.page-title,
+.path-contact h1.page-title {
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   font-size: 36px !important;
