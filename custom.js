@@ -2272,38 +2272,29 @@
           var now = Date.now();
           var visible = true;
 
-          // Registration dates live on session paragraphs, not the node itself.
-          // Always check session-level data directly.
-          var sessionItems = Array.prototype.slice.call(
-            card.querySelectorAll('.field--name-field-program-session .field__items > .field__item')
+          // Target session paragraph entities directly — the .field__items > .field__item
+          // selector would match instructor entity reference items nested inside session
+          // paragraphs rather than the session paragraphs themselves.
+          var sessionParas = Array.prototype.slice.call(
+            card.querySelectorAll('.field--name-field-program-session .paragraph--type--program-session')
           );
 
-          console.log('[PF] card:', card.querySelector('.field--name-title') && card.querySelector('.field--name-title').textContent.trim(), 'sessionItems:', sessionItems.length);
-
-          if (sessionItems.length) {
-            var hasAnyRegLink = false;
+          if (sessionParas.length) {
+            var hasAnyEndDate = false;
             var hasAnyOpenSession = false;
 
-            sessionItems.forEach(function (item) {
-              var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
-              var regEndEl2 = item.querySelector('.field--name-field-registration-end-date time[datetime]');
-              console.log('[PF]  session regLink:', regLinkEl ? regLinkEl.href : 'none', 'regEnd datetime:', regEndEl2 ? regEndEl2.getAttribute('datetime') : 'none');
-              if (!regLinkEl) return;
-              hasAnyRegLink = true;
-
-              // Read registration end date directly — do NOT use orderDatePair here,
-              // as its auto-swap can incorrectly treat an expired session as open when
-              // the start/end fields are entered in reverse order.
-              var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+            sessionParas.forEach(function (para) {
+              var regEndEl = para.querySelector('.field--name-field-registration-end-date time[datetime]');
               var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
 
               if (regEndDate) {
+                hasAnyEndDate = true;
                 if (now <= regEndDate.getTime()) {
                   hasAnyOpenSession = true;
                 }
               } else {
-                // No registration end date in DOM — fall back to session end date.
-                var sessionEndEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
+                // No registration end date — fall back to session end date.
+                var sessionEndEl = para.querySelector('.field--name-field-session-end-date time[datetime]');
                 var sessionEndDate = sessionEndEl ? parseDateValue(sessionEndEl.getAttribute('datetime') || '') : null;
                 if (!sessionEndDate || now <= sessionEndDate.getTime()) {
                   hasAnyOpenSession = true;
@@ -2311,9 +2302,9 @@
               }
             });
 
-            // Only gate visibility if at least one session had a registration link.
-            // If none did, we can't determine state — default to visible.
-            if (hasAnyRegLink) {
+            // Only gate visibility if at least one session had a registration end date.
+            // If none did, we can't determine open/closed state — default to visible.
+            if (hasAnyEndDate) {
               visible = hasAnyOpenSession;
             }
           }
