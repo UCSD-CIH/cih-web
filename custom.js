@@ -1601,7 +1601,7 @@
             var endEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
             var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
             var formatLinkEl = item.querySelector('.field--name-field-program-format a');
-            var locationEl = item.querySelector('.field--name-field-location .field__item');
+            var locationEl = item.querySelector('.field--name-field-location .field__item, .field--name-field-location');
             var dayAndTimeEl = item.querySelector('.field--name-field-day-and-time');
 
             var rangeText = '';
