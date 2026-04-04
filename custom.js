@@ -2239,12 +2239,15 @@
 
   Drupal.behaviors.programFeedViewEmbedEnhancements = {
     attach: function (context) {
+      console.log('[PF] attach called, context:', context);
       once(
         'programFeedViewEmbedEnhancements',
         '.paragraph--type--program-feed',
         context
       ).forEach(function (embed) {
+        console.log('[PF] processing embed');
         if (!embed.querySelector('article.program-card-compact')) {
+          console.log('[PF] no compact cards found, skipping');
           return;
         }
 
@@ -2275,12 +2278,16 @@
             card.querySelectorAll('.field--name-field-program-session .field__items > .field__item')
           );
 
+          console.log('[PF] card:', card.querySelector('.field--name-title') && card.querySelector('.field--name-title').textContent.trim(), 'sessionItems:', sessionItems.length);
+
           if (sessionItems.length) {
             var hasAnyRegLink = false;
             var hasAnyOpenSession = false;
 
             sessionItems.forEach(function (item) {
               var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
+              var regEndEl2 = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+              console.log('[PF]  session regLink:', regLinkEl ? regLinkEl.href : 'none', 'regEnd datetime:', regEndEl2 ? regEndEl2.getAttribute('datetime') : 'none');
               if (!regLinkEl) return;
               hasAnyRegLink = true;
 
