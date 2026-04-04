@@ -2161,15 +2161,25 @@
           var sessionWrapper = content.querySelector('.field--name-field-program-session');
           if (!dateField && sessionWrapper) {
             var sessionParas = sessionWrapper.querySelectorAll('.paragraph--type--program-session');
+            // Prefer the earliest session with open registration; fall back to earliest overall.
             var nearest = null;
             var nearestPara = null;
+            var nearestOpen = null;
+            var nearestOpenPara = null;
+            var nowMs = Date.now();
             Array.prototype.forEach.call(sessionParas, function (para) {
               var timeEl = para.querySelector('.field--name-field-session-start-date time[datetime]');
               if (!timeEl) return;
               var d = new Date(timeEl.getAttribute('datetime'));
               if (isNaN(d.getTime())) return;
               if (!nearest || d < nearest) { nearest = d; nearestPara = para; }
+
+              var regEndEl = para.querySelector('.field--name-field-registration-end-date time[datetime]');
+              var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
+              var isOpen = !regEndDate || nowMs <= regEndDate.getTime();
+              if (isOpen && (!nearestOpen || d < nearestOpen)) { nearestOpen = d; nearestOpenPara = para; }
             });
+            if (nearestOpen) { nearest = nearestOpen; nearestPara = nearestOpenPara; }
             if (nearest) {
               var sessionDateEl = document.createElement('div');
               sessionDateEl.className = 'field field--name-field-program-start-date';
