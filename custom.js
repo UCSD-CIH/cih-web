@@ -1602,6 +1602,7 @@
             var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
             var formatLinkEl = item.querySelector('.field--name-field-program-format a');
             var locationEl = item.querySelector('.field--name-field-location .field__item');
+            var dayAndTimeEl = item.querySelector('.field--name-field-day-and-time');
 
             var rangeText = '';
             if (startEl && endEl) {
@@ -1662,6 +1663,7 @@
             sessions.push({
               rangeText: rangeText,
               locationText: locationText,
+              dayAndTime: dayAndTimeEl ? (dayAndTimeEl.textContent || '').trim() : '',
               regHref: regLinkEl ? (regLinkEl.getAttribute('href') || '').trim() : '',
               isCurrent: isCurrent,
               instructors: instructors
@@ -1688,6 +1690,13 @@
               datesEl.className = 'program-sidebar__session-dates';
               datesEl.textContent = session.rangeText;
               itemEl.appendChild(datesEl);
+            }
+
+            if (session.dayAndTime) {
+              var dayTimeEl = document.createElement('p');
+              dayTimeEl.className = 'program-sidebar__session-day-time';
+              dayTimeEl.textContent = session.dayAndTime;
+              itemEl.appendChild(dayTimeEl);
             }
 
             if (session.locationText) {
