@@ -2269,58 +2269,45 @@
           var now = Date.now();
           var visible = true;
 
-          // Try node-level registration dates first.
-          var registrationPair = getDatePairFromFields(card, {
-            combinedSelector: '.field--name-field-registration-dates',
-            startSelector: '.field--name-field-registration-start-date',
-            endSelector: '.field--name-field-registration-end-date'
-          });
+          // Registration dates live on session paragraphs, not the node itself.
+          // Always check session-level data directly.
+          var sessionItems = Array.prototype.slice.call(
+            card.querySelectorAll('.field--name-field-program-session .field__items > .field__item')
+          );
 
-          if (registrationPair && registrationPair.values.startDate && registrationPair.values.endDate) {
-            visible = now >= registrationPair.values.startDate.getTime() &&
-              now <= registrationPair.values.endDate.getTime();
-          } else {
-            // Fall back to session-level registration dates, mirroring sidebar logic:
-            // a session is open if it has a registration link and either no dates or
-            // dates that currently bracket now.
-            var sessionItems = Array.prototype.slice.call(
-              card.querySelectorAll('.field--name-field-program-session .field__items > .field__item')
-            );
+          if (sessionItems.length) {
+            var hasAnyRegLink = false;
+            var hasAnyOpenSession = false;
 
-            if (sessionItems.length) {
-              var hasAnyRegLink = false;
-              var hasAnyOpenSession = false;
+            sessionItems.forEach(function (item) {
+              var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
+              if (!regLinkEl) return;
+              hasAnyRegLink = true;
 
-              sessionItems.forEach(function (item) {
-                var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
-                if (!regLinkEl) return;
-                hasAnyRegLink = true;
+              // Read registration end date directly — do NOT use orderDatePair here,
+              // as its auto-swap can incorrectly treat an expired session as open when
+              // the start/end fields are entered in reverse order.
+              var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+              var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
 
-                // Read registration end date directly — do NOT use orderDatePair here,
-                // as its auto-swap can incorrectly treat an expired session as open when
-                // the start/end fields are entered in reverse order.
-                var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
-                var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
-
-                if (regEndDate) {
-                  if (now <= regEndDate.getTime()) {
-                    hasAnyOpenSession = true;
-                  }
-                } else {
-                  // No registration end date in DOM — fall back to session end date.
-                  var sessionEndEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
-                  var sessionEndDate = sessionEndEl ? parseDateValue(sessionEndEl.getAttribute('datetime') || '') : null;
-                  if (!sessionEndDate || now <= sessionEndDate.getTime()) {
-                    hasAnyOpenSession = true;
-                  }
+              if (regEndDate) {
+                if (now <= regEndDate.getTime()) {
+                  hasAnyOpenSession = true;
                 }
-              });
-
-              // Only gate visibility if at least one session had a registration link.
-              // If none did, we can't determine state — default to visible.
-              if (hasAnyRegLink) {
-                visible = hasAnyOpenSession;
+              } else {
+                // No registration end date in DOM — fall back to session end date.
+                var sessionEndEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
+                var sessionEndDate = sessionEndEl ? parseDateValue(sessionEndEl.getAttribute('datetime') || '') : null;
+                if (!sessionEndDate || now <= sessionEndDate.getTime()) {
+                  hasAnyOpenSession = true;
+                }
               }
+            });
+
+            // Only gate visibility if at least one session had a registration link.
+            // If none did, we can't determine state — default to visible.
+            if (hasAnyRegLink) {
+              visible = hasAnyOpenSession;
             }
           }
 
