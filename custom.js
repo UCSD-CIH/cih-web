@@ -1713,7 +1713,9 @@
             if (session.instructors && session.instructors.length) {
               var instrEl = document.createElement('p');
               instrEl.className = 'program-sidebar__session-instructor';
-              instrEl.appendChild(document.createTextNode('Instructor: '));
+              instrEl.appendChild(document.createTextNode(
+                session.instructors.length > 1 ? 'Instructors: ' : 'Instructor: '
+              ));
               session.instructors.forEach(function (instr, i) {
                 if (i > 0) instrEl.appendChild(document.createTextNode(', '));
                 if (instr.href) {
