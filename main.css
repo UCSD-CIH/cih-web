@@ -7312,6 +7312,15 @@ footer.submitted {
   border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
 }
 
+.page-node-type-program .group-program-sidebar .field--name-field-enrollment-requirement {
+  color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
 /* Registration buttons */
 .page-node-type-program .group-program-sidebar .field--name-field-registration-link a {
   background-color: var(--color-bg-yellow-100);
@@ -7498,14 +7507,30 @@ footer.submitted {
 }
 
 .program-sidebar__session-instructor a:hover {
+  color: var(--color-text-blue);
+  text-decoration: none;
+}
+
+.program-sidebar__session-details a {
+  color: var(--color-text-paragraph);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-text-paragraph);
+}
+
+.program-sidebar__session-details a:hover {
+  color: var(--color-text-blue);
   text-decoration: none;
 }
 
 .program-sidebar__session-details {
   color: var(--color-text-paragraph);
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 20px;
-  padding: var(--space-250) 0;
+  padding: var(--space-100) 0 var(--space-300) 0;
 }
 
 .program-sidebar__session-details p {
