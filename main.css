@@ -7321,6 +7321,12 @@ footer.submitted {
   line-height: 20px;
 }
 
+.page-node-type-program .group-program-sidebar .field--name-field-enrollment-requirement p {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
 /* Registration buttons */
 .page-node-type-program .group-program-sidebar .field--name-field-registration-link a {
   background-color: var(--color-bg-yellow-100);
@@ -7534,6 +7540,8 @@ footer.submitted {
 }
 
 .program-sidebar__session-details p {
+  font-size: 14px;
+  line-height: 20px;
   margin: 0 0 var(--space-100);
 }
 
