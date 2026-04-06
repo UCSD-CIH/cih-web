@@ -7302,8 +7302,7 @@ footer.submitted {
 
 .page-node-type-program .group-program-sidebar :is(
   .field--name-field-pricing-details,
-  .field--name-field-schedule-details,
-  .field--name-field-session-details
+  .field--name-field-schedule-details
 ) {
   color: var(--color-text-paragraph);
   font-size: 14px;
@@ -7311,10 +7310,6 @@ footer.submitted {
   padding-bottom: var(--space-250);
   margin-bottom: 0;
   border-bottom: var(--border-050) solid var(--color-border-subdued-strong);
-}
-
-.page-node-type-program .group-program-sidebar .field--name-field-session-details {
-  padding-top: var(--space-250);
 }
 
 /* Registration buttons */
@@ -7504,6 +7499,21 @@ footer.submitted {
 
 .program-sidebar__session-instructor a:hover {
   text-decoration: none;
+}
+
+.program-sidebar__session-details {
+  color: var(--color-text-paragraph);
+  font-size: 14px;
+  line-height: 20px;
+  padding: var(--space-250) 0;
+}
+
+.program-sidebar__session-details p {
+  margin: 0 0 var(--space-100);
+}
+
+.program-sidebar__session-details p:last-child {
+  margin-bottom: 0;
 }
 
 .program-sidebar__session-register {

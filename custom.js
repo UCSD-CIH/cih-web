@@ -1660,13 +1660,17 @@
               });
             });
 
+            var sessionDetailsEl = item.querySelector('.field--name-field-session-details');
+            var sessionDetailsHTML = sessionDetailsEl ? sessionDetailsEl.innerHTML : '';
+
             sessions.push({
               rangeText: rangeText,
               locationText: locationText,
               dayAndTime: dayAndTimeEl ? (dayAndTimeEl.textContent || '').trim() : '',
               regHref: regLinkEl ? (regLinkEl.getAttribute('href') || '').trim() : '',
               isCurrent: isCurrent,
-              instructors: instructors
+              instructors: instructors,
+              sessionDetailsHTML: sessionDetailsHTML
             });
           });
 
@@ -1722,6 +1726,13 @@
                 }
               });
               itemEl.appendChild(instrEl);
+            }
+
+            if (session.sessionDetailsHTML) {
+              var detailsEl = document.createElement('div');
+              detailsEl.className = 'program-sidebar__session-details';
+              detailsEl.innerHTML = session.sessionDetailsHTML;
+              itemEl.appendChild(detailsEl);
             }
 
             if (session.regHref) {
