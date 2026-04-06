@@ -7313,7 +7313,7 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .field--name-field-enrollment-requirement {
-  color: var(--color-text-paragraph);
+  color: var(--color-text-subdued-strong);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
