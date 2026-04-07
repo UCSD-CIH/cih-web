@@ -1963,35 +1963,50 @@
           );
           if (!sessionItems.length) return;
 
-          // Collect unique formats from sessions and rebuild the header badges.
-          var header = card.querySelector('.program-card__header');
-          if (header) {
-            var seenFormats = {};
-            var formatLinks = [];
-            sessionItems.forEach(function (item) {
-              var formatLink = item.querySelector('.field--name-field-program-format a[href]');
-              if (!formatLink) return;
-              var href = (formatLink.getAttribute('href') || '').trim();
-              if (href && !seenFormats[href]) {
-                seenFormats[href] = true;
-                formatLinks.push(formatLink.cloneNode(true));
-              }
-            });
+          // Filter to open sessions only (registration not yet closed).
+          var nowMs = Date.now();
+          var openSessionItems = sessionItems.filter(function (item) {
+            var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+            if (!regEndEl) return true; // no end date = open
+            var regEndDate = new Date(regEndEl.getAttribute('datetime'));
+            return isNaN(regEndDate.getTime()) || nowMs <= regEndDate.getTime();
+          });
+          var activeSessions = openSessionItems.length ? openSessionItems : sessionItems;
 
-            if (formatLinks.length) {
-              header.innerHTML = '';
-              formatLinks.forEach(function (link) {
-                var wrap = document.createElement('div');
-                wrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
-                wrap.appendChild(link);
-                header.appendChild(wrap);
-              });
+          // Build header badge area above the title; create it if missing (entity field removed).
+          var header = card.querySelector('.program-card__header');
+          if (!header) {
+            header = document.createElement('div');
+            header.className = 'program-card__header';
+            var titleEl = card.querySelector('h2');
+            card.insertBefore(header, titleEl || card.firstChild);
+          }
+          header.innerHTML = '';
+
+          // Format badge: first open session only.
+          var firstSession = activeSessions[0];
+          if (firstSession) {
+            var formatLink = firstSession.querySelector('.field--name-field-program-format a[href]');
+            if (formatLink) {
+              var formatWrap = document.createElement('div');
+              formatWrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
+              formatWrap.appendChild(formatLink.cloneNode(true));
+              header.appendChild(formatWrap);
             }
           }
 
-          // Build formatted date ranges from session start/end date fields.
+          // Audience badge: only show if audience is "Professional"; move element into header.
+          var audienceField = card.querySelector('.field--name-field-audience-type');
+          if (audienceField) {
+            var audienceLink = audienceField.querySelector('a');
+            var audienceText = audienceLink ? (audienceLink.textContent || '').trim() : '';
+            if (audienceText.toLowerCase() === 'professional') {
+              header.appendChild(audienceField);
+            }
+          }
+
           var dateRanges = [];
-          sessionItems.forEach(function (item) {
+          activeSessions.forEach(function (item) {
             var startTimeEl = item.querySelector('.field--name-field-session-start-date time[datetime]');
             var endTimeEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
             if (!startTimeEl || !endTimeEl) return;
@@ -2019,9 +2034,9 @@
               sessionDatesEl.appendChild(p);
             });
 
-            if (sessionItems.length === 1) {
-              // Single session: show day/time below the date range.
-              var dayTimeEl = sessionItems[0].querySelector('.field--name-field-day-and-time');
+            if (activeSessions.length === 1) {
+              // Single open session: show day/time below the date range.
+              var dayTimeEl = activeSessions[0].querySelector('.field--name-field-day-and-time');
               var dayTimeText = dayTimeEl ? (dayTimeEl.textContent || '').trim() : '';
               if (dayTimeText) {
                 var scheduleP = document.createElement('p');
@@ -2030,7 +2045,7 @@
                 sessionDatesEl.appendChild(scheduleP);
               }
             } else {
-              // Multiple sessions: show "Multiple sessions available" label below dates.
+              // Multiple open sessions: show "Multiple sessions available" label below dates.
               var multipleEl = document.createElement('p');
               multipleEl.className = 'program-card__session-label';
               multipleEl.textContent = 'Multiple sessions available';
