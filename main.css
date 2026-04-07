@@ -2445,7 +2445,7 @@ body:has(.paragraph--type--hero) .main-container.container > .row,
 .paragraph--type--program-feed > .field--name-field-section-heading.field__item,
 .paragraph--type--program-feed > .field--name-field-section-heading > h2,
 .paragraph--type--program-feed > .field--name-field-section-heading > .heading--h2-alt {
-  margin: 0 0 var(--space-300) 0;
+  margin: 0 0 var(--space-400) 0;
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   font-size: 36px !important;
@@ -6556,6 +6556,12 @@ article.program-card-compact .field--name-field-program-format a {
   color: var(--color-text-blue);
   border: var(--border-050) solid var(--color-border-blue);
   background-color: var(--color-bg-lightest);
+}
+
+article.program-card-compact .field--name-field-program-format a[href$="/114"] {
+  color: var(--color-text-green);
+  border-color: var(--color-border-green-soft);
+  background-color: var(--color-bg-green-20);
 }
 
 article.program-card-compact .field--name-field-audience-type a {

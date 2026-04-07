@@ -2075,33 +2075,38 @@
             content.insertBefore(title, firstContentChild);
           }
 
-          // Collect unique format badges from session paragraphs and inject before title.
+          // Inject format badge for nearest upcoming session into footer meta, before audience badge.
           var sessionWrapperEl = content.querySelector('.field--name-field-program-session');
           if (sessionWrapperEl) {
-            var seenFormats = {};
-            var formatLinks = [];
+            var nowMs = Date.now();
+            var nearestD = null, nearestPara = null;
+            var nearestOpenD = null, nearestOpenPara = null;
             Array.prototype.forEach.call(
               sessionWrapperEl.querySelectorAll('.paragraph--type--program-session'),
               function (para) {
-                var formatLink = para.querySelector('.field--name-field-program-format a[href]');
-                if (!formatLink) return;
-                var fhref = (formatLink.getAttribute('href') || '').trim();
-                if (fhref && !seenFormats[fhref]) {
-                  seenFormats[fhref] = true;
-                  formatLinks.push(formatLink.cloneNode(true));
-                }
+                var timeEl = para.querySelector('.field--name-field-session-start-date time[datetime]');
+                if (!timeEl) return;
+                var d = new Date(timeEl.getAttribute('datetime'));
+                if (isNaN(d.getTime())) return;
+                if (!nearestD || d < nearestD) { nearestD = d; nearestPara = para; }
+                var regEndEl = para.querySelector('.field--name-field-registration-end-date time[datetime]');
+                var regEndDate = regEndEl ? new Date(regEndEl.getAttribute('datetime')) : null;
+                var isOpen = !regEndDate || isNaN(regEndDate.getTime()) || nowMs <= regEndDate.getTime();
+                if (isOpen && (!nearestOpenD || d < nearestOpenD)) { nearestOpenD = d; nearestOpenPara = para; }
               }
             );
-            if (formatLinks.length) {
-              var formatHeader = document.createElement('div');
-              formatHeader.className = 'program-card__header';
-              formatLinks.forEach(function (link) {
-                var wrap = document.createElement('div');
-                wrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
-                wrap.appendChild(link);
-                formatHeader.appendChild(wrap);
-              });
-              content.insertBefore(formatHeader, title);
+            var sourcePara = nearestOpenPara || nearestPara;
+            if (sourcePara) {
+              var formatLink = sourcePara.querySelector('.field--name-field-program-format a[href]');
+              if (formatLink) {
+                var formatWrap = document.createElement('div');
+                formatWrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
+                formatWrap.appendChild(formatLink.cloneNode(true));
+                var metaEl = content.querySelector('.program-card-compact__meta');
+                if (metaEl) {
+                  metaEl.insertBefore(formatWrap, metaEl.firstChild);
+                }
+              }
             }
           }
 
