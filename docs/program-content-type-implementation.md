@@ -29,6 +29,7 @@ Each program has one or more session paragraphs representing individual offering
 | Location | `field_location` | Text (plain) | Physical address; shown only for In Person sessions (term 114) |
 | Instructor(s) | `field_instructors` | Entity reference (Profile nodes) | |
 | Session note | `field_session_note` | Text (plain) | |
+| Phase label | `field_phase_label` | Text (plain) | Optional; cardinality 1; e.g. "Phase 1", "Phase 2" — used when program has `field_display_as_phases` enabled |
 
 **Content entry rule:** Registration start date must be earlier than registration end date. If entered in reverse order, JS visibility filtering will treat the session as expired regardless of actual dates.
 
@@ -53,6 +54,7 @@ Each program has one or more session paragraphs representing individual offering
 | Cancellation policy | `field_cancellation_policy` | Text (long, formatted) | |
 | Featured image | `field_post_featured_image` | Entity reference (Media) | Used on compact cards |
 | Schedule | `field_schedule` | Text (plain) | Node-level day/time; overridden by session-level `field_day_and_time` when sessions are present |
+| Display sessions as phases | `field_display_as_phases` | Boolean | Display label: "Display sessions as phases"; default off; when on, sidebar groups all sessions under a single register action with phase labels as sub-items rather than rendering each session as an independent block |
 
 ---
 
@@ -91,6 +93,7 @@ Used when `field_program_session` renders as "Rendered entity" on the compact ca
 | `field_program_format` | Hidden | Default |
 | `field_instructors` | Hidden | Rendered entity (instructor-compact view mode) |
 | `field_location` | Hidden | Default |
+| `field_phase_label` | Hidden | Plain text |
 
 **Important:** Date fields must use the Default formatter (not Plain text) so that Drupal renders a `<time datetime="...">` element. The JS reads the `datetime` attribute directly.
 
@@ -150,6 +153,8 @@ Runs on `.page-node-type-program .group-program-sidebar`. Responsibilities:
 - Hides the raw session paragraph field after extracting data
 - Sets `data-current-session-count` on the sidebar for use by `programRegistrationToggle`
 
+**Phase display fork:** When `field_display_as_phases` is enabled on the program node, the sidebar renders differently — all sessions are grouped under a single register button (from the first open session), with each session's phase label and date/time listed as sub-items beneath it. This communicates that sessions are a required sequence rather than independent cohorts. If `field_phase_label` is empty on any session paragraph, that session renders without a label.
+
 ### `programRegistrationToggle`
 
 Runs on `.page-node-type-program .group-program-sidebar` after `programSidebarSessionEnhancements`. Uses `data-current-session-count` to set `is-registration-open` or `is-registration-closed` on the sidebar. When closed, injects a fallback "Registration is currently closed" message and subscribe link.
@@ -173,3 +178,5 @@ The sidebar JS enforces this display order regardless of Drupal field weight:
 - **Registration dates must be entered in chronological order** (start before end). Reversed dates cause the JS visibility filter to treat the session as expired.
 - **Registration link is required** for a session to be treated as "open" in the sidebar. Sessions without a link are excluded from the current sessions list regardless of dates.
 - **In Person format** must use taxonomy term 114 for the location-vs-label logic to trigger correctly.
+- **Phase label** should be a short identifier only (e.g. "Phase 1", "Phase 2"). Do not use it for dates or descriptions — those belong in the date and day/time fields.
+- **Display sessions as phases** should only be enabled when sessions represent a required sequence. Do not use for programs with independent cohorts that happen to share an instructor.

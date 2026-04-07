@@ -2012,18 +2012,29 @@
             var sessionDatesEl = document.createElement('div');
             sessionDatesEl.className = 'program-card__session-dates';
 
-            if (dateRanges.length > 3) {
+            dateRanges.forEach(function (range) {
+              var p = document.createElement('p');
+              p.className = 'program-card__session-date';
+              p.textContent = range;
+              sessionDatesEl.appendChild(p);
+            });
+
+            if (sessionItems.length === 1) {
+              // Single session: show day/time below the date range.
+              var dayTimeEl = sessionItems[0].querySelector('.field--name-field-day-and-time');
+              var dayTimeText = dayTimeEl ? (dayTimeEl.textContent || '').trim() : '';
+              if (dayTimeText) {
+                var scheduleP = document.createElement('p');
+                scheduleP.className = 'program-card__session-schedule';
+                scheduleP.textContent = dayTimeText;
+                sessionDatesEl.appendChild(scheduleP);
+              }
+            } else {
+              // Multiple sessions: show "Multiple sessions available" label below dates.
               var multipleEl = document.createElement('p');
               multipleEl.className = 'program-card__session-label';
               multipleEl.textContent = 'Multiple sessions available';
               sessionDatesEl.appendChild(multipleEl);
-            } else {
-              dateRanges.forEach(function (range) {
-                var p = document.createElement('p');
-                p.className = 'program-card__session-date';
-                p.textContent = range;
-                sessionDatesEl.appendChild(p);
-              });
             }
 
             var body = card.querySelector('.program-card__body');
@@ -2032,12 +2043,10 @@
             }
           }
 
-          // Hide day-and-time when multiple sessions exist (each has different times).
-          if (sessionItems.length > 1) {
-            card.querySelectorAll('.field--name-field-day-and-time').forEach(function (f) {
-              f.style.display = 'none';
-            });
-          }
+          // Always hide the raw day-and-time field; day/time is now injected above.
+          card.querySelectorAll('.field--name-field-day-and-time').forEach(function (f) {
+            f.style.display = 'none';
+          });
 
           // Hide the raw session paragraph field — data has been extracted above.
           sessionField.style.display = 'none';

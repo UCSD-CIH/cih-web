@@ -6302,6 +6302,20 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   margin: 0;
 }
 
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-schedule {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-subdued-strong);
+  margin-top: var(--space-050) !important;
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-label {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-subdued-strong);
+  margin-top: var(--space-150) !important;
+}
+
 /* Always hide location and registration link from session paragraphs on cards */
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card :is(
   .field--name-field-location,
