@@ -2075,6 +2075,36 @@
             content.insertBefore(title, firstContentChild);
           }
 
+          // Collect unique format badges from session paragraphs and inject before title.
+          var sessionWrapperEl = content.querySelector('.field--name-field-program-session');
+          if (sessionWrapperEl) {
+            var seenFormats = {};
+            var formatLinks = [];
+            Array.prototype.forEach.call(
+              sessionWrapperEl.querySelectorAll('.paragraph--type--program-session'),
+              function (para) {
+                var formatLink = para.querySelector('.field--name-field-program-format a[href]');
+                if (!formatLink) return;
+                var fhref = (formatLink.getAttribute('href') || '').trim();
+                if (fhref && !seenFormats[fhref]) {
+                  seenFormats[fhref] = true;
+                  formatLinks.push(formatLink.cloneNode(true));
+                }
+              }
+            );
+            if (formatLinks.length) {
+              var formatHeader = document.createElement('div');
+              formatHeader.className = 'program-card__header';
+              formatLinks.forEach(function (link) {
+                var wrap = document.createElement('div');
+                wrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
+                wrap.appendChild(link);
+                formatHeader.appendChild(wrap);
+              });
+              content.insertBefore(formatHeader, title);
+            }
+          }
+
           var meta = content.querySelector('.program-card-compact__meta');
           var summaryField = content.querySelector('.field--name-field-program-summary');
           var dateField = content.querySelector('.field--name-field-event-dates, .field--name-field-program-start-date');
