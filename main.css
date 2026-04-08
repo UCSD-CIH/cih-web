@@ -6200,10 +6200,10 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card h2 a {
   color: var(--color-text-heading);
   font-family: 'Inter', sans-serif !important;
-  font-size: 20px !important;
-  font-weight: 700 !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
   letter-spacing: 0;
-  line-height: 24px !important;
+  line-height: 28px !important;
   margin: 0 0 var(--space-100) 0;
   text-transform: none !important;
   text-decoration: none;
@@ -6321,8 +6321,8 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-label {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 20px;
   color: var(--color-text-subdued-strong);
   margin-top: var(--space-100);
 }
@@ -6336,7 +6336,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-program-summary {
-  margin: var(--space-250) 0 0 0;
+  margin: var(--space-100) 0 0 0;
   padding-top: var(--space-200);
   border-top: var(--border-050) solid var(--color-border-subdued-soft);
   font-family: 'Inter', sans-serif;
@@ -6372,7 +6372,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-100);
-  margin-top: var(--space-200);
+  margin-top: var(--space-400);
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__meta .field--name-field-program-focus-areas {
