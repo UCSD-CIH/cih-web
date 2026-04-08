@@ -3292,5 +3292,98 @@
     }
   };
 
+  Drupal.behaviors.iconFeatureSectionEnhancements = {
+    attach: function (context) {
+      once('iconFeatureSectionEnhancements', '.paragraph--type--icon-feature-section', context)
+        .forEach(function (section) {
+          // --- Section heading ---
+          var headingField = section.querySelector('.field--name-field-section-heading');
+          if (headingField) {
+            var headingText = headingField.textContent.trim();
+            if (headingText) {
+              var h2 = document.createElement('h2');
+              h2.className = 'heading--h2-alt';
+              h2.textContent = headingText;
+              section.insertBefore(h2, section.firstChild);
+            }
+            headingField.style.display = 'none';
+          }
+
+          // --- Collect icon feature paragraphs ---
+          var featureItems = Array.from(
+            section.querySelectorAll('.paragraph--type--icon-feature')
+          );
+          if (!featureItems.length) return;
+
+          // --- Build grid container and apply column class synchronously ---
+          var grid = document.createElement('div');
+          grid.className = 'icon-feature-grid';
+          grid.classList.add(featureItems.length >= 5 ? 'icon-feature-grid--three' : 'icon-feature-grid--two');
+
+          // --- Build each card ---
+          featureItems.forEach(function (item) {
+            var iconField   = item.querySelector('.field--name-field-icon');
+            var headingEl   = item.querySelector('.field--name-field-heading');
+            var bodyField   = item.querySelector('.field--name-field-body');
+
+            var card = document.createElement('div');
+            card.className = 'icon-feature-card';
+
+            // Icon element (placeholder; SVG injected async)
+            var iconEl = document.createElement('div');
+            iconEl.className = 'icon-feature-card__icon';
+            card.appendChild(iconEl);
+
+            // Heading
+            if (headingEl) {
+              var cardHeading = document.createElement('p');
+              cardHeading.className = 'icon-feature-card__heading';
+              cardHeading.textContent = headingEl.textContent.trim();
+              card.appendChild(cardHeading);
+            }
+
+            // Body — preserve inner HTML (formatted text)
+            if (bodyField) {
+              var cardBody = document.createElement('div');
+              cardBody.className = 'icon-feature-card__body';
+              cardBody.innerHTML = bodyField.innerHTML;
+              card.appendChild(cardBody);
+            }
+
+            grid.appendChild(card);
+
+            // Hide raw paragraph output
+            item.style.display = 'none';
+
+            // Async icon fetch — runs after card is in DOM
+            var iconName = iconField ? iconField.textContent.trim() : '';
+            if (iconName) {
+              fetch('https://cdn.jsdelivr.net/npm/lucide-static/icons/' + iconName + '.svg')
+                .then(function (r) {
+                  if (!r.ok) throw new Error('fetch failed');
+                  return r.text();
+                })
+                .then(function (svg) {
+                  iconEl.innerHTML = svg;
+                })
+                .catch(function () {
+                  iconEl.remove();
+                });
+            } else {
+              iconEl.remove();
+            }
+          });
+
+          // Insert grid after the (now-hidden) feature paragraph wrappers
+          var featuresField = section.querySelector('.field--name-field-icon-features');
+          if (featuresField) {
+            featuresField.parentNode.insertBefore(grid, featuresField.nextSibling);
+          } else {
+            section.appendChild(grid);
+          }
+        });
+    }
+  };
+
 })(Drupal, once);
 </script>
