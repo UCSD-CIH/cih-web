@@ -28,9 +28,9 @@ Each program has one or more session paragraphs representing individual offering
 | Program format | `field_program_format` | Entity reference (taxonomy) | Term IDs: 113=Online, 114=In Person, 115=Hybrid, 116=Audio |
 | Location | `field_location` | Text (plain) | Physical address; shown only for In Person sessions (term 114) |
 | Instructor(s) | `field_instructors` | Entity reference (Profile nodes) | |
-| Session note | `field_session_note` | Text (plain) | |
+| Session details | `field_session_details` | Text (long, formatted) | Optional rich-text details shown in the program sidebar |
 
-**Content entry rule:** Registration start date must be earlier than registration end date. If entered in reverse order, JS visibility filtering will treat the session as expired regardless of actual dates.
+**Content entry rule:** Registration start date must be earlier than registration end date. Reversed dates create inconsistent behavior across program cards, feeds, and sidebar state.
 
 ---
 
@@ -91,6 +91,7 @@ Used when `field_program_session` renders as "Rendered entity" on the compact ca
 | `field_program_format` | Hidden | Default |
 | `field_instructors` | Hidden | Rendered entity (instructor-compact view mode) |
 | `field_location` | Hidden | Default |
+| `field_session_details` | Hidden | Default |
 
 **Important:** Date fields must use the Default formatter (not Plain text) so that Drupal renders a `<time datetime="...">` element. The JS reads the `datetime` attribute directly.
 
@@ -127,6 +128,8 @@ Runs on every `article.program-card-compact`. Responsibilities:
 
 **Session selection logic:** Reads `field_registration_end_date` from each `.paragraph--type--program-session`. Prefers the earliest session whose registration end date is in the future. Falls back to the earliest session overall.
 
+**Important:** This behavior reads `field_registration_end_date` directly from the rendered `<time datetime="...">` element. It does not normalize reversed registration date pairs.
+
 ### `programFeedViewEmbedEnhancements`
 
 Runs on `.paragraph--type--program-feed`. Responsibilities:
@@ -138,21 +141,36 @@ Runs on `.paragraph--type--program-feed`. Responsibilities:
 
 **Visibility logic:** Iterates `.paragraph--type--program-session` elements within each card (not `.field__items > .field__item`, which would match nested instructor items). A card is visible if any session has no registration end date, or has one that has not yet passed. Falls back to session end date if registration end date is absent.
 
+**Important:** This behavior checks `field_registration_end_date` directly. It does not reorder reversed registration date pairs.
+
 ### `programSidebarSessionEnhancements`
 
 Runs on `.page-node-type-program .group-program-sidebar`. Responsibilities:
 
 - Reads all session paragraphs from the sidebar's `field_program_session`
 - Determines which sessions are currently open (registration start ≤ now ≤ registration end, and a registration link exists)
-- Renders a "Current Sessions" heading and list: date range, day/time, location, instructor, register link
+- Always renders a "Current Sessions" heading, even when there are no currently open sessions
+- Renders the current session list: date range, day/time, location, instructor, session details, register link
 - For In Person sessions (format term 114), shows `field_location` text instead of the format label
 - First open session gets `.program-sidebar__session-register--primary` (gold button); additional sessions render as text links
 - Hides the raw session paragraph field after extracting data
-- Sets `data-current-session-count` on the sidebar for use by `programRegistrationToggle`
+- Sets `data-current-session-count` plus `has-current-sessions` / `has-no-current-sessions` classes on the sidebar for use by `programRegistrationToggle`
+
+**Date handling:** This behavior reads registration dates through `getDatePairFromFields()`, which normalizes reversed start/end pairs before evaluating whether a session is current.
 
 ### `programRegistrationToggle`
 
-Runs on `.page-node-type-program .group-program-sidebar` after `programSidebarSessionEnhancements`. Uses `data-current-session-count` to set `is-registration-open` or `is-registration-closed` on the sidebar. When closed, injects a fallback "Registration is currently closed" message and subscribe link.
+Runs on `.page-node-type-program .group-program-sidebar` after `programSidebarSessionEnhancements`.
+
+Responsibilities:
+
+- Uses `data-current-session-count` when available to set `is-registration-open` or `is-registration-closed`
+- Falls back to session paragraph registration windows when the sidebar has not yet been annotated with session state
+- Falls back again to node-level registration dates if no session field is available
+- Injects a plain-text closed-state message: "Registration is currently closed. New sessions will be posted as they become available."
+- Ensures the subscribe CTA opens in a new tab and injects a fallback subscribe link when the field is absent
+
+**Date handling:** The session-based and node-level fallback paths use `getDatePairFromFields()`, which normalizes reversed start/end pairs before evaluating open state.
 
 ---
 
@@ -163,13 +181,14 @@ The sidebar JS enforces this display order regardless of Drupal field weight:
 1. Price (`field_price`)
 2. Pricing details (`field_pricing_details`)
 3. Current Sessions heading
-4. Per-session items: date range → day/time → location → instructor → register link
+4. Per-session items: date range → day/time → location → instructor → session details → register link
 5. Registration closed message + subscribe link (when no open sessions)
 
 ---
 
 ## 9) Known Content Entry Rules
 
-- **Registration dates must be entered in chronological order** (start before end). Reversed dates cause the JS visibility filter to treat the session as expired.
+- **Registration dates must be entered in chronological order** (start before end). Reversed dates produce inconsistent results because feed/card visibility reads raw registration end dates, while sidebar/open-state logic normalizes date pairs.
 - **Registration link is required** for a session to be treated as "open" in the sidebar. Sessions without a link are excluded from the current sessions list regardless of dates.
 - **In Person format** must use taxonomy term 114 for the location-vs-label logic to trigger correctly.
+- **Closed program sidebars hide** `field_enrollment_requirement`; that field only remains visible in the open state.
