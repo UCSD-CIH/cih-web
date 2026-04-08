@@ -7136,7 +7136,8 @@ footer.submitted {
 .page-node-type-program .field--name-field-post-featured-image .field__item img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
   border-radius: inherit;
 }
 
@@ -9612,6 +9613,10 @@ textarea.form-textarea:focus {
    ICON FEATURE GRID & CARDS
 =================================== */
 
+.paragraph--type--icon-feature-section {
+  margin-top: var(--space-400);
+}
+
 .icon-feature-grid {
   display: grid;
   gap: var(--space-400);
@@ -9668,7 +9673,7 @@ textarea.form-textarea:focus {
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  margin: 0;
+  margin: 0 !important;
   color: var(--color-text-paragraph);
 }
 

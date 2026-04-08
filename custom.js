@@ -3301,10 +3301,9 @@
           if (headingField) {
             var headingText = headingField.textContent.trim();
             if (headingText) {
-              var h2 = document.createElement('h2');
-              h2.className = 'heading--h2-alt';
-              h2.textContent = headingText;
-              section.insertBefore(h2, section.firstChild);
+              var h3 = document.createElement('h3');
+              h3.textContent = headingText;
+              section.insertBefore(h3, section.firstChild);
             }
             headingField.style.display = 'none';
           }
@@ -3336,7 +3335,7 @@
 
             // Heading
             if (headingEl) {
-              var cardHeading = document.createElement('p');
+              var cardHeading = document.createElement('h5');
               cardHeading.className = 'icon-feature-card__heading';
               cardHeading.textContent = headingEl.textContent.trim();
               card.appendChild(cardHeading);
