@@ -1768,8 +1768,9 @@
             ? pricingField.nextSibling
             : (priceField ? priceField.nextSibling : sidebar.firstChild);
 
+          sidebar.insertBefore(sessionHeading, sessionAnchor);
+
           if (currentSessions.length) {
-            sidebar.insertBefore(sessionHeading, sessionAnchor);
             sidebar.classList.add('has-current-sessions');
             sidebar.classList.remove('has-no-current-sessions');
             sidebar.insertBefore(listEl, sessionHeading.nextSibling);
@@ -2738,12 +2739,41 @@
       once('programRegistrationToggle', '.page-node-type-program .group-program-sidebar', context)
         .forEach(function (sidebar) {
           var usesSessionState = sidebar.hasAttribute('data-current-session-count');
+          var sessionField = sidebar.querySelector('.field--name-field-program-session');
           var startDate = null;
           var endDate = null;
           var isOpen = false;
 
           if (usesSessionState) {
             isOpen = parseInt(sidebar.getAttribute('data-current-session-count') || '0', 10) > 0;
+          } else if (sessionField) {
+            var sessionItems = Array.prototype.slice.call(
+              sessionField.querySelectorAll('.field__items > .field__item')
+            );
+            var nowTime = new Date().getTime();
+
+            isOpen = sessionItems.some(function (item) {
+              var regLinkEl = item.querySelector('.field--name-field-registration-link a[href]');
+              if (!regLinkEl) return false;
+
+              var registrationPair = getDatePairFromFields(item, {
+                combinedSelector: '.field--name-field-registration-dates',
+                startSelector: '.field--name-field-registration-start-date',
+                endSelector: '.field--name-field-registration-end-date'
+              });
+              var registrationStart = registrationPair && registrationPair.values
+                ? registrationPair.values.startDate
+                : null;
+              var registrationEnd = registrationPair && registrationPair.values
+                ? registrationPair.values.endDate
+                : null;
+
+              if (registrationStart && registrationEnd) {
+                return nowTime >= registrationStart.getTime() && nowTime <= registrationEnd.getTime();
+              }
+
+              return true;
+            });
           } else {
             var root = sidebar.closest('.page-node-type-program') || document;
             var registrationPair = getDatePairFromFields(root, {
