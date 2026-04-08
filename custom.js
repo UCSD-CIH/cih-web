@@ -1915,7 +1915,7 @@
   // Adds a Study-card style "Learn More" CTA to each Programs view card.
   Drupal.behaviors.programCardsLearnMoreCta = {
     attach: function (context) {
-      once('programCardsLearnMoreCta', '.view-programs-cfm article.program-card', context)
+      once('programCardsLearnMoreCta', '.view-programs-cfm article.program-card, .view-id-programs_cfm article.program-card', context)
         .forEach(function (card) {
           var titleLink = card.querySelector('h2 a[href]');
           if (!titleLink) return;
@@ -1939,11 +1939,11 @@
           ctaLink.setAttribute('href', href);
           ctaLink.textContent = 'Learn More';
 
-          var tags = card.querySelector('.program-card__meta .field--name-field-program-focus-areas, .field--name-field-program-focus-areas');
+          var meta = card.querySelector('.program-card__meta');
           var content = card.querySelector('.content') || card;
 
-          if (tags && tags.parentNode === content) {
-            content.insertBefore(ctaWrap, tags);
+          if (meta && meta.parentNode === content) {
+            content.insertBefore(ctaWrap, meta);
           } else {
             content.appendChild(ctaWrap);
           }
@@ -1957,30 +1957,19 @@
       once('programCardSessionEnhancements', ':is(.view-programs-cfm, .view-id-programs_cfm) article.program-card', context)
         .forEach(function (card) {
           var content = card.querySelector('.content') || card;
+          var titleEl = card.querySelector('h2');
           var imageField = content.querySelector('.field--name-field-post-featured-image');
           if (imageField && imageField.parentNode === content) {
             card.insertBefore(imageField, card.firstChild);
           }
 
+          if (titleEl && titleEl.parentNode !== content) {
+            content.insertBefore(titleEl, content.firstChild);
+          } else if (titleEl && content.firstElementChild !== titleEl) {
+            content.insertBefore(titleEl, content.firstChild);
+          }
+
           var sessionField = card.querySelector('.field--name-field-program-session');
-          if (!sessionField) return;
-
-          var sessionItems = Array.prototype.slice.call(
-            sessionField.querySelectorAll('.field__items > .field__item')
-          );
-          if (!sessionItems.length) return;
-
-          // Filter to open sessions only (registration not yet closed).
-          var nowMs = Date.now();
-          var openSessionItems = sessionItems.filter(function (item) {
-            var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
-            if (!regEndEl) return true; // no end date = open
-            var regEndDate = new Date(regEndEl.getAttribute('datetime'));
-            return isNaN(regEndDate.getTime()) || nowMs <= regEndDate.getTime();
-          });
-          var activeSessions = openSessionItems.length ? openSessionItems : sessionItems;
-
-          // Build header badge area above the title; create it if missing (entity field removed).
           var header = card.querySelector('.program-card__header');
           if (!header) {
             header = document.createElement('div');
@@ -1988,84 +1977,190 @@
           }
           header.innerHTML = '';
 
-          // Format badge: first open session only.
-          var firstSession = activeSessions[0];
-          if (firstSession) {
-            var formatLink = firstSession.querySelector('.field--name-field-program-format a[href]');
-            if (formatLink) {
-              var formatWrap = document.createElement('div');
-              formatWrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
-              formatWrap.appendChild(formatLink.cloneNode(true));
-              header.appendChild(formatWrap);
-            }
+          var summaryField = content.querySelector('.field--name-field-program-summary');
+          var ctaWrap = content.querySelector('.program-card__cta');
+          var meta = card.querySelector('.program-card__meta');
+          if (!meta) {
+            meta = document.createElement('div');
+            meta.className = 'program-card__meta';
           }
 
-          var titleEl = content.querySelector('h2');
+          var focusAreas = card.querySelector('.field--name-field-program-focus-areas');
+          if (focusAreas && focusAreas.parentNode !== meta) {
+            meta.appendChild(focusAreas);
+          }
+
           if (titleEl) {
             content.insertBefore(header, titleEl.nextSibling);
           }
 
-          var dateRanges = [];
-          activeSessions.forEach(function (item) {
-            var startTimeEl = item.querySelector('.field--name-field-session-start-date time[datetime]');
-            var endTimeEl = item.querySelector('.field--name-field-session-end-date time[datetime]');
-            if (!startTimeEl || !endTimeEl) return;
-
-            var ordered = orderDatePair(
-              startTimeEl.getAttribute('datetime') || '',
-              endTimeEl.getAttribute('datetime') || ''
-            );
-            var rangeText = formatDateRangeText(
-              ordered.startValue, ordered.endValue,
-              ordered.startDate, ordered.endDate
-            );
-            if (rangeText) dateRanges.push(rangeText);
-          });
-
-          // Insert session dates above the session field.
-          if (dateRanges.length > 0) {
-            var sessionDatesEl = document.createElement('div');
+          var sessionDatesEl = card.querySelector('.program-card__session-dates');
+          if (!sessionDatesEl) {
+            sessionDatesEl = document.createElement('div');
             sessionDatesEl.className = 'program-card__session-dates';
+          }
+          sessionDatesEl.innerHTML = '';
 
-            dateRanges.forEach(function (range) {
-              var p = document.createElement('p');
-              p.className = 'program-card__session-date';
-              p.textContent = range;
-              sessionDatesEl.appendChild(p);
+          if (sessionField) {
+            var sessionItems = Array.prototype.slice.call(
+              sessionField.querySelectorAll('.field__items > .field__item')
+            );
+
+            if (sessionItems.length) {
+              var nowMs = Date.now();
+              var nearestSession = null;
+              var nearestSessionDate = null;
+              var nearestOpenSession = null;
+              var nearestOpenSessionDate = null;
+
+              sessionItems.forEach(function (item) {
+                var startTimeEl = item.querySelector('.field--name-field-session-start-date time[datetime]');
+                if (!startTimeEl) return;
+
+                var sessionStart = parseDateValue(startTimeEl.getAttribute('datetime') || '');
+                if (!sessionStart || isNaN(sessionStart.getTime())) return;
+
+                if (!nearestSessionDate || sessionStart.getTime() < nearestSessionDate.getTime()) {
+                  nearestSession = item;
+                  nearestSessionDate = sessionStart;
+                }
+
+                var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+                var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
+                var isOpen = !regEndDate || nowMs <= regEndDate.getTime();
+
+                if (isOpen && (!nearestOpenSessionDate || sessionStart.getTime() < nearestOpenSessionDate.getTime())) {
+                  nearestOpenSession = item;
+                  nearestOpenSessionDate = sessionStart;
+                }
+              });
+
+              var activeSessions = sessionItems.filter(function (item) {
+                var regEndEl = item.querySelector('.field--name-field-registration-end-date time[datetime]');
+                var regEndDate = regEndEl ? parseDateValue(regEndEl.getAttribute('datetime') || '') : null;
+                return !regEndDate || nowMs <= regEndDate.getTime();
+              });
+
+              var chosenSession = nearestOpenSession || nearestSession;
+              if (chosenSession) {
+                var formatLink = chosenSession.querySelector('.field--name-field-program-format a[href]');
+                if (formatLink) {
+                  var formatWrap = document.createElement('div');
+                  formatWrap.className = 'field field--name-field-program-format field--type-entity-reference field--label-hidden field__item';
+                  formatWrap.appendChild(formatLink.cloneNode(true));
+                  header.appendChild(formatWrap);
+                }
+              }
+
+              if (chosenSession) {
+                var chosenStartEl = chosenSession.querySelector('.field--name-field-session-start-date time[datetime]');
+                var chosenStartDate = chosenStartEl ? parseDateValue(chosenStartEl.getAttribute('datetime') || '') : null;
+                var dateText = '';
+                if (chosenStartDate && !isNaN(chosenStartDate.getTime())) {
+                  dateText = 'Starts ' + chosenStartDate.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                  });
+                }
+
+                if (dateText) {
+                  var dateP = document.createElement('p');
+                  dateP.className = 'program-card__session-date';
+                  dateP.textContent = dateText;
+                  sessionDatesEl.appendChild(dateP);
+                }
+
+                var dayTimeEl = chosenSession.querySelector('.field--name-field-day-and-time');
+                var dayTimeText = dayTimeEl ? (dayTimeEl.textContent || '').replace(/\s+/g, ' ').trim() : '';
+                if (dayTimeText) {
+                  dayTimeText = dayTimeText.replace(/\s*\([^)]*\)/g, '');
+                  var tzMatch = dayTimeText.match(/^(.*?\b(?:PT|ET|PST|PDT|EST|EDT|MST|MDT|CST|CDT|MT|CT)\b)/i);
+                  if (tzMatch) {
+                    dayTimeText = tzMatch[1];
+                  }
+                  dayTimeText = dayTimeText.replace(/\s+/g, ' ').replace(/[.,;]\s*$/, '').trim();
+                  if (dayTimeText) {
+                    var scheduleP = document.createElement('p');
+                    scheduleP.className = 'program-card__session-schedule';
+                    scheduleP.textContent = dayTimeText;
+                    sessionDatesEl.appendChild(scheduleP);
+                  }
+                }
+
+                if (activeSessions.length > 1) {
+                  var multipleEl = document.createElement('p');
+                  multipleEl.className = 'program-card__session-label';
+                  multipleEl.textContent = 'Multiple sessions available';
+                  sessionDatesEl.appendChild(multipleEl);
+                }
+              }
+            }
+
+            card.querySelectorAll('.field--name-field-day-and-time').forEach(function (f) {
+              f.style.display = 'none';
             });
 
-            if (activeSessions.length === 1) {
-              // Single open session: show day/time below the date range.
-              var dayTimeEl = activeSessions[0].querySelector('.field--name-field-day-and-time');
-              var dayTimeText = dayTimeEl ? (dayTimeEl.textContent || '').trim() : '';
-              if (dayTimeText) {
-                var scheduleP = document.createElement('p');
-                scheduleP.className = 'program-card__session-schedule';
-                scheduleP.textContent = dayTimeText;
-                sessionDatesEl.appendChild(scheduleP);
-              }
-            } else {
-              // Multiple open sessions: show "Multiple sessions available" label below dates.
-              var multipleEl = document.createElement('p');
-              multipleEl.className = 'program-card__session-label';
-              multipleEl.textContent = 'Multiple sessions available';
-              sessionDatesEl.appendChild(multipleEl);
-            }
+            card.querySelectorAll('.field--name-field-session-details').forEach(function (f) {
+              f.style.display = 'none';
+            });
 
-            var insertBeforeEl = sessionField;
-            if (header.parentNode === content) {
-              insertBeforeEl = header.nextSibling || sessionField;
-            }
-            content.insertBefore(sessionDatesEl, insertBeforeEl);
+            sessionField.style.display = 'none';
           }
 
-          // Always hide the raw day-and-time field; day/time is now injected above.
-          card.querySelectorAll('.field--name-field-day-and-time').forEach(function (f) {
-            f.style.display = 'none';
-          });
+          if (sessionDatesEl.childNodes.length) {
+            if (summaryField) {
+              content.insertBefore(sessionDatesEl, summaryField);
+            } else if (ctaWrap) {
+              content.insertBefore(sessionDatesEl, ctaWrap);
+            } else {
+              content.appendChild(sessionDatesEl);
+            }
+          }
 
-          // Hide the raw session paragraph field — data has been extracted above.
-          sessionField.style.display = 'none';
+          if (summaryField) {
+            if (ctaWrap) {
+              content.insertBefore(summaryField, ctaWrap);
+            } else if (meta.parentNode === content) {
+              content.insertBefore(summaryField, meta);
+            }
+          }
+
+          if (ctaWrap && ctaWrap.parentNode !== content) {
+            content.appendChild(ctaWrap);
+          }
+
+          if (meta.childNodes.length) {
+            if (ctaWrap && ctaWrap.parentNode === content) {
+              content.insertBefore(meta, ctaWrap.nextSibling);
+            } else {
+              content.appendChild(meta);
+            }
+          }
+
+          if (summaryField && summaryField.parentNode !== content) {
+            content.appendChild(summaryField);
+          }
+
+          if (ctaWrap && meta.parentNode === content && ctaWrap.nextElementSibling !== meta) {
+            content.insertBefore(meta, ctaWrap.nextSibling);
+          }
+
+          if (summaryField && sessionDatesEl.childNodes.length && summaryField.previousElementSibling !== sessionDatesEl) {
+            content.insertBefore(summaryField, (ctaWrap && ctaWrap.parentNode === content) ? ctaWrap : meta);
+          }
+
+          if (summaryField && titleEl && header.parentNode === content) {
+            var nodeAfterHeader = header.nextElementSibling;
+            if (nodeAfterHeader === summaryField && sessionDatesEl.childNodes.length) {
+              content.insertBefore(sessionDatesEl, summaryField);
+            }
+          }
+
+          if (card.querySelector('.field--name-field-price')) {
+            card.querySelectorAll('.field--name-field-price').forEach(function (field) {
+              field.style.display = 'none';
+            });
+          }
         });
     }
   };

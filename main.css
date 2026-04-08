@@ -6230,6 +6230,10 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   margin-bottom: var(--space-150);
 }
 
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__header:empty {
+  display: none;
+}
+
 /* Hide legacy top-level date/registration fields superseded by session paragraph data */
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card :is(
   .field--name-field-program-start-date,
@@ -6243,6 +6247,13 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-instructors {
+  display: none !important;
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card :is(
+  .field--name-field-session-details,
+  .field--name-field-price
+) {
   display: none !important;
 }
 
@@ -6330,8 +6341,8 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   border-top: var(--border-050) solid var(--color-border-subdued-soft);
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 24px;
   letter-spacing: 0;
   color: var(--color-text-paragraph);
 }
@@ -6361,7 +6372,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-100);
-  margin-top: var(--space-250);
+  margin-top: var(--space-200);
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__meta .field--name-field-program-focus-areas {
