@@ -6154,19 +6154,22 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card {
-  background-color: var(--color-bg-lightest);
+  position: relative;
+  background-color: var(--color-bg-plain);
   border: var(--border-050) solid var(--color-border-subdued-strong);
   border-radius: var(--radius-200);
   color: var(--color-text-paragraph);
-  padding: var(--space-400);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .content {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   min-height: 100%;
+  padding: var(--space-250);
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field__label,
@@ -6174,15 +6177,34 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   display: none !important;
 }
 
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-post-featured-image {
+  margin: 0;
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-post-featured-image .field__item,
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-post-featured-image article,
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-post-featured-image .field--name-field-media-image,
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-post-featured-image .field__items {
+  width: 100%;
+  margin: 0;
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-post-featured-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card h2,
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card h2 a {
   color: var(--color-text-heading);
   font-family: 'Inter', sans-serif !important;
-  font-size: 24px !important;
-  font-weight: 600 !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
   letter-spacing: 0;
-  line-height: 28px !important;
-  margin: 0 0 var(--space-150) 0;
+  line-height: 24px !important;
+  margin: 0 0 var(--space-100) 0;
   text-transform: none !important;
   text-decoration: none;
 }
@@ -6205,7 +6227,7 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-100);
-  margin-bottom: var(--space-200);
+  margin-bottom: var(--space-150);
 }
 
 /* Hide legacy top-level date/registration fields superseded by session paragraph data */
@@ -6220,30 +6242,8 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   display: none !important;
 }
 
-:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__body > .field {
-  margin-bottom: var(--space-150);
-}
-
-:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__body > .field:last-child {
-  margin-bottom: 0;
-}
-
-:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__body,
-:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__body * {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--color-text-paragraph);
-}
-
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-instructors {
   display: none !important;
-}
-
-:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__tags {
-  margin-top: var(--space-200);
-  padding-top: var(--space-200);
-  border-top: none;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-audience-type,
@@ -6297,23 +6297,23 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-dates p {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 20px;
   color: var(--color-text-paragraph);
   margin: 0;
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-schedule {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: var(--color-text-subdued-strong);
-  margin-top: var(--space-050) !important;
+  color: var(--color-text-paragraph);
+  margin-top: var(--space-050);
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__session-label {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
   color: var(--color-text-subdued-strong);
-  margin-top: var(--space-150) !important;
+  margin-top: var(--space-100);
 }
 
 /* Always hide location and registration link from session paragraphs on cards */
@@ -6322,6 +6322,18 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   .field--name-field-registration-link
 ) {
   display: none !important;
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-program-summary {
+  margin: var(--space-250) 0 0 0;
+  padding-top: var(--space-200);
+  border-top: var(--border-050) solid var(--color-border-subdued-soft);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--color-text-paragraph);
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .field--name-field-program-focus-areas .field__item a,
@@ -6345,8 +6357,19 @@ html.js .funding-opportunity-card.is-cta-ready .field--name-field-external-link 
   vertical-align: middle;
 }
 
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-100);
+  margin-top: var(--space-250);
+}
+
+:is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__meta .field--name-field-program-focus-areas {
+  margin: 0;
+}
+
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__cta {
-  margin-top: var(--space-300);
+  margin-top: var(--space-250);
 }
 
 :is(.view-programs-cfm, .view-id-programs_cfm) .program-card .program-card__cta .btn {

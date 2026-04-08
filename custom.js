@@ -1939,7 +1939,7 @@
           ctaLink.setAttribute('href', href);
           ctaLink.textContent = 'Learn More';
 
-          var tags = card.querySelector('.program-card__tags');
+          var tags = card.querySelector('.program-card__meta .field--name-field-program-focus-areas, .field--name-field-program-focus-areas');
           var content = card.querySelector('.content') || card;
 
           if (tags && tags.parentNode === content) {
@@ -1956,6 +1956,12 @@
     attach: function (context) {
       once('programCardSessionEnhancements', ':is(.view-programs-cfm, .view-id-programs_cfm) article.program-card', context)
         .forEach(function (card) {
+          var content = card.querySelector('.content') || card;
+          var imageField = content.querySelector('.field--name-field-post-featured-image');
+          if (imageField && imageField.parentNode === content) {
+            card.insertBefore(imageField, card.firstChild);
+          }
+
           var sessionField = card.querySelector('.field--name-field-program-session');
           if (!sessionField) return;
 
@@ -1979,8 +1985,6 @@
           if (!header) {
             header = document.createElement('div');
             header.className = 'program-card__header';
-            var titleEl = card.querySelector('h2');
-            card.insertBefore(header, titleEl || card.firstChild);
           }
           header.innerHTML = '';
 
@@ -1996,14 +2000,9 @@
             }
           }
 
-          // Audience badge: only show if audience is "Professional"; move element into header.
-          var audienceField = card.querySelector('.field--name-field-audience-type');
-          if (audienceField) {
-            var audienceLink = audienceField.querySelector('a');
-            var audienceText = audienceLink ? (audienceLink.textContent || '').trim() : '';
-            if (audienceText.toLowerCase() === 'professional') {
-              header.appendChild(audienceField);
-            }
+          var titleEl = content.querySelector('h2');
+          if (titleEl) {
+            content.insertBefore(header, titleEl.nextSibling);
           }
 
           var dateRanges = [];
@@ -2053,10 +2052,11 @@
               sessionDatesEl.appendChild(multipleEl);
             }
 
-            var body = card.querySelector('.program-card__body');
-            if (body) {
-              body.insertBefore(sessionDatesEl, sessionField);
+            var insertBeforeEl = sessionField;
+            if (header.parentNode === content) {
+              insertBeforeEl = header.nextSibling || sessionField;
             }
+            content.insertBefore(sessionDatesEl, insertBeforeEl);
           }
 
           // Always hide the raw day-and-time field; day/time is now injected above.
@@ -2710,10 +2710,11 @@
       once('programCardsFormatBeforeTitle', '.view-programs-cfm article.program-card, .view-id-programs_cfm article.program-card', context)
         .forEach(function (card) {
           var formatField = card.querySelector('.program-card__header');
-          var title = card.querySelector('h2');
+          var content = card.querySelector('.content') || card;
+          var title = content.querySelector('h2');
           if (!formatField || !title) return;
-          if (formatField.parentNode === card && formatField.nextElementSibling === title) return;
-          card.insertBefore(formatField, title);
+          if (formatField.parentNode === content && formatField.previousElementSibling === title) return;
+          content.insertBefore(formatField, title.nextSibling);
         });
     }
   };
