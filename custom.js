@@ -2822,7 +2822,7 @@
             if (!message) {
               message = document.createElement('p');
               message.className = 'program-registration-message';
-              message.innerHTML = '<strong>Registration is currently closed.</strong> New sessions will be posted as they become available.';
+              message.textContent = 'Registration is currently closed. New sessions will be posted as they become available.';
               var subscribeField = sidebar.querySelector('.field--name-field-subscribe-link');
               if (subscribeField) {
                 sidebar.insertBefore(message, subscribeField);
@@ -2846,6 +2846,16 @@
               fallbackAnchor.setAttribute('rel', 'noopener noreferrer');
               fallbackEl.appendChild(fallbackAnchor);
               sidebar.appendChild(fallbackEl);
+            }
+
+            var enrollmentRequirement = sidebar.querySelector('.field--name-field-enrollment-requirement');
+            var subscribeFieldForOrder = sidebar.querySelector('.field--name-field-subscribe-link');
+            if (enrollmentRequirement && subscribeFieldForOrder) {
+              if (subscribeFieldForOrder.nextSibling) {
+                sidebar.insertBefore(enrollmentRequirement, subscribeFieldForOrder.nextSibling);
+              } else {
+                sidebar.appendChild(enrollmentRequirement);
+              }
             }
           } else if (message) {
             message.parentNode.removeChild(message);

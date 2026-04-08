@@ -7339,6 +7339,7 @@ footer.submitted {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 20px;
+  margin: 0;
 }
 
 .page-node-type-program .group-program-sidebar .field--name-field-enrollment-requirement p {
@@ -7426,10 +7427,11 @@ footer.submitted {
 }
 
 .page-node-type-program .group-program-sidebar .program-registration-message {
-  margin: 0 0 var(--space-200) 0;
+  margin: 0;
   color: var(--color-text-paragraph);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
 .page-node-type-program .group-program-sidebar .program-registration-closes {
