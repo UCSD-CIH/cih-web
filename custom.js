@@ -2848,15 +2848,6 @@
               sidebar.appendChild(fallbackEl);
             }
 
-            var enrollmentRequirement = sidebar.querySelector('.field--name-field-enrollment-requirement');
-            var subscribeFieldForOrder = sidebar.querySelector('.field--name-field-subscribe-link');
-            if (enrollmentRequirement && subscribeFieldForOrder) {
-              if (subscribeFieldForOrder.nextSibling) {
-                sidebar.insertBefore(enrollmentRequirement, subscribeFieldForOrder.nextSibling);
-              } else {
-                sidebar.appendChild(enrollmentRequirement);
-              }
-            }
           } else if (message) {
             message.parentNode.removeChild(message);
           }
