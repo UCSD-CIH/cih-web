@@ -3384,5 +3384,182 @@
     }
   };
 
+  Drupal.behaviors.testimonialSectionEnhancements = {
+    attach: function (context) {
+      once('testimonialSectionEnhancements', '.paragraph--type--testimonial-section', context)
+        .forEach(function (section) {
+          var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+          // --- Promote section heading to h2.heading--h2-alt ---
+          var headingField = section.querySelector(':scope > .field--name-field-section-heading');
+          if (headingField) {
+            var headingText = headingField.textContent.trim();
+            if (headingText) {
+              var h2 = document.createElement('h2');
+              h2.className = 'heading--h2-alt';
+              h2.textContent = headingText;
+              section.insertBefore(h2, section.firstChild);
+            }
+            headingField.style.display = 'none';
+          }
+
+          // --- Collect testimonial paragraphs ---
+          var testimonialEls = Array.prototype.slice.call(
+            section.querySelectorAll('.paragraph--type--testimonial')
+          );
+          if (!testimonialEls.length) return;
+
+          // Extract data and hide raw output
+          var testimonials = testimonialEls.map(function (el) {
+            var quoteEl = el.querySelector('.field--name-field-quote');
+            var attrEl  = el.querySelector('.field--name-field-attribution');
+            var data = {
+              quote: quoteEl ? quoteEl.textContent.trim() : '',
+              attribution: attrEl ? attrEl.textContent.trim() : ''
+            };
+            el.style.display = 'none';
+            return data;
+          }).filter(function (d) { return !!d.quote; });
+
+          if (!testimonials.length) return;
+
+          // --- Build outer wrapper ---
+          var wrapper = document.createElement('div');
+          wrapper.className = 'testimonial-section';
+
+          // --- Reduced-motion or single-testimonial: render statically ---
+          if (reducedMotion || testimonials.length === 1) {
+            var stage = document.createElement('div');
+            stage.className = 'testimonial-stage';
+
+            testimonials.forEach(function (data, i) {
+              var item = document.createElement('div');
+              item.className = reducedMotion && testimonials.length > 1
+                ? 'testimonial-item testimonial-item--static'
+                : 'testimonial-item testimonial-item--active';
+
+              var blockquote = document.createElement('blockquote');
+              blockquote.className = 'testimonial-item__quote';
+              blockquote.textContent = data.quote;
+              item.appendChild(blockquote);
+
+              if (data.attribution) {
+                var attr = document.createElement('p');
+                attr.className = 'testimonial-item__attribution';
+                attr.textContent = data.attribution;
+                item.appendChild(attr);
+              }
+
+              if (reducedMotion && testimonials.length > 1 && i > 0) {
+                item.style.marginTop = 'var(--space-400)';
+              }
+
+              stage.appendChild(item);
+            });
+
+            wrapper.appendChild(stage);
+            var testimonialsField = section.querySelector('.field--name-field-testimonials');
+            if (testimonialsField) {
+              testimonialsField.parentNode.insertBefore(wrapper, testimonialsField.nextSibling);
+            } else {
+              section.appendChild(wrapper);
+            }
+            return;
+          }
+
+          // --- Multiple testimonials: cycling display ---
+          var stage = document.createElement('div');
+          stage.className = 'testimonial-stage';
+
+          var items = testimonials.map(function (data) {
+            var item = document.createElement('div');
+            item.className = 'testimonial-item';
+
+            var blockquote = document.createElement('blockquote');
+            blockquote.className = 'testimonial-item__quote';
+            blockquote.textContent = data.quote;
+            item.appendChild(blockquote);
+
+            if (data.attribution) {
+              var attr = document.createElement('p');
+              attr.className = 'testimonial-item__attribution';
+              attr.textContent = data.attribution;
+              item.appendChild(attr);
+            }
+
+            stage.appendChild(item);
+            return item;
+          });
+
+          // Indicator dots
+          var indicator = document.createElement('div');
+          indicator.className = 'testimonial-indicator';
+
+          var dots = testimonials.map(function (_data, i) {
+            var dot = document.createElement('button');
+            dot.className = 'testimonial-indicator__dot';
+            dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+            dot.setAttribute('type', 'button');
+            indicator.appendChild(dot);
+            return dot;
+          });
+
+          wrapper.appendChild(stage);
+          wrapper.appendChild(indicator);
+
+          var current = 0;
+          var timer = null;
+          var INTERVAL = 5000;
+
+          function activate(index) {
+            items[current].classList.remove('testimonial-item--active');
+            dots[current].classList.remove('testimonial-indicator__dot--active');
+            current = index;
+            items[current].classList.add('testimonial-item--active');
+            dots[current].classList.add('testimonial-indicator__dot--active');
+          }
+
+          function advance() {
+            activate((current + 1) % testimonials.length);
+          }
+
+          function startTimer() {
+            timer = setInterval(advance, INTERVAL);
+          }
+
+          function stopTimer() {
+            if (timer !== null) {
+              clearInterval(timer);
+              timer = null;
+            }
+          }
+
+          // Wire up dot clicks
+          dots.forEach(function (dot, i) {
+            dot.addEventListener('click', function () {
+              stopTimer();
+              activate(i);
+              startTimer();
+            });
+          });
+
+          // Pause on hover
+          wrapper.addEventListener('mouseenter', stopTimer);
+          wrapper.addEventListener('mouseleave', startTimer);
+
+          // Initialise first item
+          activate(0);
+          startTimer();
+
+          var testimonialsField = section.querySelector('.field--name-field-testimonials');
+          if (testimonialsField) {
+            testimonialsField.parentNode.insertBefore(wrapper, testimonialsField.nextSibling);
+          } else {
+            section.appendChild(wrapper);
+          }
+        });
+    }
+  };
+
 })(Drupal, once);
 </script>
