@@ -9696,7 +9696,7 @@ textarea.form-textarea:focus {
 =================================== */
 
 .paragraph--type--testimonial-section {
-  margin-top: var(--space-600);
+  margin-top: var(--space-400);
 }
 
 .paragraph--type--testimonial-section .field__label {
@@ -9705,7 +9705,7 @@ textarea.form-textarea:focus {
 
 .testimonial-section {
   text-align: center;
-  padding: var(--space-400) 0;
+  padding: var(--space-200) 0;
   max-width: 758px;
   margin-inline: auto;
 }
