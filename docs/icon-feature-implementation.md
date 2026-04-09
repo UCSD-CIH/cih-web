@@ -4,6 +4,25 @@ Frontend hooks in `main.css` and `custom.js` drive the icon feature grid. This d
 
 ---
 
+## For Editors
+
+Add an **Icon Feature Section** paragraph to a page. Inside it, add one or more **Icon Feature** paragraphs — each becomes a card in the grid.
+
+**Each card has:**
+- An optional icon (enter a name from the approved list below, e.g. `brain`, `compass`)
+- A short heading (2–6 words)
+- A brief body (1–3 sentences)
+
+**The section itself has:**
+- An optional **Show top divider** toggle — turns on a horizontal rule above the section
+- An optional **Section heading** — appears above the card grid as a section title
+
+**Grid layout is automatic:** 1–4 cards use a 2-column layout; 5 or more switch to 3 columns. Single column on mobile.
+
+**Icon names must match exactly** — a typo means no icon renders (the card still works, just without the icon). Use only names from the approved icon list in section 2.
+
+---
+
 ## 1) Paragraph Types
 
 ### Icon Feature (`icon_feature`)
@@ -31,7 +50,8 @@ Section containing a grid of icon feature cards.
 
 | Field | Machine name | Type | Required | Notes |
 |---|---|---|---|---|
-| Section heading | `field_section_heading` | Text (plain) | No | Promoted to `h2.heading--h2-alt` by JS |
+| Show top divider | `field_show_top_divider` | Boolean | No | Renders a divider above the section; must be first in Manage Display |
+| Section heading | `field_section_heading` | Text (plain) | No | Promoted to a plain `h3` by JS, inserted after the divider if present |
 | Icon features | `field_icon_features` | Entity reference revisions (paragraph) | Yes | References `icon_feature`; unlimited cardinality |
 
 ---
@@ -74,10 +94,13 @@ All fields visible, labels hidden.
 
 ### Paragraph: Icon Feature Section — Default
 
-| Field | Label | Format |
-|---|---|---|
-| `field_section_heading` | Hidden | Plain text |
-| `field_icon_features` | Hidden | Rendered entity — Default |
+| Field | Label | Format | Weight |
+|---|---|---|---|
+| `field_show_top_divider` | Hidden | Default | 0 (first) |
+| `field_section_heading` | Hidden | Plain text | 1 |
+| `field_icon_features` | Hidden | Rendered entity — Default | 2 |
+
+**Important:** `field_show_top_divider` must appear first in Manage Display so the JS heading-insertion logic can find it as the reference node.
 
 ---
 
@@ -87,7 +110,8 @@ All fields visible, labels hidden.
 
 Runs on `.paragraph--type--icon-feature-section`. Responsibilities:
 
-- Promotes section heading to `h2.heading--h2-alt`
+- Checks for `:scope > .field--name-field-show-top-divider`; if present, inserts the heading after it so the divider renders above the heading
+- Promotes `field_section_heading` to a plain `h3` (no class), hides the raw field
 - Iterates each `.paragraph--type--icon-feature`
 - Reads `field_icon`, `field_heading`, and `field_body` from each card
 - Fetches the Lucide SVG by icon name from jsDelivr CDN and injects inline
@@ -101,12 +125,12 @@ Runs on `.paragraph--type--icon-feature-section`. Responsibilities:
 
 **Icon fetch pattern:**
 ```js
-const iconName = field_icon.textContent.trim();
+var iconName = iconField ? iconField.textContent.trim() : '';
 if (iconName) {
-  fetch(`https://cdn.jsdelivr.net/npm/lucide-static/icons/${iconName}.svg`)
-    .then(r => r.text())
-    .then(svg => iconEl.innerHTML = svg)
-    .catch(() => iconEl.remove()); // fail silently
+  fetch('https://cdn.jsdelivr.net/npm/lucide-static/icons/' + iconName + '.svg')
+    .then(function (r) { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+    .then(function (svg) { iconEl.innerHTML = svg; })
+    .catch(function () { iconEl.remove(); }); // fail silently
 }
 ```
 
