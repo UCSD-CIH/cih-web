@@ -3303,7 +3303,9 @@
             if (headingText) {
               var h3 = document.createElement('h3');
               h3.textContent = headingText;
-              section.insertBefore(h3, section.firstChild);
+              var dividerField = section.querySelector(':scope > .field--name-field-show-top-divider');
+              var insertRef = dividerField ? dividerField.nextSibling : section.firstChild;
+              section.insertBefore(h3, insertRef);
             }
             headingField.style.display = 'none';
           }
@@ -3390,14 +3392,16 @@
         .forEach(function (section) {
           var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-          // --- Promote section heading to h2.heading--h2-alt ---
+          // --- Promote section heading to h3 ---
           var headingField = section.querySelector(':scope > .field--name-field-section-heading');
           if (headingField) {
             var headingText = headingField.textContent.trim();
             if (headingText) {
               var h3 = document.createElement('h3');
               h3.textContent = headingText;
-              section.insertBefore(h3, section.firstChild);
+              var dividerField = section.querySelector(':scope > .field--name-field-show-top-divider');
+              var insertRef = dividerField ? dividerField.nextSibling : section.firstChild;
+              section.insertBefore(h3, insertRef);
             }
             headingField.style.display = 'none';
           }
@@ -3467,7 +3471,7 @@
           }
 
           // --- Multiple testimonials: cycling display ---
-          var stage = document.createElement('div');
+          stage = document.createElement('div');
           stage.className = 'testimonial-stage';
 
           var items = testimonials.map(function (data) {
@@ -3510,28 +3514,28 @@
           var timer = null;
           var INTERVAL = 8000;
 
-          function activate(index) {
+          var activate = function (index) {
             items[current].classList.remove('testimonial-item--active');
             dots[current].classList.remove('testimonial-indicator__dot--active');
             current = index;
             items[current].classList.add('testimonial-item--active');
             dots[current].classList.add('testimonial-indicator__dot--active');
-          }
+          };
 
-          function advance() {
+          var advance = function () {
             activate((current + 1) % testimonials.length);
-          }
+          };
 
-          function startTimer() {
+          var startTimer = function () {
             timer = setInterval(advance, INTERVAL);
-          }
+          };
 
-          function stopTimer() {
+          var stopTimer = function () {
             if (timer !== null) {
               clearInterval(timer);
               timer = null;
             }
-          }
+          };
 
           // Wire up dot clicks
           dots.forEach(function (dot, i) {
