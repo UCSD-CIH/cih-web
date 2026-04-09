@@ -19,7 +19,7 @@ Add an **Icon Feature Section** paragraph to a page. Inside it, add one or more 
 
 **Grid layout is automatic:** 1–4 cards use a 2-column layout; 5 or more switch to 3 columns. Single column on mobile.
 
-**Icon names must match exactly** — a typo means no icon renders (the card still works, just without the icon). Use only names from the approved icon list in section 2.
+**Icon names must match exactly** — a typo means no icon renders (the card still works, just without the icon). The help text for the Icon field links to lucide.dev where editors can browse all available icons.
 
 ---
 
@@ -31,11 +31,11 @@ An individual card with an optional icon, short heading, and brief body text. Us
 
 | Field | Machine name | Type | Required | Notes |
 |---|---|---|---|---|
-| Icon | `field_icon` | Text (plain) | No | Lucide icon name (e.g. "brain", "compass"). See approved icon list. |
+| Icon | `field_icon` | Text (plain) | No | Lucide icon name (e.g. "brain", "compass"). Help text links to lucide.dev. |
 | Heading | `field_heading` | Text (plain) | Yes | Short — 2–6 words, no period |
 | Body | `field_body` | Text (formatted, long) | Yes | 1–3 sentences; restrict to Basic/Restricted text format (bold, italic, links only — no headings, no images) |
 
-**Help text for Icon field:** Enter a Lucide icon name (e.g. "brain", "compass"). See the [approved icon list] for valid options.
+**Help text for Icon field:** Enter a Lucide icon name (e.g. "brain", "compass"). Browse available icons at [lucide.dev](https://lucide.dev).
 
 **Content entry rules:**
 - Heading should be a short phrase — not a full sentence
@@ -56,24 +56,9 @@ Section containing a grid of icon feature cards.
 
 ---
 
-## 2) Approved Icon List
+## 2) Icons
 
-Icons are sourced from [Lucide](https://lucide.dev) and injected as inline SVG by JS. Only the following names are approved for use in `field_icon`:
-
-| Icon name | Label |
-|---|---|
-| `brain` | Focus & Awareness |
-| `heart` | Compassion |
-| `target` | Goals & Intention |
-| `eye` | Mindfulness |
-| `zap` | Resilience |
-| `message-circle` | Communication |
-| `users` | Community |
-| `shield` | Boundaries |
-| `sun` | Wellbeing |
-| `leaf` | Growth |
-| `compass` | Values & Direction |
-| `layers` | Integration |
+Icons are sourced from [Lucide](https://lucide.dev) and injected as inline SVG by JS. Any valid Lucide icon name can be used in `field_icon` — editors can browse the full set at lucide.dev and copy the icon name directly.
 
 Icons are fetched from jsDelivr CDN at render time:
 `https://cdn.jsdelivr.net/npm/lucide-static/icons/{icon-name}.svg`
@@ -173,6 +158,6 @@ if (iconName) {
 
 ## 6) Known Limitations
 
-- **Icon name validation:** There is no Drupal-side validation on `field_icon`. An unrecognized icon name fails silently — the card renders without an icon. Restrict entry to the approved icon list and consider a select list field in a future iteration to eliminate the failure mode entirely.
+- **Icon name validation:** There is no Drupal-side validation on `field_icon`. An unrecognized icon name fails silently — the card renders without an icon. Editors should verify names against lucide.dev before saving.
 - **CDN dependency:** Icon SVGs are fetched from jsDelivr at render time. If the CDN is unavailable, icons will not render. Cards remain functional without them.
 - **All-or-nothing grid:** The column count applies to the entire section. There is no per-card layout override.
